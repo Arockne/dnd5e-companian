@@ -23,6 +23,18 @@ RSpec.describe User, type: :model do
         duplicate_user = user.dup
         expect(duplicate_user.valid?).to eql false
       end
+      it "returns false when creating a user with a duplicate email" do
+        user.save
+        duplicate_user = user.dup
+        duplicate_user.username = 'billy'
+        expect(duplicate_user.valid?).to eql false
+      end
+      it "returns false when creating a user with a duplicate username" do
+        user.save
+        duplicate_user = user.dup
+        duplicate_user.email = 'another@gmail.com'
+        expect(duplicate_user.valid?).to eql false
+      end
     end
   end
 end

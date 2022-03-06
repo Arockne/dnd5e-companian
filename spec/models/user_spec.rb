@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
     User.new(
       username: 'bob', 
       email: 'bob123@bob.com', 
+      email_confirmation: 'bob123@bob.com',
       password: 'test123', 
       password_confirmation: 'test123'
     )
@@ -14,6 +15,13 @@ RSpec.describe User, type: :model do
     context "valid user" do
       it "saves user successfully" do
         expect(user.save).to eql true
+      end
+    end
+
+    context "email" do
+      it "returns false when email and email confirmation dont match" do
+        user.email_confirmation = 'bob12@bob.com'
+        expect(user.save).to eql false
       end
     end
 

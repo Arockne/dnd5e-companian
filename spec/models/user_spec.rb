@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject(:user) do 
-    User.create!(
+    User.new(
       username: 'bob', 
       email: 'bob123@bob.com', 
       email_confirmation: 'bob123@bob.com', 
@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
   end
 
   subject(:duplicate_user) do
-    User.create!(
+    User.new(
       username: 'bob', 
       email: 'bob123@bob.com', 
       email_confirmation: 'bob123@bob.com', 
@@ -29,8 +29,10 @@ RSpec.describe User, type: :model do
       it "raises exception when username is empty" do
         expect { User.create!(username: '') }.to raise_exception ActiveRecord::RecordInvalid
       end
-      it "raises exception when username or email has been taken" do
-        expect(duplicate_user).to raise_exception ActiveRecord::RecordInvalid
+      it "returns false when creating a user with the same username or email" do
+        user.save
+        duplicate_user.save
+        expect(duplicate_user.valid?).to eql false
       end
     end
   end

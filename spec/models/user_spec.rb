@@ -11,6 +11,12 @@ RSpec.describe User, type: :model do
   end
   
   describe "user validations" do
+    context "valid user" do
+      it "saves user successfully" do
+        expect(user.save).to eql true
+      end
+    end
+
     context "Invalid User" do
       it "raises exception when creating user with no data" do
         expect { User.create!() }.to raise_exception ActiveRecord::RecordInvalid
@@ -37,4 +43,5 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
 end

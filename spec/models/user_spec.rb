@@ -5,7 +5,6 @@ RSpec.describe User, type: :model do
     User.new(
       username: 'bob', 
       email: 'bob123@bob.com', 
-      email_confirmation: 'bob123@bob.com', 
       password: 'test123', 
       password_confirmation: 'test123'
     )
@@ -15,7 +14,6 @@ RSpec.describe User, type: :model do
     User.new(
       username: 'bob', 
       email: 'bob123@bob.com', 
-      email_confirmation: 'bob123@bob.com', 
       password: 'test123', 
       password_confirmation: 'test123'
     )

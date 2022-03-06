@@ -55,6 +55,7 @@ RSpec.describe User, type: :model do
         user.save
         duplicate_user = user.dup
         duplicate_user.email = 'another@gmail.com'
+        duplicate_user.email_confirmation = 'another@gmail.com'
         expect(duplicate_user.valid?).to eql false
       end
     end

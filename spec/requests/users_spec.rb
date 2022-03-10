@@ -11,7 +11,7 @@ RSpec.describe "Users", type: :request do
     )
   end
 
-  describe "POST /users" do
+  describe "POST /signup" do
     context 'with valid user params' do
       let!(:user_params) do 
         {
@@ -24,11 +24,11 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'creates a new user' do
-        expect { post '/users', params: user_params }.to change(User, :count).by(1)
+        expect { post '/signup', params: user_params }.to change(User, :count).by(1)
       end
 
       it 'returns the users data' do
-        post '/users', params: user_params
+        post '/signup', params: user_params
 
         expect(response.body).to include_json({
           id: a_kind_of(Integer),
@@ -38,7 +38,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a status code of 201 (created)' do
-        post '/users', params: user_params
+        post '/signup', params: user_params
 
         expect(response).to have_http_status(:created)
       end
@@ -56,11 +56,11 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'does not create a new user' do
-        expect { post '/users', params: user_params }.to change(User, :count).by(0)
+        expect { post '/signup', params: user_params }.to change(User, :count).by(0)
       end
 
       it 'returns the error messages' do
-        post '/users', params: user_params
+        post '/signup', params: user_params
 
         expect(response.body).to include_json({
           errors: a_kind_of(hash)
@@ -68,7 +68,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a status code of 422 (Unproccessable Entity)' do
-        post '/users', params: user_params
+        post '/signup', params: user_params
 
         expect(response).to have_http_status(:unproccessable_entity)
       end

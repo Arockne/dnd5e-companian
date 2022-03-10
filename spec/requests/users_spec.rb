@@ -66,7 +66,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'does not create a new user' do
-        expect { post '/api/signup', params: user_params }.to change(User, :count).by(0)
+        expect { post '/api/signup', params: user_params }.not_to change(User, :count)
       end
 
       it 'returns the error messages' do

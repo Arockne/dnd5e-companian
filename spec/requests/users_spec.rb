@@ -14,12 +14,13 @@ RSpec.describe "Users", type: :request do
   describe "POST /signup" do
     context 'with valid user params' do
       let!(:user_params) do 
-        {
-          username: 'ron', 
-          email:'ron@gmail.com', 
-          email_confirmation:'ron@gmail.com', 
-          password:'test123', 
-          password_confirmation:'test123'
+        { user: {
+            username: 'ron', 
+            email:'ron@gmail.com', 
+            email_confirmation:'ron@gmail.com', 
+            password:'test123', 
+            password_confirmation:'test123'
+          }
         }
       end
 
@@ -46,12 +47,13 @@ RSpec.describe "Users", type: :request do
 
     context 'with invalid user params' do
       let!(:user_params) do
-        {
-          username: 'r', 
-          email:'ron@gmail.com', 
-          email_confirmation:'different email', 
-          password:'test123', 
-          password_confirmation:'different password'
+        { user: {
+            username: 'r', 
+            email:'ron@gmail.com', 
+            email_confirmation:'different email', 
+            password:'test123', 
+            password_confirmation:'different password'
+          }
         }
       end
 
@@ -63,7 +65,7 @@ RSpec.describe "Users", type: :request do
         post '/signup', params: user_params
         
         expect(response.body).to include_json({
-          errors: a_kind_of(Hash)
+          errors: a_kind_of(Array)
         })
       end
 

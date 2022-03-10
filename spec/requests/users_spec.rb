@@ -61,16 +61,16 @@ RSpec.describe "Users", type: :request do
 
       it 'returns the error messages' do
         post '/signup', params: user_params
-
+        
         expect(response.body).to include_json({
-          errors: a_kind_of(hash)
+          errors: a_kind_of(Hash)
         })
       end
 
       it 'returns a status code of 422 (Unproccessable Entity)' do
         post '/signup', params: user_params
 
-        expect(response).to have_http_status(:unproccessable_entity)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

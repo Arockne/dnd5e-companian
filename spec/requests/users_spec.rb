@@ -33,8 +33,7 @@ RSpec.describe "Users", type: :request do
 
         expect(response.body).to include_json({
           id: a_kind_of(Integer),
-          username: 'ron',
-          email: 'ron@gmail.com'
+          username: 'ron'
         })
       end
 

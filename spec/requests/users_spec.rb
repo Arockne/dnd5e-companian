@@ -43,6 +43,14 @@ RSpec.describe "Users", type: :request do
 
         expect(response).to have_http_status(:created)
       end
+
+      it 'saves the user id in the session' do
+        post '/api/signup', params: user_params
+        
+        expect(session[:user_id]).to_not eql(nil)
+        expect(session[:user_id]).to be_a(Integer)
+        expect(session[:user_id]).to eql(User.last.id)
+      end
     end
 
     context 'with invalid user params' do

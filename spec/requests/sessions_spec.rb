@@ -28,6 +28,11 @@ RSpec.describe "Sessions", type: :request do
         expect(session[id]).to eql(user.id)
       end
 
+      it 'returns a status code of 200 (ok)' do
+        expect { post '/api/login', params: session_params }.to have_http_status(:ok)
+      end
+
     end
+
   end
 end

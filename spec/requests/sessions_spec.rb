@@ -50,6 +50,30 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status(:unauthorized)
       end
     end
-    
+
+    context 'with invalid username' do
+      let(:session_params) { { username: 'random', password: 'test123' }}
+
+      it 'does not assign user id to session' do
+        post '/api/login', params: session_params
+
+        expect(session[:user_id]).to eql(nil)
+      end
+
+      it 'returns the error messages' do
+        post '/api/login', params: session_params
+
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+
+      it 'returns a status code of 401(Unauthorized)' do
+        post '/api/login', params: session_params
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
   end
 end

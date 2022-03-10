@@ -43,5 +43,35 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(:created)
       end
     end
+
+    context 'with invalid user params' do
+      let!(:user_params) do
+        {
+          username: 'r', 
+          email:'ron@gmail.com', 
+          email_confirmation:'different email', 
+          password:'test123', 
+          password_confirmation:'different password'
+        }
+      end
+
+      it 'does not create a new user' do
+        expect { post '/users', params: user_params }.to change(User, :count).by(0)
+      end
+
+      it 'returns the error messages' do
+        post '/users', params: user_params
+
+        expect(response.body).to include_json({
+          errors: a_kind_of(hash)
+        })
+      end
+
+      it 'returns a status code of 422 (Unproccessable Entity)' do
+        post '/users', params: user_params
+
+        expect(response).to have_http_status(:unproccessable_entity)
+      end
+    end
   end
 end

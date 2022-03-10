@@ -103,7 +103,7 @@ RSpec.describe "Users", type: :request do
         expect { post '/api/signup', params: user_params }.not_to change(User, :count)
       end
 
-      it 'does not create a new user with wrong password confirmation' do
+      it 'does not create a new user with incorrect password confirmation' do
         user_params[:user][:password_confirmation] = 'notsame'
         expect { post '/api/signup', params: user_params }.not_to change(User, :count)
       end

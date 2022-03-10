@@ -2,6 +2,20 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  describe 'valid user' do 
+    it 'is valid with valid attributes' do
+      expect do
+        User.create!(
+          username: 'bob',
+          email: 'bob@gmail.com',
+          email_confirmation: 'bob@gmail.com', 
+          password: 'test123', 
+          password_confirmation: 'test123'
+        )
+      end.to_not raise_exception(ActiveRecord::RecordInvalid)
+    end
+  end
+
   describe 'attributes' do
     it { is_expected.to respond_to(:username) }
     it { is_expected.to respond_to(:email) }

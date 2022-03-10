@@ -68,6 +68,12 @@ RSpec.describe "Users", type: :request do
       it 'does not create a new user' do
         expect { post '/api/signup', params: user_params }.not_to change(User, :count)
       end
+      
+      it 'does not save user id in session' do
+        post '/api/signup', params: user_params
+
+        expect(session[:user_id]).to eql(nil)
+      end
 
       it 'returns the error messages' do
         post '/api/signup', params: user_params

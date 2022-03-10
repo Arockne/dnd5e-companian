@@ -4,15 +4,15 @@ RSpec.describe User, type: :model do
 
   describe 'valid user' do 
     it 'is valid with valid attributes' do
-      expect do
-        User.create!(
+      expect(
+        User.new(
           username: 'bob',
           email: 'bob@gmail.com',
           email_confirmation: 'bob@gmail.com', 
           password: 'test123', 
           password_confirmation: 'test123'
         )
-      end.to_not raise_exception(ActiveRecord::RecordInvalid)
+      ).to be_valid
     end
   end
 

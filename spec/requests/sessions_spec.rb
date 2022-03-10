@@ -17,19 +17,23 @@ RSpec.describe "Sessions", type: :request do
       
       it 'returns the logged in user' do
         post '/api/login', params: session_params
-        expect(response).to include_json({
-          id: a_kind_of(Integer),
-          username: session_params.user
+        
+        expect(response.body).to include_json({
+          id: user.id,
+          username: user.username
         })
       end
 
       it 'assigns user id to session' do
         post '/api/login', params: session_params
-        expect(session[id]).to eql(user.id)
+        
+        expect(session[:user_id]).to eql(user.id)
       end
 
-      it 'returns a status code of 200 (ok)' do
-        expect { post '/api/login', params: session_params }.to have_http_status(:ok)
+      it 'returns a status code of 201 (created)' do
+        post '/api/login', params: session_params
+
+        expect(response).to have_http_status(:created)
       end
     end
 

@@ -1,5 +1,7 @@
 class Api::SessionsController < ApplicationController
 
+  skip_before_action :create
+
   def create
     user = User.where('lower(username) = ?', params[:username]).first
     if user&.authenticate(params[:password])

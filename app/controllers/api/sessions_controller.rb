@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController
 
-  skip_before_action :create
+  skip_before_action :authorize, only: :create
 
   def create
     user = User.where('lower(username) = ?', params[:username]).first

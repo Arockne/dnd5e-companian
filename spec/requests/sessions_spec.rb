@@ -78,6 +78,38 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status(:unauthorized)
       end
     end
+  end
 
+  describe 'DELETE /api/logout' do
+
+    describe 'with a logged in user' do
+      
+      it 'destroys the session' do
+        post '/api/login', params: { username: user.username, password: user.password }
+        delete '/api/logout'
+        expect(session[:user_id]).to eql(nil)
+      end
+
+      it 'returns status code of 204 (no content)' do
+        post '/api/login', params: { username: user.username, password: user.password }
+        delete '/api/logout'
+        expect(response).to have_http_status(:no_content)
+      end
+    end
+
+    describe 'without a logged in user' do
+      
+      it 'returns the error messages' do
+        delete '/api/logout'
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+
+      it 'returns with a status code of 401 (unauthorized)' do
+        delete '/api/logout'
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
   end
 end

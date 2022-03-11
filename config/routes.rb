@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   namespace :api do
     post '/signup', to: 'users#create'
     post '/login', to: 'sessions#create'
-    post '/logout', to: 'sessions#destroy'
+    delete '/logout', to: 'sessions#destroy'
   end
 end

@@ -38,4 +38,8 @@ RSpec.describe Campaign, type: :model do
     it { is_expected.to validate_length_of(:name).is_at_most(30) }
   end
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:owner) }
+  end
+
 end

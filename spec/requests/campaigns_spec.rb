@@ -142,7 +142,7 @@ RSpec.describe "Campaigns", type: :request do
         it 'does not create a campaign' do
           expect { post '/api/campaigns', params: campaign_params }.to_not change(Campaign, :count)
         end
-        
+
         it 'returns a status of 422 (Unprocessable entity)' do
           post '/api/campaigns', params: campaign_params
           expect(response).to have_http_status(:unprocessable_entity)
@@ -159,6 +159,17 @@ RSpec.describe "Campaigns", type: :request do
     end
 
     context 'without logged in user' do
+      let!(:campaign_params) do
+        { 
+          campaign: {
+            name: 'The Throne of the king', 
+            setting: 'A king sits upon a throne...', 
+            password: 'test123', 
+            password_confirmation: 'test123'
+          }
+        }
+      end
+      
       it 'does not create a new campaign' do
         expect { post '/api/campaigns', params: campaign_params }.to_not change(Campaign, :count)
       end

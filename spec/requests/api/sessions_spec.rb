@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe "Api::Sessions", type: :request do
   let!(:user) do
     User.create!(
       username: 'test_user',

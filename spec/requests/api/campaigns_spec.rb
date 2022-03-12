@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Campaigns", type: :request do
+RSpec.describe "Api::Campaigns", type: :request do
   let(:user_1) do 
     User.create!(
       username: 'arthur',

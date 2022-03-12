@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe "Api::Users", type: :request do
   before do
     User.create!(
       username: 'bob',

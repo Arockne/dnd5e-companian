@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe CampaignUser, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  describe 'attributes' do
+    it { is_expected.to respond_to(:user) }
+    it { is_expected.to respond_to(:campaign) }
+  end
+  
 end

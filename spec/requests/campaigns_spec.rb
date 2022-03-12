@@ -90,40 +90,72 @@ RSpec.describe "Campaigns", type: :request do
 
   describe 'POST /create' do
     context 'with logged in user' do
-      let!(:campaign_params) do
-        { 
-          campaign: {
-            name: 'The Throne of the king', 
-            setting: 'A king sits upon a throne...', 
-            password: 'test123', 
-            password_confirmation: 'test123'
-          }
-        }
-      end
       before do
         post '/api/login', params: { username: user_1.username, password: user_1.password }
       end
 
-      it 'creates a new campaign' do
-        expect { post '/api/campaigns', params: campaign_params }.to change(Campaign, :count).by(1)
-      end
-
-      it 'returns the campaign with owner' do
-        post '/api/campaigns', params: campaign_params
-        expect(response.body).to include_json({
-          id: a_kind_of(Integer),
-          name: 'The Throne of the king',
-          owner: {
-            id: a_kind_of(Integer),
-            username: user_1.username
+      context 'with correct params' do
+        let!(:campaign_params) do
+          { 
+            campaign: {
+              name: 'The Throne of the king', 
+              setting: 'A king sits upon a throne...', 
+              password: 'test123', 
+              password_confirmation: 'test123'
+            }
           }
-        })
-      end
-      it 'returns a status of 201 (Created)' do
-        post '/api/campaigns', params: campaign_params
-        expect(response).to have_http_status(:created)
+        end
+  
+        it 'creates a new campaign' do
+          expect { post '/api/campaigns', params: campaign_params }.to change(Campaign, :count).by(1)
+        end
+  
+        it 'returns the campaign with owner' do
+          post '/api/campaigns', params: campaign_params
+          expect(response.body).to include_json({
+            id: a_kind_of(Integer),
+            name: 'The Throne of the king',
+            owner: {
+              id: a_kind_of(Integer),
+              username: user_1.username
+            }
+          })
+        end
+
+        it 'returns a status of 201 (Created)' do
+          post '/api/campaigns', params: campaign_params
+          expect(response).to have_http_status(:created)
+        end
       end
 
+      context 'with no password confirmation' do
+        let!(:campaign_params) do
+          { 
+            campaign: {
+              name: 'The Throne of the king', 
+              setting: 'A king sits upon a throne...', 
+              password: 'test123', 
+            }
+          }
+        end
+
+        it 'does not create a campaign' do
+          expect { post '/api/campaigns', params: campaign_params }.to_not change(Campaign, :count)
+        end
+        
+        it 'returns a status of 422 (Unprocessable entity)' do
+          post '/api/campaigns', params: campaign_params
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+        
+        it 'returns error messages' do
+          post '/api/campaigns', params: campaign_params
+          expect(response.body).to include_json({
+            errors: a_kind_of(Array)
+          })
+        end
+        
+      end
     end
 
     context 'without logged in user' do

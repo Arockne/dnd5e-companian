@@ -39,6 +39,52 @@ RSpec.describe "Campaigns", type: :request do
   end
 
   describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    context 'with logged in user' do
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }
+      end
+
+      it 'returns all the campaigns with owner' do
+        get '/api/campaigns'
+        expect(response.body).to include_json([
+          {
+            id: a_kind_of(Integer),
+            name: 'Knights of the Round Table',
+            owner: {
+              id: a_kind_of(Integer),
+              username: user_1.username
+            }
+          },
+          {
+            id: a_kind_of(Integer),
+            name: 'Star Wards',
+            owner: {
+              id: a_kind_of(Integer),
+              username: user_2.username
+            }
+          }
+        ])
+      end
+
+      it 'returns a status of 200 (ok)' do
+        get '/api/campaigns'
+        expect(response).to have_http_status(:ok)
+      end
+
+    end
+
+    context 'without logged in user' do
+      it 'returns a status of 401 (Unauthorized)' do
+        get '/api/campaigns'
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'returns error messages' do
+        get '/api/campaigns'
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+    end
   end
 end

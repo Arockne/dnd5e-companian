@@ -35,7 +35,7 @@ RSpec.describe CampaignUser, type: :model do
         password_confirmation: 'king'
       )
     end
-    subject(:user_campaign) { CampaignUser.create(user_id: other_user.id, campaign_id: campaign.id)}
+    subject(:user_campaign) { CampaignUser.create(user: other_user, campaign: campaign)}
       
     it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:campaign_id)}
   end

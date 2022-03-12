@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Campaigns", type: :request do
-  let!(:user_1) do 
+  let(:user_1) do 
     User.create!(
       username: 'arthur',
       email: 'arthur@camelot.com',
@@ -11,7 +11,7 @@ RSpec.describe "Campaigns", type: :request do
     )
   end
     
-  let!(:user_2) do
+  let(:user_2) do
     User.create!(
       username: 'bob',
       email: 'bob@gmail.com',
@@ -95,7 +95,7 @@ RSpec.describe "Campaigns", type: :request do
       end
 
       context 'with correct params' do
-        let!(:campaign_params) do
+        let(:campaign_params) do
           { 
             campaign: {
               name: 'The Throne of the king', 
@@ -129,7 +129,7 @@ RSpec.describe "Campaigns", type: :request do
       end
 
       context 'with no password confirmation' do
-        let!(:campaign_params) do
+        let(:campaign_params) do
           { 
             campaign: {
               name: 'The Throne of the king', 
@@ -159,7 +159,7 @@ RSpec.describe "Campaigns", type: :request do
     end
 
     context 'without logged in user' do
-      let!(:campaign_params) do
+      let(:campaign_params) do
         { 
           campaign: {
             name: 'The Throne of the king', 
@@ -169,7 +169,7 @@ RSpec.describe "Campaigns", type: :request do
           }
         }
       end
-      
+
       it 'does not create a new campaign' do
         expect { post '/api/campaigns', params: campaign_params }.to_not change(Campaign, :count)
       end

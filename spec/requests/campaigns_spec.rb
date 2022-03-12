@@ -125,6 +125,24 @@ RSpec.describe "Campaigns", type: :request do
       end
 
     end
-    
+
+    context 'without logged in user' do
+      it 'does not create a new campaign' do
+        expect { post '/api/campaigns', params: campaign_params }.to_not change(Campaign, :count)
+      end
+
+      it 'returns a status of 401 (Unauthorized)' do
+        get '/api/campaigns'
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'returns error messages' do
+        get '/api/campaigns'
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+    end
+
   end
 end

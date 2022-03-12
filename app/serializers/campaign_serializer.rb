@@ -1,3 +1,5 @@
 class CampaignSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name
+
+  belongs_to :owner
 end

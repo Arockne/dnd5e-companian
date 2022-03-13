@@ -21,7 +21,7 @@ RSpec.describe "Api::Campaigns", type: :request do
     )
   end
 
-  before do
+  let(:campaign_1) do
     Campaign.create!(
       name: 'Knights of the Round Table', 
       setting: 'Somewhere in Camelot', 
@@ -29,6 +29,9 @@ RSpec.describe "Api::Campaigns", type: :request do
       password: 'king', 
       password_confirmation: 'king'
     )
+  end
+
+  let(:campaign_2) do
     Campaign.create!(
       name: 'Star Wards', 
       setting: 'In a hospital far far away', 
@@ -36,6 +39,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       password: 'test123', 
       password_confirmation: 'test123'
     )
+    
   end
 
   describe "GET /index" do
@@ -192,7 +196,7 @@ RSpec.describe "Api::Campaigns", type: :request do
   describe 'DELETE /campaigns/:id' do
   
     context 'with logged in user' do
-      
+
       context 'as the campaign owner' do
         it 'decreases the amount of campaigns'
         it 'returns a status of 200 (Ok)'

@@ -201,7 +201,7 @@ RSpec.describe "Api::Campaigns", type: :request do
 
       context 'as the campaign owner' do
         it 'decreases the amount of campaigns' do
-          expect { delete "/api/campaigns/#{campaign_1.id}" }.to change('Campaign', :count).by(-1)
+          expect { delete "/api/campaigns/#{campaign_1.id}" }.to change(Campaign, :count).by(-1)
         end
 
         it 'returns a status of 204 (No Content)' do
@@ -222,7 +222,7 @@ RSpec.describe "Api::Campaigns", type: :request do
         end
 
         it 'does not decrease the amount of campaigns' do
-          expect { delete "/api/campaigns/#{campaign_2.id}" }.to_not change('Campaign', :count)
+          expect { delete "/api/campaigns/#{campaign_2.id}" }.to_not change(Campaign, :count)
         end
 
         it 'returns the error messages' do
@@ -241,7 +241,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       end
 
       it 'does not decrease the amount of campaigns' do
-        expect { delete "/api/campaigns/#{campaign_2.id}" }.to_not change('Campaign', :count)
+        expect { delete "/api/campaigns/#{campaign_2.id}" }.to_not change(Campaign, :count)
       end
 
       it 'returns the error messages' do

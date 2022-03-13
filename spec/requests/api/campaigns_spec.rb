@@ -235,9 +235,21 @@ RSpec.describe "Api::Campaigns", type: :request do
     end
 
     context 'without logged in user' do
-      it 'returns a status of 401 (Unauthorized)'
-      it 'does not decrease the amount of campaigns'
-      it 'returns the error messages'
+      it 'returns a status of 401 (Unauthorized)' do
+        delete "/api/campaigns/#{campaign_2.id}"
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'does not decrease the amount of campaigns' do
+        expect { delete "/api/campaigns/#{campaign_2.id}" }.to_not change('Campaign', :count)
+      end
+
+      it 'returns the error messages' do
+        delete "/api/campaigns/#{campaign_2.id}"
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
     end
   end
 end

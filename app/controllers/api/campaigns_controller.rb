@@ -6,7 +6,7 @@ class Api::CampaignsController < ApplicationController
   end
 
   def create
-    campaign = current_user.campaigns.new(campaign_params)
+    campaign = current_user.owned_campaigns.new(campaign_params)
     if campaign.save
       render json: campaign, status: :created
     else

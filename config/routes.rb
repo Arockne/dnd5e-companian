@@ -4,6 +4,6 @@ Rails.application.routes.draw do
     post '/signup', to: 'users#create'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
-    resources :campaigns, only: [:index, :create]
+    resources :campaigns, only: [:index, :create, :destroy]
   end
 end

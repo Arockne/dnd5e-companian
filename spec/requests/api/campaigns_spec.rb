@@ -188,4 +188,29 @@ RSpec.describe "Api::Campaigns", type: :request do
     end
 
   end
+
+  describe 'DELETE /campaigns/:id' do
+  
+    context 'with logged in user' do
+      
+      context 'as the campaign owner' do
+        it 'decreases the amount of campaigns'
+        it 'returns a status of 200 (Ok)'
+        it 'returns the deleted campaign'
+        
+      end
+
+      context 'with not being the campaign owner' do
+        it 'returns a status of 401 (Unauthorized)'
+        it 'does not decrease the amount of campaigns'
+        it 'returns the error messages'
+      end
+    end
+
+    context 'without logged in user' do
+      it 'returns a status of 401 (Unauthorized)'
+      it 'does not decrease the amount of campaigns'
+      it 'returns the error messages'
+    end
+  end
 end

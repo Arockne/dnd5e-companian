@@ -195,11 +195,24 @@ RSpec.describe "Api::Campaigns", type: :request do
   describe 'DELETE /campaigns/:id' do
   
     context 'with logged in user' do
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }
+      end
 
       context 'as the campaign owner' do
-        it 'decreases the amount of campaigns'
-        it 'returns a status of 200 (Ok)'
-        it 'returns the deleted campaign'
+        it 'decreases the amount of campaigns' do
+          expect { delete "/api/campaigns/#{campaign_1.id}" }.to change('Campaign', :count).by(-1)
+        end
+
+        it 'returns a status of 204 (No Content)' do
+          delete "/api/campaigns/#{campaign_1.id}"
+          expect(response).to have_http_status(:no_content)
+        end
+
+        it 'returns nothing' do
+          delete "/api/campaigns/#{campaign_1.id}"
+          expect(response.body).to be_empty
+        end
         
       end
 

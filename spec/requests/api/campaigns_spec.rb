@@ -21,7 +21,7 @@ RSpec.describe "Api::Campaigns", type: :request do
     )
   end
 
-  let(:campaign_1) do
+  let!(:campaign_1) do
     Campaign.create!(
       name: 'Knights of the Round Table', 
       setting: 'Somewhere in Camelot', 
@@ -31,7 +31,7 @@ RSpec.describe "Api::Campaigns", type: :request do
     )
   end
 
-  let(:campaign_2) do
+  let!(:campaign_2) do
     Campaign.create!(
       name: 'Star Wards', 
       setting: 'In a hospital far far away', 
@@ -39,7 +39,6 @@ RSpec.describe "Api::Campaigns", type: :request do
       password: 'test123', 
       password_confirmation: 'test123'
     )
-    
   end
 
   describe "GET /index" do

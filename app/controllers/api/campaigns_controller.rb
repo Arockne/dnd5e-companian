@@ -14,6 +14,16 @@ class Api::CampaignsController < ApplicationController
     end
   end
 
+  def destroy
+    campaign = current_user.owned_campaigns.find_by(id: params[:id])
+    if campaign.nil?
+      render json: { errors: ['Not Authorized'] }, status: :unauthorized
+    else
+      campaign.destroy
+      head :no_content
+    end
+  end
+
   private
 
   def campaign_params

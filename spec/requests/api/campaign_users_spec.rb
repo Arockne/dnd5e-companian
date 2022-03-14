@@ -119,8 +119,19 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     end
     
     context 'without logged in user' do
-      it 'returns a status of 401 (Unauthorized)'
-      it 'returns error messages'
+      let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
+
+      it 'returns a status of 401 (Unauthorized)' do
+        post '/api/campaign_users', params: campaign_user_params
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'returns error messsages' do
+        post '/api/campaign_users', params: campaign_user_params
+        expect(response).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
     end
   end
 end

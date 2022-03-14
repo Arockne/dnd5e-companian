@@ -21,6 +21,16 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     )
   end
 
+  let(:user_3) do
+    User.create!(
+      username: 'sam',
+      email: 'sam@gmail.com',
+      email_confirmation: 'sam@gmail.com', 
+      password: 'test123', 
+      password_confirmation: 'test123'
+    )
+  end
+
   let!(:campaign_1) do
     Campaign.create!(
       name: 'Knights of the Round Table', 
@@ -38,6 +48,20 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       owner: user_2, 
       password: 'test123', 
       password_confirmation: 'test123'
+    )
+  end
+
+  let!(:campaign_1_user_2) do
+    CampaignUser.create!(
+      campaign_id: campaign_1.id
+      user_id: user_2.id
+    )
+  end
+
+  let!(:campaign_1_user_3) do
+    CampaignUser.create(
+      campaign_id: campaign_1.id
+      user_id: user_3.id
     )
   end
 

@@ -44,8 +44,9 @@ RSpec.describe "Api::CampaignUsers", type: :request do
   describe 'POST /create' do
     context 'with logged in user' do
       before do
-        post '/api/login' params: { username: user_1.username, password: user_1.password}
+        post '/api/login', params: { username: user_1.username, password: user_1.password}
       end
+      
       context 'joining a campaign' do
         context 'with correct password' do
           let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
@@ -83,6 +84,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
           end
         end
       end
+
       context 'joining a campaign already a member of' do
         let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
         it 'returns a status of 403 (Forbidden)' do
@@ -100,11 +102,15 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       end
 
       context 'joining a campaign that does not exist' do
+        let(:campaign_user_params) { { campaign: { campaign_id: 0, password: 'campaigndoesnotexist' } } }
+
         it 'returns a status of 404 (Not Found)' do
+          post '/api/campaign_users', params: campaign_user_params
           expect(response).to have_http_status(:not_found)  
         end
 
         it 'returns error messages' do
+          post '/api/campaign_users', params: campaign_user_params
           expect(response.body).to include_json({
             errors: a_kind_of(Array)
           })

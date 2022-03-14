@@ -48,7 +48,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       end
       context 'joining a campaign' do
         context 'with correct password' do
-          let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id } } }
+          let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
 
           it 'increases the amount of CampaignUsers by one' do
             expect { post '/campaign_users', params: campaign_user_params }.to change(CampaignUser, :count).by(1)

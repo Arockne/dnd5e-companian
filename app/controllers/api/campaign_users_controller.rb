@@ -3,7 +3,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :render_foribidden
 
   def create
-    campaign = Campaign.find(campaign_user_params[:campaign_id])
     if campaign&.authenticate(campaign_user_params[:password])
       campaign_user = current_user.campaign_users.create!(campaign_id: campaign_user_params[:campaign_id])
       render json: campaign_user, status: :created
@@ -16,6 +15,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_foribidden
 
   def campaign_user_params
     params.require(:campaign).permit(:campaign_id, :password)
+  end
+
+  def campaign
+    @campaign ||= Campaign.find(campaign_user_params[:campaign_id])
   end
 
   def render_not_found

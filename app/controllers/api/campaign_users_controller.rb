@@ -1,7 +1,8 @@
 class Api::CampaignUsersController < ApplicationController
+rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def create
-    campaign = Campaign.find_by(id: campaign_user_params[:campaign_id])
+    campaign = Campaign.find(campaign_user_params[:campaign_id])
     if campaign&.authenticate(campaign_user_params[:password])
       campaign_user = current_user.campaign_users.new(campaign_id: campaign_user_params[:campaign_id])
       if campaign_user.save
@@ -20,5 +21,9 @@ class Api::CampaignUsersController < ApplicationController
 
   def campaign_user_params
     params.require(:campaign).permit(:campaign_id, :password)
+  end
+
+  def render_not_found
+    render json: { errors: ['Campaign does not exist'] }, status: :not_found
   end
 end

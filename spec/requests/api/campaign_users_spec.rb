@@ -78,7 +78,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
 
           it 'returns error messsages' do
             post '/api/campaign_users', params: incorrect_campaign_user_params
-            expect(response).to include_json({
+            expect(response.body).to include_json({
               errors: a_kind_of(Array)
             })
           end

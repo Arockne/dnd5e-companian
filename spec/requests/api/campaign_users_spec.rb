@@ -182,22 +182,35 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       context 'not as the campaign owner' do
         context 'removing themselves from a campaign' do
           it 'decreases the amount of CampaignUser' do
-            expect { delete "/api/campaign_users/#{campaign_2_user_1}" }.to change(CampaignUser, :count).by(1)
+            expect { delete "/api/campaign_users/#{campaign_2_user_1.id}" }.to change(CampaignUser, :count).by(-1)
           end
   
           it 'returns the CampaignUser' do
-            delete "/api/campaign_users/#{campaign_2_user_1}"
+            delete "/api/campaign_users/#{campaign_2_user_1.id}"
             expect(response.body).to include_json(campaign_2_user_1)
           end
           it 'returns a status of 200 (Ok)' do
-            delete "/api/campaign_users/#{campaign_2_user_1}"
+            delete "/api/campaign_users/#{campaign_2_user_1.id}"
             expect(response).to have_http_status(:ok)
           end
         end
 
         context 'removing others from a campaign' do
-          it 'returns a status of 401 (Unauthorized)'
-          it 'returns error messages'
+          it 'does not decrease amount of CampaignUser' do
+            expect { delete "/api/campaign_users/#{campaign_2_user_1.id}" }.to_not change(CampaignUser, :count)
+          end
+
+          it 'returns a status of 401 (Unauthorized)' do
+            delete "/api/campaign_users/#{campaign_2_user_3.id}"
+            expect(response).to have_http_status(:unauthorized)
+          end
+
+          it 'returns error messages' do
+            delete "/api/campaign_users/#{campaign_2_user_3.id}"
+            expect(response.body).to include_json({
+              errors: a_kind_of(Array)
+            })
+          end
         end
       end
 

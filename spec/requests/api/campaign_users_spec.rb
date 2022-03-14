@@ -53,16 +53,30 @@ RSpec.describe "Api::CampaignUsers", type: :request do
 
   let!(:campaign_1_user_2) do
     CampaignUser.create!(
-      campaign_id: campaign_1.id
+      campaign_id: campaign_1.id,
       user_id: user_2.id
     )
   end
 
   let!(:campaign_1_user_3) do
     CampaignUser.create(
-      campaign_id: campaign_1.id
+      campaign_id: campaign_1.id,
       user_id: user_3.id
     )
+  end
+  
+  let(:campaign_2_user_1) do
+    CampaignUser.create!(
+      campaign_id: campaign_2.id,
+      user_id: user_1.id
+    )
+  end
+
+  let(:campaign_2_user_3) do
+    CampaignUser.create!(
+      campaign_id: campaign_2.id,
+      user_id: user_3.id
+    )  
   end
 
   describe 'POST /create' do
@@ -161,22 +175,41 @@ RSpec.describe "Api::CampaignUsers", type: :request do
 
   describe 'DELETE /campaign_users/:id' do
     context 'with logged in user' do
-      context 'removing themselves from a campaign' do
-        it 'decreases the amount of CampaignUser'
-        it 'returns the CampaignUser'
-        it 'returns a status of 200 (Ok)'
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password}
       end
 
-      context 'removing others from a campaign' do
-        it 'returns a status of 401 (Unauthorized)'
-        it 'returns error messages'
+      context 'not as the campaign owner' do
+        context 'removing themselves from a campaign' do
+          it 'decreases the amount of CampaignUser' do
+            expect { delete "/api/campaign_users/#{campaign_2_user_1}" }.to change(CampaignUser, :count).by(1)
+          end
+  
+          it 'returns the CampaignUser' do
+            delete "/api/campaign_users/#{campaign_2_user_1}"
+            expect(response.body).to include_json(campaign_2_user_1)
+          end
+          it 'returns a status of 200 (Ok)' do
+            delete "/api/campaign_users/#{campaign_2_user_1}"
+            expect(response).to have_http_status(:ok)
+          end
+        end
+
+        context 'removing others from a campaign' do
+          it 'returns a status of 401 (Unauthorized)'
+          it 'returns error messages'
+        end
       end
 
-      context 'removing others as the campaign owner' do
-        it 'decreases the amount of CampaignUser'
-        it 'returns the CampaignUser'
-        it 'returns a status of 200 (Ok)'
+      context 'as the campaign owner' do
+        context 'removing users' do
+          it 'decreases the amount of CampaignUser'
+          it 'returns the CampaignUser'
+          it 'returns a status of 200 (Ok)'
+        end
+        
       end
+
     end
 
     context 'without logged in user' do

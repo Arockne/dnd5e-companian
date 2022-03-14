@@ -5,7 +5,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_foribidden
   before_action :authorize_join_request, only: [:create]
 
   def create
-    campaign_user = current_user.campaign_users.create!(campaign_id: campaign_user_params[:campaign_id])
+    campaign_user = current_user.campaign_users.create!(campaign: campaign)
     render json: campaign_user, status: :created
   end
 

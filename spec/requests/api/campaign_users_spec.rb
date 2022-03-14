@@ -216,9 +216,19 @@ RSpec.describe "Api::CampaignUsers", type: :request do
 
       context 'as the campaign owner' do
         context 'removing users' do
-          it 'decreases the amount of CampaignUser'
-          it 'returns the CampaignUser'
-          it 'returns a status of 200 (Ok)'
+          it 'decreases the amount of CampaignUser' do
+            expect { delete "/api/campaign_user/#{campaign_1_user_2.id}" }.to change(CampaignUser, :count).by(-1)
+          end
+
+          it 'returns the CampaignUser' do
+            delete "/api/campaign_user/#{campaign_1_user_2.id}"
+            expect(response.body).to include_json(campaign_1_user_2)
+          end
+
+          it 'returns a status of 200 (Ok)' do
+            delete "/api/campaign_user/#{campaign_1_user_2.id}"
+            expect(response).to have_http_status(:ok)
+          end
         end
         
       end

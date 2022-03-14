@@ -98,7 +98,20 @@ RSpec.describe "Api::CampaignUsers", type: :request do
           })
         end
       end
+
+      context 'joining a campaign that does not exist' do
+        it 'returns a status of 404 (Not Found)' do
+          expect(response).to have_http_status(:not_found)  
+        end
+
+        it 'returns error messages' do
+          expect(response.body).to include_json({
+            errors: a_kind_of(Array)
+          })
+        end
+      end
     end
+    
     context 'without logged in user' do
       it 'returns a status of 401 (Unauthorized)'
       it 'returns error messages'

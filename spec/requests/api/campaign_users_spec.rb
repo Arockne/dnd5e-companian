@@ -87,14 +87,14 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       
       context 'joining a campaign' do
         context 'with correct password' do
-          let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
+          let(:campaign_user_params) { { campaign: { password: campaign_1.password } } }
 
           it 'increases the amount of CampaignUsers by one' do
-            expect { post '/api/campaign_users', params: campaign_user_params }.to change(CampaignUser, :count).by(1)
+            expect { post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params }.to change(CampaignUser, :count).by(1)
           end
 
           it 'returns the CampaignUser' do
-            post '/api/campaign_users', params: campaign_user_params
+            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
             expect(response.body).to include_json({
               id: a_kind_of(Integer),
               user_id: user_1.id,
@@ -102,20 +102,20 @@ RSpec.describe "Api::CampaignUsers", type: :request do
             })
           end
           it 'returns a status of 201 (Created)' do
-            post '/api/campaign_users', params: campaign_user_params
+            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
             expect(response).to have_http_status(:created)
           end
         end
         context 'with incorrect password' do
-          let(:incorrect_campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: 'thisisnotthepasswordyouarelookingfor' } } }
+          let(:incorrect_campaign_user_params) { { campaign: { password: 'thisisnotthepasswordyouarelookingfor' } } }
 
           it 'returns a status of 401 (Unauthorized)' do
-            post '/api/campaign_users', params: incorrect_campaign_user_params
+            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: incorrect_campaign_user_params
             expect(response).to have_http_status(:unauthorized)
           end
 
           it 'returns error messsages' do
-            post '/api/campaign_users', params: incorrect_campaign_user_params
+            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: incorrect_campaign_user_params
             expect(response.body).to include_json({
               errors: a_kind_of(Array)
             })
@@ -124,15 +124,15 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       end
 
       context 'joining a campaign already a member of' do
-        let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
+        let(:campaign_user_params) { { campaign: { password: campaign_1.password } } }
         it 'returns a status of 403 (Forbidden)' do
-          post '/api/campaign_users', params: campaign_user_params
-          post '/api/campaign_users', params: campaign_user_params
+          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
+          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
           expect(response).to have_http_status(:forbidden)
         end
         it 'returns error messages' do
-          post '/api/campaign_users', params: campaign_user_params
-          post '/api/campaign_users', params: campaign_user_params
+          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
+          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
           expect(response.body).to include_json({
             errors: a_kind_of(Array)
           })
@@ -140,15 +140,15 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       end
 
       context 'joining a campaign that does not exist' do
-        let(:campaign_user_params) { { campaign: { campaign_id: 0, password: 'campaigndoesnotexist' } } }
+        let(:campaign_user_params) { { campaign: { password: 'campaigndoesnotexist' } } }
 
         it 'returns a status of 404 (Not Found)' do
-          post '/api/campaign_users', params: campaign_user_params
+          post "/api/campaigns/0/campaign_users", params: campaign_user_params
           expect(response).to have_http_status(:not_found)  
         end
 
         it 'returns error messages' do
-          post '/api/campaign_users', params: campaign_user_params
+          post "/api/campaigns/0/campaign_users", params: campaign_user_params
           expect(response.body).to include_json({
             errors: a_kind_of(Array)
           })
@@ -157,15 +157,15 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     end
     
     context 'without logged in user' do
-      let(:campaign_user_params) { { campaign: { campaign_id: campaign_1.id, password: campaign_1.password } } }
+      let(:campaign_user_params) { { campaign: { password: campaign_1.password } } }
 
       it 'returns a status of 401 (Unauthorized)' do
-        post '/api/campaign_users', params: campaign_user_params
+        post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'returns error messsages' do
-        post '/api/campaign_users', params: campaign_user_params
+        post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
         expect(response.body).to include_json({
           errors: a_kind_of(Array)
         })

@@ -6,7 +6,7 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.string :race
       t.string :profession
       t.string :alignment
-      t.integer :experience
+      t.integer :experience, default: 0
       t.integer :strength
       t.integer :dexterity
       t.integer :constitution

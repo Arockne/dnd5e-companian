@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2022_03_15_131715) do
     t.string "race"
     t.string "profession"
     t.string "alignment"
-    t.integer "experience"
+    t.integer "experience", default: 0
     t.integer "strength"
     t.integer "dexterity"
     t.integer "constitution"

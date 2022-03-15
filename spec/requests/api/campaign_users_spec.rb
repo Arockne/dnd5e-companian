@@ -187,7 +187,11 @@ RSpec.describe "Api::CampaignUsers", type: :request do
   
           it 'returns the CampaignUser' do
             delete "/api/campaigns/#{campaign_2.id}/campaign_users/#{campaign_2_user_1.id}"
-            expect(response.body).to include_json(campaign_2_user_1)
+            expect(response.body).to include_json({
+              id: campaign_2_user_1.id,
+              user_id: campaign_2_user_1.user_id,
+              campaign_id: campaign_2_user_1.campaign_id
+            })
           end
           it 'returns a status of 200 (Ok)' do
             delete "/api/campaigns/#{campaign_2.id}/campaign_users/#{campaign_2_user_1.id}"
@@ -222,7 +226,11 @@ RSpec.describe "Api::CampaignUsers", type: :request do
 
           it 'returns the CampaignUser' do
             delete "/api/campaigns/#{campaign_1.id}/campaign_users/#{campaign_1_user_2.id}"
-            expect(response.body).to include_json(campaign_1_user_2)
+            expect(response.body).to include_json({
+              id: campaign_1_user_2.id,
+              user_id: campaign_1_user_2.user_id,
+              campaign_id: campaign_1_user_2.campaign.id
+            })
           end
 
           it 'returns a status of 200 (Ok)' do

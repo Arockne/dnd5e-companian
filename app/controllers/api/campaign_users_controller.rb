@@ -3,6 +3,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
 
   before_action :authorize_join_request, only: [:create]
+  before_action :authorize_delete_request, only: [:destroy]
 
   def create
     campaign_user = current_user.campaign_users.create!(campaign: campaign)
@@ -10,12 +11,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
   end
 
   def destroy
-    if authenticate_delete_request
-      campaign_user.destroy
-      render json: campaign_user, status: :ok
-    else
-      render json: { errors: ['Not Authorized'] }, status: :unauthorized
-    end
+    campaign_user.destroy
+    render json: campaign_user, status: :ok
   end
 
   private
@@ -42,6 +39,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
 
   def authenticate_delete_request
     current_user.id == campaign_user.user_id || current_user.id == campaign.owner.id
+  end
+
+  def authorize_delete_request
+    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless authenticate_delete_request
   end
 
   def render_not_found

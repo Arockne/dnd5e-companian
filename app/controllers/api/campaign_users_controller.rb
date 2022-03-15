@@ -10,8 +10,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
   end
 
   def destroy
-    campaign_user = CampaignUser.find(params[:id])
-    if current_user.id == campaign_user.user_id || current_user.id == campaign.owner.id
+    if authenticate_delete_request
       campaign_user.destroy
       render json: campaign_user, status: :ok
     else
@@ -28,6 +27,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
   def campaign
     @campaign ||= Campaign.find(params[:campaign_id])
   end
+  
+  def campaign_user
+    @campaign_user ||= CampaignUser.find(params[:id])
+  end
 
   def authenticate_join_request
     campaign&.authenticate(campaign_user_params[:password])
@@ -35,6 +38,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
 
   def authorize_join_request
     render json: { errors: ['Not Authorized'] }, status: :unauthorized unless authenticate_join_request
+  end
+
+  def authenticate_delete_request
+    current_user.id == campaign_user.user_id || current_user.id == campaign.owner.id
   end
 
   def render_not_found

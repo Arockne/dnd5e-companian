@@ -9,14 +9,24 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_foribidden
     render json: campaign_user, status: :created
   end
 
+  def destroy
+    campaign_user = CampaignUser.find(params[:id])
+    if current_user.id == campaign_user.user_id || current_user.id == campaign.owner.id
+      campaign_user.destroy
+      render json: campaign_user, status: :ok
+    else
+      render json: { errors: ['Not Authorized'] }, status: :unauthorized
+    end
+  end
+
   private
 
   def campaign_user_params
-    params.require(:campaign).permit(:campaign_id, :password)
+    params.require(:campaign).permit(:password)
   end
 
   def campaign
-    @campaign ||= Campaign.find(campaign_user_params[:campaign_id])
+    @campaign ||= Campaign.find(params[:campaign_id])
   end
 
   def authenticate_join_request

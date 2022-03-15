@@ -65,14 +65,14 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     )
   end
   
-  let(:campaign_2_user_1) do
+  let!(:campaign_2_user_1) do
     CampaignUser.create!(
       campaign_id: campaign_2.id,
       user_id: user_1.id
     )
   end
 
-  let(:campaign_2_user_3) do
+  let!(:campaign_2_user_3) do
     CampaignUser.create!(
       campaign_id: campaign_2.id,
       user_id: user_3.id

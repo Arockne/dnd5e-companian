@@ -72,8 +72,16 @@ RSpec.describe "Api::Characters", type: :request do
       end
     end
     context 'when a user is logged out' do
-      it 'returns the error messages'
-      it 'returns a status of 401 (Unauthorized)'
+      it 'returns the error messages' do
+        get "/api/characters"
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+      it 'returns a status of 401 (Unauthorized)' do
+        get "/api/characters"
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
 end

@@ -1,3 +1,5 @@
 class CharacterSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :image_url, :profession
+
+  belongs_to :campaign
 end

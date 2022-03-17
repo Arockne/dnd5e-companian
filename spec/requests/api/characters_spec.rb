@@ -39,6 +39,7 @@ RSpec.describe "Api::Characters", type: :request do
       profession: 'Fighter',
       alignment: 'Neutral',
       experience: 0,
+      image_url: '',
       strength: (rand(1..6) * 3),
       dexterity: (rand(1..6) * 3),
       constitution: (rand(1..6) * 3),
@@ -59,7 +60,14 @@ RSpec.describe "Api::Characters", type: :request do
 
       it 'returns the user\'s characters' do
         get "/api/characters"
-        expect(response.body).to include_json([character_1.as_json])
+        expect(response.body).to include_json([
+          {
+            name: character_1.name,
+            image_url: a_kind_of(String),
+            profession: character_1.profession,
+            campaign: a_kind_of(Hash)
+          }
+        ])
       end
 
       it 'has a status of 200 (Ok)' do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::Characters", type: :request do
-  let!(:owner) do 
+  let!(:user_1) do 
     User.create!(
       username: 'arthur',
       email: 'arthur@camelot.com',
@@ -11,7 +11,7 @@ RSpec.describe "Api::Characters", type: :request do
     )
   end
 
-  let(:player_1) do
+  let(:user_2) do
     User.create!(
       username: 'bob',
       email: 'bob@gmail.com',
@@ -25,9 +25,19 @@ RSpec.describe "Api::Characters", type: :request do
     Campaign.create!(
       name: 'Knights of the Round Table', 
       setting: 'Somewhere in Camelot', 
-      owner: owner, 
+      owner: user_1, 
       password: 'king', 
       password_confirmation: 'king'
+    )
+  end
+
+  let!(:campaign_2) do
+    Campaign.create!(
+      name: 'Star Wards', 
+      setting: 'In a hospital far far away', 
+      owner: user_2, 
+      password: 'test123', 
+      password_confirmation: 'test123'
     )
   end
 
@@ -46,7 +56,7 @@ RSpec.describe "Api::Characters", type: :request do
       intelligence: (rand(1..6) * 3),
       wisdom: (rand(1..6) * 3),
       charisma: (rand(1..6) * 3),
-      user: player_1,
+      user: user_2,
       campaign: campaign_1
     )
   end
@@ -54,7 +64,7 @@ RSpec.describe "Api::Characters", type: :request do
   describe "GET /index" do
     context 'when a user is logged in' do
       before do
-        post '/api/login', params: { username: player_1.username, password: player_1.password }  
+        post '/api/login', params: { username: user_2.username, password: user_2.password }  
       end
 
       it 'returns the user\'s characters' do

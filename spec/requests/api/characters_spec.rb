@@ -51,7 +51,6 @@ RSpec.describe "Api::Characters", type: :request do
     )
   end
 
-
   describe "GET /index" do
     context 'when a user is logged in' do
       before do
@@ -86,6 +85,29 @@ RSpec.describe "Api::Characters", type: :request do
         get "/api/characters"
         expect(response).to have_http_status(:unauthorized)
       end
+    end
+  end
+
+  describe 'POST /create' do
+    context 'when a user is logged in' do
+      context 'being member of the campaign' do
+        it 'updates the amount of characters by one'
+        it 'returns the created character'
+        it 'returns a status of 201 (Created)'
+      end
+      context 'being the owner of the campaign' do
+        it 'updates the amount of characters by one'
+        it 'returns the created character'
+        it 'returns a status of 201 (Created)'
+      end
+      context 'not being a member of the campaign' do
+        it 'return error messages'
+        it 'has a status of 401 (Unauthorized)'
+      end
+    end
+    context 'when a user is not logged in' do
+      it 'return error messages'
+      it 'has a status of 401 (Unauthorized)'
     end
   end
 end

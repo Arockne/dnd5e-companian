@@ -71,7 +71,7 @@ RSpec.describe "Api::Characters", type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
-    context 'when a user is logged out' do
+    context 'when a user is not logged in' do
       it 'returns the error messages' do
         get "/api/characters"
         expect(response.body).to include_json({

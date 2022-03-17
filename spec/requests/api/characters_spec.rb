@@ -59,7 +59,7 @@ RSpec.describe "Api::Characters", type: :request do
 
       it 'returns the user\'s characters' do
         get "/api/characters"
-        expect(response.body).to include_json([character_1])
+        expect(response.body).to include_json([character_1.as_json])
       end
 
       it 'has a status of 200 (Ok)' do

@@ -11,7 +11,7 @@ RSpec.describe "Api::Characters", type: :request do
     )
   end
 
-  let(:user) do
+  let(:player_1) do
     User.create!(
       username: 'bob',
       email: 'bob@gmail.com',
@@ -31,10 +31,6 @@ RSpec.describe "Api::Characters", type: :request do
     )
   end
 
-  let!(:player_1) do
-    CampaignUser.create!(user: user, campaign: campaign_1)
-  end
-
   let!(:character_1) do
     Character.create!(
       name: 'Rocko',
@@ -49,7 +45,7 @@ RSpec.describe "Api::Characters", type: :request do
       intelligence: (rand(1..6) * 3),
       wisdom: (rand(1..6) * 3),
       charisma: (rand(1..6) * 3),
-      campaign_user: player_1,
+      user: player_1,
       campaign: campaign_1
     )
   end
@@ -58,7 +54,7 @@ RSpec.describe "Api::Characters", type: :request do
   describe "GET /index" do
     context 'when a user is logged in' do
       before do
-        post '/api/login', params: { username: user.username, password: user.password }  
+        post '/api/login', params: { username: player_1.username, password: player_1.password }  
       end
 
       it 'returns the user\'s characters' do

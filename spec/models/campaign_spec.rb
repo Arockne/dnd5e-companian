@@ -42,6 +42,7 @@ RSpec.describe Campaign, type: :model do
     it { is_expected.to belong_to(:owner) }
     it { is_expected.to have_many(:campaign_users) }
     it { is_expected.to have_many(:users) }
+    it { is_expected.to have_many(:characters) }
   end
 
 end

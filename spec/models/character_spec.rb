@@ -19,4 +19,30 @@ RSpec.describe Character, type: :model do
     it { is_expected.to respond_to(:campaign_id) }
   end
 
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:background) }
+    it { is_expected.to validate_presence_of(:race) }
+    it { is_expected.to validate_presence_of(:profession) }
+    
+    it { is_expected.to validate_inclusion_of(:alignment).in_array([
+      'Lawful good',
+      'Neutral good',
+      'Chaotic good',
+      'Lawful neutral',
+      'Neutral',
+      'Chaotice neutral'
+      'Lawful evil',
+      'Neutral evil',
+      'Chaotic evil'
+    ])}
+
+    it { is_expected.to validate_numericality_of(:experience).is_greater_than(0) }
+    
+    [:strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma].each do |ability_score|
+      it { is_expected.to validate_numericality_of(ability_score).is_greater_than(0) }
+    end
+
+  end
+
 end

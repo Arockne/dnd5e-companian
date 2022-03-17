@@ -13,7 +13,7 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.integer :intelligence
       t.integer :wisdom
       t.integer :charisma
-      t.belongs_to :campaign_user, null: false, foreign_key: true
+      t.belongs_to :user, null: false, foreign_key: true
       t.belongs_to :campaign, null: false, foreign_key: true
 
       t.timestamps

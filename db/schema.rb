@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(version: 2022_03_17_195710) do
     t.integer "intelligence"
     t.integer "wisdom"
     t.integer "charisma"
-    t.bigint "campaign_user_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "campaign_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_url"
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
-    t.index ["campaign_user_id"], name: "index_characters_on_campaign_user_id"
+    t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +68,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_195710) do
   add_foreign_key "campaign_users", "campaigns"
   add_foreign_key "campaign_users", "users"
   add_foreign_key "campaigns", "users"
-  add_foreign_key "characters", "campaign_users"
   add_foreign_key "characters", "campaigns"
+  add_foreign_key "characters", "users"
 end

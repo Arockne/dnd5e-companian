@@ -15,7 +15,7 @@ RSpec.describe Character, type: :model do
     it { is_expected.to respond_to(:intelligence) }
     it { is_expected.to respond_to(:wisdom) }
     it { is_expected.to respond_to(:charisma) }
-    it { is_expected.to respond_to(:campaign_user_id) }
+    it { is_expected.to respond_to(:user_id) }
     it { is_expected.to respond_to(:campaign_id) }
   end
 
@@ -40,7 +40,7 @@ RSpec.describe Character, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:campaign_user) }
+    it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:campaign) }
   end
 

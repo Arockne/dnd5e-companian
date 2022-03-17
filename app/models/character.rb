@@ -7,4 +7,7 @@ class Character < ApplicationRecord
   validates :race, presence: true
   validates :profession, presence: true
   validates :alignment, inclusion: { in: [ 'Lawful good', 'Neutral good', 'Chaotic good', 'Lawful neutral', 'Neutral', 'Chaotice neutral', 'Lawful evil', 'Neutral evil', 'Chaotic evil' ]}
+
+  validates :experience, numericality: { greater_than: 0 }
+  validates :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, numericality: { greater_than: 0 }
 end

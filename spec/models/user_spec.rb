@@ -38,5 +38,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:owned_campaigns) }
     it { is_expected.to have_many(:campaign_users) }
     it { is_expected.to have_many(:campaigns) }
+    it { is_expected.to have_many(:characters) }
   end
 end

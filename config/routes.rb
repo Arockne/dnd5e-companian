@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :campaigns, only: [:index, :create, :destroy] do
       resources :campaign_users, only: [:create, :destroy]
     end
+    resources :characters, only: [:index]
   end
 end

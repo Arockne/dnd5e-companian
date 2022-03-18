@@ -1,20 +1,18 @@
 class Api::CharactersController < ApplicationController
 
+  before_action :authorize_character_action, only: [:create]
+
   def index
     characters = current_user.characters
     render json: characters, status: :ok
   end
 
   def create
-    if membership || owner?
-      character = current_user.characters.new(character_params)
-      if character.save
-        render json: character, status: :created, serializer: CharacterShowSerializer
-      else
-        render json: { errors: character.errors.full_messages }, status: :unprocessable_entity
-      end
+    character = current_user.characters.new(character_params)
+    if character.save
+      render json: character, status: :created, serializer: CharacterShowSerializer
     else
-      render json: { errors: ['Not Authorized'] }, status: :unauthorized
+      render json: { errors: character.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -34,6 +32,10 @@ class Api::CharactersController < ApplicationController
 
   def owner?
     campaign.owner == current_user unless campaign.nil?
+  end
+
+  def authorize_character_action
+    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || owner?
   end
 
 end

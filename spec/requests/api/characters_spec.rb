@@ -163,9 +163,19 @@ RSpec.describe "Api::Characters", type: :request do
         it 'returns the created character'
         it 'returns a status of 201 (Created)'
       end
+      
       context 'not being a member of the campaign' do
-        it 'return error messages'
-        it 'has a status of 401 (Unauthorized)'
+        it 'returns the error messages' do
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
+          expect(response.body).to include_json({
+            errors: a_kind_of(Array)
+          })
+        end
+  
+        it 'returns a status of 401 (Unauthorized)' do
+          post "/api/campaigns/#{campaign_1.id}/characters", params: character_params
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
     end
 

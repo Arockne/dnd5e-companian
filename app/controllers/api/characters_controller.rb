@@ -1,5 +1,5 @@
 class Api::CharactersController < ApplicationController
-
+rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   before_action :authorize_character_action, only: [:create]
 
   def index
@@ -8,12 +8,8 @@ class Api::CharactersController < ApplicationController
   end
 
   def create
-    character = current_user.characters.new(character_params)
-    if character.save
-      render json: character, status: :created, serializer: CharacterShowSerializer
-    else
-      render json: { errors: character.errors.full_messages }, status: :unprocessable_entity
-    end
+    character = current_user.characters.create!(character_params)
+    render json: character, status: :created, serializer: CharacterShowSerializer
   end
 
   private
@@ -36,6 +32,10 @@ class Api::CharactersController < ApplicationController
 
   def authorize_character_action
     render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || owner?
+  end
+
+  def render_unprocessable_entity(invalid)
+    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 
 end

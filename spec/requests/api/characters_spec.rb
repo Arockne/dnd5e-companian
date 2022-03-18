@@ -99,7 +99,31 @@ RSpec.describe "Api::Characters", type: :request do
   end
 
   describe 'POST /create' do
+    let!(:character_params) do
+      { 
+        character: {
+          name: 'Tommy',
+          background: 'Guild artisan',
+          race: 'Human',
+          profession: 'Monk',
+          alignment: 'Lawful neutral',
+          experience: 0,
+          image_url: '',
+          strength: (rand(1..6) * 3),
+          dexterity: (rand(1..6) * 3),
+          constitution: (rand(1..6) * 3),
+          intelligence: (rand(1..6) * 3),
+          wisdom: (rand(1..6) * 3),
+          charisma: (rand(1..6) * 3)
+        } 
+      }
+    end
+
     context 'when a user is logged in' do
+      before do
+        post "/api/login", params: { username: user_1.username, password: user_1.password }
+      end
+
       context 'being member of the campaign' do
         it 'updates the amount of characters by one'
         it 'returns the created character'
@@ -115,9 +139,19 @@ RSpec.describe "Api::Characters", type: :request do
         it 'has a status of 401 (Unauthorized)'
       end
     end
+
     context 'when a user is not logged in' do
-      it 'return error messages'
-      it 'has a status of 401 (Unauthorized)'
+      it 'returns the error messages' do
+        post "/api/campaigns/#{campaign_1.id}/characters", params: character_params
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+      
+      it 'returns a status of 401 (Unauthorized)' do
+        post "/api/campaigns/#{campaign_1.id}/characters", params: character_params
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
   end
 end

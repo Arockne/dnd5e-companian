@@ -125,10 +125,39 @@ RSpec.describe "Api::Characters", type: :request do
       end
 
       context 'being member of the campaign' do
-        it 'updates the amount of characters by one'
-        it 'returns the created character'
-        it 'returns a status of 201 (Created)'
+        before do
+          CampaignUser.create(user: user_1, campaign: campaign_2)
+        end
+
+        it 'updates the amount of characters by one' do
+          expect { post "/api/campaigns/#{campaign_2.id}/characters", params: character_params }.to change(Character, :count).by(1)
+        end
+
+        it 'returns the created character' do
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
+          expect(response.body).to include_json({
+            name: 'Tommy',
+            background: 'Guild artisan',
+            race: 'Human',
+            profession: 'Monk',
+            alignment: 'Lawful neutral',
+            experience: 0,
+            image_url: '',
+            strength: a_kind_of(Integer),
+            dexterity: a_kind_of(Integer),
+            constitution: a_kind_of(Integer),
+            intelligence: a_kind_of(Integer),
+            wisdom: a_kind_of(Integer),
+            charisma: a_kind_of(Integer)
+          })  
+        end
+
+        it 'returns a status of 201 (Created)' do
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
+          expect(response).to have_http_status(:created)
+        end
       end
+
       context 'being the owner of the campaign' do
         it 'updates the amount of characters by one'
         it 'returns the created character'
@@ -147,7 +176,7 @@ RSpec.describe "Api::Characters", type: :request do
           errors: a_kind_of(Array)
         })
       end
-      
+
       it 'returns a status of 401 (Unauthorized)' do
         post "/api/campaigns/#{campaign_1.id}/characters", params: character_params
         expect(response).to have_http_status(:unauthorized)

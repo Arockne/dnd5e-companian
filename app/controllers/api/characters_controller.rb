@@ -6,7 +6,6 @@ class Api::CharactersController < ApplicationController
   end
 
   def create
-    membership = current_user.campaign_users.find_by(campaign_id: character_params[:campaign_id])
     owner = membership.nil? && current_user.owned_campaigns.find_by(id: character_params[:campaign_id])
     if membership || owner
       character = current_user.characters.new(character_params)
@@ -24,6 +23,10 @@ class Api::CharactersController < ApplicationController
 
   def character_params
     params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :campaign_id)
+  end
+
+  def membership
+    @membership ||= current_user.campaign_users.find_by(campaign_id: character_params[:campaign_id])
   end
 
 end

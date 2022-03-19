@@ -215,4 +215,21 @@ RSpec.describe "Api::Characters", type: :request do
       end
     end
   end
+
+  describe 'GET /show' do
+    
+    context 'when a user is not logged in' do
+      it 'returns the error messages' do
+        get "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+
+      it 'returns a status of 401 (Unauthorized)' do
+        get "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
 end

@@ -15,11 +15,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   private
 
   def character_params
-    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :campaign_id)
+    params.permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :campaign_id)
   end
   
   def campaign
-    @campaign ||= character_params[:campaign_id] && Campaign.find_by(id: character_params[:campaign_id])
+    @campaign ||= params[:campaign_id] && Campaign.find(params[:campaign_id])
   end
 
   def membership

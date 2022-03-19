@@ -15,7 +15,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   private
 
   def character_params
-    params.permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :campaign_id)
+    params.permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :visible, :campaign_id)
   end
   
   def campaign

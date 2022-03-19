@@ -217,6 +217,21 @@ RSpec.describe "Api::Characters", type: :request do
   end
 
   describe 'GET /show' do
+    context 'when a user is logged in' do
+      context 'being the creator of the character' do
+        it 'returns the character'
+        it 'returns a status of 200 (Ok)'
+      end
+      context 'being the owner of the campaign' do
+        it 'returns the character'
+        it 'returns a status of 200 (Ok)'
+      end
+      context 'being a member of the campaign' do
+        context 'the character allows visibility'
+        context 'the character does not allow visibility'
+      end
+      context 'not affiliated with the campaign'
+    end
     
     context 'when a user is not logged in' do
       it 'returns the error messages' do

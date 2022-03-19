@@ -323,15 +323,39 @@ RSpec.describe "Api::Characters", type: :request do
       end
 
       context 'being a member of the campaign' do
-        context 'the character allows visibility' do
-          it 'returns the character'
-          it 'returns a status of 200 (Ok)'
+        before do
+          CampaignUser.create(user: user_1, campaign: campaign_3) 
         end
+
+        context 'the character allows visibility' do
+          it 'returns the character' do
+            get "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}"
+            expect(response.body).to include_json({
+              id: a_kind_of(Integer),
+              name: visible_character.name
+            })
+          end
+          it 'returns a status of 200 (Ok)' do
+            get "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}"
+            expect(response).to have_http_status(:ok)
+          end
+        end
+        
         context 'the character does not allow visibility' do
-          it 'returns the error messages'
-          it 'returns a status of 401 (Unauthorized)'
+          it 'returns the error messages' do
+            get "/api/campaigns/#{invisible_character.campaign_id}/characters/#{invisible_character.id}"
+            expect(response.body).to include_json({
+              errors: a_kind_of(Array)
+            })
+          end
+
+          it 'returns a status of 401 (Unauthorized)' do
+            get "/api/campaigns/#{invisible_character.campaign_id}/characters/#{invisible_character.id}"
+            expect(response).to have_http_status(:unauthorized)
+          end
         end
       end
+
       context 'not affiliated with the campaign' do
         it 'returns the error messages'
         it 'returns a status of 401 (Unauthorized)'

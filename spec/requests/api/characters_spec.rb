@@ -61,6 +61,26 @@ RSpec.describe "Api::Characters", type: :request do
     )
   end
 
+  let(:character_2) do
+    Character.create!(
+      name: 'Gimly',
+      background: 'Noble',
+      race: 'Elf',
+      profession: 'Wizard',
+      alignment: 'Neutral good',
+      experience: 0,
+      image_url: '',
+      strength: (rand(1..6) * 3),
+      dexterity: (rand(1..6) * 3),
+      constitution: (rand(1..6) * 3),
+      intelligence: (rand(1..6) * 3),
+      wisdom: (rand(1..6) * 3),
+      charisma: (rand(1..6) * 3),
+      user: user_1,
+      campaign: campaign_2
+    )
+  end
+
   describe "GET /index" do
     context 'when a user is logged in' do
       before do
@@ -218,10 +238,24 @@ RSpec.describe "Api::Characters", type: :request do
 
   describe 'GET /show' do
     context 'when a user is logged in' do
-      context 'being the creator of the character' do
-        it 'returns the character'
-        it 'returns a status of 200 (Ok)'
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }  
       end
+
+      context 'being the creator of the character' do
+        it 'returns the character' do
+          get "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
+          expect(response.body).to include_json({
+            id: a_kind_of(Integer),
+            name: character_2.name
+          })
+        end
+        it 'returns a status of 200 (Ok)' do
+          get "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
+          expect(response).to have_http_status(:ok)
+        end
+      end
+      
       context 'being the owner of the campaign' do
         it 'returns the character'
         it 'returns a status of 200 (Ok)'

@@ -41,6 +41,16 @@ RSpec.describe "Api::Characters", type: :request do
     )
   end
 
+  let!(:campaign_3) do
+    Campaign.create!(
+      name: 'Coderama', 
+      setting: 'Code in the future...', 
+      owner: user_2, 
+      password: 'test123', 
+      password_confirmation: 'test123'
+    )
+  end
+
   let!(:character_1) do
     Character.create!(
       name: 'Rocko',
@@ -77,7 +87,49 @@ RSpec.describe "Api::Characters", type: :request do
       wisdom: (rand(1..6) * 3),
       charisma: (rand(1..6) * 3),
       user: user_1,
-      campaign: campaign_2
+      campaign: campaign_3
+    )
+  end
+
+  let!(:visible_character) do
+    Character.create!(
+      name: 'Ally',
+      background: 'Merchant',
+      race: 'Orc',
+      profession: 'Barbarian',
+      alignment: 'Neutral',
+      experience: 0,
+      image_url: '',
+      strength: (rand(1..6) * 3),
+      dexterity: (rand(1..6) * 3),
+      constitution: (rand(1..6) * 3),
+      intelligence: (rand(1..6) * 3),
+      wisdom: (rand(1..6) * 3),
+      charisma: (rand(1..6) * 3),
+      visible: true,
+      user: user_1,
+      campaign: campaign_3
+    )
+  end
+
+  let!(:invisible_character) do
+    Character.create!(
+      name: 'Ally',
+      background: 'Merchant',
+      race: 'Orc',
+      profession: 'Barbarian',
+      alignment: 'Neutral',
+      experience: 0,
+      image_url: '',
+      strength: (rand(1..6) * 3),
+      dexterity: (rand(1..6) * 3),
+      constitution: (rand(1..6) * 3),
+      intelligence: (rand(1..6) * 3),
+      wisdom: (rand(1..6) * 3),
+      charisma: (rand(1..6) * 3),
+      visible: false,
+      user: user_1,
+      campaign: campaign_3
     )
   end
 
@@ -257,9 +309,19 @@ RSpec.describe "Api::Characters", type: :request do
       end
       
       context 'being the owner of the campaign' do
-        it 'returns the character'
-        it 'returns a status of 200 (Ok)'
+        it 'returns the character' do
+          get "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+          expect(response.body).to include_json({
+            id: a_kind_of(Integer),
+            name: character_1.name
+          })
+        end
+        it 'returns a status of 200 (Ok)' do
+          get "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+          expect(response).to have_http_status(:ok)
+        end
       end
+
       context 'being a member of the campaign' do
         context 'the character allows visibility' do
           it 'returns the character'

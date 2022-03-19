@@ -227,10 +227,19 @@ RSpec.describe "Api::Characters", type: :request do
         it 'returns a status of 200 (Ok)'
       end
       context 'being a member of the campaign' do
-        context 'the character allows visibility'
-        context 'the character does not allow visibility'
+        context 'the character allows visibility' do
+          it 'returns the character'
+          it 'returns a status of 200 (Ok)'
+        end
+        context 'the character does not allow visibility' do
+          it 'returns the error messages'
+          it 'returns a status of 401 (Unauthorized)'
+        end
       end
-      context 'not affiliated with the campaign'
+      context 'not affiliated with the campaign' do
+        it 'returns the error messages'
+        it 'returns a status of 401 (Unauthorized)'
+      end
     end
     
     context 'when a user is not logged in' do

@@ -99,64 +99,21 @@ RSpec.describe "Api::Characters", type: :request do
   end
 
   describe 'POST /create' do
-    let!(:character_params_as_member) do
+    let!(:character_params) do
       { 
-        character: {
-          name: 'Tommy',
-          background: 'Guild artisan',
-          race: 'Human',
-          profession: 'Monk',
-          alignment: 'Lawful neutral',
-          experience: 0,
-          image_url: '',
-          strength: (rand(1..6) * 3),
-          dexterity: (rand(1..6) * 3),
-          constitution: (rand(1..6) * 3),
-          intelligence: (rand(1..6) * 3),
-          wisdom: (rand(1..6) * 3),
-          charisma: (rand(1..6) * 3),
-          campaign_id: campaign_2.id
-        } 
-      }
-    end
-    let!(:character_params_as_owner) do
-      { 
-        character: {
-          name: 'Tommy',
-          background: 'Guild artisan',
-          race: 'Human',
-          profession: 'Monk',
-          alignment: 'Lawful neutral',
-          experience: 0,
-          image_url: '',
-          strength: (rand(1..6) * 3),
-          dexterity: (rand(1..6) * 3),
-          constitution: (rand(1..6) * 3),
-          intelligence: (rand(1..6) * 3),
-          wisdom: (rand(1..6) * 3),
-          charisma: (rand(1..6) * 3),
-          campaign_id: campaign_1.id
-        } 
-      }
-    end
-    let!(:character_params_as_non_member) do
-      { 
-        character: {
-          name: 'Tommy',
-          background: 'Guild artisan',
-          race: 'Human',
-          profession: 'Monk',
-          alignment: 'Lawful neutral',
-          experience: 0,
-          image_url: '',
-          strength: (rand(1..6) * 3),
-          dexterity: (rand(1..6) * 3),
-          constitution: (rand(1..6) * 3),
-          intelligence: (rand(1..6) * 3),
-          wisdom: (rand(1..6) * 3),
-          charisma: (rand(1..6) * 3),
-          campaign: campaign_2.id
-        } 
+        name: 'Tommy',
+        background: 'Guild artisan',
+        race: 'Human',
+        profession: 'Monk',
+        alignment: 'Lawful neutral',
+        experience: 0,
+        image_url: '',
+        strength: (rand(1..6) * 3),
+        dexterity: (rand(1..6) * 3),
+        constitution: (rand(1..6) * 3),
+        intelligence: (rand(1..6) * 3),
+        wisdom: (rand(1..6) * 3),
+        charisma: (rand(1..6) * 3),
       }
     end
 
@@ -171,11 +128,11 @@ RSpec.describe "Api::Characters", type: :request do
         end
 
         it 'updates the amount of characters by one' do
-          expect { post "/api/characters", params: character_params_as_member }.to change(Character, :count).by(1)
+          expect { post "/api/campaigns/#{campaign_2.id}/characters", params: character_params }.to change(Character, :count).by(1)
         end
 
         it 'returns the created character' do
-          post "/api/characters", params: character_params_as_member
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
           expect(response.body).to include_json({
             name: 'Tommy',
             background: 'Guild artisan',
@@ -194,18 +151,18 @@ RSpec.describe "Api::Characters", type: :request do
         end
 
         it 'returns a status of 201 (Created)' do
-          post "/api/characters", params: character_params_as_member
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
           expect(response).to have_http_status(:created)
         end
       end
 
       context 'being the owner of the campaign' do
         it 'updates the amount of characters by one' do
-          expect { post "/api/characters", params: character_params_as_owner }.to change(Character, :count).by(1)
+          expect { post "/api/campaigns/#{campaign_1.id}/characters", params: character_params }.to change(Character, :count).by(1)
         end
 
         it 'returns the created character' do
-          post "/api/characters", params: character_params_as_owner
+          post "/api/campaigns/#{campaign_1.id}/characters", params: character_params
           expect(response.body).to include_json({
             name: 'Tommy',
             background: 'Guild artisan',
@@ -224,21 +181,21 @@ RSpec.describe "Api::Characters", type: :request do
         end
 
         it 'returns a status of 201 (Created)' do
-          post "/api/characters", params: character_params_as_owner
+          post "/api/campaigns/#{campaign_1.id}/characters", params: character_params
           expect(response).to have_http_status(:created)
         end
       end
 
       context 'not being a member of the campaign' do
         it 'returns the error messages' do
-          post "/api/characters", params: character_params_as_non_member
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
           expect(response.body).to include_json({
             errors: a_kind_of(Array)
           })
         end
   
         it 'returns a status of 401 (Unauthorized)' do
-          post "/api/characters", params: character_params_as_non_member
+          post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
           expect(response).to have_http_status(:unauthorized)
         end
       end
@@ -246,14 +203,14 @@ RSpec.describe "Api::Characters", type: :request do
 
     context 'when a user is not logged in' do
       it 'returns the error messages' do
-        post "/api/characters", params: character_params_as_non_member
+        post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
         expect(response.body).to include_json({
           errors: a_kind_of(Array)
         })
       end
 
       it 'returns a status of 401 (Unauthorized)' do
-        post "/api/characters", params: character_params_as_non_member
+        post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
         expect(response).to have_http_status(:unauthorized)
       end
     end

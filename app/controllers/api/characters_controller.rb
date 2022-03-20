@@ -9,7 +9,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def show
-    character = campaign.characters.find(params[:id])
     if !campaign_owner? && !character.visible && character.user != current_user
       return render json: { errors: ['Not Authorized'] }, status: :unauthorized 
     end
@@ -40,6 +39,10 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def membership
     @membership ||= current_user.campaign_users.find_by(campaign: campaign)
+  end
+
+  def character
+    @character ||= campaign.characters.find(params[:id])
   end
 
   def campaign_owner?

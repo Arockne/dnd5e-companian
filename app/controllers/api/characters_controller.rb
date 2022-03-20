@@ -2,8 +2,9 @@ class Api::CharactersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   
-  before_action :authorize_create_action, only: [:create, :destroy]
+  before_action :authorize_create_action, only: [:create]
   before_action :authorize_show_action, only: [:show]
+  before_action :authorize_update, only: [:destroy]
   
   def index
     characters = current_user.characters
@@ -20,7 +21,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def destroy
-    return render json: { errors: ["Not Authorized"] }, status: :unauthorized unless campaign_owner? || current_user == character.user
     character.destroy
     render json: character, status: :ok
   end
@@ -55,6 +55,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def authorize_create_action
     render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || campaign_owner?
+  end
+
+  def authorize_update
+    unless campaign_owner? || current_user == character.user
+      render json: { errors: ["Not Authorized"] }, status: :unauthorized
+    end
   end
 
   def render_unprocessable_entity(invalid)

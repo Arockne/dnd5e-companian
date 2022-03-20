@@ -21,7 +21,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def destroy
-    character = campaign.characters.find(params[:id])
     return render json: { errors: ["Not Authorized"] }, status: :unauthorized unless campaign_owner? || current_user == character.user
     character.destroy
     render json: character, status: :ok

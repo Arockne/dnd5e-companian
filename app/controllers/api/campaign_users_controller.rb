@@ -11,6 +11,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
   end
 
   def destroy
+    campaign_user.user.characters.where(campaign: campaign).destroy_all
     campaign_user.destroy
     render json: campaign_user, status: :ok
   end

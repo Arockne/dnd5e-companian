@@ -440,10 +440,24 @@ RSpec.describe "Api::Characters", type: :request do
           expect(response).to have_http_status(:no_content)
         end
       end
+      
       context 'as the campaign owner' do
-        it 'returns nothing'
-        it 'returns a status of 201 (No Content)'
+        it 'decreases the amount of characters' do
+          expect do
+            delete "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+          end.to change(Character, :count).by(-1)
+        end
+        it 'returns nothing' do
+          delete "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+          expect(response.body).to be_empty
+        end
+
+        it 'returns a status of 201 (No Content)' do
+          delete "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
+          expect(response).to have_http_status(:no_content)
+        end
       end
+
       context 'as another member of the campaign'
         it 'returns error messages'
         it 'returns a status of 401 (Unauthorized)'

@@ -210,7 +210,7 @@ RSpec.describe "Api::Campaigns", type: :request do
 
       context 'as the owner of the campaign' do
         it 'returns the campaign with the changes' do
-          patch "/api/campaign/#{campaign_1.id}", params: campaign_params
+          patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
           expect(response.body).to include_json({
             id: campaign_1.id,
             name: 'Knights of the SQUARE Table', 
@@ -219,21 +219,21 @@ RSpec.describe "Api::Campaigns", type: :request do
         end
 
         it 'returns a status of 200 (Ok)' do
-          patch "/api/campaign/#{campaign_1.id}", params: campaign_params
+          patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
           expect(response).to have_http_status(:ok)
         end
       end
 
       context 'not as the owner of the campaign' do
         it 'returns the error messages' do
-          patch "/api/campaign/#{campaign_2.id}", params: campaign_params
+          patch "/api/campaigns/#{campaign_2.id}", params: campaign_params
           expect(response.body).to include_json({
             errors: a_kind_of(Array)
           })
         end
 
         it 'returns a status of 401 (Unauthorized)' do
-          patch "/api/campaign/#{campaign_2.id}", params: campaign_params
+          patch "/api/campaigns/#{campaign_2.id}", params: campaign_params
           expect(response).to have_http_status(:unauthorized)
         end
       end
@@ -241,14 +241,14 @@ RSpec.describe "Api::Campaigns", type: :request do
 
     context 'when a user is not logged in' do
       it 'returns the error messages' do
-        patch "/api/campaign/#{campaign_1.id}", params: campaign_params
+        patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
         expect(response.body).to include_json({
           errors: a_kind_of(Array)
         })
       end
 
       it 'returns a status of 401 (Unauthorized)' do
-        patch "/api/campaign/#{campaign_1.id}", params: campaign_params
+        patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
         expect(response).to have_http_status(:unauthorized)
       end
     end

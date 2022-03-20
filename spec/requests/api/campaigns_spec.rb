@@ -189,7 +189,25 @@ RSpec.describe "Api::Campaigns", type: :request do
         })
       end
     end
+  end
 
+  describe 'PATCH /update' do
+    context 'when a user is logged in' do
+      context 'as the owner of the campaign' do
+        it 'returns the campaign with the changes'
+        it 'returns a status of 200 (Ok)' 
+      end
+
+      context 'not as the owner of the campaign' do
+        it 'returns the error messages'
+        it 'returns a status of 401 (Unauthorized)'  
+      end
+    end
+
+    context 'when a user is not logged in' do
+      it 'returns the error messages'
+      it 'returns a status of 401 (Unauthorized)'
+    end
   end
 
   describe 'DELETE /campaigns/:id' do

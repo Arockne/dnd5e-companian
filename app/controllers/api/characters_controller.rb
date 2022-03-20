@@ -47,8 +47,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     campaign.owner == current_user unless campaign.nil?
   end
 
+  def character_creator?
+    character.user == current_user
+  end
+
   def authorize_show_action
-    unless campaign_owner? || ( character.visible && membership ) || character.user == current_user
+    unless campaign_owner? || ( character.visible && membership ) || character_creator?
       return render json: { errors: ['Not Authorized'] }, status: :unauthorized 
     end
   end

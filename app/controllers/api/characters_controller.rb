@@ -1,10 +1,18 @@
 class Api::CharactersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-  before_action :authorize_character_action, only: [:create]
+  before_action :authorize_character_action, only: [:create, :show]
 
   def index
     characters = current_user.characters
     render json: characters, status: :ok
+  end
+
+  def show
+    character = campaign.characters.find(params[:id])
+    if !owner? && !character.visible && character.user != current_user
+      return render json: { errors: ['Not Authorized'] }, status: :unauthorized 
+    end
+    render json: character, status: :ok, serializer: CharacterShowSerializer
   end
 
   def create

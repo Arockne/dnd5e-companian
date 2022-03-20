@@ -192,10 +192,36 @@ RSpec.describe "Api::Campaigns", type: :request do
   end
 
   describe 'PATCH /update' do
+    let!(:campaign_params) do
+      {
+        campaign: {
+          name: 'Knights of the SQUARE Table', 
+          setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT', 
+          password: 'kingforever', 
+          password_confirmation: 'kingforever'
+        }
+      }
+    end
+    
     context 'when a user is logged in' do
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }
+      end
+
       context 'as the owner of the campaign' do
-        it 'returns the campaign with the changes'
-        it 'returns a status of 200 (Ok)' 
+        it 'returns the campaign with the changes' do
+          patch "/api/campaign/#{campaign_1.id}", params: campaign_params
+          expect(response.body).to include_json({
+            id: campaign_1.id,
+            name: 'Knights of the SQUARE Table', 
+            setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT'
+          })
+        end
+
+        it 'returns a status of 200 (Ok)' do
+          patch "/api/campaign/#{campaign_1.id}", params: campaign_params
+          expect(response).to have_http_status(:ok)
+        end
       end
 
       context 'not as the owner of the campaign' do

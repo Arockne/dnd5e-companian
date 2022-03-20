@@ -202,7 +202,7 @@ RSpec.describe "Api::Campaigns", type: :request do
         }
       }
     end
-    
+
     context 'when a user is logged in' do
       before do
         post '/api/login', params: { username: user_1.username, password: user_1.password }
@@ -225,8 +225,17 @@ RSpec.describe "Api::Campaigns", type: :request do
       end
 
       context 'not as the owner of the campaign' do
-        it 'returns the error messages'
-        it 'returns a status of 401 (Unauthorized)'  
+        it 'returns the error messages' do
+          patch "/api/campaign/#{campaign_2.id}", params: campaign_params
+          expect(response.body).to include_json({
+            errors: a_kind_of(Array)
+          })
+        end
+
+        it 'returns a status of 401 (Unauthorized)' do
+          patch "/api/campaign/#{campaign_2.id}", params: campaign_params
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
     end
 

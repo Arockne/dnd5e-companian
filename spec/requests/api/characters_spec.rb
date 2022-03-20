@@ -413,4 +413,28 @@ RSpec.describe "Api::Characters", type: :request do
       end
     end
   end
+
+  describe 'DELETE /destroy' do
+    context 'when a user is logged in' do
+      context 'as the creator of the character' do
+        it 'returns nothing'
+        it 'returns a status of 201 (No Content)'
+      end
+      context 'as the campaign owner' do
+        it 'returns nothing'
+        it 'returns a status of 201 (No Content)'
+      end
+      context 'as another member of the campaign'
+        it 'returns error messages'
+        it 'returns a status of 401 (Unauthorized)'
+      context 'not affiliated with the campaign' do
+        it 'returns error messages'
+        it 'returns a status of 401 (Unauthorized)'
+      end
+    end
+    context 'when a user is not logged in' do
+      it 'returns error messages'
+      it 'returns a status of 401 (Unauthorized)'
+    end
+  end
 end

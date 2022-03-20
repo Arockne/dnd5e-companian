@@ -20,6 +20,16 @@ RSpec.describe "Api::Characters", type: :request do
       password_confirmation: 'test123'
     )
   end
+
+  let(:user_3) do
+    User.create!(
+      username: 'Jill',
+      email: 'jill@gmail.com',
+      email_confirmation: 'jill@gmail.com', 
+      password: 'test123', 
+      password_confirmation: 'test123'
+    )
+  end
   
   let!(:campaign_1) do
     Campaign.create!(
@@ -107,7 +117,7 @@ RSpec.describe "Api::Characters", type: :request do
       wisdom: (rand(1..6) * 3),
       charisma: (rand(1..6) * 3),
       visible: true,
-      user: user_1,
+      user: user_3,
       campaign: campaign_3
     )
   end
@@ -128,7 +138,7 @@ RSpec.describe "Api::Characters", type: :request do
       wisdom: (rand(1..6) * 3),
       charisma: (rand(1..6) * 3),
       visible: false,
-      user: user_1,
+      user: user_3,
       campaign: campaign_3
     )
   end
@@ -294,7 +304,11 @@ RSpec.describe "Api::Characters", type: :request do
         post '/api/login', params: { username: user_1.username, password: user_1.password }  
       end
 
-      context 'being the creator of the character' do
+      context 'being the creator of the character as a member' do
+        before do
+          CampaignUser.create(user: user_1, campaign: campaign_3) 
+        end
+
         it 'returns the character' do
           get "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
           expect(response.body).to include_json({

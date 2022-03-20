@@ -1,5 +1,6 @@
 class Api::CharactersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   before_action :authorize_character_action, only: [:create, :show]
 
   def index
@@ -44,6 +45,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def render_unprocessable_entity(invalid)
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def render_not_found
+    render json: { errors: ['The character you were looking for does not exist']}, status: :not_found
   end
 
 end

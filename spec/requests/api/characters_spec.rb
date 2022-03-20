@@ -430,14 +430,18 @@ RSpec.describe "Api::Characters", type: :request do
             delete "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
           end.to change(Character, :count).by(-1)
         end
-        it 'returns nothing' do
+
+        it 'returns the removed character' do
           delete "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
-          expect(response.body).to be_empty
+          expect(response.body).to include_json({
+            id: character_2.id,
+            name: character_2.name
+          })
         end
 
-        it 'returns a status of 201 (No Content)' do
+        it 'returns a status of 200 (Ok)' do
           delete "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
-          expect(response).to have_http_status(:no_content)
+          expect(response).to have_http_status(:ok)
         end
       end
       
@@ -447,14 +451,18 @@ RSpec.describe "Api::Characters", type: :request do
             delete "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
           end.to change(Character, :count).by(-1)
         end
-        it 'returns nothing' do
+
+        it 'returns the removed character' do
           delete "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
-          expect(response.body).to be_empty
+          expect(response.body).to include_json({
+            id: character_1.id,
+            name: character_1.name
+          })
         end
 
-        it 'returns a status of 201 (No Content)' do
+        it 'returns a status of 200 (Ok)' do
           delete "/api/campaigns/#{character_1.campaign_id}/characters/#{character_1.id}"
-          expect(response).to have_http_status(:no_content)
+          expect(response).to have_http_status(:ok)
         end
       end
 
@@ -472,7 +480,7 @@ RSpec.describe "Api::Characters", type: :request do
 
         it 'returns a status of 401 (Unauthorized)' do
           delete "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}"
-          expect(response).to have_http_status
+          expect(response).to have_http_status(:unauthorized)
         end
       end
         
@@ -486,7 +494,7 @@ RSpec.describe "Api::Characters", type: :request do
 
         it 'returns a status of 401 (Unauthorized)' do
           delete "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}"
-          expect(response).to have_http_status
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
@@ -501,7 +509,7 @@ RSpec.describe "Api::Characters", type: :request do
 
         it 'returns a status of 401 (Unauthorized)' do
           delete "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}"
-          expect(response).to have_http_status
+          expect(response).to have_http_status(:unauthorized)
         end
     end
   end

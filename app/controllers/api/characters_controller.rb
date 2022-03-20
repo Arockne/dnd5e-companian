@@ -10,7 +10,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def show
     character = campaign.characters.find(params[:id])
-    if !owner? && !character.visible && character.user != current_user
+    if !campaign_owner? && !character.visible && character.user != current_user
       return render json: { errors: ['Not Authorized'] }, status: :unauthorized 
     end
     render json: character, status: :ok, serializer: CharacterShowSerializer
@@ -35,12 +35,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     @membership ||= current_user.campaign_users.find_by(campaign: campaign)
   end
 
-  def owner?
+  def campaign_owner?
     campaign.owner == current_user unless campaign.nil?
   end
 
   def authorize_character_action
-    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || owner?
+    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || campaign_owner?
   end
 
   def render_unprocessable_entity(invalid)

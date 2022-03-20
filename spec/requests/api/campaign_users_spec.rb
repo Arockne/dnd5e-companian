@@ -79,6 +79,67 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     )  
   end
 
+  let!(:character_1_campaign_2_user_1) do
+    Character.create!(
+      name: 'Ally',
+      background: 'Merchant',
+      race: 'Orc',
+      profession: 'Barbarian',
+      alignment: 'Neutral',
+      experience: 0,
+      image_url: '',
+      strength: (rand(1..6) * 3),
+      dexterity: (rand(1..6) * 3),
+      constitution: (rand(1..6) * 3),
+      intelligence: (rand(1..6) * 3),
+      wisdom: (rand(1..6) * 3),
+      charisma: (rand(1..6) * 3),
+      visible: false,
+      user: user_1,
+      campaign: campaign_2
+    )
+  end
+
+  let!(:character_2_campaign_2_user_1) do
+    Character.create!(
+      name: 'Gimly',
+      background: 'Noble',
+      race: 'Elf',
+      profession: 'Wizard',
+      alignment: 'Neutral good',
+      experience: 0,
+      image_url: '',
+      strength: (rand(1..6) * 3),
+      dexterity: (rand(1..6) * 3),
+      constitution: (rand(1..6) * 3),
+      intelligence: (rand(1..6) * 3),
+      wisdom: (rand(1..6) * 3),
+      charisma: (rand(1..6) * 3),
+      user: user_1,
+      campaign: campaign_2
+    )
+  end
+
+  let!(:character_1_campaign_1_user_1) do
+    Character.create!(
+      name: 'Frodo',
+      background: 'Sitter',
+      race: 'Gnome',
+      profession: 'Theif',
+      alignment: 'Neutral good',
+      experience: 0,
+      image_url: '',
+      strength: (rand(1..6) * 3),
+      dexterity: (rand(1..6) * 3),
+      constitution: (rand(1..6) * 3),
+      intelligence: (rand(1..6) * 3),
+      wisdom: (rand(1..6) * 3),
+      charisma: (rand(1..6) * 3),
+      user: user_2,
+      campaign: campaign_1
+    )
+  end
+
   describe 'POST /create' do
     context 'with logged in user' do
       before do
@@ -184,6 +245,11 @@ RSpec.describe "Api::CampaignUsers", type: :request do
           it 'decreases the amount of CampaignUser' do
             expect { delete "/api/campaigns/#{campaign_2.id}/campaign_users/#{campaign_2_user_1.id}" }.to change(CampaignUser, :count).by(-1)
           end
+          
+          it 'removes the associated characters' do
+            delete "/api/campaigns/#{campaign_2.id}/campaign_users/#{campaign_2_user_1.id}"
+            expect(Character.where(campaign: campaign_2, user: user_1)).to be_empty
+          end
   
           it 'returns the CampaignUser' do
             delete "/api/campaigns/#{campaign_2.id}/campaign_users/#{campaign_2_user_1.id}"
@@ -193,6 +259,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
               campaign_id: campaign_2_user_1.campaign_id
             })
           end
+
           it 'returns a status of 200 (Ok)' do
             delete "/api/campaigns/#{campaign_2.id}/campaign_users/#{campaign_2_user_1.id}"
             expect(response).to have_http_status(:ok)
@@ -224,6 +291,11 @@ RSpec.describe "Api::CampaignUsers", type: :request do
             expect { delete "/api/campaigns/#{campaign_1.id}/campaign_users/#{campaign_1_user_2.id}" }.to change(CampaignUser, :count).by(-1)
           end
 
+          it 'removes the associated characters' do
+            delete "/api/campaigns/#{campaign_1.id}/campaign_users/#{campaign_1_user_2.id}"
+            expect(Character.where(campaign: campaign_1, user: user_2)).to be_empty
+          end
+
           it 'returns the CampaignUser' do
             delete "/api/campaigns/#{campaign_1.id}/campaign_users/#{campaign_1_user_2.id}"
             expect(response.body).to include_json({
@@ -239,7 +311,6 @@ RSpec.describe "Api::CampaignUsers", type: :request do
           end
         end
       end
-
     end
 
     context 'without logged in user' do

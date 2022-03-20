@@ -422,7 +422,7 @@ RSpec.describe "Api::Characters", type: :request do
 
       context 'as the creator of the character' do
         before do
-          CampaignUser.create(user: user_1, campaign: campaign_3) 
+          CampaignUser.create(user: user_1, campaign_id: character_2.campaign_id) 
         end
 
         it 'decreases the amount of characters' do

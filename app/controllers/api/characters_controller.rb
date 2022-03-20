@@ -1,7 +1,7 @@
 class Api::CharactersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-  before_action :authorize_character_action, only: [:create, :show, :destroy]
+  before_action :authorize_create_action, only: [:create, :show, :destroy]
 
   def index
     characters = current_user.characters
@@ -46,7 +46,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     campaign.owner == current_user unless campaign.nil?
   end
 
-  def authorize_character_action
+  def authorize_create_action
     render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || campaign_owner?
   end
 

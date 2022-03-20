@@ -416,9 +416,29 @@ RSpec.describe "Api::Characters", type: :request do
 
   describe 'DELETE /destroy' do
     context 'when a user is logged in' do
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }  
+      end
+
       context 'as the creator of the character' do
-        it 'returns nothing'
-        it 'returns a status of 201 (No Content)'
+        before do
+          CampaignUser.create(user: user_1, campaign: campaign_3) 
+        end
+
+        it 'decreases the amount of characters' do
+          expect do
+            delete "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
+          end.to change(Character, :count).by(-1)
+        end
+        it 'returns nothing' do
+          delete "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
+          expect(response.body).to be_empty
+        end
+
+        it 'returns a status of 201 (No Content)' do
+          delete "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}"
+          expect(response).to have_http_status(:no_content)
+        end
       end
       context 'as the campaign owner' do
         it 'returns nothing'

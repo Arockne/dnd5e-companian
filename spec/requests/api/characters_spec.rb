@@ -417,19 +417,21 @@ RSpec.describe "Api::Characters", type: :request do
   describe 'PATCH /update' do
     let!(:character_params) do
       {
-        name: 'Updatedname',
-        background: 'Updatedbackground',
-        race: 'Updatedrace',
-        profession: 'Updatedprofession',
-        alignment: 'Updatedalignment',
-        experience: 999999999,
-        image_url: '',
-        strength: 18,
-        dexterity: 18,
-        constitution: 18,
-        intelligence: 18,
-        wisdom: 18,
-        charisma: 18
+        character: {
+          name: 'Updatedname',
+          background: 'Updatedbackground',
+          race: 'Updatedrace',
+          profession: 'Updatedprofession',
+          alignment: 'Updatedalignment',
+          experience: 999999999,
+          image_url: '',
+          strength: 18,
+          dexterity: 18,
+          constitution: 18,
+          intelligence: 18,
+          wisdom: 18,
+          charisma: 18
+        }
       }
     end
 

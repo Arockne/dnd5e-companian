@@ -7,9 +7,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def show
-    membership = current_user.campaign_users.find_by(campaign_id: params[:id])
     campaign = Campaign.find_by_id(params[:id])
-    if membership || current_user == Campaign.find_by_id(params[:id]).owner
+    if membership || current_user == campaign.owner
       render json: campaign, status: :ok
     else
       render json: { errors: ['Not Authorized'] }, status: :unauthorized
@@ -43,6 +42,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def render_unprocessable_entity(invalid)
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def membership
+    @membership ||= current_user.campaign_users.find_by(campaign_id: params[:id])
   end
 
 end

@@ -203,24 +203,50 @@ RSpec.describe "Api::Campaigns", type: :request do
       }
     end
 
+    let!(:invalid_params) do
+      {
+        campaign: {
+          name: '', 
+          setting: '', 
+          password: '', 
+          password_confirmation: 'kingforever'
+        }
+      }
+    end
     context 'when a user is logged in' do
       before do
         post '/api/login', params: { username: user_1.username, password: user_1.password }
       end
 
       context 'as the owner of the campaign' do
-        it 'returns the campaign with the changes' do
-          patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
-          expect(response.body).to include_json({
-            id: campaign_1.id,
-            name: 'Knights of the SQUARE Table', 
-            setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT'
-          })
+        context 'with valid params' do
+          it 'returns the campaign with the changes' do
+            patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
+            expect(response.body).to include_json({
+              id: campaign_1.id,
+              name: 'Knights of the SQUARE Table', 
+              setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT'
+            })
+          end
+  
+          it 'returns a status of 200 (Ok)' do
+            patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
+            expect(response).to have_http_status(:ok)
+          end
         end
 
-        it 'returns a status of 200 (Ok)' do
-          patch "/api/campaigns/#{campaign_1.id}", params: campaign_params
-          expect(response).to have_http_status(:ok)
+        context 'with invalid params' do
+          it 'returns the error messages' do
+            patch "/api/campaigns/#{campaign_1.id}", params: invalid_params
+            expect(response.body).to include_json({
+              errors: a_kind_of(Array)
+            })
+          end
+
+          it 'returns a status of 422 (Unprocessable Entity)' do
+            patch "/api/campaigns/#{campaign_1.id}", params: invalid_params
+            expect(response).to have_http_status(:unprocessable_entity)
+          end
         end
       end
 

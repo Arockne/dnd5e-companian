@@ -91,6 +91,27 @@ RSpec.describe "Api::Campaigns", type: :request do
     end
   end
 
+  describe 'GET /show' do
+    context 'with a logged in user' do
+      context 'as a member of the campaign' do
+        it 'returns the campaign'
+        it 'returns a status of 200 (Ok)'
+      end
+      context 'as the owner of the campaign' do
+        it 'returns the campaign'
+        it 'returns a status of 200 (Ok)'
+      end
+      context 'not affiliated with the campaign' do
+        it 'returns the error messages'
+        it 'returns a status of 401 (Unauthorized)'
+      end
+    end
+    context 'without a logged in user' do
+      it 'returns error messages'
+      it 'returns a status of 401 (Unauthorized)'
+    end
+  end
+
   describe 'POST /create' do
     context 'with logged in user' do
       before do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_19_221817) do
+ActiveRecord::Schema.define(version: 2022_03_21_200523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,22 @@ ActiveRecord::Schema.define(version: 2022_03_19_221817) do
     t.string "password_digest"
     t.string "image_url"
     t.index ["user_id"], name: "index_campaigns_on_user_id"
+  end
+
+  create_table "character_profiles", force: :cascade do |t|
+    t.integer "age", default: 1
+    t.string "height", default: ""
+    t.string "weight", default: ""
+    t.string "eyes", default: ""
+    t.string "skin", default: ""
+    t.string "hair", default: ""
+    t.string "gender", default: ""
+    t.text "appearance", default: ""
+    t.text "backstory", default: ""
+    t.bigint "character_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_character_profiles_on_character_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -69,6 +85,7 @@ ActiveRecord::Schema.define(version: 2022_03_19_221817) do
   add_foreign_key "campaign_users", "campaigns"
   add_foreign_key "campaign_users", "users"
   add_foreign_key "campaigns", "users"
+  add_foreign_key "character_profiles", "characters"
   add_foreign_key "characters", "campaigns"
   add_foreign_key "characters", "users"
 end

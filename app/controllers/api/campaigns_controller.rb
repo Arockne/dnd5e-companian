@@ -6,6 +6,16 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     render json: campaigns, status: :ok
   end
 
+  def show
+    membership = current_user.campaign_users.find_by(campaign_id: params[:id])
+    campaign = Campaign.find_by_id(params[:id])
+    if membership || current_user == Campaign.find_by_id(params[:id]).owner
+      render json: campaign, status: :ok
+    else
+      render json: { errors: ['Not Authorized'] }, status: :unauthorized
+    end
+  end
+
   def create
     campaign = current_user.owned_campaigns.create!(campaign_params)
     render json: campaign, status: :created

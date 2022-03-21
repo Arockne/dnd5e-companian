@@ -416,11 +416,11 @@ RSpec.describe "Api::Characters", type: :request do
 
   describe 'PATCH /update' do
     let!(:character_params) do
-      name: 'UpdatedGimly',
-      background: 'UpdatedNoble',
-      race: 'UpdatedElf',
-      profession: 'UpdatedWizard',
-      alignment: 'UpdatedNeutral good',
+      name: 'Updatedname',
+      background: 'Updatedbackground',
+      race: 'Updatedrace',
+      profession: 'Updatedprofession',
+      alignment: 'Updatedalignment',
       experience: 999999999,
       image_url: '',
       strength: 18,
@@ -428,14 +428,45 @@ RSpec.describe "Api::Characters", type: :request do
       constitution: 18,
       intelligence: 18,
       wisdom: 18,
-      charisma: 18,
+      charisma: 18
     end
 
     context 'when a user is logged in' do
-      context 'as the creator of the character' do
-        it 'returns the updated character'
-        it 'returns a status of 200 (Ok)'
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }
       end
+
+      context 'as the creator of the character' do
+        before do
+          CampaignUser.create!(user: user_1, campaign: campaign_3)
+        end
+
+        it 'returns the updated character' do
+          patch "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}", params: character_params
+          expect(response.body).to include_json({
+            id: character_2.id,
+            name: 'Updatedname',
+            background: 'Updatedbackground',
+            race: 'Updatedrace',
+            profession: 'Updatedprofession',
+            alignment: 'Updatedalignment',
+            experience: 999999999,
+            image_url: '',
+            strength: 18,
+            dexterity: 18,
+            constitution: 18,
+            intelligence: 18,
+            wisdom: 18,
+            charisma: 18
+          })
+        end
+
+        it 'returns a status of 200 (Ok)' do
+          patch "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}", params: character_params
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
       context 'as campaign owner' do
         it 'returns the updated character'
         it 'returns a status of 200 (Ok)'

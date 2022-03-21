@@ -93,10 +93,34 @@ RSpec.describe "Api::Campaigns", type: :request do
 
   describe 'GET /show' do
     context 'with a logged in user' do
-      context 'as a member of the campaign' do
-        it 'returns the campaign'
-        it 'returns a status of 200 (Ok)'
+      before do
+        post '/api/login', params: { username: user_1.username, password: user_1.password }
       end
+
+      context 'as a member of the campaign' do
+        before do
+          CampaignUser.create!(user: user_1, campaign: campaign_2)
+        end
+
+        it 'returns the campaign' do
+          get "/api/campaigns/#{campaign_2.id}"
+          expect(response.body).to include_json({
+            id: campaign_2.id,
+            name: campaign_2.name,
+            setting: campaign_2.setting,
+            owner: {
+              id: user_2.id,
+              username: user_2.username
+            }
+          })
+        end
+
+        it 'returns a status of 200 (Ok)' do
+          get "/api/campaigns/#{campaign_2.id}"
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
       context 'as the owner of the campaign' do
         it 'returns the campaign'
         it 'returns a status of 200 (Ok)'

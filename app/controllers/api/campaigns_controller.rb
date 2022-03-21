@@ -7,7 +7,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def show
-    campaign = Campaign.find_by_id(params[:id])
     if membership || current_user == campaign.owner
       render json: campaign, status: :ok
     else
@@ -46,6 +45,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def membership
     @membership ||= current_user.campaign_users.find_by(campaign_id: params[:id])
+  end
+
+  def campaign
+    @campaign ||= Campaign.find_by_id(params[:id])
   end
 
 end

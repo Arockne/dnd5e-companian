@@ -1,17 +1,15 @@
 class Api::CampaignsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   
+  before_action :authorize_show_action, only: [:show]
+
   def index
     campaigns = Campaign.all
     render json: campaigns, status: :ok
   end
 
   def show
-    if membership || current_user == campaign.owner
-      render json: campaign, status: :ok
-    else
-      render json: { errors: ['Not Authorized'] }, status: :unauthorized
-    end
+    render json: campaign, status: :ok
   end
 
   def create
@@ -49,6 +47,14 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def campaign
     @campaign ||= Campaign.find_by_id(params[:id])
+  end
+
+  def campaign_owner?
+    current_user == campaign.owner
+  end
+
+  def authorize_show_action
+    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || campaign_owner?
   end
 
 end

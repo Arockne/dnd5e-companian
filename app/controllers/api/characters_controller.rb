@@ -20,6 +20,18 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     render json: character, status: :created, serializer: CharacterShowSerializer
   end
 
+  def update
+    if campaign_owner?
+      character.update!(campaign_owner_update_character_params)
+      render json: character, status: :ok, serializer: CharacterShowSerializer
+    elsif character_creator?
+      character.update!(creator_update_character_params)
+      render json: character, status: :ok, serializer: CharacterShowSerializer
+    else
+      render json: { errors: ["Not Authorized"] }, status: :unauthorized
+    end
+  end
+
   def destroy
     character.destroy
     render json: character, status: :ok
@@ -36,7 +48,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def campaign_owner_update_character_params
-    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url)
+    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma)
   end
   
   def campaign

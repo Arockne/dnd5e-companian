@@ -122,9 +122,25 @@ RSpec.describe "Api::Campaigns", type: :request do
       end
 
       context 'as the owner of the campaign' do
-        it 'returns the campaign'
-        it 'returns a status of 200 (Ok)'
+        it 'returns the campaign' do
+          get "/api/campaigns/#{campaign_1.id}"
+          expect(response.body).to include_json({
+            id: campaign_1.id,
+            name: campaign_1.name,
+            setting: campaign_1.setting,
+            owner: {
+              id: user_1.id,
+              username: user_1.username
+            }
+          })
+        end
+
+        it 'returns a status of 200 (Ok)' do
+          get "/api/campaigns/#{campaign_1.id}"
+          expect(response).to have_http_status(:ok)
+        end
       end
+      
       context 'not affiliated with the campaign' do
         it 'returns the error messages'
         it 'returns a status of 401 (Unauthorized)'

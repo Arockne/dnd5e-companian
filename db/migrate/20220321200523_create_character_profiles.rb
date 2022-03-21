@@ -1,7 +1,7 @@
 class CreateCharacterProfiles < ActiveRecord::Migration[6.1]
   def change
     create_table :character_profiles do |t|
-      t.integer :age, default: 0
+      t.integer :age, default: 1
       t.string :height, default: ''
       t.string :weight, default: ''
       t.string :eyes, default: ''

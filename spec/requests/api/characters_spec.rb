@@ -414,6 +414,43 @@ RSpec.describe "Api::Characters", type: :request do
     end
   end
 
+  describe 'PATCH /update' do
+    let!(:character_params) do
+      name: 'UpdatedGimly',
+      background: 'UpdatedNoble',
+      race: 'UpdatedElf',
+      profession: 'UpdatedWizard',
+      alignment: 'UpdatedNeutral good',
+      experience: 999999999,
+      image_url: '',
+      strength: 18,
+      dexterity: 18,
+      constitution: 18,
+      intelligence: 18,
+      wisdom: 18,
+      charisma: 18,
+    end
+
+    context 'when a user is logged in' do
+      context 'as the creator of the character' do
+        it 'returns the updated character'
+        it 'returns a status of 200 (Ok)'
+      end
+      context 'as campaign owner' do
+        it 'returns the updated character'
+        it 'returns a status of 200 (Ok)'
+      end
+      context 'not affiliated with the campaign' do
+        it 'returns error messages'
+        it 'returns a status of 401 (Unauthorized)'
+      end
+    end
+    context 'when a user is not logged in' do
+      it 'returns error messages'
+      it 'returns a status of 401 (Unauthorized)'
+    end
+  end
+
   describe 'DELETE /destroy' do
     context 'when a user is logged in' do
       before do

@@ -7,12 +7,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def create
-    campaign = current_user.owned_campaigns.new(campaign_params)
-    if campaign.save
-      render json: campaign, status: :created
-    else
-      render json: { errors: campaign.errors.full_messages }, status: :unprocessable_entity
-    end
+    campaign = current_user.owned_campaigns.create!(campaign_params)
+    render json: campaign, status: :created
   end
 
   def update

@@ -11,4 +11,8 @@ RSpec.describe CharacterProfile, type: :model do
   describe 'validations' do
     it { is_expected.to validate_numericality_of(:age).is_greater_than(0) }
   end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:character) }
+  end
 end

@@ -7,4 +7,8 @@ RSpec.describe CharacterProfile, type: :model do
       it { is_expected.to respond_to(attr) }
     end
   end
+
+  describe 'validations' do
+    it { is_expected.to validate_numericality_of(:age).is_greater_than(0) }
+  end
 end

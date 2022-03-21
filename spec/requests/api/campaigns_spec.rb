@@ -140,12 +140,22 @@ RSpec.describe "Api::Campaigns", type: :request do
           expect(response).to have_http_status(:ok)
         end
       end
-      
+
       context 'not affiliated with the campaign' do
-        it 'returns the error messages'
-        it 'returns a status of 401 (Unauthorized)'
+        it 'returns the error messages' do
+          get "/api/campaigns/#{campaign_2.id}"
+          expect(response.body).to include_json({
+            errors: a_kind_of(Array)
+          })
+        end
+
+        it 'returns a status of 401 (Unauthorized)' do
+          get "/api/campaigns/#{campaign_2.id}"
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
     end
+
     context 'without a logged in user' do
       it 'returns error messages'
       it 'returns a status of 401 (Unauthorized)'

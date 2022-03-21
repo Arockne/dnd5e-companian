@@ -525,7 +525,7 @@ RSpec.describe "Api::Characters", type: :request do
 
         it 'returns a status of 401 (Unauthorized)' do
           patch "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}", params: character_params
-          expect(response.body).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
@@ -540,7 +540,7 @@ RSpec.describe "Api::Characters", type: :request do
 
       it 'returns a status of 401 (Unauthorized)' do
         patch "/api/campaigns/#{visible_character.campaign_id}/characters/#{visible_character.id}", params: character_params
-        expect(response.body).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end

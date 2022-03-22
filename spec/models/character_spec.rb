@@ -43,7 +43,7 @@ RSpec.describe Character, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:campaign) }
-    it { is_expected.to have_one(:character_profile) }
+    it { is_expected.to have_one(:character_profile).dependent(:destroy) }
   end
 
 end

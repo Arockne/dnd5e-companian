@@ -213,6 +213,10 @@ RSpec.describe "Api::Characters", type: :request do
           expect { post "/api/campaigns/#{campaign_2.id}/characters", params: character_params }.to change(Character, :count).by(1)
         end
 
+        it 'also updates the amount of CharacterProfile' do
+          expect { post "/api/campaigns/#{campaign_2.id}/characters", params: character_params }.to change(CharacterProfile, :count).by(1)
+        end
+
         it 'returns the created character' do
           post "/api/campaigns/#{campaign_2.id}/characters", params: character_params
           expect(response.body).to include_json({

@@ -12,4 +12,8 @@ RSpec.describe CampaignLog, type: :model do
     it { is_expected.to validate_presence_of(:color) }
     it { is_expected.to validate_presence_of(:message) }
   end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:campaign) }
+  end
 end

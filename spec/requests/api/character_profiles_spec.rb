@@ -132,8 +132,8 @@ RSpec.describe "Api::CharacterProfiles", type: :request do
       context 'as the creator of the character' do
         it 'returns the updated character profile' do
           patch "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}/character_profiles/#{character_profile_2.id}", params: character_profile_params
-          expects(response.body).to include_json({
-            id: a_kind_of(:id),
+          expect(response.body).to include_json({
+            id: a_kind_of(Integer),
             age: 78,
             height: '300cm',
             weight: '500lb',
@@ -148,7 +148,7 @@ RSpec.describe "Api::CharacterProfiles", type: :request do
 
         it 'returns a status of 200 (Ok)' do
           patch "/api/campaigns/#{character_2.campaign_id}/characters/#{character_2.id}/character_profiles/#{character_profile_2.id}", params: character_profile_params
-          expects(response).to have_http_status(:ok)
+          expect(response).to have_http_status(:ok)
         end
       end
 

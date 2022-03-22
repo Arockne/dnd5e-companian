@@ -40,9 +40,9 @@ RSpec.describe Campaign, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:owner) }
-    it { is_expected.to have_many(:campaign_users) }
+    it { is_expected.to have_many(:campaign_users).dependent(:destroy) }
     it { is_expected.to have_many(:users) }
-    it { is_expected.to have_many(:characters) }
+    it { is_expected.to have_many(:characters).dependent(:destroy) }
   end
 
 end

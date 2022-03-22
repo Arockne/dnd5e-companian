@@ -1,7 +1,7 @@
 class Character < ApplicationRecord
   belongs_to :user
   belongs_to :campaign
-  has_one :character_profile
+  has_one :character_profile, dependent: :destroy
 
   validates :name, presence: true
   validates :background, presence: true

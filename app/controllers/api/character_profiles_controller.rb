@@ -1,5 +1,6 @@
 class Api::CharacterProfilesController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def update
     character_profile = CharacterProfile.find(params[:id])
@@ -21,4 +22,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 
+  def render_not_found
+    render json: { errors: ['The profile of the character you were looking for does not exist'] }, status: :not_found
+  end
 end

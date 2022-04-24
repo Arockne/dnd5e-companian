@@ -6,11 +6,19 @@
       "jsx": true
     }
   },
-  "extends": ["eslint:recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "rules": {
     "strict": ["error", "never"]
   },
   "env": {
-    "browser": true
-  }
+    "browser": true,
+    "jest/globals": true
+  },
+  "plugins": [
+    "react",
+    "jest"
+  ]
 }

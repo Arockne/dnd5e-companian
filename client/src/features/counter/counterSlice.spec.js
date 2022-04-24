@@ -1,4 +1,8 @@
-import counterReducer, { increment, decrement, incrementByAmount } from "./counterSlice";
+import counterReducer, {
+  increment,
+  decrement,
+  incrementByAmount,
+} from "./counterSlice";
 
 describe("counter reducer", () => {
   const initialState = {

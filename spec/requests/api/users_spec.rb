@@ -40,9 +40,9 @@ RSpec.describe "Api::Users", type: :request do
         })
       end
 
-      it "returns a status code of 422 (Unproccessable Entity)" do
+      it "returns a status code of 401 (Unauthorized)" do
         get "/api/me"
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end

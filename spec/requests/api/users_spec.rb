@@ -11,6 +11,42 @@ RSpec.describe "Api::Users", type: :request do
     )
   end
 
+  describe "GET /me" do
+    context "with user logged in" do
+      before do
+        post "/api/login", params: { username: 'bob', password: 'test123' }
+      end
+
+      it "returns the users data" do
+        get "/api/me"
+        expect(response.body).to include_json({
+          id: a_kind_of(Integer),
+          username: 'bob'
+        })
+      end
+
+      it "returns a status of 200(ok)" do
+        get "/api/me"
+        expect(response).to have_http_status(:ok)
+      end
+
+    end
+
+    context "with user not logged in" do
+      it "returns the error messages" do
+        get "/api/me"
+        expect(response.body).to include_json({
+          errors: a_kind_of(Array)
+        })
+      end
+
+      it "returns a status code of 422 (Unproccessable Entity)" do
+        get "/api/me"
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
   describe "POST /signup" do
     context 'with valid user params' do
       let!(:user_params) do 

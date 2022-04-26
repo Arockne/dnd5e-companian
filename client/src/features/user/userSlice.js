@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchUser } from './userAPI';
+import { fetchMe } from './userAPI';
 
-export const userAsync = createAsyncThunk('user/fetchUser', async () => {
-  const response = await fetchUser();
+export const getUser = createAsyncThunk('user/getUser', async () => {
+  const response = await fetchMe();
   return response.data;
 });
 
@@ -17,10 +17,10 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(userAsync.pending, (state) => {
+      .addCase(getUser.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(userAsync.fulfilled, (state, action) => {
+      .addCase(getUser.fulfilled, (state, action) => {
         state.status = 'idle';
         state.user = action.payload;
       });

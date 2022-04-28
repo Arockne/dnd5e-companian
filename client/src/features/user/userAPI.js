@@ -1,3 +1,3 @@
 export function fetchMe() {
-  return fetch('/api/me');
+  return fetch('/api/me')
 }

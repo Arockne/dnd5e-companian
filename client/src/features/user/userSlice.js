@@ -37,6 +37,18 @@ export const loginUser = createAsyncThunk(
   }
 )
 
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, { rejectWithValue }) => {
+    const response = await client.delete(`/api/logout`)
+    const body = await response.json()
+    if (response.ok) {
+      return {}
+    }
+    return rejectWithValue(body)
+  }
+)
+
 const initialState = {
   user: {},
   status: 'idle',
@@ -78,6 +90,17 @@ export const userSlice = createSlice({
         state.user = action.payload
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.user = action.payload
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload.errors
       })

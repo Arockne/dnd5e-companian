@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { client } from '../../api/client'
 
-export const getUser = createAsyncThunk(
-  'user/getUser',
+export const getCurrentUser = createAsyncThunk(
+  'user/getCurrentUser',
   async (_, { rejectWithValue }) => {
     const response = await client('/api/me')
     const body = await response.json()
@@ -25,14 +25,14 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.pending, (state) => {
+      .addCase(getCurrentUser.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.user = action.payload
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getCurrentUser.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload
       })

@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { fetchMe } from './userAPI'
+import { client } from '../../api/client'
 
 export const getUser = createAsyncThunk(
   'user/getUser',
-  // eslint-disable-next-line no-unused-vars
   async (_, { rejectWithValue }) => {
-    const response = await fetchMe()
+    const response = await client('/api/me')
     const body = await response.json()
     if (response.ok) {
       return body

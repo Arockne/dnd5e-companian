@@ -4,7 +4,7 @@ import { client } from '../../api/client'
 export const getCurrentUser = createAsyncThunk(
   'user/getCurrentUser',
   async (_, { rejectWithValue }) => {
-    const response = await client('/api/me')
+    const response = await client.get('/api/me')
     const body = await response.json()
     if (response.ok) {
       return body
@@ -15,8 +15,8 @@ export const getCurrentUser = createAsyncThunk(
 
 export const createUser = createAsyncThunk(
   'user/getUser',
-  async (_, { rejectWithValue }) => {
-    const response = await client('/api/users', { method: 'POST' })
+  async (user, { rejectWithValue }) => {
+    const response = await client.post('/api/users', user)
     const body = await response.json()
     if (response.ok) {
       return body

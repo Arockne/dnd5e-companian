@@ -13,6 +13,18 @@ export const getCurrentUser = createAsyncThunk(
   }
 )
 
+export const createUser = createAsyncThunk(
+  'user/getUser',
+  async (_, { rejectWithValue }) => {
+    const response = await client('/api/users', { method: 'POST' })
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
 const initialState = {
   user: {},
   status: 'idle',
@@ -33,6 +45,16 @@ export const userSlice = createSlice({
         state.user = action.payload
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload
+      })
+      .addCase(createUser.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(createUser.fulfilled, (state) => {
+        state.status = 'succeeded'
+      })
+      .addCase(createUser.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload
       })

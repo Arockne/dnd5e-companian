@@ -1,13 +1,8 @@
-import React from 'react'
-import {
-  TextInput,
-  Checkbox,
-  Button,
-  Group,
-  Box,
-  PasswordInput,
-} from '@mantine/core'
+import React, { useEffect } from 'react'
+import { TextInput, Button, Box, PasswordInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from './userSlice'
 
 function LoginForm() {
   const form = useForm({
@@ -17,13 +12,22 @@ function LoginForm() {
     },
   })
 
+  const dispatch = useDispatch()
+  const { status, errors } = useSelector((state) => state.user)
+
+  useEffect(() => {
+    if (status === 'failed') {
+      errors.map((error) => form.setFieldError('password', error))
+    }
+  }, [status])
+
   const disabled = Object.entries(form.values).every(
     ([_, value]) => value.length > 0
   )
 
   return (
     <Box>
-      <form>
+      <form onSubmit={form.onSubmit((values) => dispatch(loginUser(values)))}>
         <TextInput
           required
           autoComplete="username"

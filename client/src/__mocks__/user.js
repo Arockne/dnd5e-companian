@@ -5,4 +5,7 @@ export const handlers = [
     const { username } = req
     return res(ctx.res({ username }), ctx.status(201))
   }),
+  rest.post('/api/signup', (req, res, ctx) => {
+    return res(ctx.json(201))
+  }),
 ]

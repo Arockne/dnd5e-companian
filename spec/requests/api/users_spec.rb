@@ -5,9 +5,7 @@ RSpec.describe "Api::Users", type: :request do
     User.create!(
       username: 'bob',
       email: 'bob@gmail.com',
-      email_confirmation: 'bob@gmail.com', 
-      password: 'test123', 
-      password_confirmation: 'test123'
+      password: 'test123'
     )
   end
 
@@ -52,10 +50,8 @@ RSpec.describe "Api::Users", type: :request do
       let!(:user_params) do 
         { user: {
             username: 'ron', 
-            email:'ron@gmail.com', 
-            email_confirmation:'ron@gmail.com', 
-            password:'test123', 
-            password_confirmation:'test123'
+            email:'ron@gmail.com',
+            password:'test123'
           }
         }
       end
@@ -91,9 +87,9 @@ RSpec.describe "Api::Users", type: :request do
     context 'with invalid user params' do
       let!(:user_params) do
         { user: {
-            username: 'ron', 
-            email:'ron@gmail.com', 
-            password:'test123'
+            username: '', 
+            email:'', 
+            password:''
           }
         }
       end
@@ -121,90 +117,6 @@ RSpec.describe "Api::Users", type: :request do
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    end
-
-    context 'with no password confirmation' do
-      let!(:user_params) do
-        { user: {
-            username: 'ron', 
-            email:'ron@gmail.com', 
-            email_confirmation: 'ron@gmail.com',
-            password:'test123'
-          }
-        }
-      end
-
-      it 'does not create a new user' do
-        expect { post '/api/signup', params: user_params }.not_to change(User, :count)
-      end
-
-      it 'does not create a new user with incorrect password confirmation' do
-        user_params[:user][:password_confirmation] = 'notsame'
-        expect { post '/api/signup', params: user_params }.not_to change(User, :count)
-      end
-      
-      it 'does not save user id in session' do
-        post '/api/signup', params: user_params
-
-        expect(session[:user_id]).to eql(nil)
-      end
-
-      it 'returns the error messages' do
-        post '/api/signup', params: user_params
-        
-        expect(response.body).to include_json({
-          errors: a_kind_of(Array)
-        })
-      end
-
-      it 'returns a status code of 422 (Unproccessable Entity)' do
-        post '/api/signup', params: user_params
-
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-    end
-
-    context 'with no email confirmation' do
-      let!(:user_params) do
-        { user: {
-            username: 'ron', 
-            email: 'ron@gmail.com', 
-            password: 'test123',
-            password_confirmation: 'test123'
-          }
-        }
-      end
-
-      it 'does not create a new user' do
-        expect { post '/api/signup', params: user_params }.not_to change(User, :count)
-      end
-
-      it 'does not create a new user with incorrect email confirmation' do
-        user_params[:user][:email_confirmation] = 'notsame@gmail.com'
-        expect { post '/api/signup', params: user_params }.not_to change(User, :count)
-      end
-      
-      it 'does not save user id in session' do
-        post '/api/signup', params: user_params
-
-        expect(session[:user_id]).to eql(nil)
-      end
-
-      it 'returns the error messages' do
-        post '/api/signup', params: user_params
-        
-        expect(response.body).to include_json({
-          errors: a_kind_of(Array)
-        })
-      end
-
-      it 'returns a status code of 422 (Unproccessable Entity)' do
-        post '/api/signup', params: user_params
-
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
     end
   end
 end

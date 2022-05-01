@@ -23,11 +23,14 @@ it('keeps button disabled until all fields are filled out', async () => {
   const submitButton = screen.getByRole('button', /submit/i)
 
   await userEvent.type(username, newUser.username)
+  expect(username).toHaveValue(newUser.username)
   expect(submitButton).toBeDisabled()
 
   await userEvent.type(email, newUser.email)
+  expect(email).toHaveValue(newUser.email)
   expect(submitButton).toBeDisabled()
 
   await userEvent.type(password, newUser.password)
+  expect(password).toHaveValue(newUser.password)
   expect(submitButton).toBeEnabled()
 })

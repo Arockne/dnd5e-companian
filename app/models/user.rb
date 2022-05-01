@@ -7,8 +7,6 @@ class User < ApplicationRecord
   #need to create a custom query for getting all current characters that the current_user has a membership for campaigns. This query method wont grab the characters previously created in campaigns. IF we want the characters that we left we would need to rejoin whatever campaign we were part of. If the campaign owner did not delete the characters of course.
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 3 }
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, confirmation: true
-  validates :email_confirmation, presence: true
-  validates :password_confirmation, presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
   has_secure_password
 end

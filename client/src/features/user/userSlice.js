@@ -16,7 +16,7 @@ export const getCurrentUser = createAsyncThunk(
 export const createUser = createAsyncThunk(
   'user/createUser',
   async (user, { rejectWithValue }) => {
-    const response = await client.post('/api/signup', user)
+    const response = await client.post('/api/signup', { user: user })
     const body = await response.json()
     if (response.ok) {
       return body

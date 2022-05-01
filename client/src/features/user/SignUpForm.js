@@ -1,6 +1,8 @@
-import { Box, Button, PasswordInput, TextInput } from '@mantine/core'
+import { List, Box, Button, PasswordInput, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createUser } from './userSlice'
 
 function SignUpForm() {
   const form = useForm({
@@ -11,13 +13,22 @@ function SignUpForm() {
     },
   })
 
+  const { status, errors } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
   const disabled = Object.entries(form.values).every(
     ([_, value]) => value.length > 0
   )
 
+  useEffect(() => {
+    if (status === 'failed') {
+      form.setErrors(errors)
+    }
+  })
+
   return (
     <Box>
-      <form>
+      <form onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}>
         <TextInput
           required
           label="Username"
@@ -36,6 +47,13 @@ function SignUpForm() {
           placeholder="password"
           {...form.getInputProps('password')}
         />
+        <List withPadding>
+          {form.errors && Array.isArray(form.errors)
+            ? form.errors.map((error) => (
+                <List.Item key={error}>{error}</List.Item>
+              ))
+            : null}
+        </List>
         <Button disabled={!disabled} type="submit">
           Submit
         </Button>

@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event'
-import { screen, render } from '../../../tests/redux-test-utils'
+import { screen, render } from '../../../tests/test-utils'
 import Login from '../Login'
 
 test('login initially renders login form and I can navigate between login and signup', async () => {

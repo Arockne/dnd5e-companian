@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { handlers } from '../../../__mocks__/user'
-import { screen, render, waitFor } from '../../../tests/redux-test-utils'
+import { screen, render, waitFor } from '../../../tests/test-utils'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import SignUpForm from '../SignUpForm'

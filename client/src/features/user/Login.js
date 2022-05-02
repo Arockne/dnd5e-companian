@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 
@@ -10,6 +10,7 @@ function Login() {
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/signup" element={<SignUpForm />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   )

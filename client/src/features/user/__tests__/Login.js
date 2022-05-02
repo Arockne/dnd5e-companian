@@ -10,3 +10,9 @@ test('login initially renders login form and I can navigate between login and si
   await userEvent.click(screen.getByText(/sign/i))
   expect(screen.getByText(/create/i)).toBeInTheDocument()
 })
+
+test('redirect to home when given an address that does not exist', () => {
+  render(<Login />, { route: '/some-random-link' })
+  expect(screen.getByRole('heading')).toHaveTextContent(/welcome/i)
+  expect(screen.getByText(/create/i)).toBeInTheDocument()
+})

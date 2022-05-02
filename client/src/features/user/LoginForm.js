@@ -9,6 +9,7 @@ import {
 import { useForm } from '@mantine/form'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from './userSlice'
+import { Link } from 'react-router-dom'
 
 function LoginForm() {
   const [visible, setVisible] = useState(false)
@@ -59,6 +60,7 @@ function LoginForm() {
         <Button disabled={!enabled} type="submit">
           Submit
         </Button>
+        <Link to="/signup">Create Account</Link>
       </form>
     </Box>
   )

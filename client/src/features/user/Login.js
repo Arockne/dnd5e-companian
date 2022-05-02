@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import LoginForm from './loginForm'
+import LoginForm from './LoginForm'
 import SignUpForm from './SignUpForm'
 
 function Login() {

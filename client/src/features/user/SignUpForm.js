@@ -13,6 +13,7 @@ import { AlertCircle } from 'tabler-icons-react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from './userSlice'
+import { Link } from 'react-router-dom'
 
 function SignUpForm() {
   const [visible, setVisible] = useState(false)
@@ -91,6 +92,7 @@ function SignUpForm() {
             Submit
           </Button>
         </Group>
+        <Link to="/">Sign In</Link>
       </form>
     </Box>
   )

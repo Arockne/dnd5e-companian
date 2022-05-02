@@ -1,10 +1,18 @@
-import { List, Box, Button, PasswordInput, TextInput } from '@mantine/core'
+import {
+  List,
+  Box,
+  Button,
+  PasswordInput,
+  TextInput,
+  LoadingOverlay,
+} from '@mantine/core'
 import { useForm } from '@mantine/form'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from './userSlice'
 
 function SignUpForm() {
+  const [visible, setVisible] = useState(false)
   const form = useForm({
     initialValues: {
       username: '',
@@ -22,13 +30,22 @@ function SignUpForm() {
 
   useEffect(() => {
     if (status === 'failed') {
+      setVisible(false)
       form.setErrors(errors)
+    }
+    if (status === 'loading') {
+      setVisible(true)
+      form.clearErrors()
     }
   })
 
   return (
     <Box>
-      <form onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}>
+      <form
+        onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}
+        style={{ position: 'relative' }}
+      >
+        <LoadingOverlay visible={visible} />
         <TextInput
           required
           label="Username"
@@ -50,7 +67,9 @@ function SignUpForm() {
         <List withPadding>
           {form.errors && Array.isArray(form.errors)
             ? form.errors.map((error) => (
-                <List.Item key={error}>{error}</List.Item>
+                <List.Item key={error} style={{ color: 'burgundy' }}>
+                  {error}
+                </List.Item>
               ))
             : null}
         </List>

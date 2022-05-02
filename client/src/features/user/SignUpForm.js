@@ -6,6 +6,7 @@ import {
   TextInput,
   LoadingOverlay,
   ThemeIcon,
+  Group,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { AlertCircle } from 'tabler-icons-react'
@@ -42,7 +43,7 @@ function SignUpForm() {
   })
 
   return (
-    <Box>
+    <Box sx={{ maxWidth: 400 }} mx="auto">
       <form
         onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}
         style={{ position: 'relative' }}
@@ -62,29 +63,34 @@ function SignUpForm() {
         />
         <PasswordInput
           required
+          autoComplete="off"
           label="Password"
           placeholder="password"
           {...form.getInputProps('password')}
         />
         <List
           withPadding
+          size="sm"
+          mt="sm"
           icon={
-            <ThemeIcon color="red" size={24} radius="xl">
-              <AlertCircle size={16} />
+            <ThemeIcon variant="light" color="red" size={20} radius="xl">
+              <AlertCircle size={18} />
             </ThemeIcon>
           }
         >
           {form.errors && Array.isArray(form.errors)
             ? form.errors.map((error) => (
-                <List.Item key={error} style={{ color: 'burgundy' }}>
+                <List.Item key={error} sx={{ color: '#EE4B2B' }}>
                   {error}
                 </List.Item>
               ))
             : null}
         </List>
-        <Button disabled={!disabled} type="submit">
-          Submit
-        </Button>
+        <Group position="right" mt="md">
+          <Button disabled={!disabled} type="submit">
+            Submit
+          </Button>
+        </Group>
       </form>
     </Box>
   )

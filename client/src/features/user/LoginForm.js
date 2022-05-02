@@ -31,7 +31,7 @@ function LoginForm() {
     }
   }, [status])
 
-  const disabled = Object.entries(form.values).every(
+  const enabled = Object.entries(form.values).every(
     ([_, value]) => value.length > 0
   )
 
@@ -56,7 +56,7 @@ function LoginForm() {
           placeholder="Password"
           {...form.getInputProps('password')}
         />
-        <Button disabled={!disabled} type="submit">
+        <Button disabled={!enabled} type="submit">
           Submit
         </Button>
       </form>

@@ -5,6 +5,7 @@ import {
   Box,
   PasswordInput,
   LoadingOverlay,
+  Group,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,7 +38,7 @@ function LoginForm() {
   )
 
   return (
-    <Box>
+    <Box sx={{ maxWidth: 400 }} mx="auto">
       <form
         style={{ position: 'relative' }}
         onSubmit={form.onSubmit((values) => dispatch(loginUser(values)))}
@@ -57,9 +58,11 @@ function LoginForm() {
           placeholder="Password"
           {...form.getInputProps('password')}
         />
-        <Button disabled={!enabled} type="submit">
-          Sign in
-        </Button>
+        <Group position="right" mt="md">
+          <Button disabled={!enabled} type="submit">
+            Sign in
+          </Button>
+        </Group>
         <Link to="/signup">Create new account</Link>
       </form>
     </Box>

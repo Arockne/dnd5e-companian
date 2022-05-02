@@ -5,8 +5,10 @@ import {
   PasswordInput,
   TextInput,
   LoadingOverlay,
+  ThemeIcon,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { AlertCircle } from 'tabler-icons-react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from './userSlice'
@@ -64,7 +66,14 @@ function SignUpForm() {
           placeholder="password"
           {...form.getInputProps('password')}
         />
-        <List withPadding>
+        <List
+          withPadding
+          icon={
+            <ThemeIcon color="red" size={24} radius="xl">
+              <AlertCircle size={16} />
+            </ThemeIcon>
+          }
+        >
           {form.errors && Array.isArray(form.errors)
             ? form.errors.map((error) => (
                 <List.Item key={error} style={{ color: 'burgundy' }}>

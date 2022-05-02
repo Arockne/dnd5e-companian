@@ -89,7 +89,7 @@ function SignUpForm() {
         </List>
         <Group position="right" mt="md">
           <Button disabled={!enabled} type="submit">
-            Submit
+            Create account
           </Button>
         </Group>
         <Link to="/">Sign In</Link>

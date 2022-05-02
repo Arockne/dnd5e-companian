@@ -58,9 +58,9 @@ function LoginForm() {
           {...form.getInputProps('password')}
         />
         <Button disabled={!enabled} type="submit">
-          Submit
+          Sign in
         </Button>
-        <Link to="/signup">Create Account</Link>
+        <Link to="/signup">Create new account</Link>
       </form>
     </Box>
   )

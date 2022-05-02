@@ -20,7 +20,7 @@ it('renders a form with username and password fields', () => {
   render(<LoginForm />)
   screen.getByLabelText(/username/i)
   screen.getByLabelText(/password/i)
-  screen.getByText(/submit/i)
+  screen.getByText(/sign/i)
 })
 
 test('button to be initially disabled and enabled when form is filled out', async () => {
@@ -29,7 +29,7 @@ test('button to be initially disabled and enabled when form is filled out', asyn
   render(<LoginForm />)
   const username = screen.getByLabelText(/username/i)
   const password = screen.getByLabelText(/password/i)
-  const submitButton = screen.getByRole('button', /submit/i)
+  const submitButton = screen.getByRole('button', /sign/i)
 
   expect(submitButton).toBeDisabled()
 
@@ -61,7 +61,7 @@ it('handles server error', async () => {
   render(<LoginForm />)
   const username = screen.getByLabelText(/username/i)
   const password = screen.getByLabelText(/password/i)
-  const submitButton = screen.getByRole('button', /submit/i)
+  const submitButton = screen.getByRole('button', /sign/i)
 
   expect(username).toBeEmptyDOMElement()
   expect(password).toBeEmptyDOMElement()

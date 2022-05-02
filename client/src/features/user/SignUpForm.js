@@ -40,7 +40,7 @@ function SignUpForm() {
       setVisible(true)
       form.clearErrors()
     }
-  })
+  }, [status])
 
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">

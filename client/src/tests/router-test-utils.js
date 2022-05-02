@@ -7,10 +7,7 @@ function render(ui, { route = '/', ...renderOptions } = {}) {
   function Wrapper({ children }) {
     return <BrowserRouter>{children}</BrowserRouter>
   }
-  return rtlRender(ui, {
-    wrapper: Wrapper,
-    ...renderOptions,
-  })
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 }
 
 // re-export everything

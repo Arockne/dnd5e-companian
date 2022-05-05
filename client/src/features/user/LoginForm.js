@@ -9,7 +9,7 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser } from './userSlice'
+import { loginUser, reset } from './userSlice'
 import { Link } from 'react-router-dom'
 
 function LoginForm() {
@@ -30,6 +30,11 @@ function LoginForm() {
     } else if (status === 'failed') {
       setVisible(false)
       errors.map((error) => form.setFieldError('password', error))
+    }
+    return () => {
+      if (status !== 'succeeded') {
+        dispatch(reset())
+      }
     }
   }, [status])
 

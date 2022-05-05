@@ -1,8 +1,8 @@
 import userEvent from '@testing-library/user-event'
+import { screen, render, waitFor } from '../../utils/test-utils'
 import { handlers } from '../../__mocks__/user'
-import { screen, render, waitFor } from '../../tests/test-utils'
-import { rest } from 'msw'
 import { setupServer } from 'msw/node'
+import { rest } from 'msw'
 import SignUpForm from '../SignUpForm'
 
 const server = setupServer(...handlers)

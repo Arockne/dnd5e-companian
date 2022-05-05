@@ -5,13 +5,16 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 // Import your own reducer
-import userReducer from '../features/user/userSlice'
+import userSlice from '../user/state/userReducer'
 
 function render(
   ui,
   {
     preloadedState,
-    store = configureStore({ reducer: { user: userReducer }, preloadedState }),
+    store = configureStore({
+      reducer: { user: userSlice.reducer },
+      preloadedState,
+    }),
     ...renderOptions
   } = {}
 ) {

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import {
   List,
   Box,
@@ -11,21 +10,27 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { AlertCircle } from 'tabler-icons-react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, reset } from './userSlice'
+import { createUser, reset } from './state/userActions'
 import { Link } from 'react-router-dom'
 
-function LoginForm() {
+function SignUpForm() {
   const [visible, setVisible] = useState(false)
   const form = useForm({
     initialValues: {
       username: '',
+      email: '',
       password: '',
     },
   })
 
-  const dispatch = useDispatch()
   const { status, errors } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+  const enabled = Object.entries(form.values).every(
+    ([_, value]) => value.length > 0
+  )
 
   useEffect(() => {
     if (status === 'failed') {
@@ -37,35 +42,34 @@ function LoginForm() {
       form.clearErrors()
     }
     return () => {
-      if (status !== 'succeeded') {
-        dispatch(reset())
-      }
+      dispatch(reset())
     }
   }, [status])
-
-  const enabled = Object.entries(form.values).every(
-    ([_, value]) => value.length > 0
-  )
 
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
       <form
+        onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}
         style={{ position: 'relative' }}
-        onSubmit={form.onSubmit((values) => dispatch(loginUser(values)))}
       >
         <LoadingOverlay visible={visible} />
         <TextInput
           required
-          autoComplete="username"
           label="Username"
           placeholder="Username"
           {...form.getInputProps('username')}
         />
+        <TextInput
+          required
+          label="Email"
+          placeholder="Email"
+          {...form.getInputProps('email')}
+        />
         <PasswordInput
           required
-          autoComplete="current-password"
+          autoComplete="off"
           label="Password"
-          placeholder="Password"
+          placeholder="password"
           {...form.getInputProps('password')}
         />
         <List
@@ -88,13 +92,13 @@ function LoginForm() {
         </List>
         <Group position="right" mt="md">
           <Button disabled={!enabled} type="submit">
-            Sign in
+            Create account
           </Button>
         </Group>
-        <Link to="/signup">Create new account</Link>
+        <Link to="/">Sign In</Link>
       </form>
     </Box>
   )
 }
 
-export default LoginForm
+export default SignUpForm

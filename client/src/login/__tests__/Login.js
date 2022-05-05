@@ -31,59 +31,71 @@ test('redirect to home when given an address that does not exist', () => {
   expect(screen.getByText(/create/i)).toBeInTheDocument()
 })
 
-// test('when switching between login and signup, errors should not exist from the previous component mount', async () => {
-//   const userInput = { username: 'a', email: 'b', password: 'c' }
-//   const loginError = {
-//     errors: ['Invalid username or password'],
-//   }
-//   const signupErrors = {
-//     errors: [
-//       'Username must be greater than 3 characters',
-//       'Email must be valid',
-//       'Password must be 8 characters long',
-//     ],
-//   }
+test('when switching between login and signup, errors should not exist from the previous component', async () => {
+  const userInput = { username: 'a', email: 'b', password: 'c' }
+  const loginError = {
+    errors: ['Invalid username or password'],
+  }
+  const signupErrors = {
+    errors: [
+      'Username must be greater than 3 characters',
+      'Email must be valid',
+      'Password must be 8 characters long',
+    ],
+  }
 
-//   server.use(
-//     rest.post('/api/login', (req, res, ctx) => {
-//       return res(ctx.json(loginError), ctx.status(401))
-//     })
-//   )
+  server.use(
+    rest.post('/api/login', (req, res, ctx) => {
+      return res(ctx.json(loginError), ctx.status(401))
+    })
+  )
 
-//   render(<Login />)
+  server.use(
+    rest.post('/api/signup', (req, res, ctx) => {
+      return res(ctx.json(signupErrors), ctx.status(401))
+    })
+  )
 
-//   const username = screen.getByLabelText(/username/i)
-//   const password = screen.getByLabelText(/password/i)
-//   const submit = screen.getByRole('button', /sign/i)
+  render(<Login />)
 
-//   await userEvent.type(username, userInput.username)
-//   userEvent.type(password, userInput.password)
-//   userEvent.click(submit)
-//   await waitFor(() => expect(screen.getByText(/invalid/i)))
-//   expect(screen.getByText(/invalid/i)).toBeInTheDocument()
+  const loginFormUsername = screen.getByRole('textbox', { name: /username/i })
+  const loginFormPassword = screen.getByLabelText(/password \*/i)
+  const loginFormSubmit = screen.getByRole('button', /sign/i)
 
-//   userEvent.click(screen.getByText(/create/i))
-//   expect(screen.getByText(/invalid/i)).not.toBeInTheDocument()
+  userEvent.type(loginFormUsername, userInput.username)
+  userEvent.type(loginFormPassword, userInput.password)
+  userEvent.click(loginFormSubmit)
 
-//   // server.use(
-//   //   rest.post('/api/signup', (req, res, ctx) => {
-//   //     return res(ctx.json(signupErrors), ctx.status(422))
-//   //   })
-//   // )
+  await waitFor(() => expect(screen.getByText(/invalid/i)))
+  expect(screen.getByText(/invalid/i)).toBeInTheDocument()
 
-//   // userEvent.type(screen.getByLabelText(/username/i), userInput.username)
-//   // userEvent.type(screen.getByLabelText(/email/i), userInput.email)
-//   // userEvent.type(screen.getByLabelText(/password/i), userInput.password)
-//   // userEvent.click(screen.getByText(/create/i))
+  userEvent.click(screen.getByText(/create/i))
 
-//   // await waitFor(() => {
-//   //   expect(screen.getByText(/username must be/i)).toBeInTheDocument()
-//   //   expect(screen.getByText(/email must be/i)).toBeInTheDocument()
-//   //   expect(screen.getByText(/password must be/i)).toBeInTheDocument()
-//   // })
+  await waitFor(() => {
+    expect(screen.queryByText(/invalid/i)).not.toBeInTheDocument()
+  })
 
-//   // userEvent.click(screen.getByText(/sign/i))
-//   // expect(screen.getByText(/username must be/i)).not.toBeInTheDocument()
-//   // expect(screen.getByText(/email must be/i)).not.toBeInTheDocument()
-//   // expect(screen.getByText(/password must be/i)).not.toBeInTheDocument()
-// })
+  const signupFormUsername = screen.getByRole('textbox', { name: /username/i })
+  const signupFormEmail = screen.getByRole('textbox', { name: /email/i })
+  const signupFormPassword = screen.getByLabelText(/password \*/i)
+  const signUpFormSubmit = screen.getByRole('button', /create/i)
+
+  await userEvent.type(signupFormUsername, userInput.username)
+  await userEvent.type(signupFormEmail, userInput.email)
+  await userEvent.type(signupFormPassword, userInput.password)
+
+  expect(signUpFormSubmit).toBeEnabled()
+
+  userEvent.click(signUpFormSubmit)
+
+  // await waitFor(() => {
+  //   expect(screen.getByText(/username must be/i)).toBeInTheDocument()
+  //   expect(screen.getByText(/email must be/i)).toBeInTheDocument()
+  //   expect(screen.getByText(/password must be/i)).toBeInTheDocument()
+  // })
+
+  //   // userEvent.click(screen.getByText(/sign/i))
+  //   // expect(screen.getByText(/username must be/i)).not.toBeInTheDocument()
+  //   // expect(screen.getByText(/email must be/i)).not.toBeInTheDocument()
+  //   // expect(screen.getByText(/password must be/i)).not.toBeInTheDocument()
+})

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import {
-  TextInput,
-  Button,
+  List,
   Box,
+  Button,
   PasswordInput,
+  TextInput,
   LoadingOverlay,
+  ThemeIcon,
   Group,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { AlertCircle } from 'tabler-icons-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, reset } from './userSlice'
 import { Link } from 'react-router-dom'
@@ -25,11 +28,13 @@ function LoginForm() {
   const { status, errors } = useSelector((state) => state.user)
 
   useEffect(() => {
+    if (status === 'failed') {
+      setVisible(false)
+      form.setErrors(errors)
+    }
     if (status === 'loading') {
       setVisible(true)
-    } else if (status === 'failed') {
-      setVisible(false)
-      errors.map((error) => form.setFieldError('password', error))
+      form.clearErrors()
     }
     return () => {
       if (status !== 'succeeded') {
@@ -63,6 +68,24 @@ function LoginForm() {
           placeholder="Password"
           {...form.getInputProps('password')}
         />
+        <List
+          withPadding
+          size="sm"
+          mt="sm"
+          icon={
+            <ThemeIcon variant="light" color="red" size={20} radius="xl">
+              <AlertCircle size={18} />
+            </ThemeIcon>
+          }
+        >
+          {form.errors && Array.isArray(form.errors)
+            ? form.errors.map((error) => (
+                <List.Item key={error} sx={{ color: '#EE4B2B' }}>
+                  {error}
+                </List.Item>
+              ))
+            : null}
+        </List>
         <Group position="right" mt="md">
           <Button disabled={!enabled} type="submit">
             Sign in

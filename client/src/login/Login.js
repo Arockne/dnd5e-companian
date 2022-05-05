@@ -1,3 +1,4 @@
+import { Title } from '@mantine/core'
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
@@ -6,7 +7,7 @@ import SignUpForm from './SignUpForm'
 function Login() {
   return (
     <>
-      <h1>Welcome to dnd 5e companion</h1>
+      <Title order={1}>Welcome to dnd 5e companion</Title>
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/signup" element={<SignUpForm />} />

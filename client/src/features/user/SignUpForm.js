@@ -12,7 +12,7 @@ import { useForm } from '@mantine/form'
 import { AlertCircle } from 'tabler-icons-react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createUser } from './userSlice'
+import { createUser, reset } from './userSlice'
 import { Link } from 'react-router-dom'
 
 function SignUpForm() {
@@ -40,6 +40,9 @@ function SignUpForm() {
     if (status === 'loading') {
       setVisible(true)
       form.clearErrors()
+    }
+    return () => {
+      dispatch(reset())
     }
   }, [status])
 

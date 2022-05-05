@@ -69,7 +69,7 @@ function SignUpForm() {
           required
           autoComplete="off"
           label="Password"
-          placeholder="password"
+          placeholder="Password"
           {...form.getInputProps('password')}
         />
         <List

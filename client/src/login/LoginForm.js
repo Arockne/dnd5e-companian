@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import {
   List,
   Box,
@@ -10,27 +11,21 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { AlertCircle } from 'tabler-icons-react'
-import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createUser, reset } from './state/userActions'
+import { loginUser, reset } from '../user/state/userActions'
 import { Link } from 'react-router-dom'
 
-function SignUpForm() {
+function LoginForm() {
   const [visible, setVisible] = useState(false)
   const form = useForm({
     initialValues: {
       username: '',
-      email: '',
       password: '',
     },
   })
 
-  const { status, errors } = useSelector((state) => state.user)
   const dispatch = useDispatch()
-
-  const enabled = Object.entries(form.values).every(
-    ([_, value]) => value.length > 0
-  )
+  const { status, errors } = useSelector((state) => state.user)
 
   useEffect(() => {
     if (status === 'failed') {
@@ -42,34 +37,35 @@ function SignUpForm() {
       form.clearErrors()
     }
     return () => {
-      dispatch(reset())
+      if (status !== 'succeeded') {
+        dispatch(reset())
+      }
     }
   }, [status])
+
+  const enabled = Object.entries(form.values).every(
+    ([_, value]) => value.length > 0
+  )
 
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
       <form
-        onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}
         style={{ position: 'relative' }}
+        onSubmit={form.onSubmit((values) => dispatch(loginUser(values)))}
       >
         <LoadingOverlay visible={visible} />
         <TextInput
           required
+          autoComplete="username"
           label="Username"
           placeholder="Username"
           {...form.getInputProps('username')}
         />
-        <TextInput
-          required
-          label="Email"
-          placeholder="Email"
-          {...form.getInputProps('email')}
-        />
         <PasswordInput
           required
-          autoComplete="off"
+          autoComplete="current-password"
           label="Password"
-          placeholder="password"
+          placeholder="Password"
           {...form.getInputProps('password')}
         />
         <List
@@ -92,13 +88,13 @@ function SignUpForm() {
         </List>
         <Group position="right" mt="md">
           <Button disabled={!enabled} type="submit">
-            Create account
+            Sign in
           </Button>
         </Group>
-        <Link to="/">Sign In</Link>
+        <Link to="/signup">Create new account</Link>
       </form>
     </Box>
   )
 }
 
-export default SignUpForm
+export default LoginForm

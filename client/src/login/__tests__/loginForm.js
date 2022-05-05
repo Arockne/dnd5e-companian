@@ -1,5 +1,5 @@
 import { screen, render, waitFor } from '../../tests/test-utils'
-import LoginForm from '../loginForm'
+import LoginForm from '../LoginForm'
 import userEvent from '@testing-library/user-event'
 import { handlers } from '../../__mocks__/user'
 import { setupServer } from 'msw/node'

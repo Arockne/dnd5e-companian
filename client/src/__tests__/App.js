@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event'
-import { screen, render, waitFor } from '../utils/test-utils'
+import { screen, render } from '../utils/test-utils'
 import App from '../App'
 import { handlers } from '../__mocks__/user'
 import { setupServer } from 'msw/node'

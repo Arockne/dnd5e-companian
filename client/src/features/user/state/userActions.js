@@ -4,7 +4,7 @@ import {
   createUser,
   loginUser,
   logoutUser,
-} from '../../api/userApi'
+} from '../../../api/userApi'
 
 const { reset } = userSlice.actions
 // console.log(...userApi)

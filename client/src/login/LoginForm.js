@@ -28,6 +28,9 @@ function LoginForm() {
   )
 
   function handleChange(e) {
+    if (status === 'failed') {
+      dispatch(reset())
+    }
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 

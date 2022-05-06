@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import {
-  List,
   Box,
   Button,
   PasswordInput,
   TextInput,
   LoadingOverlay,
-  ThemeIcon,
   Group,
 } from '@mantine/core'
-import { AlertCircle } from 'tabler-icons-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, reset } from '../user/state/userActions'
 import { Link } from 'react-router-dom'
+import ErrorsContainer from '../errors/ErrorsContainer'
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -67,24 +65,7 @@ function LoginForm() {
           onChange={handleChange}
           value={formData.password}
         />
-        <List
-          withPadding
-          size="sm"
-          mt="sm"
-          icon={
-            <ThemeIcon variant="light" color="red" size={20} radius="xl">
-              <AlertCircle size={18} />
-            </ThemeIcon>
-          }
-        >
-          {errors
-            ? errors.map((error) => (
-                <List.Item key={error} sx={{ color: '#EE4B2B' }}>
-                  {error}
-                </List.Item>
-              ))
-            : null}
-        </List>
+        <ErrorsContainer errors={errors} />
         <Group position="right" mt="md">
           <Button disabled={!enabled} type="submit">
             Sign in

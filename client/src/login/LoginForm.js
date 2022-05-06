@@ -16,7 +16,6 @@ import { loginUser, reset } from '../user/state/userActions'
 import { Link } from 'react-router-dom'
 
 function LoginForm() {
-  const [visible, setVisible] = useState(false)
   const form = useForm({
     initialValues: {
       username: '',
@@ -29,11 +28,9 @@ function LoginForm() {
 
   useEffect(() => {
     if (status === 'failed') {
-      setVisible(false)
       form.setErrors(errors)
     }
     if (status === 'loading') {
-      setVisible(true)
       form.clearErrors()
     }
     return () => {
@@ -53,7 +50,7 @@ function LoginForm() {
         style={{ position: 'relative' }}
         onSubmit={form.onSubmit((values) => dispatch(loginUser(values)))}
       >
-        <LoadingOverlay visible={visible} />
+        <LoadingOverlay visible={status === 'loading'} />
         <TextInput
           required
           autoComplete="username"

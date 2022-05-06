@@ -16,7 +16,6 @@ import { createUser, reset } from '../user/state/userActions'
 import { Link } from 'react-router-dom'
 
 function SignUpForm() {
-  const [visible, setVisible] = useState(false)
   const form = useForm({
     initialValues: {
       username: '',
@@ -34,15 +33,15 @@ function SignUpForm() {
 
   useEffect(() => {
     if (status === 'failed') {
-      setVisible(false)
       form.setErrors(errors)
     }
     if (status === 'loading') {
-      setVisible(true)
       form.clearErrors()
     }
-    return () => {
-      dispatch(reset())
+    if (status === 'failed') {
+      return () => {
+        dispatch(reset())
+      }
     }
   }, [status])
 
@@ -52,7 +51,7 @@ function SignUpForm() {
         onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}
         style={{ position: 'relative' }}
       >
-        <LoadingOverlay visible={visible} />
+        <LoadingOverlay visible={status === 'loading'} />
         <TextInput
           required
           label="Username"

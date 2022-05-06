@@ -2,6 +2,10 @@ import userEvent from '@testing-library/user-event'
 import { screen, render, waitFor } from '../utils/test-utils'
 import App from '../App'
 
+it('renders app', () => {
+  render(<App />)
+})
+
 test('user is able to login', async () => {
   const testUser = { username: 'test', password: 'testpassword' }
 

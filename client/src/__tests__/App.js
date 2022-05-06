@@ -1,6 +1,19 @@
 import userEvent from '@testing-library/user-event'
 import { screen, render, waitFor } from '../utils/test-utils'
 import App from '../App'
+import { handlers } from '../__mocks__/user'
+import { setupServer } from 'msw/node'
+
+const server = setupServer(...handlers)
+
+// Enable API mocking before tests.
+beforeAll(() => server.listen())
+
+// Reset any runtime request handlers we may add during the tests.
+afterEach(() => server.resetHandlers())
+
+// Disable API mocking after the tests are done.
+afterAll(() => server.close())
 
 it('renders app', () => {
   render(<App />)

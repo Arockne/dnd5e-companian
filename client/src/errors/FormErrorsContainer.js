@@ -1,6 +1,7 @@
 import React from 'react'
 import { List, ThemeIcon } from '@mantine/core'
 import { AlertCircle } from 'tabler-icons-react'
+import FormError from './FormError'
 
 function FormErrorsContainer({ errors }) {
   return (
@@ -15,11 +16,7 @@ function FormErrorsContainer({ errors }) {
       }
     >
       {errors
-        ? errors.map((error) => (
-            <List.Item key={error} sx={{ color: '#EE4B2B' }}>
-              {error}
-            </List.Item>
-          ))
+        ? errors.map((error) => <FormError key={error} error={error} />)
         : null}
     </List>
   )

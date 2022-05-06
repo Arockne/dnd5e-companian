@@ -56,6 +56,7 @@ function LoginForm() {
           placeholder="Username"
           name="username"
           onChange={handleChange}
+          value={formData.username}
         />
         <PasswordInput
           required
@@ -64,6 +65,7 @@ function LoginForm() {
           placeholder="Password"
           name="password"
           onChange={handleChange}
+          value={formData.password}
         />
         <List
           withPadding

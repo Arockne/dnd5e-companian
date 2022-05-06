@@ -8,68 +8,73 @@ import {
   ThemeIcon,
   Group,
 } from '@mantine/core'
-import { useForm } from '@mantine/form'
 import { AlertCircle } from 'tabler-icons-react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser, reset } from '../user/state/userActions'
 import { Link } from 'react-router-dom'
 
 function SignUpForm() {
-  const form = useForm({
-    initialValues: {
-      username: '',
-      email: '',
-      password: '',
-    },
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
   })
 
   const { status, errors } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
-  const enabled = Object.entries(form.values).every(
+  const enabled = Object.entries(formData).every(
     ([_, value]) => value.length > 0
   )
 
-  useEffect(() => {
+  function handleChange(e) {
     if (status === 'failed') {
-      form.setErrors(errors)
+      dispatch(reset())
     }
-    if (status === 'loading') {
-      form.clearErrors()
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(createUser(formData))
+    if (status === 'successful') {
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+      })
     }
-    if (status === 'failed') {
-      return () => {
-        dispatch(reset())
-      }
-    }
-  }, [status])
+  }
 
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
-      <form
-        onSubmit={form.onSubmit((values) => dispatch(createUser(values)))}
-        style={{ position: 'relative' }}
-      >
+      <form onSubmit={handleSubmit} style={{ position: 'relative' }}>
         <LoadingOverlay visible={status === 'loading'} />
         <TextInput
           required
           label="Username"
           placeholder="Username"
-          {...form.getInputProps('username')}
+          name="username"
+          onChange={handleChange}
+          value={formData.username}
         />
         <TextInput
           required
           label="Email"
           placeholder="Email"
-          {...form.getInputProps('email')}
+          name="email"
+          onChange={handleChange}
+          value={formData.email}
         />
         <PasswordInput
           required
           autoComplete="off"
           label="Password"
           placeholder="Password"
-          {...form.getInputProps('password')}
+          name="password"
+          onChange={handleChange}
+          value={formData.password}
         />
         <List
           withPadding
@@ -81,8 +86,8 @@ function SignUpForm() {
             </ThemeIcon>
           }
         >
-          {form.errors && Array.isArray(form.errors)
-            ? form.errors.map((error) => (
+          {errors
+            ? errors.map((error) => (
                 <List.Item key={error} sx={{ color: '#EE4B2B' }}>
                   {error}
                 </List.Item>
@@ -94,7 +99,9 @@ function SignUpForm() {
             Create account
           </Button>
         </Group>
-        <Link to="/">Sign In</Link>
+        <Link to="/" onClick={() => dispatch(reset())}>
+          Sign In
+        </Link>
       </form>
     </Box>
   )

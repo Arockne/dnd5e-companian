@@ -10,7 +10,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser, reset } from '../user/state/userActions'
 import { Link } from 'react-router-dom'
-import ErrorsContainer from '../errors/ErrorsContainer'
+import FormErrorsContainer from '../errors/FormErrorsContainer'
 
 function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -74,7 +74,7 @@ function SignUpForm() {
           onChange={handleChange}
           value={formData.password}
         />
-        <ErrorsContainer errors={errors} />
+        <FormErrorsContainer errors={errors} />
         <Group position="right" mt="md">
           <Button disabled={!enabled} type="submit">
             Create account

@@ -2,7 +2,7 @@ import React from 'react'
 import { List, ThemeIcon } from '@mantine/core'
 import { AlertCircle } from 'tabler-icons-react'
 
-function ErrorsContainer({ errors }) {
+function FormErrorsContainer({ errors }) {
   return (
     <List
       withPadding
@@ -25,4 +25,4 @@ function ErrorsContainer({ errors }) {
   )
 }
 
-export default ErrorsContainer
+export default FormErrorsContainer

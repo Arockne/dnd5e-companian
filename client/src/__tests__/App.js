@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event'
-import { screen, render } from '../utils/test-utils'
+import { screen, render, waitFor } from '../utils/test-utils'
 import App from '../App'
 import { handlers } from '../__mocks__/user'
 import { setupServer } from 'msw/node'
@@ -35,4 +35,8 @@ test('user is able to login', async () => {
   expect(password).toHaveValue(testUser.password)
 
   await userEvent.click(submit)
+
+  await waitFor(() => {
+    expect(screen.getByText(/welcome test/i)).toBeInTheDocument()
+  })
 })

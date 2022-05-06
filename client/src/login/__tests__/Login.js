@@ -31,28 +31,15 @@ test('redirect to home when given an address that does not exist', () => {
   expect(screen.getByText(/create/i)).toBeInTheDocument()
 })
 
-test('when switching between login and signup, errors should not exist from the previous component', async () => {
+test('when switching from login to signup, errors should not exist from the previous component', async () => {
   const userInput = { username: 'a', email: 'b', password: 'c' }
   const loginError = {
     errors: ['Invalid username or password'],
-  }
-  const signupErrors = {
-    errors: [
-      'Username must be greater than 3 characters',
-      'Email must be valid',
-      'Password must be 8 characters long',
-    ],
   }
 
   server.use(
     rest.post('/api/login', (req, res, ctx) => {
       return res(ctx.json(loginError), ctx.status(401))
-    })
-  )
-
-  server.use(
-    rest.post('/api/signup', (req, res, ctx) => {
-      return res(ctx.json(signupErrors), ctx.status(401))
     })
   )
 
@@ -74,6 +61,26 @@ test('when switching between login and signup, errors should not exist from the 
   await waitFor(() => {
     expect(screen.queryByText(/invalid/i)).not.toBeInTheDocument()
   })
+})
+
+test('when switching from signup to login, errors should not exist from the previous component', async () => {
+  const userInput = { username: 'a', email: 'b', password: 'c' }
+
+  const signupErrors = {
+    errors: [
+      'Username must be greater than 3 characters',
+      'Email must be valid',
+      'Password must be 8 characters long',
+    ],
+  }
+
+  server.use(
+    rest.post('/api/signup', (req, res, ctx) => {
+      return res(ctx.json(signupErrors), ctx.status(401))
+    })
+  )
+
+  render(<Login />, { route: '/signup' })
 
   const signupFormUsername = screen.getByRole('textbox', { name: /username/i })
   const signupFormEmail = screen.getByRole('textbox', { name: /email/i })
@@ -88,14 +95,15 @@ test('when switching between login and signup, errors should not exist from the 
 
   userEvent.click(signUpFormSubmit)
 
-  // await waitFor(() => {
-  //   expect(screen.getByText(/username must be/i)).toBeInTheDocument()
-  //   expect(screen.getByText(/email must be/i)).toBeInTheDocument()
-  //   expect(screen.getByText(/password must be/i)).toBeInTheDocument()
-  // })
+  await waitFor(() => {
+    expect(screen.getByText(/username must be/i)).toBeInTheDocument()
+    expect(screen.getByText(/email must be/i)).toBeInTheDocument()
+    expect(screen.getByText(/password must be/i)).toBeInTheDocument()
+  })
 
-  //   // userEvent.click(screen.getByText(/sign/i))
-  //   // expect(screen.getByText(/username must be/i)).not.toBeInTheDocument()
-  //   // expect(screen.getByText(/email must be/i)).not.toBeInTheDocument()
-  //   // expect(screen.getByText(/password must be/i)).not.toBeInTheDocument()
+  expect(screen.getByRole('list')).not.toBeEmptyDOMElement()
+
+  await userEvent.click(screen.getByRole('link', { name: /sign in/i }))
+
+  expect(screen.getByRole('list')).toBeEmptyDOMElement()
 })

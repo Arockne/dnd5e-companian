@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Loader } from '@mantine/core'
+import { Group, Loader } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCurrentUser } from './features/user/state/userActions'
 import HomeContainer from './features/home/HomeContainer'
@@ -16,7 +16,11 @@ function App() {
 
   function unauthorizedUser() {
     if (!authenticated) {
-      return <Loader size="xl" variant="bars" />
+      return (
+        <Group sx={{ justifyContent: 'center', height: '100vh' }}>
+          <Loader size="100" variant="bars" />
+        </Group>
+      )
     } else {
       return <Login />
     }

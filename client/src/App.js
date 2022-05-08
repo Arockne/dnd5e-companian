@@ -1,12 +1,34 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { Loader } from '@mantine/core'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCurrentUser } from './features/user/state/userActions'
 import HomeContainer from './features/home/HomeContainer'
 import Login from './features/login/Login'
 
 function App() {
-  const { user } = useSelector((state) => state.user)
+  const { user, authenticated } = useSelector((state) => state.user)
 
-  return <div className="App">{user ? <HomeContainer /> : <Login />}</div>
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [])
+
+  function unauthorizedUser() {
+    if (!authenticated) {
+      return <Loader size="xl" variant="bars" />
+    } else {
+      return <Login />
+    }
+  }
+
+  function authorizedUser() {
+    return <HomeContainer />
+  }
+
+  return (
+    <div className="App">{user ? authorizedUser() : unauthorizedUser()}</div>
+  )
 }
 
 export default App

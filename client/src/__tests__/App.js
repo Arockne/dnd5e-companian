@@ -1,8 +1,14 @@
 import userEvent from '@testing-library/user-event'
-import { screen, render, waitFor } from '../utils/test-utils'
+import {
+  screen,
+  render,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '../utils/test-utils'
 import App from '../App'
 import { handlers } from '../__mocks__/user'
 import { setupServer } from 'msw/node'
+import { rest } from 'msw'
 
 const server = setupServer(...handlers)
 
@@ -15,18 +21,22 @@ afterEach(() => server.resetHandlers())
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-it('renders app', () => {
-  render(<App />)
-})
-
 test('user is able to login', async () => {
   const testUser = { username: 'test', password: 'testpassword' }
 
+  server.use(
+    rest.get('/api/me', (req, res, ctx) => {
+      return res(ctx.json({ errors: ['Not authorized'] }), ctx.status(401))
+    })
+  )
+
   render(<App />)
 
-  const username = screen.getByRole('textbox', { name: /username/i })
-  const password = screen.getByLabelText(/password \*/i)
-  const submit = screen.getByRole('button', { name: /sign in/i })
+  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
+
+  const username = await screen.getByRole('textbox', { name: /username/i })
+  const password = await screen.getByLabelText(/password \*/i)
+  const submit = await screen.getByRole('button', { name: /sign in/i })
 
   await userEvent.type(username, testUser.username)
   expect(username).toHaveValue(testUser.username)

@@ -26,7 +26,6 @@ const userSlice = createSlice({
       })
       .addCase(userApi.getCurrentUser.rejected, (state, action) => {
         state.status = 'failed'
-        state.errors = action.payload.errors
         state.authenticated = true
       })
       .addCase(userApi.createUser.pending, (state) => {

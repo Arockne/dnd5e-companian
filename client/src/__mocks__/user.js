@@ -8,4 +8,7 @@ export const handlers = [
   rest.post('/api/signup', (req, res, ctx) => {
     return res(ctx.status(201))
   }),
+  rest.get('/api/me', (req, res, ctx) => {
+    return res(ctx.status(200))
+  }),
 ]

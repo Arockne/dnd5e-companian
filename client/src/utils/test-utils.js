@@ -15,9 +15,11 @@ function render(
       reducer: { user: userSlice.reducer },
       preloadedState,
     }),
+    route = '/',
     ...renderOptions
   } = {}
 ) {
+  window.history.pushState({}, 'Test Page', route)
   function Wrapper({ children }) {
     return (
       <BrowserRouter>

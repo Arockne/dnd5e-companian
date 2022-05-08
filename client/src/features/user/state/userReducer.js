@@ -5,13 +5,14 @@ const initialState = {
   user: null,
   status: 'idle',
   errors: null,
+  authenticated: false,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    reset: () => initialState,
+    reset: () => ({ ...initialState, authenticated: true }),
   },
   extraReducers: (builder) => {
     builder
@@ -21,10 +22,12 @@ const userSlice = createSlice({
       .addCase(userApi.getCurrentUser.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.user = action.payload
+        state.authenticated = true
       })
       .addCase(userApi.getCurrentUser.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload.errors
+        state.authenticated = true
       })
       .addCase(userApi.createUser.pending, (state) => {
         state.status = 'loading'

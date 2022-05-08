@@ -6,7 +6,7 @@ import HomeContainer from './features/home/HomeContainer'
 import Login from './features/login/Login'
 
 function App() {
-  const { user, authenticated } = useSelector((state) => state.user)
+  const { user, status } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
 
@@ -15,7 +15,7 @@ function App() {
   }, [])
 
   function unauthorizedUser() {
-    if (!authenticated) {
+    if (status === 'loading') {
       return (
         <Group sx={{ justifyContent: 'center', height: '100vh' }}>
           <Loader size="100" variant="bars" />

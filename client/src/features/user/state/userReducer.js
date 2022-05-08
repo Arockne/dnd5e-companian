@@ -5,7 +5,6 @@ const initialState = {
   user: null,
   status: 'idle',
   errors: null,
-  authenticated: false,
 }
 
 const userSlice = createSlice({
@@ -22,11 +21,9 @@ const userSlice = createSlice({
       .addCase(userApi.getCurrentUser.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.user = action.payload
-        state.authenticated = true
       })
       .addCase(userApi.getCurrentUser.rejected, (state, action) => {
         state.status = 'failed'
-        state.authenticated = true
       })
       .addCase(userApi.createUser.pending, (state) => {
         state.status = 'loading'

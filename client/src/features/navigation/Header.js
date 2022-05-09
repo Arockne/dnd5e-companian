@@ -100,6 +100,11 @@ const useStyles = createStyles((theme) => {
           theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
       },
     },
+
+    userActive: {
+      backgroundColor:
+        theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+    },
   }
 })
 

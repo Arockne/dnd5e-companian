@@ -9,6 +9,6 @@ export const handlers = [
     return res(ctx.status(201))
   }),
   rest.get('/api/me', (req, res, ctx) => {
-    return res(ctx.status(200))
+    return res(ctx.json({ id: 1, username: 'test' }), ctx.status(200))
   }),
 ]

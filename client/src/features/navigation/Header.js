@@ -33,6 +33,10 @@ const useStyles = createStyles((theme) => {
       height: '100%',
     },
 
+    title: {
+      textDecoration: 'none',
+    },
+
     links: {
       [theme.fn.smallerThan('sm')]: {
         display: 'none',
@@ -136,7 +140,17 @@ function MainHeader({ links }) {
   return (
     <Header height={60} mb={120}>
       <Container className={classes.header}>
-        <Title order={3}>D&D 5e Companion</Title>
+        <Title
+          component={Link}
+          to="/"
+          order={2}
+          className={classes.title}
+          onClick={() => {
+            setActive('/')
+          }}
+        >
+          D&D 5e Companion
+        </Title>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

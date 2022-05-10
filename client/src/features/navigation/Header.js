@@ -8,7 +8,6 @@ import {
   Text,
   Menu,
   Divider,
-  Tabs,
   Burger,
   Anchor,
   Header,
@@ -16,17 +15,7 @@ import {
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
 import { Link } from 'react-router-dom'
-import {
-  Logout,
-  Heart,
-  Star,
-  Message,
-  Settings,
-  PlayerPause,
-  Trash,
-  SwitchHorizontal,
-  ChevronDown,
-} from 'tabler-icons-react'
+import { Logout, Settings, Trash, ChevronDown } from 'tabler-icons-react'
 
 const useStyles = createStyles((theme) => {
   return {

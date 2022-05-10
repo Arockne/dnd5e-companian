@@ -35,6 +35,10 @@ const useStyles = createStyles((theme) => {
 
     title: {
       textDecoration: 'none',
+      color:
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[0]
+          : theme.colors.gray[7],
     },
 
     links: {

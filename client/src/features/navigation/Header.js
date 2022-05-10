@@ -174,33 +174,18 @@ function MainHeader({ links }) {
               </UnstyledButton>
             }
           >
-            <Menu.Item icon={<Heart size={14} color={theme.colors.red[6]} />}>
-              Liked posts
-            </Menu.Item>
-            <Menu.Item icon={<Star size={14} color={theme.colors.yellow[6]} />}>
-              Saved posts
-            </Menu.Item>
-            <Menu.Item
-              icon={<Message size={14} color={theme.colors.blue[6]} />}
-            >
-              Your comments
-            </Menu.Item>
+            <Menu.Item>Characters</Menu.Item>
+            <Menu.Item>Campaigns</Menu.Item>
 
             <Menu.Label>Settings</Menu.Label>
             <Menu.Item icon={<Settings size={14} />}>
               Account settings
-            </Menu.Item>
-            <Menu.Item icon={<SwitchHorizontal size={14} />}>
-              Change account
             </Menu.Item>
             <Menu.Item icon={<Logout size={14} />}>Logout</Menu.Item>
 
             <Divider />
 
             <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item icon={<PlayerPause size={14} />}>
-              Pause subscription
-            </Menu.Item>
             <Menu.Item color="red" icon={<Trash size={14} />}>
               Delete account
             </Menu.Item>

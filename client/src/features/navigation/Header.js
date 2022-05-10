@@ -15,7 +15,14 @@ import {
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
 import { Link } from 'react-router-dom'
-import { Logout, Settings, Trash, ChevronDown } from 'tabler-icons-react'
+import {
+  Logout,
+  Settings,
+  Trash,
+  ChevronDown,
+  Swords,
+  Book2,
+} from 'tabler-icons-react'
 
 const useStyles = createStyles((theme) => {
   return {
@@ -163,8 +170,8 @@ function MainHeader({ links }) {
               </UnstyledButton>
             }
           >
-            <Menu.Item>Characters</Menu.Item>
-            <Menu.Item>Campaigns</Menu.Item>
+            <Menu.Item icon={<Book2 size={14} />}>Characters</Menu.Item>
+            <Menu.Item icon={<Swords size={14} />}>Campaigns</Menu.Item>
 
             <Menu.Label>Settings</Menu.Label>
             <Menu.Item icon={<Settings size={14} />}>

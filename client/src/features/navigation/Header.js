@@ -7,7 +7,6 @@ import {
   Group,
   Text,
   Menu,
-  Divider,
   Burger,
   Anchor,
   Header,
@@ -19,7 +18,6 @@ import { Link } from 'react-router-dom'
 import {
   Logout,
   Settings,
-  Trash,
   ChevronDown,
   Swords,
   Book2,
@@ -197,13 +195,6 @@ function MainHeader({ links }) {
               Account settings
             </Menu.Item>
             <Menu.Item icon={<Logout size={14} />}>Logout</Menu.Item>
-
-            <Divider />
-
-            <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item color="red" icon={<Trash size={14} />}>
-              Delete account
-            </Menu.Item>
           </Menu>
         </Group>
 

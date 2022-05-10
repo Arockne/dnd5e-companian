@@ -34,13 +34,13 @@ const useStyles = createStyles((theme) => {
     },
 
     links: {
-      [theme.fn.smallerThan('md')]: {
+      [theme.fn.smallerThan('sm')]: {
         display: 'none',
       },
     },
 
     burger: {
-      [theme.fn.largerThan('md')]: {
+      [theme.fn.largerThan('sm')]: {
         display: 'none',
       },
     },
@@ -80,7 +80,7 @@ const useStyles = createStyles((theme) => {
     },
 
     userMenu: {
-      [theme.fn.smallerThan('xs')]: {
+      [theme.fn.smallerThan('sm')]: {
         display: 'none',
       },
     },

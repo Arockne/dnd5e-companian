@@ -12,6 +12,7 @@ import {
   Anchor,
   Header,
   Title,
+  Drawer,
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
 import { Link } from 'react-router-dom'
@@ -212,6 +213,17 @@ function MainHeader({ links }) {
           className={classes.burger}
           size="md"
         />
+
+        <Drawer
+          opened={opened}
+          onClose={() => toggleOpened()}
+          position="top"
+          title="D&D 5e Companion"
+          padding="xl"
+          size="xl"
+        >
+          {}
+        </Drawer>
       </Container>
     </Header>
   )

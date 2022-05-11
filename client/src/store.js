@@ -3,6 +3,6 @@ import userReducer from './features/user/state/userReducer'
 
 export const store = configureStore({
   reducer: {
-    user: userReducer.reducer,
+    user: userReducer,
   },
 })

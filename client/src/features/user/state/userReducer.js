@@ -1,5 +1,53 @@
-import { createSlice } from '@reduxjs/toolkit'
-import * as userApi from '../../../api/userApi'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { client } from '../../../api/client'
+
+export const getCurrentUser = createAsyncThunk(
+  'user/getCurrentUser',
+  async (_, { rejectWithValue }) => {
+    const response = await client.get('/api/me')
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
+export const createUser = createAsyncThunk(
+  'user/createUser',
+  async (user, { rejectWithValue }) => {
+    const response = await client.post('/api/signup', { user: user })
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
+export const loginUser = createAsyncThunk(
+  'user/loginUser',
+  async (user, { rejectWithValue }) => {
+    const response = await client.post('/api/login', user)
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, { rejectWithValue }) => {
+    const response = await client.delete(`/api/logout`)
+    const body = await response.json()
+    if (response.ok) {
+      return {}
+    }
+    return rejectWithValue(body)
+  }
+)
 
 const initialState = {
   user: null,
@@ -15,49 +63,51 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(userApi.getCurrentUser.pending, (state) => {
+      .addCase(getCurrentUser.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(userApi.getCurrentUser.fulfilled, (state, action) => {
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.user = action.payload
       })
-      .addCase(userApi.getCurrentUser.rejected, (state, action) => {
+      .addCase(getCurrentUser.rejected, (state, action) => {
         state.status = 'failed'
       })
-      .addCase(userApi.createUser.pending, (state) => {
+      .addCase(createUser.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(userApi.createUser.fulfilled, (state) => {
+      .addCase(createUser.fulfilled, (state) => {
         state.status = 'succeeded'
       })
-      .addCase(userApi.createUser.rejected, (state, action) => {
-        state.status = 'failed'
-        state.errors = action.payload.errors
-      })
-      .addCase(userApi.loginUser.pending, (state) => {
-        state.status = 'loading'
-      })
-      .addCase(userApi.loginUser.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-        state.user = action.payload
-      })
-      .addCase(userApi.loginUser.rejected, (state, action) => {
+      .addCase(createUser.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload.errors
       })
-      .addCase(userApi.logoutUser.pending, (state) => {
+      .addCase(loginUser.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(userApi.logoutUser.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.user = action.payload
       })
-      .addCase(userApi.logoutUser.rejected, (state, action) => {
+      .addCase(loginUser.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.user = action.payload
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload.errors
       })
   },
 })
 
-export default userSlice
+export const { reset } = userSlice.actions
+
+export default userSlice.reducer

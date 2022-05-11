@@ -11,4 +11,7 @@ export const handlers = [
   rest.get('/api/me', (req, res, ctx) => {
     return res(ctx.json({ id: 1, username: 'test' }), ctx.status(200))
   }),
+  rest.delete('/api/logout', (req, res, ctx) => {
+    return res(ctx.status(204))
+  }),
 ]

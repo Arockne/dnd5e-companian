@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Button,
@@ -8,7 +8,7 @@ import {
   Group,
 } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser, reset } from '../user/state/userActions'
+import { loginUser, reset } from '../user/state/userReducer'
 import { Link } from 'react-router-dom'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 

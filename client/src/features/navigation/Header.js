@@ -14,7 +14,7 @@ import {
   Drawer,
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Logout,
   Settings,
@@ -22,7 +22,8 @@ import {
   Swords,
   Book2,
 } from 'tabler-icons-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser } from '../user/state/userReducer'
 
 const useStyles = createStyles((theme) => {
   return {
@@ -118,6 +119,9 @@ function MainHeader({ links }) {
   const [active, setActive] = useState('')
   const { classes, theme, cx } = useStyles()
   const { user } = useSelector(({ user }) => user)
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const items = links.map((link) => (
     <Anchor
@@ -207,7 +211,15 @@ function MainHeader({ links }) {
             <Menu.Item icon={<Settings size={14} />}>
               Account settings
             </Menu.Item>
-            <Menu.Item icon={<Logout size={14} />}>Logout</Menu.Item>
+            <Menu.Item
+              icon={<Logout size={14} />}
+              onClick={() => {
+                dispatch(logoutUser())
+                navigate('/')
+              }}
+            >
+              Logout
+            </Menu.Item>
           </Menu>
         </Group>
 

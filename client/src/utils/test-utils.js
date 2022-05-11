@@ -12,7 +12,7 @@ function render(
   {
     preloadedState,
     store = configureStore({
-      reducer: { user: userSlice.reducer },
+      reducer: { user: userSlice },
       preloadedState,
     }),
     route = '/',

@@ -187,8 +187,26 @@ function MainHeader({ links }) {
               </UnstyledButton>
             }
           >
-            <Menu.Item icon={<Book2 size={14} />}>Characters</Menu.Item>
-            <Menu.Item icon={<Swords size={14} />}>Campaigns</Menu.Item>
+            <Menu.Item
+              component={Link}
+              to="/characters"
+              onClick={() => {
+                setActive('/characters')
+              }}
+              icon={<Book2 size={14} />}
+            >
+              Characters
+            </Menu.Item>
+            <Menu.Item
+              component={Link}
+              to="/campaigns"
+              onClick={() => {
+                setActive('/campaigns')
+              }}
+              icon={<Swords size={14} />}
+            >
+              Campaigns
+            </Menu.Item>
 
             <Menu.Label>Settings</Menu.Label>
             <Menu.Item icon={<Settings size={14} />}>

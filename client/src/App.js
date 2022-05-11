@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Group, Loader } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCurrentUser } from './features/user/state/userReducer'
+import { getCurrentUser } from './features/user/state/userSlice'
 import HomeContainer from './features/home/HomeContainer'
 import Login from './features/login/Login'
 

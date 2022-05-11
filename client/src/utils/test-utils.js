@@ -5,7 +5,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 // Import your own reducer
-import userSlice from '../features/user/state/userReducer'
+import userSlice from '../features/user/state/userSlice'
 
 function render(
   ui,

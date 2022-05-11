@@ -8,7 +8,7 @@ import {
 } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createUser, reset } from '../user/state/userReducer'
+import { createUser, reset } from '../user/state/userSlice'
 import { Link } from 'react-router-dom'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 

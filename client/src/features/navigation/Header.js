@@ -23,7 +23,7 @@ import {
   Book2,
 } from 'tabler-icons-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../user/state/userReducer'
+import { logoutUser } from '../user/state/userSlice'
 
 const useStyles = createStyles((theme) => {
   return {

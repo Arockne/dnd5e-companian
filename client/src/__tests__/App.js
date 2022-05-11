@@ -47,7 +47,7 @@ test('user is able to login', async () => {
   await userEvent.click(submit)
 
   await waitFor(() => {
-    expect(screen.getByText(/welcome test/i)).toBeInTheDocument()
+    expect(screen.getByText(/test/i)).toBeInTheDocument()
   })
 })
 
@@ -56,5 +56,5 @@ test('if already logged in should see home page', async () => {
 
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 
-  expect(screen.getByText(/welcome test/i)).toBeInTheDocument()
+  expect(screen.getByText(/test/i)).toBeInTheDocument()
 })

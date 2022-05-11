@@ -58,3 +58,21 @@ test('if already logged in should see home page', async () => {
 
   expect(screen.getByText(/test/i)).toBeInTheDocument()
 })
+
+test('user is able to logout', async () => {
+  render(<App />)
+
+  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
+
+  await userEvent.click(screen.getByRole('button', { name: /test/i }))
+
+  expect(screen.getByRole('menuitem', { name: /logout/i })).toBeInTheDocument()
+
+  await userEvent.click(screen.getByRole('menuitem', { name: /logout/i }))
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('textbox', { name: /username/i })
+    ).toBeInTheDocument()
+  })
+})

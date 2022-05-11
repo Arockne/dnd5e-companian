@@ -27,7 +27,15 @@ function App() {
   }
 
   function authorizedUser() {
-    return <HomeContainer />
+    if (status === 'loading') {
+      return (
+        <Group sx={{ justifyContent: 'center', height: '100vh' }}>
+          <Loader size="100" variant="bars" />
+        </Group>
+      )
+    } else {
+      return <HomeContainer />
+    }
   }
 
   return (

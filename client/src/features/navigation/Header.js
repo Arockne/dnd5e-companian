@@ -22,6 +22,7 @@ import {
   Swords,
   Book2,
 } from 'tabler-icons-react'
+import { useSelector } from 'react-redux'
 
 const useStyles = createStyles((theme) => {
   return {
@@ -111,18 +112,12 @@ const useStyles = createStyles((theme) => {
   }
 })
 
-const user = {
-  name: 'Jane Spoonfighter',
-  email: 'janspoon@fighter.dev',
-  image:
-    'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80',
-}
-
 function MainHeader({ links }) {
   const [opened, toggleOpened] = useBooleanToggle(false)
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const [active, setActive] = useState('')
   const { classes, theme, cx } = useStyles()
+  const { user } = useSelector(({ user }) => user)
 
   const items = links.map((link) => (
     <Anchor
@@ -180,7 +175,7 @@ function MainHeader({ links }) {
                     size={20}
                   />
                   <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {user.name}
+                    {user.username}
                   </Text>
                   <ChevronDown size={12} />
                 </Group>

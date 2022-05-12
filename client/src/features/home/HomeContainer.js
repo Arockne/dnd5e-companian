@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { MAINHEADERLINKS } from '../../constants'
 import MainHeader from '../navigation/Header'
 

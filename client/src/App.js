@@ -16,7 +16,11 @@ function App() {
 
   function unauthorizedUser() {
     if (!authenticated) {
-      return <div></div>
+      return (
+        <Group sx={{ justifyContent: 'center', height: '100vh' }}>
+          <Loader size="100" variant="bars" />
+        </Group>
+      )
     } else {
       return <Login />
     }

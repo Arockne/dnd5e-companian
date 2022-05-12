@@ -8,7 +8,7 @@ import {
 } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createUser, reset } from '../user/state/userSlice'
+import { createUser, resetErrors } from '../user/state/userSlice'
 import { Link } from 'react-router-dom'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 
@@ -28,7 +28,7 @@ function SignUpForm() {
 
   function handleChange(e) {
     if (status === 'failed') {
-      dispatch(reset())
+      dispatch(resetErrors())
     }
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -80,7 +80,7 @@ function SignUpForm() {
             Create account
           </Button>
         </Group>
-        <Link to="/" onClick={() => dispatch(reset())}>
+        <Link to="/" onClick={() => dispatch(resetErrors())}>
           Sign In
         </Link>
       </form>

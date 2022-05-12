@@ -8,7 +8,7 @@ function Login() {
   return (
     <>
       <Title order={1} align="center">
-        Welcome to DnD 5e Companion
+        Welcome to D&D 5e Companion
       </Title>
       <Routes>
         <Route path="/" element={<LoginForm />} />

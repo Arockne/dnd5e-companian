@@ -32,6 +32,10 @@ test('user is able to login', async () => {
 
   render(<App />)
 
+  await waitFor(() => {
+    screen.getByRole('presentation')
+  })
+
   await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 
   const username = await screen.getByRole('textbox', { name: /username/i })
@@ -54,7 +58,7 @@ test('user is able to login', async () => {
 test('if already logged in should see home page', async () => {
   render(<App />)
 
-  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
+  await waitFor(() => screen.getByText(/test/i))
 
   expect(screen.getByText(/test/i)).toBeInTheDocument()
 })
@@ -62,7 +66,7 @@ test('if already logged in should see home page', async () => {
 test('user is able to logout', async () => {
   render(<App />)
 
-  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
+  await waitFor(() => screen.getByText(/test/i))
 
   await userEvent.click(screen.getByRole('button', { name: /test/i }))
 

@@ -2,7 +2,7 @@ import { Group } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { Loader } from 'tabler-icons-react'
 import { MAINHEADERLINKS } from '../../constants'
-import MainHeader from '../navigation/Header'
+import MainHeader from '../navigation/MainHeader'
 
 function HomeContainer() {
   const [pageLoad, setPageLoad] = useState(false)

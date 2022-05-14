@@ -1,7 +1,6 @@
 import { Group } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { Loader } from 'tabler-icons-react'
-import { MAINHEADERLINKS } from '../../constants'
 import MainHeader from '../navigation/MainHeader'
 
 function HomeContainer() {
@@ -13,7 +12,7 @@ function HomeContainer() {
 
   return pageLoad ? (
     <div>
-      <MainHeader links={MAINHEADERLINKS} />
+      <MainHeader />
       <p>{`Welcome`}</p>
     </div>
   ) : (

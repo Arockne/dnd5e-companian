@@ -113,7 +113,7 @@ const useStyles = createStyles((theme) => {
   }
 })
 
-function MainHeader({ links }) {
+function MainHeader() {
   const [opened, toggleOpened] = useBooleanToggle(false)
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const [active, setActive] = useState('')
@@ -121,22 +121,6 @@ function MainHeader({ links }) {
   const { user } = useSelector(({ user }) => user)
 
   const dispatch = useDispatch()
-
-  const items = links.map((link) => (
-    <Anchor
-      component={Link}
-      key={link.label}
-      to={link.link}
-      className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
-      })}
-      onClick={() => {
-        setActive(link.link)
-      }}
-    >
-      {link.label}
-    </Anchor>
-  ))
 
   return (
     <Header height={60} mb={120}>
@@ -153,7 +137,30 @@ function MainHeader({ links }) {
           D&D 5e Companion
         </Title>
         <Group spacing={5} className={classes.links}>
-          {items}
+          <Anchor
+            component={Link}
+            to={'/campaigns/create'}
+            className={cx(classes.link, {
+              [classes.linkActive]: active === '/campaigns/create',
+            })}
+            onClick={() => {
+              setActive('/campaigns/create')
+            }}
+          >
+            Create Campaign
+          </Anchor>
+          <Anchor
+            component={Link}
+            to={'/campaigns/search'}
+            className={cx(classes.link, {
+              [classes.linkActive]: active === '/campaigns/search',
+            })}
+            onClick={() => {
+              setActive('/campaigns/search')
+            }}
+          >
+            Create Campaign
+          </Anchor>
         </Group>
 
         <Group position="apart">

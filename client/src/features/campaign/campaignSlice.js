@@ -52,6 +52,18 @@ export const updateCampaign = createAsyncThunk(
   }
 )
 
+export const deleteCampaign = createAsyncThunk(
+  'campaign/updateCampaign',
+  async (id, { rejectWithValue }) => {
+    const response = await client.delete(`/api/campaigns/${id}`)
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
 const initialState = {
   campaign: null,
   campaigns: null,

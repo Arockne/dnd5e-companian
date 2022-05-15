@@ -17,13 +17,29 @@ const initialState = {
   campaign: null,
   campaigns: null,
   status: 'idle',
+  errors: null,
 }
 
 const campaignSlice = createSlice({
   name: 'campaign',
   initialState,
   reducers: {},
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCampaigns.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(getCampaigns.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.campaigns = action.payload
+        state.errors = null
+      })
+      .addCase(getCampaigns.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
+  },
 })
 
 export default campaignSlice.reducer

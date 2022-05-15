@@ -159,7 +159,7 @@ function MainHeader() {
               setActive('/campaigns/search')
             }}
           >
-            Create Campaign
+            Search Campaigns
           </Anchor>
         </Group>
 

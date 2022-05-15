@@ -38,7 +38,7 @@ export const createCampaign = createAsyncThunk(
 )
 
 export const updateCampaign = createAsyncThunk(
-  'campaign/createCampaign',
+  'campaign/updateCampaign',
   async (campaign, { rejectWithValue }) => {
     const response = await client.patch(
       `/api/campaigns/${campaign.id}`,

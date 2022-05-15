@@ -128,6 +128,27 @@ const campaignSlice = createSlice({
         state.status = 'failed'
         state.errors = action.payload.errors
       })
+      .addCase(deleteCampaign.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(deleteCampaign.fulfilled, (state) => {
+        state.status = 'idle'
+        state.errors = null
+        if (state.campaigns) {
+          const campaignIndex = state.campaigns.findIndex(
+            (campaign) => campaign.id === state.campaign
+          )
+          if (campaignIndex > -1) {
+            state.campaigns.splice(campaignIndex, 1)
+          }
+        }
+        state.campaign = null
+      })
+      .addCase(deleteCampaign.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
   },
 })
 

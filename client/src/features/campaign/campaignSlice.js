@@ -12,10 +12,23 @@ export const getCampaigns = createAsyncThunk(
     return rejectWithValue(body)
   }
 )
+
 export const getCampaign = createAsyncThunk(
   'campaign/getCampaign',
   async (id, { rejectWithValue }) => {
     const response = await client.get(`/api/campaign/${id}`)
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
+export const createCampaign = createAsyncThunk(
+  'campaign/createCampaign',
+  async (campaign, { rejectWithValue }) => {
+    const response = await client.post(`/api/campaigns/`, campaign)
     const body = await response.json()
     if (response.ok) {
       return body

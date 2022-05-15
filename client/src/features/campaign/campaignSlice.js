@@ -50,6 +50,20 @@ const campaignSlice = createSlice({
         state.status = 'failed'
         state.errors = action.payload.errors
       })
+      .addCase(getCampaign.pending, (state) => {
+        state.status = 'loading'
+        state.campaign = null
+        state.errors = null
+      })
+      .addCase(getCampaign.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.campaign = action.payload
+        state.errors = null
+      })
+      .addCase(getCampaign.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
   },
 })
 

@@ -31,7 +31,6 @@ RSpec.describe Campaign, type: :model do
 
   describe 'validations' do
     it { is_expected.to have_secure_password }
-    it { is_expected.to validate_presence_of(:password_confirmation) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_length_of(:name).is_at_most(30) }
   end

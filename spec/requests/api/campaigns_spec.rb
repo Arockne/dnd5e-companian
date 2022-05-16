@@ -22,8 +22,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       name: 'Knights of the Round Table', 
       setting: 'Somewhere in Camelot', 
       owner: user_1, 
-      password: 'king', 
-      password_confirmation: 'king'
+      password: 'king'
     )
   end
 
@@ -32,8 +31,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       name: 'Star Wards', 
       setting: 'In a hospital far far away', 
       owner: user_2, 
-      password: 'test123', 
-      password_confirmation: 'test123'
+      password: 'test123'
     )
   end
 
@@ -178,8 +176,7 @@ RSpec.describe "Api::Campaigns", type: :request do
             campaign: {
               name: 'The Throne of the king', 
               setting: 'A king sits upon a throne...', 
-              password: 'test123', 
-              password_confirmation: 'test123'
+              password: 'test123'
             }
           }
         end
@@ -205,35 +202,6 @@ RSpec.describe "Api::Campaigns", type: :request do
           expect(response).to have_http_status(:created)
         end
       end
-
-      context 'with no password confirmation' do
-        let(:campaign_params) do
-          { 
-            campaign: {
-              name: 'The Throne of the king', 
-              setting: 'A king sits upon a throne...', 
-              password: 'test123', 
-            }
-          }
-        end
-
-        it 'does not create a campaign' do
-          expect { post '/api/campaigns', params: campaign_params }.to_not change(Campaign, :count)
-        end
-
-        it 'returns a status of 422 (Unprocessable entity)' do
-          post '/api/campaigns', params: campaign_params
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
-        
-        it 'returns error messages' do
-          post '/api/campaigns', params: campaign_params
-          expect(response.body).to include_json({
-            errors: a_kind_of(Array)
-          })
-        end
-        
-      end
     end
 
     context 'without logged in user' do
@@ -242,8 +210,7 @@ RSpec.describe "Api::Campaigns", type: :request do
           campaign: {
             name: 'The Throne of the king', 
             setting: 'A king sits upon a throne...', 
-            password: 'test123', 
-            password_confirmation: 'test123'
+            password: 'test123'
           }
         }
       end
@@ -272,8 +239,7 @@ RSpec.describe "Api::Campaigns", type: :request do
         campaign: {
           name: 'Knights of the SQUARE Table', 
           setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT', 
-          password: 'kingforever', 
-          password_confirmation: 'kingforever'
+          password: 'kingforever'
         }
       }
     end
@@ -283,8 +249,7 @@ RSpec.describe "Api::Campaigns", type: :request do
         campaign: {
           name: '', 
           setting: '', 
-          password: '', 
-          password_confirmation: 'kingforever'
+          password: ''
         }
       }
     end

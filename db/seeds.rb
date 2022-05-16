@@ -23,4 +23,29 @@ user_3 = User.create(
   password: 'test123'
 )
 
+users = [user_1, user_2, user_3]
+
+Campaign.create!(
+  name: 'Knights of the Round Table', 
+  setting: 'Somewhere in Camelot', 
+  owner: user_1, 
+  password: 'test123',
+)
+
+Campaign.create!(
+  name: 'Star Wards', 
+  setting: 'In a hospital far far away', 
+  owner: user_2, 
+  password: 'test123',
+)
+
+(1..50).each do
+  Campaign.create(
+    name: Faker::Lorem.word, 
+    setting: Faker::Lorem.sentence, 
+    owner: users[rand(0..2)], 
+    password: 'test123',
+  )
+end
+
 puts 'finished seeding 🌹'

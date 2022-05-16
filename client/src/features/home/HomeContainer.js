@@ -12,16 +12,14 @@ function HomeContainer() {
   }, [])
 
   return pageLoad ? (
-    <div>
-      <Routes>
-        <Route path="/" element={<MainHeader />}>
-          <Route path="campaigns">
-            <Route path="search" />
-          </Route>
+    <Routes>
+      <Route path="/" element={<MainHeader />}>
+        <Route path="campaigns">
+          <Route path="search" />
         </Route>
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </div>
+      </Route>
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   ) : (
     <Group sx={{ justifyContent: 'center', height: '100vh' }}>
       <Loader size="100" variant="bars" />

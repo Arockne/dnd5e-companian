@@ -1,5 +1,6 @@
 import { Group } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { Loader } from 'tabler-icons-react'
 import MainHeader from '../navigation/MainHeader'
 
@@ -12,8 +13,14 @@ function HomeContainer() {
 
   return pageLoad ? (
     <div>
-      <MainHeader />
-      <p>{`Welcome`}</p>
+      <Routes>
+        <Route path="/" element={<MainHeader />}>
+          <Route path="campaigns">
+            <Route path="search" />
+          </Route>
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </div>
   ) : (
     <Group sx={{ justifyContent: 'center', height: '100vh' }}>

@@ -14,7 +14,7 @@ import {
   Drawer,
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import {
   Logout,
   Settings,
@@ -123,130 +123,133 @@ function MainHeader() {
   const dispatch = useDispatch()
 
   return (
-    <Header height={60} mb={120}>
-      <Container className={classes.header}>
-        <Title
-          component={Link}
-          to="/"
-          order={2}
-          className={classes.title}
-          onClick={() => {
-            setActive('/')
-          }}
-        >
-          D&D 5e Companion
-        </Title>
-        <Group spacing={5} className={classes.links}>
-          <Anchor
+    <>
+      <Header height={60} mb={120}>
+        <Container className={classes.header}>
+          <Title
             component={Link}
-            to={'/campaigns/create'}
-            className={cx(classes.link, {
-              [classes.linkActive]: active === '/campaigns/create',
-            })}
+            to="/"
+            order={2}
+            className={classes.title}
             onClick={() => {
-              setActive('/campaigns/create')
+              setActive('/')
             }}
           >
-            Create Campaign
-          </Anchor>
-          <Anchor
-            component={Link}
-            to={'/campaigns/search'}
-            className={cx(classes.link, {
-              [classes.linkActive]: active === '/campaigns/search',
-            })}
-            onClick={() => {
-              setActive('/campaigns/search')
-            }}
-          >
-            Search Campaigns
-          </Anchor>
-        </Group>
+            D&D 5e Companion
+          </Title>
+          <Group spacing={5} className={classes.links}>
+            <Anchor
+              component={Link}
+              to={'/campaigns/create'}
+              className={cx(classes.link, {
+                [classes.linkActive]: active === '/campaigns/create',
+              })}
+              onClick={() => {
+                setActive('/campaigns/create')
+              }}
+            >
+              Create Campaign
+            </Anchor>
+            <Anchor
+              component={Link}
+              to={'/campaigns/search'}
+              className={cx(classes.link, {
+                [classes.linkActive]: active === '/campaigns/search',
+              })}
+              onClick={() => {
+                setActive('/campaigns/search')
+              }}
+            >
+              Search Campaigns
+            </Anchor>
+          </Group>
 
-        <Group position="apart">
-          <Menu
-            size={260}
-            placement="end"
-            transition="pop-top-right"
-            className={classes.userMenu}
-            onClose={() => setUserMenuOpened(false)}
-            onOpen={() => setUserMenuOpened(true)}
-            control={
-              <UnstyledButton
-                className={cx(classes.user, {
-                  [classes.userActive]: userMenuOpened,
-                })}
+          <Group position="apart">
+            <Menu
+              size={260}
+              placement="end"
+              transition="pop-top-right"
+              className={classes.userMenu}
+              onClose={() => setUserMenuOpened(false)}
+              onOpen={() => setUserMenuOpened(true)}
+              control={
+                <UnstyledButton
+                  className={cx(classes.user, {
+                    [classes.userActive]: userMenuOpened,
+                  })}
+                >
+                  <Group spacing={7}>
+                    <Avatar
+                      src={user.image}
+                      alt={user.name}
+                      radius="xl"
+                      size={20}
+                    />
+                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+                      {user.username}
+                    </Text>
+                    <ChevronDown size={12} />
+                  </Group>
+                </UnstyledButton>
+              }
+            >
+              <Menu.Item
+                component={Link}
+                to="/characters"
+                onClick={() => {
+                  setActive('/characters')
+                }}
+                icon={<Book2 size={14} />}
               >
-                <Group spacing={7}>
-                  <Avatar
-                    src={user.image}
-                    alt={user.name}
-                    radius="xl"
-                    size={20}
-                  />
-                  <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {user.username}
-                  </Text>
-                  <ChevronDown size={12} />
-                </Group>
-              </UnstyledButton>
-            }
+                Characters
+              </Menu.Item>
+              <Menu.Item
+                component={Link}
+                to="/campaigns"
+                onClick={() => {
+                  setActive('/campaigns')
+                }}
+                icon={<Swords size={14} />}
+              >
+                Campaigns
+              </Menu.Item>
+
+              <Menu.Label>Settings</Menu.Label>
+              <Menu.Item icon={<Settings size={14} />}>
+                Account settings
+              </Menu.Item>
+              <Menu.Item
+                icon={<Logout size={14} />}
+                onClick={() => {
+                  dispatch(logoutUser())
+                }}
+              >
+                Logout
+              </Menu.Item>
+            </Menu>
+          </Group>
+
+          <Burger
+            opened={opened}
+            onClick={() => toggleOpened()}
+            className={classes.burger}
+            size="md"
+          />
+
+          <Drawer
+            opened={opened}
+            onClose={() => toggleOpened()}
+            position="top"
+            title="D&D 5e Companion"
+            padding="xl"
+            size="xl"
           >
-            <Menu.Item
-              component={Link}
-              to="/characters"
-              onClick={() => {
-                setActive('/characters')
-              }}
-              icon={<Book2 size={14} />}
-            >
-              Characters
-            </Menu.Item>
-            <Menu.Item
-              component={Link}
-              to="/campaigns"
-              onClick={() => {
-                setActive('/campaigns')
-              }}
-              icon={<Swords size={14} />}
-            >
-              Campaigns
-            </Menu.Item>
-
-            <Menu.Label>Settings</Menu.Label>
-            <Menu.Item icon={<Settings size={14} />}>
-              Account settings
-            </Menu.Item>
-            <Menu.Item
-              icon={<Logout size={14} />}
-              onClick={() => {
-                dispatch(logoutUser())
-              }}
-            >
-              Logout
-            </Menu.Item>
-          </Menu>
-        </Group>
-
-        <Burger
-          opened={opened}
-          onClick={() => toggleOpened()}
-          className={classes.burger}
-          size="md"
-        />
-
-        <Drawer
-          opened={opened}
-          onClose={() => toggleOpened()}
-          position="top"
-          title="D&D 5e Companion"
-          padding="xl"
-          size="xl"
-        >
-          {}
-        </Drawer>
-      </Container>
-    </Header>
+            {}
+          </Drawer>
+        </Container>
+      </Header>
+      <Outlet />
+    </>
   )
 }
 

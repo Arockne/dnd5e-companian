@@ -5,6 +5,5 @@ class Campaign < ApplicationRecord
   has_many :characters, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 30 }
-  validates :password_confirmation, presence: true
   has_secure_password
 end

@@ -3,7 +3,6 @@ import React from 'react'
 
 function CampaignCard({ campaign }) {
   const theme = useMantineTheme()
-  console.log(campaign)
 
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]

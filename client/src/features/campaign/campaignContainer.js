@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampaigns } from './campaignSlice'
-import { Stack, TextInput, Container } from '@mantine/core'
+import { Stack, TextInput, Container, Pagination } from '@mantine/core'
 import CampaignCard from './CampaignCard'
 
 function CampaignContainer() {
   const [searchByName, setSearchByName] = useState('')
+  const [activePage, setActivePage] = useState(1)
   const dispatch = useDispatch()
   const { campaigns, status } = useSelector((state) => state.campaign)
+
+  const campaignIndex = (activePage * 5 - 5) % campaigns?.length
 
   useEffect(() => {
     dispatch(getCampaigns())
   }, [])
 
-  const campaignSearchResults = campaigns?.filter(({ name }) =>
-    name.toLowerCase().includes(searchByName)
-  )
+  function handlePaginationChange(page) {
+    setActivePage(page)
+  }
+
+  const campaignSearchResults = campaigns
+    ?.filter(({ name }) => name.toLowerCase().includes(searchByName))
+    .slice(campaignIndex, campaignIndex + 5)
 
   return status === 'succeeded' ? (
     <Stack
@@ -41,6 +48,15 @@ function CampaignContainer() {
         {campaignSearchResults.map((campaign) => (
           <CampaignCard key={campaign.id} campaign={campaign} />
         ))}
+      </Container>
+      <Container>
+        <Pagination
+          position="center"
+          direction="row"
+          total={Math.ceil(campaigns.length / 5)}
+          page={activePage}
+          onChange={handlePaginationChange}
+        />
       </Container>
     </Stack>
   ) : null

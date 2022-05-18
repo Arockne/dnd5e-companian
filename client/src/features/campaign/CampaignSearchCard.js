@@ -1,7 +1,7 @@
 import { Card, Group, Image, Text, useMantineTheme } from '@mantine/core'
 import React from 'react'
 
-function CampaignCard({ campaign }) {
+function CampaignSearchCard({ campaign }) {
   const theme = useMantineTheme()
 
   const secondaryColor =
@@ -40,4 +40,4 @@ function CampaignCard({ campaign }) {
   )
 }
 
-export default CampaignCard
+export default CampaignSearchCard

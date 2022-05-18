@@ -18,6 +18,7 @@ function CampaignContainer() {
   const { campaigns, status } = useSelector((state) => state.campaign)
 
   const campaignIndex = (activePage * 5 - 5) % campaigns?.length
+  const pages = Math.ceil(campaigns.length / 5)
 
   useEffect(() => {
     dispatch(getCampaigns())
@@ -60,7 +61,7 @@ function CampaignContainer() {
         <Pagination
           position="center"
           direction="row"
-          total={Math.ceil(campaigns.length / 5)}
+          total={pages}
           page={activePage}
           onChange={handlePaginationChange}
         />

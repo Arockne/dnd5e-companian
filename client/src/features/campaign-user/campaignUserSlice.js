@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { client } from '../../api/client'
 
-const joinCampaign = createAsyncThunk(
+export const joinCampaign = createAsyncThunk(
   'campaignUser/joinCampaign',
   async (campaign, { rejectWithValue }) => {
     const response = await client.post(`/api/campaigns/${campaign.id}`, {

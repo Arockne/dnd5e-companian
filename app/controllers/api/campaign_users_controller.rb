@@ -35,7 +35,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
   end
 
   def authorize_join_request
-    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless authenticate_join_request
+    render json: { errors: ['Invalid password'] }, status: :unauthorized unless authenticate_join_request
   end
 
   def authenticate_delete_request

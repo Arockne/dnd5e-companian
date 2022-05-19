@@ -4,7 +4,7 @@ import { getCampaigns } from './campaignSlice'
 import { Stack, TextInput, Container, Pagination, Grid } from '@mantine/core'
 import CampaignSearchCard from './CampaignSearchCard'
 
-function CampaignContainer() {
+function CampaignSearchContainer() {
   const [searchByName, setSearchByName] = useState('')
   const [activePage, setActivePage] = useState(1)
   const dispatch = useDispatch()
@@ -74,4 +74,4 @@ function CampaignContainer() {
   ) : null
 }
 
-export default CampaignContainer
+export default CampaignSearchContainer

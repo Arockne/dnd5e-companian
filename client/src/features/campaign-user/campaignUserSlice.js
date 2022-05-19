@@ -24,7 +24,20 @@ const campaignUserSlice = createSlice({
   name: 'campaignUser',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(joinCampaign.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(joinCampaign.fulfilled, (state) => {
+        state.status = 'succeeded'
+      })
+      .addCase(joinCampaign.rejected, (state, action) => {
+        state.status = 'rejected'
+        state.errors = action.payload.errors
+      })
+  },
 })
 
 export default campaignUserSlice.reducer

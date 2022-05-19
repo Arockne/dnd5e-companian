@@ -54,9 +54,11 @@ function CampaignContainer() {
           value={searchByName}
         />
       </Container>
-      <Grid>
+      <Grid columns={6} style={{ width: '100vw' }} justify="center">
         {campaignsPerPage.map((campaign) => (
-          <CampaignSearchCard key={campaign.id} campaign={campaign} />
+          <Grid.Col span={1} key={campaign.id}>
+            <CampaignSearchCard campaign={campaign} />
+          </Grid.Col>
         ))}
       </Grid>
       <Container>

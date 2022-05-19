@@ -1,19 +1,52 @@
-import { Card, Group, Image, Modal, Text, useMantineTheme } from '@mantine/core'
+import {
+  Button,
+  Card,
+  Group,
+  Image,
+  Modal,
+  PasswordInput,
+  Text,
+  TextInput,
+  useMantineTheme,
+} from '@mantine/core'
 import React, { useState } from 'react'
+import FormErrorsContainer from '../errors/FormErrorsContainer'
 
 function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)
+  const [password, setPassword] = useState('')
   const theme = useMantineTheme()
 
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
 
   const { setting, name, image_url } = campaign
+  const enabled = password.length > 0
 
   return (
     <>
-      <Modal opened={opened} onClose={() => setOpened(false)} title={name}>
-        {/* Modal content */}
+      <Modal
+        centered
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title={name}
+      >
+        <form style={{ position: 'relative' }}>
+          <PasswordInput
+            required
+            autoComplete="off"
+            label="Password"
+            placeholder="Password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <Group position="right" mt="md">
+            <Button disabled={!enabled} type="submit">
+              Join the Adventure!
+            </Button>
+          </Group>
+        </form>
       </Modal>
       <Card
         shadow="sm"

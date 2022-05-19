@@ -8,13 +8,11 @@ function CampaignSearchCard({ campaign }) {
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
 
+  const { setting, name, image_url } = campaign
+
   return (
     <>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Introduce yourself!"
-      >
+      <Modal opened={opened} onClose={() => setOpened(false)} title={name}>
         {/* Modal content */}
       </Modal>
       <Card
@@ -25,7 +23,7 @@ function CampaignSearchCard({ campaign }) {
       >
         <Card.Section>
           <Image
-            src={campaign.image_url}
+            src={image_url}
             height={200}
             alt="campaign"
             withPlaceholder={true}
@@ -37,7 +35,7 @@ function CampaignSearchCard({ campaign }) {
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
           <Text weight={500} align="center">
-            {campaign.name}
+            {name}
           </Text>
         </Group>
 
@@ -46,7 +44,7 @@ function CampaignSearchCard({ campaign }) {
           style={{ color: secondaryColor, lineHeight: 1.5 }}
           align="center"
         >
-          {campaign.setting}
+          {setting}
         </Text>
       </Card>
     </>

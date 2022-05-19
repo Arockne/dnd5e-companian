@@ -23,7 +23,12 @@ const initialState = {
 const campaignUserSlice = createSlice({
   name: 'campaignUser',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.status = 'idle'
+      state.errors = null
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(joinCampaign.pending, (state) => {

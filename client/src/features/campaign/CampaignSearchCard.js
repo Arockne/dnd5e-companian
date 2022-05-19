@@ -9,12 +9,17 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { joinCampaign } from '../campaign-user/campaignUserSlice'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 
-function CampaignSearchCard({ campaign, errors }) {
+function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)
   const [password, setPassword] = useState('')
   const theme = useMantineTheme()
+  const { status, errors } = useSelector((state) => state.campaignUser)
+
+  const dispatch = useDispatch()
 
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
@@ -24,6 +29,7 @@ function CampaignSearchCard({ campaign, errors }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    dispatch(joinCampaign({ id: campaign.id, password }))
     setPassword('')
   }
 

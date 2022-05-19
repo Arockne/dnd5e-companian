@@ -10,11 +10,11 @@ export const joinCampaign = createAsyncThunk(
         campaign,
       }
     )
-    const data = await response
+    const body = await response.json()
     if (response.ok) {
       return
     }
-    rejectWithValue(data)
+    return rejectWithValue(body)
   }
 )
 

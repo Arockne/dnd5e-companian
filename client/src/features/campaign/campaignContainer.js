@@ -8,7 +8,7 @@ function CampaignContainer() {
   const [searchByName, setSearchByName] = useState('')
   const [activePage, setActivePage] = useState(1)
   const dispatch = useDispatch()
-  const { campaigns, status } = useSelector((state) => state.campaign)
+  const { campaigns, status, errors } = useSelector((state) => state.campaign)
 
   useEffect(() => {
     dispatch(getCampaigns())
@@ -57,7 +57,7 @@ function CampaignContainer() {
       <Grid columns={6} style={{ width: '100vw' }} justify="center">
         {campaignsPerPage.map((campaign) => (
           <Grid.Col span={1} key={campaign.id}>
-            <CampaignSearchCard campaign={campaign} />
+            <CampaignSearchCard campaign={campaign} errors={errors} />
           </Grid.Col>
         ))}
       </Grid>

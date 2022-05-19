@@ -22,6 +22,11 @@ function CampaignSearchCard({ campaign, errors }) {
   const { setting, name, image_url } = campaign
   const enabled = password.length > 0
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    setPassword('')
+  }
+
   return (
     <>
       <Modal
@@ -30,7 +35,7 @@ function CampaignSearchCard({ campaign, errors }) {
         onClose={() => setOpened(false)}
         title={name}
       >
-        <form style={{ position: 'relative' }}>
+        <form style={{ position: 'relative' }} onSubmit={handleSubmit}>
           <PasswordInput
             required
             autoComplete="off"

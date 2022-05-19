@@ -6,13 +6,12 @@ import {
   Modal,
   PasswordInput,
   Text,
-  TextInput,
   useMantineTheme,
 } from '@mantine/core'
 import React, { useState } from 'react'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 
-function CampaignSearchCard({ campaign }) {
+function CampaignSearchCard({ campaign, errors }) {
   const [opened, setOpened] = useState(false)
   const [password, setPassword] = useState('')
   const theme = useMantineTheme()
@@ -41,6 +40,7 @@ function CampaignSearchCard({ campaign }) {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
+          <FormErrorsContainer errors={errors} />
           <Group position="right" mt="md">
             <Button disabled={!enabled} type="submit">
               Join the Adventure!

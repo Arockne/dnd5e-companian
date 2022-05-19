@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampaigns } from './campaignSlice'
-import {
-  Stack,
-  TextInput,
-  Container,
-  Pagination,
-  Grid,
-  SimpleGrid,
-} from '@mantine/core'
+import { Stack, TextInput, Container, Pagination, Grid } from '@mantine/core'
 import CampaignSearchCard from './CampaignSearchCard'
 
 function CampaignContainer() {
@@ -16,9 +9,6 @@ function CampaignContainer() {
   const [activePage, setActivePage] = useState(1)
   const dispatch = useDispatch()
   const { campaigns, status } = useSelector((state) => state.campaign)
-
-  const campaignIndex = (activePage * 5 - 5) % campaigns?.length
-  const pages = Math.ceil(campaigns.length / 5)
 
   useEffect(() => {
     dispatch(getCampaigns())
@@ -28,9 +18,18 @@ function CampaignContainer() {
     setActivePage(page)
   }
 
-  const campaignSearchResults = campaigns
-    ?.filter(({ name }) => name.toLowerCase().includes(searchByName))
-    .slice(campaignIndex, campaignIndex + 5)
+  const campaignIndex = (activePage * 5 - 5) % campaigns?.length
+
+  const campaignSearchResults = campaigns?.filter(({ name }) =>
+    name.toLowerCase().includes(searchByName)
+  )
+
+  const pages = Math.ceil(campaignSearchResults?.length / 5)
+
+  const campaignsPerPage = campaignSearchResults?.slice(
+    campaignIndex,
+    campaignIndex + 5
+  )
 
   return status === 'succeeded' ? (
     <Stack
@@ -48,12 +47,15 @@ function CampaignContainer() {
           label="Search for a Campaign:"
           placeholder="Campaign Search"
           size="xs"
-          onChange={(e) => setSearchByName(e.target.value)}
+          onChange={(e) => {
+            setSearchByName(e.target.value)
+            setActivePage(1)
+          }}
           value={searchByName}
         />
       </Container>
       <Grid>
-        {campaignSearchResults.map((campaign) => (
+        {campaignsPerPage.map((campaign) => (
           <CampaignSearchCard key={campaign.id} campaign={campaign} />
         ))}
       </Grid>

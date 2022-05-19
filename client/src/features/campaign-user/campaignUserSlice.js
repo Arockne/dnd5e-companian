@@ -46,3 +46,4 @@ const campaignUserSlice = createSlice({
 })
 
 export default campaignUserSlice.reducer
+export const { reset } = campaignUserSlice.actions

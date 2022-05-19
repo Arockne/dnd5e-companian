@@ -4,9 +4,12 @@ import { client } from '../../api/client'
 export const joinCampaign = createAsyncThunk(
   'campaignUser/joinCampaign',
   async (campaign, { rejectWithValue }) => {
-    const response = await client.post(`/api/campaigns/${campaign.id}`, {
-      campaign,
-    })
+    const response = await client.post(
+      `/api/campaigns/${campaign.id}/campaign_users`,
+      {
+        campaign,
+      }
+    )
     const data = await response
     if (response.ok) {
       return

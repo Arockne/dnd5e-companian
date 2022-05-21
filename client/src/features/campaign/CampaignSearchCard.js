@@ -11,7 +11,7 @@ import {
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { joinCampaign } from '../campaign-user/campaignUserSlice'
+import { joinCampaign, reset } from '../campaign-user/campaignUserSlice'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 
 function CampaignSearchCard({ campaign }) {
@@ -35,17 +35,18 @@ function CampaignSearchCard({ campaign }) {
   }
 
   function handleChange(e) {
+    dispatch(reset())
     setPassword(e.target.value)
+  }
+
+  function handleClose() {
+    dispatch(reset())
+    setOpened(false)
   }
 
   return (
     <>
-      <Modal
-        centered
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title={name}
-      >
+      <Modal centered opened={opened} onClose={handleClose} title={name}>
         <form style={{ position: 'relative' }} onSubmit={handleSubmit}>
           <PasswordInput
             required

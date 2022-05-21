@@ -1,24 +1,24 @@
-# README
+# D&D 5e Companion
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+D&D 5e Companion is a campaign management system to manage players and resources
 
-Things you may want to cover:
+## To get started:
 
-* Ruby version
+**This application assumes that bundler, npm, ruby, rails, and postgresql is installed**
 
-* System dependencies
+```sh
+bundle install
+rails db:create db:migrate db:seed
+npm install --prefix client
+```
 
-* Configuration
+## Ruby Version:
+- ruby-2.7.4
 
-* Database creation
+## Future Feature Implementations:
 
-* Database initialization
+## Deployment Instructions
 
-* How to run the test suite
+## System Dependencies:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Configuration

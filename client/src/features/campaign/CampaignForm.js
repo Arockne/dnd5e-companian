@@ -59,12 +59,14 @@ function CampaignForm() {
           name="name"
           onChange={handleChange}
           value={formData.name}
+          autoComplete="off"
         />
         <TextInput
           label="Image"
           name="image_url"
           onChange={handleChange}
           value={formData.image_url}
+          autoComplete="off"
         />
         <Textarea
           required
@@ -73,15 +75,16 @@ function CampaignForm() {
           name="setting"
           onChange={handleChange}
           value={formData.setting}
+          autoComplete="off"
         />
         <PasswordInput
           required
-          autoComplete="current-password"
           label="Password"
           placeholder="Password"
           name="password"
           onChange={handleChange}
           value={formData.password}
+          autoComplete="off"
         />
         <Group position="right" mt="md">
           <Button type="submit">Create Adventure!</Button>

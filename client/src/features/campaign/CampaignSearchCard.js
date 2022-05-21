@@ -35,12 +35,16 @@ function CampaignSearchCard({ campaign }) {
   }
 
   function handleChange(e) {
-    dispatch(reset())
+    if (status === 'failed') {
+      dispatch(reset())
+    }
     setPassword(e.target.value)
   }
 
   function handleClose() {
-    dispatch(reset())
+    if (status === 'failed') {
+      dispatch(reset())
+    }
     setOpened(false)
   }
 

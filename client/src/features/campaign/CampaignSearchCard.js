@@ -99,7 +99,11 @@ function CampaignSearchCard({ campaign }) {
             marginTop: theme.spacing.sm,
           }}
         >
-          <Text weight={500} align="center" style={{ position: 'absolute' }}>
+          <Text
+            weight={500}
+            align="center"
+            style={{ position: 'absolute', height: 20 }}
+          >
             {name}
           </Text>
         </Group>
@@ -111,6 +115,7 @@ function CampaignSearchCard({ campaign }) {
               color: secondaryColor,
               lineHeight: 1.5,
               position: 'absolute',
+              height: 15,
             }}
             align="center"
           >

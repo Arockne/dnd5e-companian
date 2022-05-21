@@ -6,9 +6,10 @@ import {
   Textarea,
   TextInput,
 } from '@mantine/core'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { createCampaign } from './campaignSlice'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { createCampaign, resetStatus } from './campaignSlice'
 
 function CampaignForm() {
   const [formData, setFormData] = useState({
@@ -18,7 +19,24 @@ function CampaignForm() {
     password: '',
   })
 
+  const { status } = useSelector((state) => state.campaign)
+
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      setFormData({
+        name: '',
+        image_url: '',
+        setting: '',
+        password: '',
+      })
+      dispatch(resetStatus())
+      //temporary navigate to '/', needs to navigate to '/campaigns/:id'
+      navigate('/')
+    }
+  }, [status])
 
   function handleChange(e) {
     const { name, value } = e.target

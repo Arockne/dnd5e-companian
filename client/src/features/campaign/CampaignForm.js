@@ -38,7 +38,6 @@ function CampaignForm() {
         setting: '',
         password: '',
       })
-      dispatch(resetStatus())
       //temporary navigate to '/', needs to navigate to '/campaigns/:id'
       navigate('/')
     }

@@ -3,6 +3,7 @@ import {
   Card,
   Group,
   Image,
+  LoadingOverlay,
   Modal,
   PasswordInput,
   Text,
@@ -60,6 +61,7 @@ function CampaignSearchCard({ campaign }) {
     <>
       <Modal centered opened={opened} onClose={handleClose} title={name}>
         <form style={{ position: 'relative' }} onSubmit={handleSubmit}>
+          <LoadingOverlay visible={status === 'loading'} />
           <PasswordInput
             required
             autoComplete="off"

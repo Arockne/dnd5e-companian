@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Group,
+  LoadingOverlay,
   PasswordInput,
   Textarea,
   TextInput,
@@ -24,6 +25,10 @@ function CampaignForm() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(resetErrors())
+  }, [])
 
   useEffect(() => {
     if (status === 'succeeded') {
@@ -56,6 +61,7 @@ function CampaignForm() {
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
       <form style={{ position: 'relative' }} onSubmit={handleSubmit}>
+        <LoadingOverlay visible={status === 'loading'} />
         <TextInput
           required
           label="Name"

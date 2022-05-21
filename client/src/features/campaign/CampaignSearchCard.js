@@ -10,6 +10,7 @@ import {
 } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { joinCampaign } from '../campaign-user/campaignUserSlice'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 
@@ -20,6 +21,7 @@ function CampaignSearchCard({ campaign }) {
   const { status, errors } = useSelector((state) => state.campaignUser)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
@@ -30,7 +32,10 @@ function CampaignSearchCard({ campaign }) {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(joinCampaign({ id: campaign.id, password }))
-    setPassword('')
+  }
+
+  function handleChange(e) {
+    setPassword(e.target.value)
   }
 
   return (
@@ -48,7 +53,7 @@ function CampaignSearchCard({ campaign }) {
             label="Password"
             placeholder="Password"
             name="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
             value={password}
           />
           <FormErrorsContainer errors={errors} />

@@ -42,7 +42,7 @@ const campaignUserSlice = createSlice({
         state.status = 'succeeded'
       })
       .addCase(joinCampaign.rejected, (state, action) => {
-        state.status = 'rejected'
+        state.status = 'failed'
         state.errors = action.payload.errors
       })
   },

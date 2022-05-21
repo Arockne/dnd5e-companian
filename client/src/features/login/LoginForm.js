@@ -29,6 +29,15 @@ function LoginForm() {
     dispatch(resetErrors())
   }, [])
 
+  useEffect(() => {
+    if (status === 'successful') {
+      setFormData({
+        username: '',
+        password: '',
+      })
+    }
+  }, [status])
+
   function handleChange(e) {
     if (status === 'failed') {
       dispatch(resetErrors())
@@ -39,12 +48,6 @@ function LoginForm() {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(loginUser(formData))
-    if (status === 'successful') {
-      setFormData({
-        username: '',
-        password: '',
-      })
-    }
   }
 
   return (

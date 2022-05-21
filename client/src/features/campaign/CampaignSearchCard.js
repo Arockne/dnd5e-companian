@@ -44,6 +44,11 @@ function CampaignSearchCard({ campaign }) {
     setOpened(false)
   }
 
+  if (status === 'succeeded') {
+    dispatch(reset())
+    navigate('/')
+  }
+
   return (
     <>
       <Modal centered opened={opened} onClose={handleClose} title={name}>

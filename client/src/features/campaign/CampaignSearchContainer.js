@@ -36,7 +36,7 @@ function CampaignSearchContainer() {
     campaignIndex + itemsPerPage
   )
 
-  return status === 'succeeded' ? (
+  return (
     <Stack
       align="flex-start"
       justify="stretch"
@@ -76,7 +76,7 @@ function CampaignSearchContainer() {
         />
       </Container>
     </Stack>
-  ) : null
+  )
 }
 
 export default CampaignSearchContainer

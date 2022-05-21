@@ -9,7 +9,8 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createCampaign, resetStatus } from './campaignSlice'
+import FormErrorsContainer from '../errors/FormErrorsContainer'
+import { createCampaign, resetErrors, resetStatus } from './campaignSlice'
 
 function CampaignForm() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ function CampaignForm() {
     password: '',
   })
 
-  const { status } = useSelector((state) => state.campaign)
+  const { status, errors } = useSelector((state) => state.campaign)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,6 +40,9 @@ function CampaignForm() {
   }, [status])
 
   function handleChange(e) {
+    if (status === 'failed') {
+      dispatch(resetErrors())
+    }
     const { name, value } = e.target
     const updatedFormData = { ...formData, [name]: value }
     setFormData(updatedFormData)
@@ -86,6 +90,7 @@ function CampaignForm() {
           value={formData.password}
           autoComplete="off"
         />
+        <FormErrorsContainer errors={errors} />
         <Group position="right" mt="md">
           <Button type="submit">Create Adventure!</Button>
         </Group>

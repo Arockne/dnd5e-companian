@@ -18,17 +18,20 @@ function CampaignSearchContainer() {
     setActivePage(page)
   }
 
-  const campaignIndex = (activePage * 5 - 5) % campaigns?.length
+  const itemsPerPage = 5
+
+  const campaignIndex =
+    (activePage * itemsPerPage - itemsPerPage) % campaigns?.length
 
   const campaignSearchResults = campaigns?.filter(({ name }) =>
     name.toLowerCase().includes(searchByName)
   )
 
-  const pages = Math.ceil(campaignSearchResults?.length / 5)
+  const pages = Math.ceil(campaignSearchResults?.length / itemsPerPage)
 
   const campaignsPerPage = campaignSearchResults?.slice(
     campaignIndex,
-    campaignIndex + 5
+    campaignIndex + itemsPerPage
   )
 
   return status === 'succeeded' ? (

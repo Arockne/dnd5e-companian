@@ -2,6 +2,7 @@ import { Group } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Loader } from 'tabler-icons-react'
+import CampaignForm from '../campaign/CampaignForm'
 import CampaignSearchContainer from '../campaign/CampaignSearchContainer'
 import MainHeader from '../navigation/MainHeader'
 
@@ -16,6 +17,7 @@ function HomeContainer() {
     <Routes>
       <Route path="/" element={<MainHeader />}>
         <Route path="campaigns/search" element={<CampaignSearchContainer />} />
+        <Route path="campaigns/create" element={<CampaignForm />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

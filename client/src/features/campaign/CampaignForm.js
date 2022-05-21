@@ -97,7 +97,7 @@ function CampaignForm() {
           autoComplete="off"
         />
         <FormErrorsContainer errors={errors} />
-        <Group position="right" mt="md">
+        <Group position="center" mt="md">
           <Button type="submit">Create Adventure!</Button>
         </Group>
       </form>

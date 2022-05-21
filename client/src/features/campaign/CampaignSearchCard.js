@@ -8,7 +8,7 @@ import {
   Text,
   useMantineTheme,
 } from '@mantine/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { joinCampaign, reset } from '../campaign-user/campaignUserSlice'
@@ -48,10 +48,13 @@ function CampaignSearchCard({ campaign }) {
     setOpened(false)
   }
 
-  if (status === 'succeeded') {
-    dispatch(reset())
-    navigate('/')
-  }
+  useEffect(() => {
+    if (status === 'succeeded') {
+      setOpened(false)
+      dispatch(reset())
+      navigate('/')
+    }
+  }, [status])
 
   return (
     <>

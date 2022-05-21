@@ -91,20 +91,29 @@ function CampaignSearchCard({ campaign }) {
 
         <Group
           position="center"
-          style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
+          style={{
+            marginBottom: 5,
+            marginTop: theme.spacing.sm,
+          }}
         >
-          <Text weight={500} align="center">
+          <Text weight={500} align="center" style={{ position: 'absolute' }}>
             {name}
           </Text>
         </Group>
 
-        <Text
-          size="xs"
-          style={{ color: secondaryColor, lineHeight: 1.5 }}
-          align="center"
-        >
-          {setting}
-        </Text>
+        <Group position="center" style={{ height: 100 }}>
+          <Text
+            size="xs"
+            style={{
+              color: secondaryColor,
+              lineHeight: 1.5,
+              position: 'absolute',
+            }}
+            align="center"
+          >
+            {setting}
+          </Text>
+        </Group>
       </Card>
     </>
   )

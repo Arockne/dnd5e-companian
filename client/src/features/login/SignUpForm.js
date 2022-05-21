@@ -6,10 +6,10 @@ import {
   LoadingOverlay,
   Group,
 } from '@mantine/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser, resetErrors } from '../user/state/userSlice'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
 
 function SignUpForm() {
@@ -21,10 +21,22 @@ function SignUpForm() {
 
   const { status, errors } = useSelector((state) => state.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const enabled = Object.entries(formData).every(
     ([_, value]) => value.length > 0
   )
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+      })
+      navigate('/')
+    }
+  }, [status])
 
   function handleChange(e) {
     if (status === 'failed') {
@@ -36,13 +48,6 @@ function SignUpForm() {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(createUser(formData))
-    if (status === 'successful') {
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
-      })
-    }
   }
 
   return (

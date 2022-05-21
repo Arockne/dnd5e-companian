@@ -15,9 +15,7 @@ function HomeContainer() {
   return pageLoad ? (
     <Routes>
       <Route path="/" element={<MainHeader />}>
-        <Route path="campaigns">
-          <Route path="search" element={<CampaignSearchContainer />} />
-        </Route>
+        <Route path="campaigns/search" element={<CampaignSearchContainer />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Box,
   Button,
@@ -24,6 +24,10 @@ function LoginForm() {
   const enabled = Object.entries(formData).every(
     ([_, value]) => value.length > 0
   )
+
+  useEffect(() => {
+    dispatch(resetErrors())
+  }, [])
 
   function handleChange(e) {
     if (status === 'failed') {
@@ -71,9 +75,7 @@ function LoginForm() {
             Sign in
           </Button>
         </Group>
-        <Link to="/signup" onClick={() => dispatch(resetErrors())}>
-          Create new account
-        </Link>
+        <Link to="/signup">Create new account</Link>
       </form>
     </Box>
   )

@@ -28,6 +28,10 @@ function SignUpForm() {
   )
 
   useEffect(() => {
+    dispatch(resetErrors())
+  }, [])
+
+  useEffect(() => {
     if (status === 'succeeded') {
       setFormData({
         username: '',
@@ -85,9 +89,7 @@ function SignUpForm() {
             Create account
           </Button>
         </Group>
-        <Link to="/" onClick={() => dispatch(resetErrors())}>
-          Sign In
-        </Link>
+        <Link to="/">Sign In</Link>
       </form>
     </Box>
   )

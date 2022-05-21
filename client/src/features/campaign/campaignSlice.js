@@ -78,6 +78,10 @@ const campaignSlice = createSlice({
     resetStatus: (state) => {
       state.status = 'idle'
     },
+    resetErrors: (state) => {
+      state.status = 'idle'
+      state.errors = null
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -157,4 +161,4 @@ const campaignSlice = createSlice({
 })
 
 export default campaignSlice.reducer
-export const { resetStatus } = campaignSlice.actions
+export const { resetStatus, resetErrors } = campaignSlice.actions

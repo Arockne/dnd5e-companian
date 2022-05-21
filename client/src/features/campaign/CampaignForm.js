@@ -7,6 +7,8 @@ import {
   TextInput,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { createCampaign } from './campaignSlice'
 
 function CampaignForm() {
   const [formData, setFormData] = useState({
@@ -16,15 +18,22 @@ function CampaignForm() {
     password: '',
   })
 
+  const dispatch = useDispatch()
+
   function handleChange(e) {
     const { name, value } = e.target
     const updatedFormData = { ...formData, [name]: value }
     setFormData(updatedFormData)
   }
-  console.log(formData)
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(createCampaign(formData))
+  }
+
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
-      <form style={{ position: 'relative' }}>
+      <form style={{ position: 'relative' }} onSubmit={handleSubmit}>
         <TextInput
           required
           label="Name"

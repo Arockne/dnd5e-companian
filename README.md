@@ -16,6 +16,9 @@ npm install --prefix client
 - ruby-2.7.4
 
 ## Future Feature Implementations:
+- Live Campaign Log
+
+## Bugs that need to be stomped
 
 ## Deployment Instructions
 

@@ -10,8 +10,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def current_campaigns
-    owned_campaigns = current_user.owned_campaigns
-    campaigns = current_user.campaigns
+    owned_campaigns = current_user.owned_campaigns.select(:id, :name, :setting, :image_url)
+    campaigns = current_user.campaigns.select(:id, :name, :setting, :image_url)
     current = { owned_campaigns: owned_campaigns, campaigns: campaigns}
     render json: current, status: :ok
   end

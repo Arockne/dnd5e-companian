@@ -43,7 +43,7 @@ function CampaignsTable({ campaigns = [] }) {
 
   const rows = campaigns?.map((row) => (
     <tr key={row.id}>
-      <td>
+      <td style={{ cursor: 'pointer' }}>
         <Group spacing="sm">
           <Avatar size={26} src={row.image_url} radius={26} />
           <Text size="sm" weight={500}>

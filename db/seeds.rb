@@ -50,9 +50,9 @@ user_1.campaign_users.create!(campaign: campaign_2)
   )
 end
 
-def roll_stat(dice_amount:)
+def roll_stat()
   dice = []
-  dice_amount += 1
+  dice_amount = 4
   dice_amount.times do 
     dice << rand(1..6)
   end
@@ -66,12 +66,12 @@ end
     race: Faker::Games::DnD.race,
     profession: Faker::Games::DnD.klass,
     alignment: Faker::Games::DnD.alignment,
-    strength: roll_stat(dice_amount: 4),
-    dexterity: roll_stat(dice_amount: 4),
-    constitution: roll_stat(dice_amount: 4),
-    intelligence: roll_stat(dice_amount: 4),
-    wisdom: roll_stat(dice_amount: 4),
-    charisma: roll_stat(dice_amount: 4),
+    strength: roll_stat,
+    dexterity: roll_stat,
+    constitution: roll_stat,
+    intelligence: roll_stat,
+    wisdom: roll_stat,
+    charisma: roll_stat,
     user: user_1,
     campaign: campaign_2
   )

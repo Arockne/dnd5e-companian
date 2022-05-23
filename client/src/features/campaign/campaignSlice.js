@@ -66,7 +66,7 @@ export const deleteCampaign = createAsyncThunk(
 
 const initialState = {
   campaign: null,
-  campaigns: null,
+  campaigns: {},
   status: 'idle',
   errors: null,
 }

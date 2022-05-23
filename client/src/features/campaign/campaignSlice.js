@@ -94,6 +94,18 @@ const campaignSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getCurrentCampaigns.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(getCurrentCampaigns.fulfilled, (state) => {
+        state.status = 'succeeded'
+        state.campaigns = state.payload
+      })
+      .addCase(getCurrentCampaigns.rejected, (state) => {
+        state.status = 'loading'
+        state.errors = state.payload.errors
+      })
       .addCase(getCampaigns.pending, (state) => {
         state.status = 'loading'
         state.errors = null

@@ -84,7 +84,7 @@ RSpec.describe "Api::CharacterProfiles", type: :request do
       background: 'Noble',
       race: 'Elf',
       profession: 'Wizard',
-      alignment: 'Neutral good',
+      alignment: 'Neutral Good',
       experience: 0,
       image_url: '',
       strength: (rand(1..6) * 3),

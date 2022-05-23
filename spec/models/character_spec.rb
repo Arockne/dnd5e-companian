@@ -28,7 +28,7 @@ RSpec.describe Character, type: :model do
     
     it do 
       is_expected.to validate_inclusion_of(:alignment).
-      in_array([ 'Lawful good', 'Neutral good', 'Chaotic good', 'Lawful neutral', 'Neutral', 'Chaotice neutral', 'Lawful evil', 'Neutral evil', 'Chaotic evil' ])
+      in_array([ 'Lawful Good', 'Neutral Good', 'Chaotic Good', 'Lawful Neutral', 'Neutral', 'Chaotic Neutral', 'Lawful Evil', 'Neutral Evil', 'Chaotic Evil' ])
     end
 
     it { is_expected.to validate_numericality_of(:experience).is_greater_than_or_equal_to(0) }

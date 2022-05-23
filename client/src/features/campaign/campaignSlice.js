@@ -25,6 +25,18 @@ export const getCampaign = createAsyncThunk(
   }
 )
 
+export const getCurrentCampaigns = createAsyncThunk(
+  'campaign/getCurrentCampaigns',
+  async (_, { rejectWithValue }) => {
+    const response = await client.get('/api/campaigns/current')
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
 export const createCampaign = createAsyncThunk(
   'campaign/createCampaign',
   async (campaign, { rejectWithValue }) => {

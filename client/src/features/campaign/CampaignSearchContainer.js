@@ -11,9 +11,7 @@ function CampaignSearchContainer() {
   const { campaigns, status, errors } = useSelector((state) => state.campaign)
 
   useEffect(() => {
-    if (!campaigns) {
-      dispatch(getCampaigns())
-    }
+    dispatch(getCampaigns())
   }, [])
 
   function handlePaginationChange(page) {

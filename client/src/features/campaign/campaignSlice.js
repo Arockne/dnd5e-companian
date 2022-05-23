@@ -86,13 +86,13 @@ const campaignSlice = createSlice({
         state.status = 'loading'
         state.errors = null
       })
-      .addCase(getCurrentCampaigns.fulfilled, (state) => {
+      .addCase(getCurrentCampaigns.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.campaigns = state.payload
+        state.campaigns = action.payload
       })
-      .addCase(getCurrentCampaigns.rejected, (state) => {
+      .addCase(getCurrentCampaigns.rejected, (state, action) => {
         state.status = 'loading'
-        state.errors = state.payload.errors
+        state.errors = action.payload.errors
       })
       .addCase(getCampaign.pending, (state) => {
         state.status = 'loading'

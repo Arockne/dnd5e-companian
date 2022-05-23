@@ -59,7 +59,7 @@ function CampaignsTable({ campaigns = [] }) {
       sx={{ height: 300 }}
       onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
     >
-      <Table sx={{ minWidth: 700 }}>
+      <Table sx={{ width: '60vw' }} highlightOnHover>
         <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <tr>
             <th>Name</th>

@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { Loader } from 'tabler-icons-react'
 import CampaignForm from '../campaign/CampaignForm'
 import CampaignsContainer from '../campaign/CampaignsContainer'
-import CampaignSearchContainer from '../campaign/CampaignSearchContainer'
+import CampaignSearchContainer from '../campaign-search/CampaignSearchContainer'
 import MainHeader from '../navigation/MainHeader'
 
 function HomeContainer() {

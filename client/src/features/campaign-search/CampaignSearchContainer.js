@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCampaigns } from './campaignSlice'
+import { getCampaigns } from './campaignSearchSlice'
 import { Stack, TextInput, Container, Pagination, Grid } from '@mantine/core'
 import CampaignSearchCard from './CampaignSearchCard'
 
@@ -8,7 +8,7 @@ function CampaignSearchContainer() {
   const [searchByName, setSearchByName] = useState('')
   const [activePage, setActivePage] = useState(1)
   const dispatch = useDispatch()
-  const { campaigns, status, errors } = useSelector((state) => state.campaign)
+  const { campaigns } = useSelector((state) => state.campaignSearch)
 
   useEffect(() => {
     dispatch(getCampaigns())

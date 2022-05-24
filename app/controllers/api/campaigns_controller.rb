@@ -4,7 +4,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   before_action :authorize_show_action, only: [:show]
 
   def index
-    #need to change this to show only the campaigns that the current user is not part of or has a membership in
+    #need to also query only the campaigns that the user is not member of as well
     campaigns = Campaign.where.not(owner: current_user)
     render json: campaigns, status: :ok
   end

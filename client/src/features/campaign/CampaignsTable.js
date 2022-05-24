@@ -7,6 +7,7 @@ import {
   Text,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -41,8 +42,10 @@ function CampaignsTable({ campaigns = [] }) {
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
 
+  const navigate = useNavigate()
+
   const rows = campaigns?.map((row) => (
-    <tr key={row.id}>
+    <tr key={row.id} onClick={() => navigate(`/campaigns/${row.id}`)}>
       <td style={{ cursor: 'pointer' }}>
         <Group spacing="sm">
           <Avatar size={26} src={row.image_url} radius={26} />

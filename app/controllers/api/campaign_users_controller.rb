@@ -30,11 +30,16 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
     @campaign_user ||= CampaignUser.find(params[:id])
   end
 
+  def campaign_owner?
+    current_user == campaign.owner
+  end
+
   def authenticate_join_request
     campaign&.authenticate(campaign_user_params[:password])
   end
 
   def authorize_join_request
+    render json: { errors: ['Cannot join campaign as owner'] }, status: :unauthorized if campaign_owner?
     render json: { errors: ['Invalid password'] }, status: :unauthorized unless authenticate_join_request
   end
 

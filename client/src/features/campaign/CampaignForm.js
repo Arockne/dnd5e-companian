@@ -11,7 +11,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
-import { createCampaign, resetErrors, resetStatus } from './campaignSlice'
+import {
+  createCampaign,
+  reset,
+  resetErrors,
+  resetStatus,
+} from './campaignSlice'
 
 function CampaignForm() {
   const [formData, setFormData] = useState({
@@ -27,7 +32,7 @@ function CampaignForm() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(resetErrors())
+    dispatch(reset())
   }, [])
 
   useEffect(() => {
@@ -39,6 +44,7 @@ function CampaignForm() {
         password: '',
       })
       //temporary navigate to '/', needs to navigate to '/campaigns/:id'
+      // eslint-disable-next-line no-debugger
       navigate(`/campaigns/${campaign.id}`)
     }
   }, [status])

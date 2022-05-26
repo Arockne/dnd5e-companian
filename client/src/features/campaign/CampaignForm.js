@@ -21,7 +21,7 @@ function CampaignForm() {
     password: '',
   })
 
-  const { status, errors } = useSelector((state) => state.campaign)
+  const { status, errors, campaign } = useSelector((state) => state.campaign)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -39,7 +39,7 @@ function CampaignForm() {
         password: '',
       })
       //temporary navigate to '/', needs to navigate to '/campaigns/:id'
-      navigate('/')
+      navigate(`/campaigns/${campaign.id}`)
     }
   }, [status])
 

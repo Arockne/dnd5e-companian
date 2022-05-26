@@ -12,7 +12,9 @@ export function CampaignHeader() {
   const { campaign } = useSelector((state) => state.campaign)
 
   useEffect(() => {
-    dispatch(getCampaign(id))
+    if (campaign?.id !== id) {
+      dispatch(getCampaign(id))
+    }
   }, [id])
 
   return (

@@ -43,8 +43,6 @@ function CampaignForm() {
         setting: '',
         password: '',
       })
-      //temporary navigate to '/', needs to navigate to '/campaigns/:id'
-      // eslint-disable-next-line no-debugger
       navigate(`/campaigns/${campaign.id}`)
     }
   }, [status])

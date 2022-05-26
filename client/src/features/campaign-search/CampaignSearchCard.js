@@ -53,7 +53,6 @@ function CampaignSearchCard({ campaign }) {
     if (status === 'succeeded') {
       setOpened(false)
       dispatch(reset())
-      //temporary navigate to '/', needs to navigate to '/campaigns/:id'
       navigate(`/campaigns/${id}`)
     }
   }, [status])

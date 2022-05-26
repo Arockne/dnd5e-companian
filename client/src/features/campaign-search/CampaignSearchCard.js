@@ -27,7 +27,7 @@ function CampaignSearchCard({ campaign }) {
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
 
-  const { setting, name, image_url } = campaign
+  const { setting, name, image_url, id } = campaign
   const enabled = password.length > 0
 
   function handleSubmit(e) {
@@ -54,7 +54,7 @@ function CampaignSearchCard({ campaign }) {
       setOpened(false)
       dispatch(reset())
       //temporary navigate to '/', needs to navigate to '/campaigns/:id'
-      navigate('/')
+      navigate(`/campaigns/${id}`)
     }
   }, [status])
 

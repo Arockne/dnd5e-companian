@@ -75,6 +75,7 @@ const campaignSlice = createSlice({
   name: 'campaign',
   initialState,
   reducers: {
+    reset: () => initialState,
     resetErrors: (state) => {
       state.status = 'idle'
       state.errors = null
@@ -87,7 +88,7 @@ const campaignSlice = createSlice({
         state.errors = null
       })
       .addCase(getCurrentCampaigns.fulfilled, (state, action) => {
-        state.status = 'succeeded'
+        state.status = 'idle'
         state.campaigns = action.payload
       })
       .addCase(getCurrentCampaigns.rejected, (state, action) => {
@@ -100,7 +101,7 @@ const campaignSlice = createSlice({
         state.errors = null
       })
       .addCase(getCampaign.fulfilled, (state, action) => {
-        state.status = 'succeeded'
+        state.status = 'idle'
         state.campaign = action.payload
         state.errors = null
       })
@@ -125,7 +126,7 @@ const campaignSlice = createSlice({
         state.errors = null
       })
       .addCase(updateCampaign.fulfilled, (state, action) => {
-        state.status = 'succeeded'
+        state.status = 'idle'
         state.campaign = action.payload
       })
       .addCase(updateCampaign.rejected, (state, action) => {
@@ -157,4 +158,4 @@ const campaignSlice = createSlice({
 })
 
 export default campaignSlice.reducer
-export const { resetErrors } = campaignSlice.actions
+export const { resetErrors, reset } = campaignSlice.actions

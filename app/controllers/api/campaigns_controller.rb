@@ -5,7 +5,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def index
     campaigns = Campaign.where.not(owner: current_user)
-    render json: campaigns, status: :ok
+    render json: campaigns, status: :ok, each_serializer: CampaignIndexSerializer
   end
 
   def current_campaigns

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Anchor, Grid, Group, Stack, Tabs, Title } from '@mantine/core'
+import { Anchor, Grid, Group, Loader, Stack, Tabs, Title } from '@mantine/core'
 import { MessageCircle, Photo, Settings } from 'tabler-icons-react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +17,7 @@ export function CampaignHeader() {
     }
   }, [id])
 
-  return (
+  return campaign ? (
     <Grid grow>
       <Grid.Col span={1}>
         <Stack>
@@ -33,6 +33,10 @@ export function CampaignHeader() {
         <Outlet />
       </Grid.Col>
     </Grid>
+  ) : (
+    <Group position="center">
+      <Loader size="xl" />
+    </Group>
   )
 }
 

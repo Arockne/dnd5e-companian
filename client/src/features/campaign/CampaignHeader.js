@@ -29,7 +29,9 @@ export function CampaignHeader() {
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>
-        <Title order={2}>{campaign?.name}</Title>
+        <Group position="center">
+          <Title order={2}>{campaign?.name}</Title>
+        </Group>
         <Outlet />
       </Grid.Col>
     </Grid>

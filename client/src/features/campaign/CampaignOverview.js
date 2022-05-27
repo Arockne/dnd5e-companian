@@ -1,0 +1,29 @@
+import { AspectRatio, Container, Group, Image, Text } from '@mantine/core'
+import React from 'react'
+import { useSelector } from 'react-redux'
+
+function CampaignOverview() {
+  const {
+    campaign: { image_url, setting },
+  } = useSelector((state) => state.campaign)
+
+  return (
+    <Group grow>
+      <Container>
+        <Image
+          withPlaceholder={true}
+          src={
+            'https://bookstr.com/wp-content/uploads/2020/12/dark-fantasy.jpg'
+          }
+          alt="campaign image"
+          width={400}
+        />
+      </Container>
+      <Container>
+        <Text>{setting}</Text>
+      </Container>
+    </Group>
+  )
+}
+
+export default CampaignOverview

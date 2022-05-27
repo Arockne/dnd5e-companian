@@ -44,7 +44,7 @@ user_1.campaign_users.create!(campaign: campaign_2)
 (1..50).each do
   Campaign.create(
     name: Faker::Game.title, 
-    setting: Faker::Lorem.sentence, 
+    setting: Faker::Lorem.paragraphs.join(' '), 
     owner: users[rand(0..2)], 
     password: 'test123',
   )

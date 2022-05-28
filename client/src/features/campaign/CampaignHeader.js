@@ -25,7 +25,7 @@ export function CampaignHeader() {
           <NavLink to={`/campaigns/${id}`}>Players</NavLink>
           <NavLink to={`/campaigns/${id}`}>Messages</NavLink>
           <NavLink to={`/campaigns/${id}`}>Logs</NavLink>
-          <NavLink to={`/campaigns/${id}`}>Settings</NavLink>
+          <NavLink to={`/campaigns/${id}/settings`}>Settings</NavLink>
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>

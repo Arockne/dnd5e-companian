@@ -42,9 +42,9 @@ function CampaignSettings() {
           <Text size="sm">
             Please type <strong>{textUserNeedsToMatch}</strong> to confirm
           </Text>
-          <Input value={inputData} onChange={handleInputChange} />
+          <Input required value={inputData} onChange={handleInputChange} />
           <Group position="center" grow>
-            <Button required type="submit" disabled={!inputMatchesRequirement}>
+            <Button type="submit" disabled={!inputMatchesRequirement}>
               I understand the consequences of my actions
             </Button>
           </Group>

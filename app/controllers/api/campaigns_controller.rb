@@ -35,7 +35,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     campaign = current_user.owned_campaigns.find_by_id(params[:id])
     return render json: { errors: ['Not Authorized'] }, status: :unauthorized if campaign.nil?
     campaign.destroy
-    head :no_content
+    head :ok
   end
 
   private

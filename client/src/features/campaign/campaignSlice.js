@@ -66,7 +66,7 @@ export const deleteCampaign = createAsyncThunk(
 
 const initialState = {
   campaign: null,
-  campaigns: {},
+  campaigns: [],
   status: 'idle',
   errors: null,
 }
@@ -131,14 +131,13 @@ const campaignSlice = createSlice({
       })
       .addCase(updateCampaign.rejected, (state, action) => {
         state.status = 'failed'
-        state.errors = action.payload.errors
       })
       .addCase(deleteCampaign.pending, (state) => {
         state.status = 'loading'
         state.errors = null
       })
       .addCase(deleteCampaign.fulfilled, (state) => {
-        state.status = 'idle'
+        state.status = 'succeeded'
         state.errors = null
         if (state.campaigns) {
           const campaignIndex = state.campaigns.findIndex(
@@ -152,7 +151,7 @@ const campaignSlice = createSlice({
       })
       .addCase(deleteCampaign.rejected, (state, action) => {
         state.status = 'failed'
-        state.errors = action.payload.errors
+        state.errors = ['Something went wrong, try again later']
       })
   },
 })

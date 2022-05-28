@@ -3,23 +3,21 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 function CampaignOverview() {
-  const {
-    campaign: { image_url, setting },
-  } = useSelector((state) => state.campaign)
+  const { campaign } = useSelector((state) => state.campaign)
 
   return (
     <Group direction="row">
       <Container>
         <Image
           withPlaceholder={true}
-          src={image_url}
+          src={campaign?.image_url}
           alt="campaign image"
           width={400}
           height={225}
         />
       </Container>
       <Container>
-        <Text>{setting}</Text>
+        <Text>{campaign?.setting}</Text>
       </Container>
     </Group>
   )

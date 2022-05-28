@@ -56,11 +56,10 @@ export const deleteCampaign = createAsyncThunk(
   'campaign/deleteCampaign',
   async (id, { rejectWithValue }) => {
     const response = await client.delete(`/api/campaigns/${id}`)
-    const body = await response.json()
-    if (response.ok) {
-      return body
+    if (!response.ok) {
+      const body = await response.json()
+      return rejectWithValue(body)
     }
-    return rejectWithValue(body)
   }
 )
 
@@ -139,14 +138,6 @@ const campaignSlice = createSlice({
       .addCase(deleteCampaign.fulfilled, (state) => {
         state.status = 'succeeded'
         state.errors = null
-        if (state.campaigns) {
-          const campaignIndex = state.campaigns.findIndex(
-            (campaign) => campaign.id === state.campaign
-          )
-          if (campaignIndex > -1) {
-            state.campaigns.splice(campaignIndex, 1)
-          }
-        }
         state.campaign = null
       })
       .addCase(deleteCampaign.rejected, (state, action) => {

@@ -7,8 +7,9 @@ import {
   Text,
   Title,
 } from '@mantine/core'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { deleteCampaign } from './campaignSlice'
 
 function CampaignSettings() {
@@ -16,6 +17,7 @@ function CampaignSettings() {
   const [inputData, setInputData] = useState('')
   const { campaign, status } = useSelector((state) => state.campaign)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const textUserNeedsToMatch = `destroy ${campaign.name}`
   const inputMatchesRequirement = textUserNeedsToMatch === inputData
@@ -24,9 +26,16 @@ function CampaignSettings() {
     setInputData(e.target.value)
   }
 
+  useEffect(() => {
+    if (!campaign) {
+      navigate('/')
+    }
+  }, [campaign])
+
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(deleteCampaign(campaign.id))
+    navigate('/')
   }
 
   return (

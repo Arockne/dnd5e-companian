@@ -60,7 +60,11 @@ function CampaignSettings() {
           </Text>
           <Input required value={inputData} onChange={handleInputChange} />
           <Group position="center" grow>
-            <Button type="submit" disabled={!inputMatchesRequirement}>
+            <Button
+              type="submit"
+              disabled={!inputMatchesRequirement}
+              loading={status === 'loading'}
+            >
               I understand the consequences of my actions
             </Button>
           </Group>

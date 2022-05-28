@@ -17,7 +17,7 @@ export function CampaignHeader() {
     }
   }, [id])
 
-  return campaign ? (
+  return (
     <Grid grow>
       <Grid.Col span={1}>
         <Stack>
@@ -35,10 +35,6 @@ export function CampaignHeader() {
         <Outlet />
       </Grid.Col>
     </Grid>
-  ) : (
-    <Group position="center">
-      <Loader size="xl" />
-    </Group>
   )
 }
 

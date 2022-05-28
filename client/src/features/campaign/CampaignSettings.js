@@ -8,15 +8,26 @@ import {
   Title,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 function CampaignSettings() {
   const [opened, setOpened] = useState(false)
+  const [inputData, setInputData] = useState('')
+  const { campaign } = useSelector((state) => state.campaign)
+
+  const textUserNeedsToMatch = `destroy ${campaign.name}`
+  const inputMatchesRequirement = textUserNeedsToMatch === inputData
+
+  function handleInputChange(e) {
+    setInputData(e.target.value)
+  }
+
   return (
     <Group direction="column">
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Delete this campaign"
+        title={`Delete ${campaign.name}?`}
         centered
       >
         <form>
@@ -29,11 +40,11 @@ function CampaignSettings() {
           </Text>
           <br />
           <Text size="sm">
-            Please type <strong>destroy this campaign</strong> to confirm
+            Please type <strong>{textUserNeedsToMatch}</strong> to confirm
           </Text>
-          <Input />
+          <Input value={inputData} onChange={handleInputChange} />
           <Group position="center" grow>
-            <Button type="submit">
+            <Button type="submit" disabled={!inputMatchesRequirement}>
               I understand the consequences of my actions
             </Button>
           </Group>

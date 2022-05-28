@@ -8,18 +8,25 @@ import {
   Title,
 } from '@mantine/core'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteCampaign } from './campaignSlice'
 
 function CampaignSettings() {
   const [opened, setOpened] = useState(false)
   const [inputData, setInputData] = useState('')
-  const { campaign } = useSelector((state) => state.campaign)
+  const { campaign, status } = useSelector((state) => state.campaign)
+  const dispatch = useDispatch()
 
   const textUserNeedsToMatch = `destroy ${campaign.name}`
   const inputMatchesRequirement = textUserNeedsToMatch === inputData
 
   function handleInputChange(e) {
     setInputData(e.target.value)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(deleteCampaign(campaign.id))
   }
 
   return (
@@ -30,7 +37,7 @@ function CampaignSettings() {
         title={`Delete ${campaign.name}?`}
         centered
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <Text size="sm">
             Are you absolutely certain you want this campaign deleted?
           </Text>

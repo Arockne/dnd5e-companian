@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import CampaignDeleteContainer from './CampaignDeleteContainer'
-import CampaignUpdateForm from './CampaignUpdateForm'
+import CampaignUpdateContainer from './CampaignUpdateContainer'
 
 function CampaignSettingsContainer() {
   const { campaign, status } = useSelector((state) => state.campaign)
@@ -17,7 +17,7 @@ function CampaignSettingsContainer() {
 
   return (
     <Group direction="column">
-      <CampaignUpdateForm campaign={campaign} />
+      <CampaignUpdateContainer campaign={campaign} />
       <CampaignDeleteContainer campaign={campaign} status={status} />
     </Group>
   )

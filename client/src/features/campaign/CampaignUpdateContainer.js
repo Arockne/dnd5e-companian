@@ -1,10 +1,10 @@
 import React from 'react'
 import CampaignUpdateForm from './CampaignUpdateForm'
 
-function CampaignUpdateContainer({ campaign }) {
+function CampaignUpdateContainer({ campaign, status }) {
   return (
     <>
-      <CampaignUpdateForm campaign={campaign} />
+      <CampaignUpdateForm campaign={campaign} status={status} />
     </>
   )
 }

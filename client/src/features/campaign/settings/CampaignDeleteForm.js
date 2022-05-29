@@ -1,8 +1,8 @@
 import { Button, Group, Input, Text } from '@mantine/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteCampaign } from '../campaignSlice'
+import { deleteCampaign, reset } from '../campaignSlice'
 
 function CampaignDeleteForm({ campaign, status }) {
   const [inputData, setInputData] = useState('')
@@ -12,6 +12,13 @@ function CampaignDeleteForm({ campaign, status }) {
   const textUserNeedsToMatch = `destroy ${campaign?.name}`
   const inputMatchesRequirement = textUserNeedsToMatch === inputData
 
+  useEffect(() => {
+    if (status === 'succeeded') {
+      dispatch(reset())
+      navigate('/')
+    }
+  }, [status])
+
   function handleInputChange(e) {
     setInputData(e.target.value)
   }
@@ -19,7 +26,6 @@ function CampaignDeleteForm({ campaign, status }) {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(deleteCampaign(campaign.id))
-    navigate('/')
   }
 
   return (

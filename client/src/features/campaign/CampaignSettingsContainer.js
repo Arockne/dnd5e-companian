@@ -17,7 +17,7 @@ function CampaignSettingsContainer() {
 
   return (
     <Group direction="column">
-      <CampaignUpdateContainer campaign={campaign} />
+      <CampaignUpdateContainer campaign={campaign} status={status} />
       <CampaignDeleteContainer campaign={campaign} status={status} />
     </Group>
   )

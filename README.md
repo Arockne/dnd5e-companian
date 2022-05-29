@@ -21,15 +21,17 @@ npm install --prefix client
 - Live Campaign Log
 - Add navigation to dropdown in phone view
 - Isolate campaigns in search to campaigns that are not affiliated with current user
+- Implement server search pagination for campaigns
 
 ## Bugs that need to be stomped
 
-- Main Header
-  - Create Campaign link when clicked on sometimes does not render
-    - Examples:
-      - If Redirected to another url the styling for the current button does not match up to the resource
-        - For example, when creating a new campaign and its successful will redirect to home but the nav button does not update where they are
-      - When clicking the link itself sometimes does not render the CampaignForm and the page redirects itself to home('/')
+- Campaign Settings
+  - When a campaign is deleted the app should redirect to home.
+  - If a user was to refresh the page it will redirect back to home
+    - This is not the intended functionality
+    - The reason for this is there is not a campaign stored in redux state on load
+    - Need to change how redirects are working within application
+      - May need to change all redirects to better reflect this change
 
 ## Deployment Instructions
 

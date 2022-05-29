@@ -1,12 +1,15 @@
 import { Box, Button, Group, Textarea, TextInput } from '@mantine/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateCampaign } from './campaignSlice'
 
-function CampaignUpdateForm({ campaign }) {
+function CampaignUpdateForm({ campaign, status }) {
   const [formData, setFormData] = useState(campaign || {})
+  const dispatch = useDispatch()
 
-  function changeInDataField() {
-    for (const key in formData) {
-      if (formData[key] !== campaign[key]) {
+  function changeInDataField(initial, change) {
+    for (const key in change) {
+      if (change[key] !== initial[key]) {
         return true
       }
     }
@@ -18,9 +21,14 @@ function CampaignUpdateForm({ campaign }) {
     setFormData({ ...formData, [name]: value })
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(updateCampaign(formData))
+  }
+
   return (
     <Box>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           required
           label="Name"
@@ -47,7 +55,10 @@ function CampaignUpdateForm({ campaign }) {
           onChange={handleChange}
         />
         <Group position="left" mt="md">
-          <Button type="submit" disabled={!changeInDataField()}>
+          <Button
+            type="submit"
+            disabled={!changeInDataField(formData, campaign)}
+          >
             Update campaign
           </Button>
         </Group>

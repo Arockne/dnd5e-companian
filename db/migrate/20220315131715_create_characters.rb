@@ -1,11 +1,11 @@
 class CreateCharacters < ActiveRecord::Migration[6.1]
   def change
     create_table :characters do |t|
-      t.string :name
-      t.string :background
-      t.string :race
-      t.string :profession
-      t.string :alignment
+      t.string :name, default: ""
+      t.string :background, default: ""
+      t.string :race, default: ""
+      t.string :profession, default: ""
+      t.string :alignment, default: ""
       t.integer :experience, default: 0
       t.integer :strength
       t.integer :dexterity

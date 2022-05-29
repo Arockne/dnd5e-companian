@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
   enable_extension "plpgsql"
 
   create_table "campaign_logs", force: :cascade do |t|
-    t.string "message"
-    t.string "color"
+    t.string "message", default: ""
+    t.string "color", default: ""
     t.bigint "campaign_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
-    t.string "image_url"
+    t.string "image_url", default: ""
     t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
@@ -61,11 +61,11 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
   end
 
   create_table "characters", force: :cascade do |t|
-    t.string "name"
-    t.string "background"
-    t.string "race"
-    t.string "profession"
-    t.string "alignment"
+    t.string "name", default: ""
+    t.string "background", default: ""
+    t.string "race", default: ""
+    t.string "profession", default: ""
+    t.string "alignment", default: ""
     t.integer "experience", default: 0
     t.integer "strength"
     t.integer "dexterity"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
     t.bigint "campaign_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image_url"
+    t.string "image_url", default: ""
     t.boolean "visible", default: false
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image_url"
+    t.string "image_url", default: ""
   end
 
   add_foreign_key "campaign_logs", "campaigns"

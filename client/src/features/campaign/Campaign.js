@@ -16,8 +16,6 @@ function Campaign() {
   const campaignOwnerId = campaign?.owner?.id
   const userId = user?.id
 
-  console.log({ campaignOwnerId, userId })
-
   useEffect(() => {
     if (campaign?.id !== id) {
       dispatch(getCampaign(id))

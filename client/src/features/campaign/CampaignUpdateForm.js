@@ -1,20 +1,22 @@
 import { Box, Button, Group, Textarea, TextInput } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateCampaign } from './campaignSlice'
+import { useNavigate } from 'react-router-dom'
+import { resetErrors, updateCampaign } from './campaignSlice'
 
 function CampaignUpdateForm({ campaign, status }) {
-  const [formData, setFormData] = useState(campaign || {})
+  const [formData, setFormData] = useState(
+    campaign || { name: '', image_url: '', setting: '' }
+  )
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  function changeInDataField(initial, change) {
-    for (const key in change) {
-      if (change[key] !== initial[key]) {
-        return true
-      }
+  useEffect(() => {
+    if (status === 'succeeded') {
+      dispatch(resetErrors())
+      navigate(`/campaigns/${campaign.id}`)
     }
-    return false
-  }
+  }, [status])
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -23,7 +25,7 @@ function CampaignUpdateForm({ campaign, status }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(updateCampaign(formData))
+    dispatch(updateCampaign({ ...formData, id: campaign.id }))
   }
 
   return (
@@ -35,14 +37,14 @@ function CampaignUpdateForm({ campaign, status }) {
           placeholder="Name"
           name="name"
           autoComplete="off"
-          value={formData.name}
+          value={formData?.name}
           onChange={handleChange}
         />
         <TextInput
           label="Image"
           name="image_url"
           autoComplete="off"
-          value={formData.image_url}
+          value={formData?.image_url}
           onChange={handleChange}
         />
         <Textarea
@@ -51,16 +53,11 @@ function CampaignUpdateForm({ campaign, status }) {
           placeholder="In a place unbeknownst to man..."
           name="setting"
           autoComplete="off"
-          value={formData.setting}
+          value={formData?.setting}
           onChange={handleChange}
         />
         <Group position="left" mt="md">
-          <Button
-            type="submit"
-            disabled={!changeInDataField(formData, campaign)}
-          >
-            Update campaign
-          </Button>
+          <Button type="submit">Update campaign</Button>
         </Group>
       </form>
     </Box>

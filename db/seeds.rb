@@ -25,6 +25,8 @@ user_3 = User.create(
 
 users = [user_1, user_2, user_3]
 
+puts 'Creating campaigns'
+
 campaign_1 = Campaign.create!(
   name: 'Knights of the Round Table', 
   setting: 'Somewhere in Camelot', 
@@ -58,6 +60,8 @@ def roll_stat()
   end
   dice.sort.drop(1).sum
 end
+
+puts 'Creating characters'
 
 (1..50).each do
   Character.create(

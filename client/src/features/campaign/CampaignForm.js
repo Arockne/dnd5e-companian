@@ -11,12 +11,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import FormErrorsContainer from '../errors/FormErrorsContainer'
-import {
-  createCampaign,
-  reset,
-  resetErrors,
-  resetStatus,
-} from './campaignSlice'
+import { createCampaign, reset, resetErrors } from './campaignSlice'
 
 function CampaignForm() {
   const [formData, setFormData] = useState({
@@ -37,12 +32,7 @@ function CampaignForm() {
 
   useEffect(() => {
     if (status === 'succeeded') {
-      setFormData({
-        name: '',
-        image_url: '',
-        setting: '',
-        password: '',
-      })
+      dispatch(resetErrors())
       navigate(`/campaigns/${campaign.id}`)
     }
   }, [status])

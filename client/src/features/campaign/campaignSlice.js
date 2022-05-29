@@ -125,7 +125,7 @@ const campaignSlice = createSlice({
         state.errors = null
       })
       .addCase(updateCampaign.fulfilled, (state, action) => {
-        state.status = 'idle'
+        state.status = 'succeeded'
         state.campaign = action.payload
       })
       .addCase(updateCampaign.rejected, (state, action) => {
@@ -136,7 +136,7 @@ const campaignSlice = createSlice({
         state.errors = null
       })
       .addCase(deleteCampaign.fulfilled, (state) => {
-        state.status = 'idle'
+        state.status = 'succeeded'
         state.errors = null
         state.campaign = null
       })

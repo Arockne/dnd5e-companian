@@ -8,7 +8,7 @@ import CampaignSearchContainer from '../campaign-search/CampaignSearchContainer'
 import MainHeader from '../navigation/MainHeader'
 import CampaignHeader from '../campaign/CampaignHeader'
 import CampaignOverview from '../campaign/CampaignOverview'
-import CampaignSettingsContainer from '../campaign/CampaignSettingsContainer'
+import CampaignSettingsContainer from '../campaign/settings/CampaignSettingsContainer'
 
 function HomeContainer() {
   const [pageLoad, setPageLoad] = useState(false)

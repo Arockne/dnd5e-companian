@@ -2,7 +2,7 @@ import { Button, Group, Input, Text } from '@mantine/core'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteCampaign } from './campaignSlice'
+import { deleteCampaign } from '../campaignSlice'
 
 function CampaignDeleteForm({ campaign, status }) {
   const [inputData, setInputData] = useState('')

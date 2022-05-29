@@ -5,27 +5,16 @@ import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampaign } from './campaignSlice'
 
-export function CampaignHeader() {
-  const { id } = useParams()
-  const dispatch = useDispatch()
-
-  const { campaign } = useSelector((state) => state.campaign)
-
-  useEffect(() => {
-    if (campaign?.id !== id) {
-      dispatch(getCampaign(id))
-    }
-  }, [id])
-
+export function CampaignHeader({ campaign }) {
   return (
     <Grid grow>
       <Grid.Col span={1}>
         <Stack>
-          <NavLink to={`/campaigns/${id}`}>Overview</NavLink>
-          <NavLink to={`/campaigns/${id}`}>Players</NavLink>
-          <NavLink to={`/campaigns/${id}`}>Messages</NavLink>
-          <NavLink to={`/campaigns/${id}`}>Logs</NavLink>
-          <NavLink to={`/campaigns/${id}/settings`}>Settings</NavLink>
+          <NavLink to={`/campaigns/${campaign?.id}`}>Overview</NavLink>
+          <NavLink to={`/campaigns/${campaign?.id}`}>Players</NavLink>
+          <NavLink to={`/campaigns/${campaign?.id}`}>Messages</NavLink>
+          <NavLink to={`/campaigns/${campaign?.id}`}>Logs</NavLink>
+          <NavLink to={`/campaigns/${campaign?.id}/settings`}>Settings</NavLink>
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>

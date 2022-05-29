@@ -19,7 +19,7 @@ function CampaignSettings() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const textUserNeedsToMatch = `destroy ${campaign.name}`
+  const textUserNeedsToMatch = `destroy ${campaign?.name}`
   const inputMatchesRequirement = textUserNeedsToMatch === inputData
 
   function handleInputChange(e) {
@@ -43,7 +43,7 @@ function CampaignSettings() {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title={`Delete ${campaign.name}?`}
+        title={`Delete ${campaign?.name}?`}
         centered
       >
         <form onSubmit={handleSubmit}>
@@ -52,7 +52,7 @@ function CampaignSettings() {
           </Text>
           <Text size="sm">
             This will permanently delete this campaign and all of its associated
-            player characters.
+            player&#39;s characters.
           </Text>
           <br />
           <Text size="sm">

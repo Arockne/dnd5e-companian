@@ -5,7 +5,7 @@ import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampaign } from './campaignSlice'
 
-export function CampaignHeader({ campaign }) {
+export function CampaignHeader({ campaign, owner }) {
   return (
     <Grid grow>
       <Grid.Col span={1}>
@@ -13,8 +13,14 @@ export function CampaignHeader({ campaign }) {
           <NavLink to={`/campaigns/${campaign?.id}`}>Overview</NavLink>
           <NavLink to={`/campaigns/${campaign?.id}`}>Players</NavLink>
           <NavLink to={`/campaigns/${campaign?.id}`}>Messages</NavLink>
-          <NavLink to={`/campaigns/${campaign?.id}`}>Logs</NavLink>
-          <NavLink to={`/campaigns/${campaign?.id}/settings`}>Settings</NavLink>
+          {owner ? (
+            <>
+              <NavLink to={`/campaigns/${campaign?.id}`}>Logs</NavLink>
+              <NavLink to={`/campaigns/${campaign?.id}/settings`}>
+                Settings
+              </NavLink>
+            </>
+          ) : null}
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>

@@ -13,8 +13,7 @@ function Campaign() {
   const { campaign } = useSelector((state) => state.campaign)
   const { user } = useSelector((state) => state.user)
 
-  const campaignOwnerId = campaign?.owner?.id
-  const userId = user?.id
+  const owner = campaign?.owner?.id === user?.id
 
   useEffect(() => {
     if (campaign?.id !== id) {
@@ -24,9 +23,12 @@ function Campaign() {
 
   return (
     <Routes>
-      <Route path="/" element={<CampaignHeader campaign={campaign} />}>
+      <Route
+        path="/"
+        element={<CampaignHeader campaign={campaign} owner={owner} />}
+      >
         <Route index element={<CampaignOverview />} />
-        {campaignOwnerId === userId ? (
+        {owner ? (
           <Route path="settings" element={<CampaignSettingsContainer />} />
         ) : null}
       </Route>

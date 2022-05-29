@@ -1,7 +1,14 @@
 import { Box, Button, Group, Textarea, TextInput } from '@mantine/core'
-import React from 'react'
+import React, { useState } from 'react'
 
-function CampaignUpdateForm() {
+function CampaignUpdateForm({ campaign }) {
+  const [formData, setFormData] = useState(campaign || {})
+
+  function handleChange(e) {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+
   return (
     <Box>
       <form>
@@ -11,14 +18,24 @@ function CampaignUpdateForm() {
           placeholder="Name"
           name="name"
           autoComplete="off"
+          value={formData.name}
+          onChange={handleChange}
         />
-        <TextInput label="Image" name="image_url" autoComplete="off" />
+        <TextInput
+          label="Image"
+          name="image_url"
+          autoComplete="off"
+          value={formData.image_url}
+          onChange={handleChange}
+        />
         <Textarea
           required
           label="Setting"
           placeholder="In a place unbeknownst to man..."
           name="setting"
           autoComplete="off"
+          value={formData.setting}
+          onChange={handleChange}
         />
         <Group position="left" mt="md">
           <Button type="submit">Update campaign</Button>

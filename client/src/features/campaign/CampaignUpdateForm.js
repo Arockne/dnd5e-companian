@@ -4,6 +4,15 @@ import React, { useState } from 'react'
 function CampaignUpdateForm({ campaign }) {
   const [formData, setFormData] = useState(campaign || {})
 
+  function changeInDataField() {
+    for (const key in formData) {
+      if (formData[key] !== campaign[key]) {
+        return true
+      }
+    }
+    return false
+  }
+
   function handleChange(e) {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
@@ -38,7 +47,9 @@ function CampaignUpdateForm({ campaign }) {
           onChange={handleChange}
         />
         <Group position="left" mt="md">
-          <Button type="submit">Update campaign</Button>
+          <Button type="submit" disabled={!changeInDataField()}>
+            Update campaign
+          </Button>
         </Group>
       </form>
     </Box>

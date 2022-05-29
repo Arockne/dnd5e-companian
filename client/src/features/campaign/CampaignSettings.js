@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { deleteCampaign } from './campaignSlice'
+import CampaignUpdateForm from './CampaignUpdateForm'
 
 function CampaignSettings() {
   const [opened, setOpened] = useState(false)
@@ -40,6 +41,7 @@ function CampaignSettings() {
 
   return (
     <Group direction="column">
+      <CampaignUpdateForm />
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}

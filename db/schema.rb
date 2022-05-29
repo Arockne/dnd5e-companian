@@ -67,12 +67,12 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
     t.string "profession", default: ""
     t.string "alignment", default: ""
     t.integer "experience", default: 0
-    t.integer "strength"
-    t.integer "dexterity"
-    t.integer "constitution"
-    t.integer "intelligence"
-    t.integer "wisdom"
-    t.integer "charisma"
+    t.integer "strength", default: 3
+    t.integer "dexterity", default: 3
+    t.integer "constitution", default: 3
+    t.integer "intelligence", default: 3
+    t.integer "wisdom", default: 3
+    t.integer "charisma", default: 3
     t.bigint "user_id", null: false
     t.bigint "campaign_id", null: false
     t.datetime "created_at", precision: 6, null: false

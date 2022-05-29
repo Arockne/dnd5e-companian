@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { deleteCampaign } from './campaignSlice'
 import CampaignUpdateForm from './CampaignUpdateForm'
 
-function CampaignSettings() {
+function CampaignSettingsContainer() {
   const [opened, setOpened] = useState(false)
   const [inputData, setInputData] = useState('')
   const { campaign, status } = useSelector((state) => state.campaign)
@@ -41,7 +41,7 @@ function CampaignSettings() {
 
   return (
     <Group direction="column">
-      <CampaignUpdateForm />
+      <CampaignUpdateForm campaign={campaign} />
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
@@ -82,4 +82,4 @@ function CampaignSettings() {
   )
 }
 
-export default CampaignSettings
+export default CampaignSettingsContainer

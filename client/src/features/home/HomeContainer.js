@@ -8,7 +8,7 @@ import CampaignSearchContainer from '../campaign-search/CampaignSearchContainer'
 import MainHeader from '../navigation/MainHeader'
 import CampaignHeader from '../campaign/CampaignHeader'
 import CampaignOverview from '../campaign/CampaignOverview'
-import CampaignSettings from '../campaign/CampaignSettings'
+import CampaignSettingsContainer from '../campaign/CampaignSettingsContainer'
 
 function HomeContainer() {
   const [pageLoad, setPageLoad] = useState(false)
@@ -25,7 +25,7 @@ function HomeContainer() {
         <Route path="campaigns" element={<CampaignsContainer />} />
         <Route path="campaigns/:id" element={<CampaignHeader />}>
           <Route index element={<CampaignOverview />} />
-          <Route path="settings" element={<CampaignSettings />} />
+          <Route path="settings" element={<CampaignSettingsContainer />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" />} />

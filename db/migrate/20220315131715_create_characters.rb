@@ -7,12 +7,12 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.string :profession, default: ""
       t.string :alignment, default: ""
       t.integer :experience, default: 0
-      t.integer :strength
-      t.integer :dexterity
-      t.integer :constitution
-      t.integer :intelligence
-      t.integer :wisdom
-      t.integer :charisma
+      t.integer :strength, default: 3
+      t.integer :dexterity, default: 3
+      t.integer :constitution, default: 3
+      t.integer :intelligence, default: 3
+      t.integer :wisdom, default: 3
+      t.integer :charisma, default: 3
       t.belongs_to :user, null: false, foreign_key: true
       t.belongs_to :campaign, null: false, foreign_key: true
 

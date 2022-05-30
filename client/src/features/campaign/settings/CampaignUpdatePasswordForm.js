@@ -1,5 +1,6 @@
-import { Button, Group, PasswordInput } from '@mantine/core'
+import { Button, Group, List, PasswordInput, ThemeIcon } from '@mantine/core'
 import React, { useState } from 'react'
+import { CircleCheck } from 'tabler-icons-react'
 import { client } from '../../../api/client'
 import FormErrorsContainer from '../../errors/FormErrorsContainer'
 
@@ -63,6 +64,20 @@ function CampaignUpdatePasswordForm({ campaign }) {
         value={formData.new_password_confirmation}
         onChange={handleChange}
       />
+      {status === 'succeeded' ? (
+        <List
+          withPadding
+          size="sm"
+          mt="sm"
+          icon={
+            <ThemeIcon variant="light" color="teal" size={20} radius="xl">
+              <CircleCheck size={18} />
+            </ThemeIcon>
+          }
+        >
+          <List.Item>Password has successfully been changed</List.Item>
+        </List>
+      ) : null}
       <FormErrorsContainer errors={errors} />
       <Group position="left" mt="md">
         <Button type="submit">Update password</Button>

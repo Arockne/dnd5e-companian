@@ -11,7 +11,7 @@ function CampaignUpdateContainer({ campaign, status, errors }) {
       <CampaignUpdateForm campaign={campaign} status={status} errors={errors} />
       <Title order={3}>Update Password</Title>
       <Divider />
-      <CampaignUpdatePasswordForm />
+      <CampaignUpdatePasswordForm campaign={campaign} />
     </>
   )
 }

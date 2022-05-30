@@ -16,7 +16,7 @@ function CampaignDeleteContainer({ campaign, status }) {
         <CampaignDeleteForm campaign={campaign} status={status} />
       </Modal>
       <Title order={3}>Delete Campaign</Title>
-      <Divider size="lg" />
+      <Divider size="xs" />
       <Text>Once deleted, there is no going back</Text>
       <Button variant="outline" color="red" onClick={() => setOpened(true)}>
         Delete this campaign

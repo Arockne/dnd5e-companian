@@ -25,14 +25,6 @@ npm install --prefix client
 
 ## Bugs that need to be stomped
 
-- Campaign Settings
-  - When a campaign is deleted the app should redirect to home.
-  - If a user was to refresh the page it will redirect back to home
-    - This is not the intended functionality
-    - The reason for this is there is not a campaign stored in redux state on load
-    - Need to change how redirects are working within application
-      - May need to change all redirects to better reflect this change
-
 ## Deployment Instructions
 
 ## System Dependencies:

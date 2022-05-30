@@ -44,6 +44,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     params.require(:campaign).permit(:name, :setting, :image_url)
   end
 
+  def campaign_password_params
+    params.require(:campaign).permit(:old_password, :new_password)
+  end
+
   def render_unprocessable_entity(invalid)
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end

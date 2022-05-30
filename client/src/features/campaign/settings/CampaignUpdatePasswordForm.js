@@ -1,6 +1,7 @@
 import { Button, Group, PasswordInput } from '@mantine/core'
 import React, { useState } from 'react'
 import { client } from '../../../api/client'
+import FormErrorsContainer from '../../errors/FormErrorsContainer'
 
 function CampaignUpdatePasswordForm({ campaign }) {
   const [formData, setFormData] = useState({
@@ -59,6 +60,7 @@ function CampaignUpdatePasswordForm({ campaign }) {
         value={formData.new_password_confirmation}
         onChange={handleChange}
       />
+      <FormErrorsContainer errors={errors} />
       <Group position="left" mt="md">
         <Button type="submit">Update password</Button>
       </Group>

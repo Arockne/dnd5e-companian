@@ -1,4 +1,4 @@
-import { Group } from '@mantine/core'
+import { Container } from '@mantine/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CampaignDeleteContainer from './CampaignDeleteContainer'
@@ -8,14 +8,14 @@ function CampaignSettingsContainer() {
   const { campaign, status, errors } = useSelector((state) => state.campaign)
 
   return (
-    <Group direction="column">
+    <Container>
       <CampaignUpdateContainer
         campaign={campaign}
         status={status}
         errors={errors}
       />
       <CampaignDeleteContainer campaign={campaign} status={status} />
-    </Group>
+    </Container>
   )
 }
 

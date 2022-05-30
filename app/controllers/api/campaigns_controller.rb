@@ -31,6 +31,14 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     render json: campaign, status: :ok
   end
 
+  def password_update
+    if campaign&.authenticate(campaign_password_params[:old_password])
+      campaign.update!(password: campaign_password_params[:new_password])
+      return head :ok
+    end
+    return render json: { errors: ['Old password does not match current password']}
+  end
+
   def destroy
     campaign = current_user.owned_campaigns.find_by_id(params[:id])
     return render json: { errors: ['Not Authorized'] }, status: :unauthorized if campaign.nil?

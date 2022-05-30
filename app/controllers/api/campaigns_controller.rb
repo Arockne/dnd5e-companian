@@ -33,7 +33,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def password_update
-    if campaign&.authenticate(campaign_password_params[:old_password])
+    if authenticate_password_update
       campaign.update!(password: campaign_password_params[:new_password])
       return head :ok
     end
@@ -71,6 +71,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def campaign_owner?
     current_user == campaign.owner
+  end
+
+  def authenticate_password_update
+    campaign&.authenticate(campaign_password_params[:old_password])
   end
 
   def authorize_show_action

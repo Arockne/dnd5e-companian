@@ -130,6 +130,7 @@ const campaignSlice = createSlice({
       })
       .addCase(updateCampaign.rejected, (state, action) => {
         state.status = 'failed'
+        state.errors = action.payload.errors
       })
       .addCase(deleteCampaign.pending, (state) => {
         state.status = 'loading'

@@ -13,6 +13,9 @@ function CampaignUpdatePasswordForm({ campaign }) {
   const [status, setStatus] = useState('idle')
 
   function handleChange(e) {
+    if (status === 'failed') {
+      setErrors([])
+    }
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }

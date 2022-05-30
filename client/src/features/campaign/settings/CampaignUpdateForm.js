@@ -20,6 +20,9 @@ function CampaignUpdateForm({ campaign, status, errors }) {
   }, [status])
 
   function handleChange(e) {
+    if (status === 'failed') {
+      dispatch(resetErrors())
+    }
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }

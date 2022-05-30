@@ -52,23 +52,6 @@ export const updateCampaign = createAsyncThunk(
   }
 )
 
-export const updateCampaignPassword = createAsyncThunk(
-  'campaign/updateCampaignPassword',
-  async (campaign, { rejectWithValue }) => {
-    const response = await client.patch(
-      `/api/campaigns/${campaign.id}/password`,
-      {
-        campaign,
-      }
-    )
-    const body = await response.json()
-    if (response.ok) {
-      return body
-    }
-    return rejectWithValue(body)
-  }
-)
-
 export const deleteCampaign = createAsyncThunk(
   'campaign/deleteCampaign',
   async (id, { rejectWithValue }) => {
@@ -146,17 +129,6 @@ const campaignSlice = createSlice({
         state.campaign = action.payload
       })
       .addCase(updateCampaign.rejected, (state, action) => {
-        state.status = 'failed'
-        state.errors = action.payload.errors
-      })
-      .addCase(updateCampaignPassword.pending, (state) => {
-        state.status = 'loading'
-        state.errors = null
-      })
-      .addCase(updateCampaignPassword.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-      })
-      .addCase(updateCampaignPassword.rejected, (state, action) => {
         state.status = 'failed'
         state.errors = action.payload.errors
       })

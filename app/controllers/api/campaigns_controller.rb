@@ -2,6 +2,7 @@ class Api::CampaignsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   
   before_action :authorize_show_action, only: [:show]
+  before_action :authorize_password_update, only: [:password_update]
 
   def index
     campaigns = Campaign.where.not(owner: current_user)
@@ -74,6 +75,10 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   def authorize_show_action
     render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || campaign_owner?
+  end
+
+  def authorize_password_update
+    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless campaign_owner?
   end
 
 end

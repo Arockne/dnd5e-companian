@@ -33,11 +33,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def password_update
-    if authenticate_password_update
-      campaign.update!(password: campaign_password_params[:new_password])
-      return head :ok
-    end
-    render json: { errors: ['Old password does not match current password']}, status: :unprocessable_entity
+    campaign.update!(password: campaign_password_params[:new_password])
+    head :ok
   end
 
   def destroy
@@ -82,7 +79,12 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def authorize_password_update
-    render json: { errors: ['Not Authorized'] }, status: :unauthorized unless campaign_owner?
+    render json: { 
+      errors: ['Not Authorized'] 
+    }, status: :unauthorized unless campaign_owner?
+    render json: { 
+      errors: ['Old password does not match current password']
+    }, status: :unprocessable_entity unless authenticate_password_update
   end
 
 end

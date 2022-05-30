@@ -37,7 +37,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
       campaign.update!(password: campaign_password_params[:new_password])
       return head :ok
     end
-    return render json: { errors: ['Old password does not match current password']}
+    render json: { errors: ['Old password does not match current password']}, status: :unprocessable_entity
   end
 
   def destroy

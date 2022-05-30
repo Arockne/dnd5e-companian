@@ -2,9 +2,10 @@ import { Box, Button, Group, Textarea, TextInput } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import FormErrorsContainer from '../../errors/FormErrorsContainer'
 import { resetErrors, updateCampaign } from '../campaignSlice'
 
-function CampaignUpdateForm({ campaign, status }) {
+function CampaignUpdateForm({ campaign, status, errors }) {
   const [formData, setFormData] = useState(
     campaign || { name: '', image_url: '', setting: '' }
   )
@@ -56,6 +57,7 @@ function CampaignUpdateForm({ campaign, status }) {
           value={formData?.setting}
           onChange={handleChange}
         />
+        <FormErrorsContainer errors={errors} />
         <Group position="left" mt="md">
           <Button type="submit">Update campaign</Button>
         </Group>

@@ -5,11 +5,15 @@ import CampaignDeleteContainer from './CampaignDeleteContainer'
 import CampaignUpdateContainer from './CampaignUpdateContainer'
 
 function CampaignSettingsContainer() {
-  const { campaign, status } = useSelector((state) => state.campaign)
+  const { campaign, status, errors } = useSelector((state) => state.campaign)
 
   return (
     <Group direction="column">
-      <CampaignUpdateContainer campaign={campaign} status={status} />
+      <CampaignUpdateContainer
+        campaign={campaign}
+        status={status}
+        errors={errors}
+      />
       <CampaignDeleteContainer campaign={campaign} status={status} />
     </Group>
   )

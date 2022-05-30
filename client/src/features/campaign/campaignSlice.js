@@ -52,6 +52,23 @@ export const updateCampaign = createAsyncThunk(
   }
 )
 
+export const updateCampaignPassword = createAsyncThunk(
+  'campaign/updateCampaignPassword',
+  async (campaign, { rejectWithValue }) => {
+    const response = await client.patch(
+      `/api/campaigns/${campaign.id}/password`,
+      {
+        campaign,
+      }
+    )
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
 export const deleteCampaign = createAsyncThunk(
   'campaign/deleteCampaign',
   async (id, { rejectWithValue }) => {

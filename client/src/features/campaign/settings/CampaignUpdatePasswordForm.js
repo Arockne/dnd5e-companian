@@ -14,7 +14,7 @@ function CampaignUpdatePasswordForm({ campaign }) {
   const [status, setStatus] = useState('idle')
 
   function handleChange(e) {
-    if (status === 'failed') {
+    if (errors.length) {
       setErrors([])
     }
     const { name, value } = e.target
@@ -23,7 +23,13 @@ function CampaignUpdatePasswordForm({ campaign }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { old_password, new_password } = formData
+
+    const { old_password, new_password, new_password_confirmation } = formData
+
+    if (new_password !== new_password_confirmation) {
+      setErrors(['New password and new password confirmation do not match'])
+      return
+    }
 
     const response = await client.patch(
       `/api/campaigns/${campaign.id}/password`,

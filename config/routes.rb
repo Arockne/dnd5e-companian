@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy'
     get '/campaigns/current', to: 'campaigns#current_campaigns'
     resources :campaigns, only: [:index, :show, :create, :update, :destroy] do
+      patch '/password', to: 'campaigns#update_password'
       resources :campaign_users, only: [:create, :destroy]
       resources :characters, only: [:show, :create, :update, :destroy] do
         resources :character_profiles, only: [:update]

@@ -66,7 +66,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   end
 
   def campaign
-    @campaign ||= Campaign.find_by_id(params[:id])
+    @campaign ||= Campaign.find_by_id(params[:id] || params[:campaign_id])
   end
 
   def campaign_owner?

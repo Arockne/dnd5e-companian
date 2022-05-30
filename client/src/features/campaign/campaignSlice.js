@@ -149,6 +149,17 @@ const campaignSlice = createSlice({
         state.status = 'failed'
         state.errors = action.payload.errors
       })
+      .addCase(updateCampaignPassword.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(updateCampaignPassword.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+      })
+      .addCase(updateCampaignPassword.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
       .addCase(deleteCampaign.pending, (state) => {
         state.status = 'loading'
         state.errors = null

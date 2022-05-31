@@ -43,9 +43,9 @@ campaign_2 = Campaign.create!(
 
 user_1.campaign_users.create!(campaign: campaign_2)
 
-(1..50).each do
+(1..35).each do
   campaign = Campaign.create(
-    name: Faker::Games::ElderScrolls.city, 
+    name: Faker::Games::ElderScrolls.unique.city, 
     setting: Faker::Lorem.paragraphs(number: 20).join(' '), 
     owner: users[rand(0..2)], 
     password: 'test123',

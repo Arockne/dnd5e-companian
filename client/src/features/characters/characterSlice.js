@@ -25,7 +25,21 @@ export const characterSlice = createSlice({
   name: 'character',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCharacters.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(getCharacters.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.characters = action.payload
+      })
+      .addCase(getCharacters.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
+  },
 })
 
 export default characterSlice.reducer

@@ -324,9 +324,9 @@ RSpec.describe "Api::Campaigns", type: :request do
           expect { delete "/api/campaigns/#{campaign_1.id}" }.to change(Campaign, :count).by(-1)
         end
 
-        it 'returns a status of 204 (No Content)' do
+        it 'returns a status of 200 (Ok)' do
           delete "/api/campaigns/#{campaign_1.id}"
-          expect(response).to have_http_status(:no_content)
+          expect(response).to have_http_status(:ok)
         end
 
         it 'returns nothing' do

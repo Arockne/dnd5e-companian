@@ -30,8 +30,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       name: 'Knights of the Round Table', 
       setting: 'Somewhere in Camelot', 
       owner: user_1, 
-      password: 'king', 
-      password_confirmation: 'king'
+      password: 'king'
     )
   end
 
@@ -40,8 +39,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       name: 'Star Wards', 
       setting: 'In a hospital far far away', 
       owner: user_2, 
-      password: 'test123', 
-      password_confirmation: 'test123'
+      password: 'test123'
     )
   end
 
@@ -179,15 +177,15 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       end
 
       context 'joining a campaign already a member of' do
-        let(:campaign_user_params) { { campaign: { password: campaign_1.password } } }
-        it 'returns a status of 403 (Forbidden)' do
-          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
-          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
-          expect(response).to have_http_status(:forbidden)
+        let(:campaign_user_params) { { campaign: { password: campaign_2.password } } }
+        it 'returns a status of 401 (Unauthorized)' do
+          post "/api/campaigns/#{campaign_2.id}/campaign_users", params: campaign_user_params
+          post "/api/campaigns/#{campaign_2.id}/campaign_users", params: campaign_user_params
+          expect(response).to have_http_status(:unauthorized)
         end
         it 'returns error messages' do
-          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
-          post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
+          post "/api/campaigns/#{campaign_2.id}/campaign_users", params: campaign_user_params
+          post "/api/campaigns/#{campaign_2.id}/campaign_users", params: campaign_user_params
           expect(response.body).to include_json({
             errors: a_kind_of(Array)
           })

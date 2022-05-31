@@ -1,6 +1,6 @@
 class Api::CampaignUsersController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
+rescue_from ActiveRecord::RecordInvalid, with: :render_unauthorized
 
   before_action :authorize_join_request, only: [:create]
   before_action :authorize_delete_request, only: [:destroy]
@@ -55,7 +55,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_forbidden
     render json: { errors: ['Campaign does not exist'] }, status: :not_found
   end
 
-  def render_forbidden(invalid)
-    render json: { errors: invalid.record.errors.full_messages }, status: :forbidden
+  def render_unauthorized(invalid)
+    render json: { errors: invalid.record.errors.full_messages }, status: :unauthorized
   end
 end

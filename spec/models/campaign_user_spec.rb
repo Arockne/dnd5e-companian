@@ -35,7 +35,7 @@ RSpec.describe CampaignUser, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:campaign_id)}
+    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:campaign_id).with_message("is already a player of Knights of the Round Table")}
   end
 
   describe 'associations' do

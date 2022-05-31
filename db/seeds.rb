@@ -44,12 +44,15 @@ campaign_2 = Campaign.create!(
 user_1.campaign_users.create!(campaign: campaign_2)
 
 (1..50).each do
-  Campaign.create(
-    name: Faker::Game.title, 
+  campaign = Campaign.create(
+    name: Faker::Games::ElderScrolls.city, 
     setting: Faker::Lorem.paragraphs(number: 20).join(' '), 
     owner: users[rand(0..2)], 
     password: 'test123',
   )
+  filtered_users = users.filter { |user| user.username != campaign.owner.username }
+  selected_user = filtered_users[rand(0...filtered_users.length)]
+  selected_user.campaign_users.create!(campaign: campaign)
 end
 
 def roll_stat()

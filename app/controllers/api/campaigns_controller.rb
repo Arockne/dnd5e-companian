@@ -47,7 +47,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   private
 
   def campaign_params
-    params.require(:campaign).permit(:name, :setting, :image_url)
+    params.require(:campaign).permit(:name, :setting, :image_url, :password)
   end
 
   def campaign_password_params

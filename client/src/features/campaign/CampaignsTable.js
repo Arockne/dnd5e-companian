@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   header: {
-    display: 'block',
     position: 'sticky',
     top: 0,
     zIndex: 1,

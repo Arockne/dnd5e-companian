@@ -2,6 +2,7 @@ import { Stack, Title } from '@mantine/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCharacters } from './characterSlice'
+import CharactersTable from './CharactersTable'
 
 function CharactersContainer() {
   const { characters } = useSelector((state) => state.character)
@@ -13,6 +14,7 @@ function CharactersContainer() {
   return (
     <Stack align="center">
       <Title order={2}>Characters</Title>
+      <CharactersTable characters={characters} />
     </Stack>
   )
 }

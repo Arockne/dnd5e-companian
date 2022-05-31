@@ -51,8 +51,7 @@ user_1.campaign_users.create!(campaign: campaign_2)
     password: 'test123',
   )
   filtered_users = users.filter { |user| user.username != campaign.owner.username }
-  selected_user = filtered_users[rand(0...filtered_users.length)]
-  selected_user.campaign_users.create!(campaign: campaign)
+  filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
 end
 
 def roll_stat()

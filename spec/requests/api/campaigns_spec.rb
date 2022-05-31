@@ -41,17 +41,9 @@ RSpec.describe "Api::Campaigns", type: :request do
         post '/api/login', params: { username: user_1.username, password: user_1.password }
       end
 
-      it 'returns all the campaigns with owner' do
+      it 'returns all the campaigns not including current user campaigns with owner' do
         get '/api/campaigns'
         expect(response.body).to include_json([
-          {
-            id: a_kind_of(Integer),
-            name: 'Knights of the Round Table',
-            owner: {
-              id: a_kind_of(Integer),
-              username: user_1.username
-            }
-          },
           {
             id: a_kind_of(Integer),
             name: 'Star Wards',

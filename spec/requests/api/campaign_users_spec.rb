@@ -43,6 +43,15 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     )
   end
 
+  let!(:campaign_3) do
+    Campaign.create!(
+      name: 'The Unending Maze', 
+      setting: 'The maze keeps going on and on and on and...', 
+      owner: user_3, 
+      password: 'test123'
+    )
+  end
+
   let!(:campaign_1_user_2) do
     CampaignUser.create!(
       campaign_id: campaign_1.id,
@@ -140,22 +149,22 @@ RSpec.describe "Api::CampaignUsers", type: :request do
       
       context 'joining a campaign' do
         context 'with correct password' do
-          let(:campaign_user_params) { { campaign: { password: campaign_1.password } } }
+          let(:campaign_user_params) { { campaign: { password: campaign_3.password } } }
 
           it 'increases the amount of CampaignUsers by one' do
-            expect { post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params }.to change(CampaignUser, :count).by(1)
+            expect { post "/api/campaigns/#{campaign_3.id}/campaign_users", params: campaign_user_params }.to change(CampaignUser, :count).by(1)
           end
 
           it 'returns the CampaignUser' do
-            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
+            post "/api/campaigns/#{campaign_3.id}/campaign_users", params: campaign_user_params
             expect(response.body).to include_json({
               id: a_kind_of(Integer),
               user_id: user_1.id,
-              campaign_id: campaign_1.id
+              campaign_id: campaign_3.id
             })
           end
           it 'returns a status of 201 (Created)' do
-            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: campaign_user_params
+            post "/api/campaigns/#{campaign_3.id}/campaign_users", params: campaign_user_params
             expect(response).to have_http_status(:created)
           end
         end
@@ -163,12 +172,12 @@ RSpec.describe "Api::CampaignUsers", type: :request do
           let(:incorrect_campaign_user_params) { { campaign: { password: 'thisisnotthepasswordyouarelookingfor' } } }
 
           it 'returns a status of 401 (Unauthorized)' do
-            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: incorrect_campaign_user_params
+            post "/api/campaigns/#{campaign_3.id}/campaign_users", params: incorrect_campaign_user_params
             expect(response).to have_http_status(:unauthorized)
           end
 
           it 'returns error messsages' do
-            post "/api/campaigns/#{campaign_1.id}/campaign_users", params: incorrect_campaign_user_params
+            post "/api/campaigns/#{campaign_3.id}/campaign_users", params: incorrect_campaign_user_params
             expect(response.body).to include_json({
               errors: a_kind_of(Array)
             })

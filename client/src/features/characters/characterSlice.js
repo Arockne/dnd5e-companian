@@ -49,6 +49,18 @@ export const characterSlice = createSlice({
       .addCase(getCharacters.rejected, (state, action) => {
         state.status = 'failed'
       })
+      .addCase(getCharacter.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(getCharacter.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.characters = action.payload
+      })
+      .addCase(getCharacter.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
   },
 })
 

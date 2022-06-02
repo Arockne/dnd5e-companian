@@ -1,11 +1,11 @@
-import { Stack, Title } from '@mantine/core'
+import { Group, Loader, Stack, Title } from '@mantine/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCharacters } from './characterSlice'
 import CharactersTable from './CharactersTable'
 
 function CharactersContainer() {
-  const { characters } = useSelector((state) => state.character)
+  const { characters, status } = useSelector((state) => state.character)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCharacters())
@@ -14,7 +14,13 @@ function CharactersContainer() {
   return (
     <Stack align="center">
       <Title order={2}>Characters</Title>
-      <CharactersTable characters={characters} />
+      {status !== 'loading' ? (
+        <CharactersTable characters={characters} />
+      ) : (
+        <Group position="center">
+          <Loader size="xl" />
+        </Group>
+      )}
     </Stack>
   )
 }

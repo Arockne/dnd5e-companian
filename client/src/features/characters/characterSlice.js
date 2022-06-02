@@ -13,6 +13,18 @@ export const getCharacters = createAsyncThunk(
   }
 )
 
+export const getCharacter = createAsyncThunk(
+  'character/getCharacter',
+  async (id, { rejectWithValue }) => {
+    const response = await client.get(`/api/characters/${id}`)
+    const body = await response.json()
+    if (response.ok) {
+      return body
+    }
+    return rejectWithValue(body)
+  }
+)
+
 const initialState = {
   character: null,
   characters: [],
@@ -36,7 +48,6 @@ export const characterSlice = createSlice({
       })
       .addCase(getCharacters.rejected, (state, action) => {
         state.status = 'failed'
-        // state.errors = action.payload.errors
       })
   },
 })

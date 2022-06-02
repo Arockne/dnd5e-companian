@@ -7,6 +7,7 @@ import {
   Text,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -39,8 +40,14 @@ const useStyles = createStyles((theme) => ({
 function CharactersTable({ characters }) {
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
+  const navigate = useNavigate()
+
   const rows = characters?.map((row) => (
-    <tr key={row.id} style={{ cursor: 'pointer' }}>
+    <tr
+      key={row.id}
+      style={{ cursor: 'pointer' }}
+      onClick={() => navigate(`/characters/${row.id}`)}
+    >
       <td>
         <Group spacing="sm">
           <Avatar size={26} src={row.image_url} radius={26} />

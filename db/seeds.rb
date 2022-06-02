@@ -67,23 +67,23 @@ puts 'Creating characters'
 
 Campaign.all.each_entry do |campaign|
     filtered_users = users.filter { |user| user.username != campaign.owner.username }
-    selected_user = filtered_users[rand(0...filtered_users.length)]
-  10.times do
-    Character.create(
-      name: Faker::Name.unique.name,
-      background: Faker::Games::DnD.background,
-      race: Faker::Games::DnD.race,
-      profession: Faker::Games::DnD.klass,
-      alignment: Faker::Games::DnD.alignment,
-      strength: roll_stat,
-      dexterity: roll_stat,
-      constitution: roll_stat,
-      intelligence: roll_stat,
-      wisdom: roll_stat,
-      charisma: roll_stat,
-      user: user_1,
-      campaign: campaign
-    )
+    10.times do
+      selected_user = filtered_users[rand(0...filtered_users.length)]
+      Character.create(
+        name: Faker::Name.unique.name,
+        background: Faker::Games::DnD.background,
+        race: Faker::Games::DnD.race,
+        profession: Faker::Games::DnD.klass,
+        alignment: Faker::Games::DnD.alignment,
+        strength: roll_stat,
+        dexterity: roll_stat,
+        constitution: roll_stat,
+        intelligence: roll_stat,
+        wisdom: roll_stat,
+        charisma: roll_stat,
+        user: selected_user,
+        campaign: campaign
+      )
   end
 end
 

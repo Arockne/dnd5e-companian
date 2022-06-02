@@ -55,7 +55,7 @@ export const characterSlice = createSlice({
       })
       .addCase(getCharacter.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.characters = action.payload
+        state.character = action.payload
       })
       .addCase(getCharacter.rejected, (state, action) => {
         state.status = 'failed'

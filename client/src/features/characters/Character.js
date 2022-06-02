@@ -1,10 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import CharacterHeader from './CharacterHeader'
 
 function Character() {
   return (
     <Routes>
-      <Route path="/" element={<h1>This is the character page</h1>} />
+      <Route path="/" element={<CharacterHeader />} />
     </Routes>
   )
 }

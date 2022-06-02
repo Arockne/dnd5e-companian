@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         resources :character_profiles, only: [:update]
       end
     end
-    resources :characters, only: [:index]
+    resources :characters, only: [:index, :show]
   end
 
   get '*path',

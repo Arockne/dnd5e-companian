@@ -7,8 +7,7 @@ function CharacterHeader({ character }) {
     <Grid grow>
       <Grid.Col span={1}>
         <Stack>
-          <NavLink to={`/characters/${character?.id}`}>Biography</NavLink>
-          <NavLink to={`/characters/${character?.id}`}>Stats</NavLink>
+          <NavLink to={`/characters/${character?.id}`}>Overview</NavLink>
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>

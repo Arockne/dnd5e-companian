@@ -11,9 +11,6 @@ function CharacterHeader({ character }) {
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>
-        <Group position="center">
-          <Title order={2}>{character?.name}</Title>
-        </Group>
         <Outlet />
       </Grid.Col>
     </Grid>

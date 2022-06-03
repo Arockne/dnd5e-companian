@@ -19,7 +19,7 @@ function Character() {
   return (
     <Routes>
       <Route path="/" element={<CharacterHeader character={character} />}>
-        <Route index element={<CharacterOverview />} />
+        <Route index element={<CharacterOverview character={character} />} />
       </Route>
     </Routes>
   )

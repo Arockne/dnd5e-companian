@@ -3,7 +3,7 @@ import { Skeleton, Container, Group, Image, Grid, Title } from '@mantine/core'
 
 const child = <Skeleton height={140} radius="md" animate={false} />
 
-export function CharacterOverview() {
+export function CharacterOverview({ character }) {
   return (
     <Container my="md">
       <Grid>
@@ -35,12 +35,12 @@ export function CharacterOverview() {
           <Grid>
             <Grid.Col>
               <Group position="center">
-                <Skeleton height={70} radius="md" animate={false} />
+                <Title order={2}>{character?.name}</Title>
               </Group>
             </Grid.Col>
             <Grid.Col>
               <Group>
-                <Skeleton height={435} radius="md" animate={false} />
+                <Skeleton height={470} radius="md" animate={false} />
               </Group>
             </Grid.Col>
           </Grid>

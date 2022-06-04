@@ -69,7 +69,7 @@ Campaign.all.each_entry do |campaign|
     filtered_users = users.filter { |user| user.username != campaign.owner.username }
     10.times do
       selected_user = filtered_users[rand(0...filtered_users.length)]
-      Character.create(
+      character = Character.create(
         name: Faker::Name.unique.name,
         background: Faker::Games::DnD.background,
         race: Faker::Games::DnD.race,
@@ -84,7 +84,19 @@ Campaign.all.each_entry do |campaign|
         user: selected_user,
         campaign: campaign
       )
+      if character.id
+        CharacterProfile.create(
+          age: rand(15..1000), 
+          height: "#{rand(160...200)}cm", 
+          weight: "#{rand(50...150)}g", 
+          eyes: Faker::Color.color_name, 
+          gender: Faker::Gender.short_binary_type, 
+          appearance: Faker::Lorem.paragraphs(number: 10).join(' '), backstory: Faker::Lorem.paragraphs(number: 30).join(' '),
+          character: character
+        )
+      end
   end
 end
+
 
 puts 'finished seeding 🌹'

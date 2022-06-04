@@ -42,28 +42,32 @@ function CharactersTable({ characters }) {
   const [scrolled, setScrolled] = useState(false)
   const navigate = useNavigate()
 
-  const rows = characters?.map((row) => (
+  const rows = characters?.map((character) => (
     <tr
-      key={row.id}
+      key={character.id}
       style={{ cursor: 'pointer' }}
-      onClick={() => navigate(`/characters/${row.id}`)}
+      onClick={() =>
+        navigate(
+          `/campaigns/${character.campaign.id}/characters/${character.id}`
+        )
+      }
     >
       <td>
         <Group spacing="sm">
-          <Avatar size={26} src={row.image_url} radius={26} />
+          <Avatar size={26} src={character.image_url} radius={26} />
           <Text size="sm" weight={500}>
-            {row.name}
+            {character.name}
           </Text>
         </Group>
       </td>
       <td>
         <Text size="sm" weight={500}>
-          {row.profession}
+          {character.profession}
         </Text>
       </td>
       <td>
         <Text size="sm" weight={500}>
-          {row.campaign.name}
+          {character.campaign.name}
         </Text>
       </td>
     </tr>

@@ -23,9 +23,8 @@ function HomeContainer() {
         <Route path="campaigns/search" element={<CampaignSearchContainer />} />
         <Route path="campaigns/create" element={<CampaignForm />} />
         <Route path="campaigns" element={<CampaignsContainer />} />
-        <Route path="campaigns/:id/*" element={<Campaign />} />
+        <Route path="campaigns/:campaign_id/*" element={<Campaign />} />
         <Route path="characters" element={<CharactersContainer />} />
-        <Route path="characters/:id/*" element={<Character />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

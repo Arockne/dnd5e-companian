@@ -61,7 +61,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def character
-    @character ||= Character.find(params[:id])
+    @character ||= campaign.characters.find(params[:id])
   end
 
   def campaign_owner?

@@ -7,12 +7,12 @@ import { getCharacter } from './characterSlice'
 
 function Character() {
   const { character } = useSelector((state) => state.character)
-  const { id } = useParams()
+  const { campaign_id, character_id } = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (character?.id !== id) {
-      dispatch(getCharacter(id))
+    if (character?.id !== character_id) {
+      dispatch(getCharacter({ campaign_id, character_id }))
     }
   }, [])
 

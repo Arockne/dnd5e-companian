@@ -15,8 +15,10 @@ export const getCharacters = createAsyncThunk(
 
 export const getCharacter = createAsyncThunk(
   'character/getCharacter',
-  async (id, { rejectWithValue }) => {
-    const response = await client.get(`/api/characters/${id}`)
+  async ({ campaign_id, character_id }, { rejectWithValue }) => {
+    const response = await client.get(
+      `/api/campaigns/${campaign_id}/characters/${character_id}`
+    )
     const body = await response.json()
     if (response.ok) {
       return body

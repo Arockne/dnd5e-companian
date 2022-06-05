@@ -7,8 +7,7 @@ import CampaignsContainer from '../campaign/CampaignsContainer'
 import CampaignSearchContainer from '../campaign-search/CampaignSearchContainer'
 import MainHeader from '../navigation/MainHeader'
 import Campaign from '../campaign/Campaign'
-import CharactersContainer from '../characters/CharactersContainer'
-import Character from '../characters/Character'
+import CharactersContainer from '../character/CharactersContainer'
 
 function HomeContainer() {
   const [pageLoad, setPageLoad] = useState(false)

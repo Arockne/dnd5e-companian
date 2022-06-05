@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes, useParams } from 'react-router-dom'
-import Character from '../characters/Character'
+import Character from '../character/Character'
 import CampaignHeader from './CampaignHeader'
 import CampaignOverview from './CampaignOverview'
 import { getCampaign } from './campaignSlice'

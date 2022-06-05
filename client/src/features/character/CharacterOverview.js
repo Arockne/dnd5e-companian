@@ -1,5 +1,6 @@
 import React from 'react'
 import { Skeleton, Container, Group, Image, Grid, Title } from '@mantine/core'
+import CharacterBiography from './CharacterBiography'
 
 const child = <Skeleton height={140} radius="md" animate={false} />
 
@@ -39,9 +40,9 @@ export function CharacterOverview({ character }) {
               </Group>
             </Grid.Col>
             <Grid.Col>
-              <Group>
-                <Skeleton height={470} radius="md" animate={false} />
-              </Group>
+              <Container>
+                <CharacterBiography character={character} />
+              </Container>
             </Grid.Col>
           </Grid>
         </Grid.Col>

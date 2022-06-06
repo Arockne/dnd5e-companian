@@ -53,20 +53,26 @@ function CharactersTable({ characters }) {
       }
     >
       <td>
-        <Group spacing="sm">
+        <Group spacing="xs">
           <Avatar size={26} src={character.image_url} radius={26} />
-          <Text size="sm" weight={500}>
+          <Text size="xs" weight={500}>
             {character.name}
           </Text>
         </Group>
       </td>
       <td>
-        <Text size="sm" weight={500}>
+        <Text size="xs" weight={500}>
           {character.profession}
         </Text>
       </td>
+      <td>{character?.strength}</td>
+      <td>{character?.dexterity}</td>
+      <td>{character?.constitution}</td>
+      <td>{character?.intelligence}</td>
+      <td>{character?.wisdom}</td>
+      <td>{character?.charisma}</td>
       <td>
-        <Text size="sm" weight={500}>
+        <Text size="xs" weight={500}>
           {character.campaign.name}
         </Text>
       </td>
@@ -83,6 +89,12 @@ function CharactersTable({ characters }) {
           <tr>
             <th>Name</th>
             <th>Class</th>
+            <th>Str</th>
+            <th>Dex</th>
+            <th>Con</th>
+            <th>Int</th>
+            <th>Wis</th>
+            <th>Cha</th>
             <th>Campaign</th>
           </tr>
         </thead>

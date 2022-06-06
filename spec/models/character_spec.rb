@@ -18,6 +18,9 @@ RSpec.describe Character, type: :model do
     it { is_expected.to respond_to(:visible) }
     it { is_expected.to respond_to(:user_id) }
     it { is_expected.to respond_to(:campaign_id) }
+    [:age, :height, :weight, :eyes, :skin, :hair, :gender, :appearance, :backstory].each do |attr|
+      it { is_expected.to respond_to(attr) }
+    end
   end
 
   describe 'validations' do
@@ -43,7 +46,6 @@ RSpec.describe Character, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:campaign) }
-    it { is_expected.to have_one(:character_profile).dependent(:destroy) }
   end
 
 end

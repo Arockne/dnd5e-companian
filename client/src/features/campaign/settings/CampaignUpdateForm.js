@@ -2,7 +2,7 @@ import { Box, Button, Group, Textarea, TextInput } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import FormErrorsContainer from '../../errors/FormErrorsContainer'
+import FormErrorsContainer from '../../error/FormErrorsContainer'
 import { resetErrors, updateCampaign } from '../campaignSlice'
 
 function CampaignUpdateForm({ campaign, status, errors }) {

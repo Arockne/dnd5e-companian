@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser, resetErrors } from '../user/state/userSlice'
 import { Link, useNavigate } from 'react-router-dom'
-import FormErrorsContainer from '../errors/FormErrorsContainer'
+import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function SignUpForm() {
   const [formData, setFormData] = useState({

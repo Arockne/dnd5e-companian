@@ -2,7 +2,7 @@ import { Button, Group, List, PasswordInput, ThemeIcon } from '@mantine/core'
 import React, { useState } from 'react'
 import { CircleCheck } from 'tabler-icons-react'
 import { client } from '../../../api/client'
-import FormErrorsContainer from '../../errors/FormErrorsContainer'
+import FormErrorsContainer from '../../error/FormErrorsContainer'
 
 function CampaignUpdatePasswordForm({ campaign }) {
   const [formData, setFormData] = useState({

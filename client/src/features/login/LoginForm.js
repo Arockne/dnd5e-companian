@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, resetErrors } from '../user/state/userSlice'
 import { Link } from 'react-router-dom'
-import FormErrorsContainer from '../errors/FormErrorsContainer'
+import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function LoginForm() {
   const [formData, setFormData] = useState({

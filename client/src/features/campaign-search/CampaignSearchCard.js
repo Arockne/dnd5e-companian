@@ -13,7 +13,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { joinCampaign, reset } from '../campaign-user/campaignUserSlice'
-import FormErrorsContainer from '../errors/FormErrorsContainer'
+import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)

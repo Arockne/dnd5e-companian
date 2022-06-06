@@ -2,7 +2,6 @@ import React from 'react'
 import { Divider, ScrollArea, Text, Title } from '@mantine/core'
 
 function CharacterBiography({ character }) {
-  console.log(character)
   return (
     <>
       <Title order={4}>Appearance</Title>

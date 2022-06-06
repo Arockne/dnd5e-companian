@@ -44,22 +44,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_232538) do
     t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
-  create_table "character_profiles", force: :cascade do |t|
-    t.integer "age", default: 1
-    t.string "height", default: ""
-    t.string "weight", default: ""
-    t.string "eyes", default: ""
-    t.string "skin", default: ""
-    t.string "hair", default: ""
-    t.string "gender", default: ""
-    t.text "appearance", default: ""
-    t.text "backstory", default: ""
-    t.bigint "character_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["character_id"], name: "index_character_profiles_on_character_id"
-  end
-
   create_table "characters", force: :cascade do |t|
     t.string "name", default: ""
     t.string "background", default: ""
@@ -104,7 +88,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_232538) do
   add_foreign_key "campaign_users", "campaigns"
   add_foreign_key "campaign_users", "users"
   add_foreign_key "campaigns", "users"
-  add_foreign_key "character_profiles", "characters"
   add_foreign_key "characters", "campaigns"
   add_foreign_key "characters", "users"
 end

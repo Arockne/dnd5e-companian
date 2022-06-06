@@ -3,7 +3,7 @@ import React from 'react'
 
 function CharacterStats({ character }) {
   return (
-    <Stack align="flex-start" spacing={0}>
+    <Stack spacing={0}>
       <Text size="xs">Strength: {character?.strength}</Text>
       <Text size="xs">Dexterity: {character?.dexterity}</Text>
       <Text size="xs">Constitution: {character?.constitution}</Text>

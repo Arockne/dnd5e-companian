@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_123748) do
+ActiveRecord::Schema.define(version: 2022_06_06_232538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 2022_03_23_123748) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_url", default: ""
     t.boolean "visible", default: false
+    t.integer "age", default: 1
+    t.string "height", default: ""
+    t.string "weight", default: ""
+    t.string "eyes", default: ""
+    t.string "hair", default: ""
+    t.string "gender", default: ""
+    t.string "appearance", default: ""
+    t.string "backstory", default: ""
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
   end

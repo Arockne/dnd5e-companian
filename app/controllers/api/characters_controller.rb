@@ -44,11 +44,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def creator_update_character_params
-    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :visible)
+    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :age, :height, :weight, :eyes, :skin, :hair, :gender, :appearance, :backstory, :visible, )
   end
 
   def campaign_owner_update_character_params
-    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma)
+    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :age, :height, :weight, :eyes, :skin, :hair, :gender, :appearance, :backstory)
   end
   
   def campaign

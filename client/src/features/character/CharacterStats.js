@@ -3,13 +3,13 @@ import React from 'react'
 
 function CharacterStats({ character }) {
   return (
-    <Stack align="flex-start">
-      <Title order={6}>Strength: {character?.strength}</Title>
-      <Title order={6}>Dexterity: {character?.dexterity}</Title>
-      <Title order={6}>Constitution: {character?.constitution}</Title>
-      <Title order={6}>intelligence: {character?.intelligence}</Title>
-      <Title order={6}>wisdom: {character?.wisdom}</Title>
-      <Title order={6}>charisma: {character?.charisma}</Title>
+    <Stack align="flex-start" spacing={0}>
+      <Text size="xs">Str: {character?.strength}</Text>
+      <Text size="xs">Dex: {character?.dexterity}</Text>
+      <Text size="xs">Con: {character?.constitution}</Text>
+      <Text size="xs">Int: {character?.intelligence}</Text>
+      <Text size="xs">Wis: {character?.wisdom}</Text>
+      <Text size="xs">Cha: {character?.charisma}</Text>
     </Stack>
   )
 }

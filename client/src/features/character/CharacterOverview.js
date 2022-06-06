@@ -1,5 +1,14 @@
 import React from 'react'
-import { Skeleton, Container, Group, Image, Grid, Title } from '@mantine/core'
+import {
+  Skeleton,
+  Container,
+  Group,
+  Image,
+  Grid,
+  Title,
+  Stack,
+  Text,
+} from '@mantine/core'
 import CharacterBiography from './CharacterBiography'
 import CharacterStats from './CharacterStats'
 
@@ -22,9 +31,25 @@ export function CharacterOverview({ character }) {
               </Group>
             </Grid.Col>
             <Grid.Col>
-              <Group position="left">
+              <Group position="center">
                 {/* <Skeleton height={250} radius="md" animate={false} /> */}
                 <CharacterStats character={character} />
+                <Stack spacing={0}>
+                  <Text size="xs">Age: {character?.character_profile.age}</Text>
+                  <Text size="xs">
+                    Eyes: {character?.character_profile.eyes}
+                  </Text>
+                  <Text size="xs">
+                    Gender: {character?.character_profile.gender}
+                  </Text>
+                  <Text size="xs">
+                    Weight: {character?.character_profile.weight}
+                  </Text>
+                  <Text size="xs">
+                    Height: {character?.character_profile.height}
+                  </Text>
+                  <Text size="xs">Race: {character?.race}</Text>
+                </Stack>
               </Group>
             </Grid.Col>
             <Grid.Col>

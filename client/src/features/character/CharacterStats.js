@@ -1,15 +1,16 @@
 import { Stack, Text, Title } from '@mantine/core'
 import React from 'react'
+import CharacterStat from './CharacterStat'
 
 function CharacterStats({ character }) {
   return (
     <Stack spacing={0}>
-      <Text size="xs">Strength: {character?.strength}</Text>
-      <Text size="xs">Dexterity: {character?.dexterity}</Text>
-      <Text size="xs">Constitution: {character?.constitution}</Text>
-      <Text size="xs">Intelligence: {character?.intelligence}</Text>
-      <Text size="xs">Wisdom: {character?.wisdom}</Text>
-      <Text size="xs">Charisma: {character?.charisma}</Text>
+      <CharacterStat name={'Strength'} stat={character?.strength} />
+      <CharacterStat name={'Dexterity'} stat={character?.dexterity} />
+      <CharacterStat name={'Constitution'} stat={character?.constitution} />
+      <CharacterStat name={'Intelligence'} stat={character?.intelligence} />
+      <CharacterStat name={'Wisdom'} stat={character?.wisdom} />
+      <CharacterStat name={'Charisma'} stat={character?.charisma} />
     </Stack>
   )
 }

@@ -25,9 +25,7 @@ npm install --prefix client
     - Currrent campaigns user has not joined
     - Current campaigns user does not own
 - Implement server search pagination for campaigns
-- User Characters
-  - Table
-    - Might add columns for each stat
+- User's Characters
   - Search
     - will create query based on search parameters
   - Server side pagination to load more when user scrolls down

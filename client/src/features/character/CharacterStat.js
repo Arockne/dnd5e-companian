@@ -12,7 +12,7 @@ function CharacterStat({ name, stat }) {
         border: '2px solid black',
         height: '80px',
         width: '70px',
-        borderRadius: '20px',
+        borderRadius: '15px',
       }}
       noWrap={true}
     >

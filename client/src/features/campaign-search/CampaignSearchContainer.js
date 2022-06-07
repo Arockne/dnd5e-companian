@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampaigns } from './campaignSearchSlice'
-import { Stack, TextInput, Container, Pagination, Grid } from '@mantine/core'
+import {
+  Stack,
+  TextInput,
+  Container,
+  Pagination,
+  Grid,
+  Group,
+} from '@mantine/core'
 import CampaignSearchCard from './CampaignSearchCard'
 
 function CampaignSearchContainer() {
@@ -57,13 +64,11 @@ function CampaignSearchContainer() {
           value={searchByName}
         />
       </Container>
-      <Grid columns={6} style={{ width: '100vw' }} justify="center">
+      <Group style={{ width: '100vw' }} position="center">
         {campaignsPerPage?.map((campaign) => (
-          <Grid.Col span={1} key={campaign.id}>
-            <CampaignSearchCard campaign={campaign} />
-          </Grid.Col>
+          <CampaignSearchCard key={campaign.id} campaign={campaign} />
         ))}
-      </Grid>
+      </Group>
       <Container>
         <Pagination
           position="center"

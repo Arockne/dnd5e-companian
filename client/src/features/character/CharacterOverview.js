@@ -32,21 +32,7 @@ export function CharacterOverview({ character }) {
             </Grid.Col>
             <Grid.Col>
               <Group position="center">
-                {/* <Skeleton height={250} radius="md" animate={false} /> */}
                 <CharacterStats character={character} />
-                <Stack spacing={0}>
-                  <Text size="xs">Age: {character?.age}</Text>
-                  <Text size="xs">Eyes: {character?.eyes}</Text>
-                  <Text size="xs">Gender: {character?.gender}</Text>
-                  <Text size="xs">Weight: {character?.weight}</Text>
-                  <Text size="xs">Height: {character?.height}</Text>
-                  <Text size="xs">Race: {character?.race}</Text>
-                </Stack>
-              </Group>
-            </Grid.Col>
-            <Grid.Col>
-              <Group position="center">
-                <Skeleton height={100} radius="md" animate={false} />
               </Group>
             </Grid.Col>
           </Grid>

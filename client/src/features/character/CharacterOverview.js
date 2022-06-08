@@ -40,8 +40,9 @@ export function CharacterOverview({ character }) {
         <Grid.Col xs={6}>
           <Grid>
             <Grid.Col>
-              <Group position="center">
+              <Group position="center" direction="column" spacing={0}>
                 <Title order={2}>{character?.name}</Title>
+                <Text size="sm">{character?.profession}</Text>
               </Group>
             </Grid.Col>
             <Grid.Col>

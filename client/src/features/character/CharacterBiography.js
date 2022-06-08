@@ -13,9 +13,9 @@ function CharacterBiography({ character }) {
             <Text size="sm">Age: {character?.age}</Text>
             <Text size="sm">Eyes: {character?.eyes}</Text>
             <Text size="sm">Gender: {character?.gender}</Text>
+            <Text size="sm">Race: {character?.race}</Text>
             <Text size="sm">Weight: {character?.weight}</Text>
             <Text size="sm">Height: {character?.height}</Text>
-            <Text size="sm">Race: {character?.race}</Text>
           </Group>
         </Group>
         <Divider />

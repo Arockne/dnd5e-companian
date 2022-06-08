@@ -2,6 +2,11 @@ import { Card, Group, Text, ThemeIcon } from '@mantine/core'
 import React from 'react'
 
 function CharacterStat({ name, stat }) {
+  function abilityModifier(stat) {
+    const modifier = Math.floor((stat - 10) / 2)
+    return modifier > 0 ? `+${modifier}` : modifier
+  }
+
   return (
     <Group
       direction="column"
@@ -23,7 +28,7 @@ function CharacterStat({ name, stat }) {
         size="md"
         style={{ position: 'relative', bottom: '5px' }}
       >
-        <Text size="sm">+1</Text>
+        <Text size="sm">{abilityModifier(stat)}</Text>
       </ThemeIcon>
     </Group>
   )

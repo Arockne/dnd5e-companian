@@ -2,7 +2,7 @@ import { Card, Group, Text, ThemeIcon } from '@mantine/core'
 import React from 'react'
 
 function CharacterStat({ name, stat }) {
-  function abilityModifier(stat) {
+  function abilityModifier(stat = 0) {
     const modifier = Math.floor((stat - 10) / 2)
     return modifier > 0 ? `+${modifier}` : modifier
   }

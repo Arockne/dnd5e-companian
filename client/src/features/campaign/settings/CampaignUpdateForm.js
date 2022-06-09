@@ -1,4 +1,12 @@
-import { Box, Button, Group, Textarea, TextInput } from '@mantine/core'
+import {
+  Box,
+  Button,
+  Divider,
+  Group,
+  Textarea,
+  TextInput,
+  Title,
+} from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -34,6 +42,8 @@ function CampaignUpdateForm({ campaign, status, errors }) {
 
   return (
     <Box>
+      <Title order={3}>Update Campaign</Title>
+      <Divider />
       <form onSubmit={handleSubmit}>
         <TextInput
           required

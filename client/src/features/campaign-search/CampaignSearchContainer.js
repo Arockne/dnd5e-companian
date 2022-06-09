@@ -31,7 +31,7 @@ function CampaignSearchContainer() {
     (activePage * itemsPerPage - itemsPerPage) % campaigns?.length
 
   const campaignSearchResults = campaigns?.filter(({ name }) =>
-    name.toLowerCase().includes(searchByName)
+    name.toLowerCase().includes(searchByName.toLowerCase())
   )
 
   const pages = Math.ceil(campaignSearchResults?.length / itemsPerPage)

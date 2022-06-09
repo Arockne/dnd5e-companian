@@ -2,7 +2,6 @@ import { Container, Space } from '@mantine/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CampaignDeleteContainer from './CampaignDeleteContainer'
-import CampaignUpdateContainer from './CampaignUpdateContainer'
 import CampaignUpdateForm from './CampaignUpdateForm'
 import CampaignUpdatePasswordForm from './CampaignUpdatePasswordForm'
 

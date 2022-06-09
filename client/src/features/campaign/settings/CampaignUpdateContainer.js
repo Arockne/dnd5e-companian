@@ -1,4 +1,4 @@
-import { Divider, Title } from '@mantine/core'
+import { Divider, Space, Title } from '@mantine/core'
 import React from 'react'
 import CampaignUpdateForm from './CampaignUpdateForm'
 import CampaignUpdatePasswordForm from './CampaignUpdatePasswordForm'
@@ -9,6 +9,7 @@ function CampaignUpdateContainer({ campaign, status, errors }) {
       <Title order={3}>Update Campaign</Title>
       <Divider />
       <CampaignUpdateForm campaign={campaign} status={status} errors={errors} />
+      <Space h="lg" />
       <Title order={3}>Update Password</Title>
       <Divider />
       <CampaignUpdatePasswordForm campaign={campaign} />

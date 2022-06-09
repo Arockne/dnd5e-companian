@@ -1,4 +1,4 @@
-import { Container } from '@mantine/core'
+import { Container, Space } from '@mantine/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CampaignDeleteContainer from './CampaignDeleteContainer'
@@ -14,6 +14,7 @@ function CampaignSettingsContainer() {
         status={status}
         errors={errors}
       />
+      <Space h="lg" />
       <CampaignDeleteContainer campaign={campaign} status={status} />
     </Container>
   )

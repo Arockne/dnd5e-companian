@@ -1,4 +1,13 @@
-import { Button, Group, List, PasswordInput, ThemeIcon } from '@mantine/core'
+import {
+  Box,
+  Button,
+  Divider,
+  Group,
+  List,
+  PasswordInput,
+  ThemeIcon,
+  Title,
+} from '@mantine/core'
 import React, { useState } from 'react'
 import { CircleCheck } from 'tabler-icons-react'
 import { client } from '../../../api/client'
@@ -48,47 +57,51 @@ function CampaignUpdatePasswordForm({ campaign }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <PasswordInput
-        required
-        label="Old password"
-        name="old_password"
-        value={formData.old_password}
-        onChange={handleChange}
-      />
-      <PasswordInput
-        required
-        label="New password"
-        name="new_password"
-        value={formData.new_password}
-        onChange={handleChange}
-      />
-      <PasswordInput
-        required
-        label="New password confirmation"
-        name="new_password_confirmation"
-        value={formData.new_password_confirmation}
-        onChange={handleChange}
-      />
-      {status === 'succeeded' ? (
-        <List
-          withPadding
-          size="sm"
-          mt="sm"
-          icon={
-            <ThemeIcon variant="light" color="teal" size={20} radius="xl">
-              <CircleCheck size={18} />
-            </ThemeIcon>
-          }
-        >
-          <List.Item>Password has successfully been changed</List.Item>
-        </List>
-      ) : null}
-      <FormErrorsContainer errors={errors} />
-      <Group position="left" mt="md">
-        <Button type="submit">Update password</Button>
-      </Group>
-    </form>
+    <Box>
+      <Title order={3}>Update Password</Title>
+      <Divider />
+      <form onSubmit={handleSubmit}>
+        <PasswordInput
+          required
+          label="Old password"
+          name="old_password"
+          value={formData.old_password}
+          onChange={handleChange}
+        />
+        <PasswordInput
+          required
+          label="New password"
+          name="new_password"
+          value={formData.new_password}
+          onChange={handleChange}
+        />
+        <PasswordInput
+          required
+          label="New password confirmation"
+          name="new_password_confirmation"
+          value={formData.new_password_confirmation}
+          onChange={handleChange}
+        />
+        {status === 'succeeded' ? (
+          <List
+            withPadding
+            size="sm"
+            mt="sm"
+            icon={
+              <ThemeIcon variant="light" color="teal" size={20} radius="xl">
+                <CircleCheck size={18} />
+              </ThemeIcon>
+            }
+          >
+            <List.Item>Password has successfully been changed</List.Item>
+          </List>
+        ) : null}
+        <FormErrorsContainer errors={errors} />
+        <Group position="left" mt="md">
+          <Button type="submit">Update password</Button>
+        </Group>
+      </form>
+    </Box>
   )
 }
 

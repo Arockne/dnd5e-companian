@@ -20,10 +20,14 @@ npm install --prefix client
 
 - Live Campaign Log
 - Add navigation to dropdown in phone view
-- Isolate campaigns in search to campaigns that are not affiliated with current user
-  - This includes:
-    - Currrent campaigns user has not joined
-    - Current campaigns user does not own
+- Campaign Search Page
+  - Add owner of campaign to card
+    - Add the ability to message owner
+      - when this gets added, need to change how to select a specific card
+  - Isolate campaigns in search to campaigns that are not affiliated with current user
+    - This includes:
+      - Currrent campaigns user has not joined
+      - Current campaigns user does not own
 - Implement server search pagination for campaigns
 - User's Characters
   - Search

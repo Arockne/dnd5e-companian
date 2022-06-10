@@ -24,6 +24,7 @@ import {
 } from 'tabler-icons-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../user/state/userSlice'
+import MainHeaderBurgerMenu from './MainHeaderBurgerMenu'
 
 const useStyles = createStyles((theme) => {
   return {
@@ -164,7 +165,7 @@ function MainHeader() {
             </Anchor>
           </Group>
 
-          <Group position="apart">
+          <Group>
             <Menu
               size={260}
               placement="end"
@@ -244,7 +245,7 @@ function MainHeader() {
             padding="xl"
             size="xl"
           >
-            {}
+            <MainHeaderBurgerMenu user={user} toggleOpened={toggleOpened} />
           </Drawer>
         </Container>
       </Header>

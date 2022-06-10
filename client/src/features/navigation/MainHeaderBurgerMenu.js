@@ -1,19 +1,12 @@
-import {
-  Anchor,
-  Avatar,
-  Group,
-  Text,
-  Button,
-  Divider,
-  Space,
-  Stack,
-  Container,
-} from '@mantine/core'
+import { Avatar, Group, Text, Button, Divider } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Book2, Logout, Settings, Swords } from 'tabler-icons-react'
+import { useDispatch } from 'react-redux'
+import { logoutUser } from '../user/state/userSlice'
 
 function MainHeaderBurgerMenu({ user, toggleOpened }) {
+  const dispatch = useDispatch()
   return (
     <Group
       direction="column"
@@ -64,6 +57,14 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
         Campaigns
       </Button>
       <Divider label="Settings" labelPosition="center" />
+      <Button
+        onClick={() => {
+          dispatch(logoutUser())
+        }}
+      >
+        <Logout size={14} />
+        Logout
+      </Button>
     </Group>
   )
 }

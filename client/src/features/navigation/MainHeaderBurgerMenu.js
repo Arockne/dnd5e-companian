@@ -1,43 +1,43 @@
-import { Anchor, Avatar, Group, Text } from '@mantine/core'
+import { Anchor, Avatar, Group, Text, Button } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Book2, Logout, Settings, Swords } from 'tabler-icons-react'
 
 function MainHeaderBurgerMenu({ user, toggleOpened }) {
   return (
-    <Group direction="column" position="center">
+    <Group direction="column" position="center" spacing={0} radius="lg" grow>
       <Group spacing={7}>
         <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
         <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
           {user.username}
         </Text>
       </Group>
-      <Anchor
+      <Button
         component={Link}
         to={'/campaigns/create'}
         onClick={() => toggleOpened()}
       >
         Create Campaign
-      </Anchor>
-      <Anchor
+      </Button>
+      <Button
         component={Link}
         to={'/campaigns/search'}
         onClick={() => toggleOpened()}
       >
         Search Campaigns
-      </Anchor>
-      <Anchor
+      </Button>
+      <Button
         component={Link}
         to={'/characters'}
         onClick={() => toggleOpened()}
       >
         <Book2 size={14} />
         Characters
-      </Anchor>
-      <Anchor component={Link} to={'/campaigns'} onClick={() => toggleOpened()}>
+      </Button>
+      <Button component={Link} to={'/campaigns'} onClick={() => toggleOpened()}>
         <Swords size={14} />
         Campaigns
-      </Anchor>
+      </Button>
     </Group>
   )
 }

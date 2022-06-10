@@ -1,7 +1,14 @@
 import { Avatar, Group, Text, Button, Divider, Space } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Book2, Logout, Settings, Swords } from 'tabler-icons-react'
+import {
+  Book2,
+  Logout,
+  Settings,
+  Swords,
+  MapSearch,
+  World,
+} from 'tabler-icons-react'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../user/state/userSlice'
 
@@ -29,7 +36,10 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
         onClick={() => toggleOpened()}
         radius={0}
       >
-        Create Campaign
+        <Group spacing={7}>
+          <World size={14} />
+          <Text>Create Campaign</Text>
+        </Group>
       </Button>
       <Button
         component={Link}
@@ -37,7 +47,10 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
         onClick={() => toggleOpened()}
         radius={0}
       >
-        Search Campaigns
+        <Group spacing={7}>
+          <MapSearch size={14} />
+          <Text>Search Campaigns</Text>
+        </Group>
       </Button>
       <Divider label="User Resources" labelPosition="center" />
       <Button
@@ -46,8 +59,10 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
         onClick={() => toggleOpened()}
         radius={0}
       >
-        <Book2 size={14} />
-        Characters
+        <Group spacing={7}>
+          <Book2 size={14} />
+          <Text>Characters</Text>
+        </Group>
       </Button>
       <Button
         component={Link}
@@ -55,8 +70,10 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
         onClick={() => toggleOpened()}
         radius={0}
       >
-        <Swords size={14} />
-        Campaigns
+        <Group spacing={7}>
+          <Swords size={14} />
+          <Text>Campaigns</Text>
+        </Group>
       </Button>
       <Divider label="Settings" labelPosition="center" />
       <Button
@@ -64,8 +81,10 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
           dispatch(logoutUser())
         }}
       >
-        <Logout size={14} />
-        Logout
+        <Group spacing={7}>
+          <Logout size={14} />
+          <Text>Logout</Text>
+        </Group>
       </Button>
     </Group>
   )

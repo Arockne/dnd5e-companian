@@ -1,4 +1,4 @@
-import { Avatar, Group, Text, Button, Divider } from '@mantine/core'
+import { Avatar, Group, Text, Button, Divider, Space } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Book2, Logout, Settings, Swords } from 'tabler-icons-react'
@@ -16,11 +16,13 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
       style={{ maxWidth: 500, margin: '0 auto' }}
     >
       <Group spacing={7}>
-        <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
-        <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+        <Avatar src={user.image} alt={user.name} radius="xl" size={40} />
+        <Text weight={500} size="md" sx={{ lineHeight: 0 }}>
           {user.username}
         </Text>
       </Group>
+      <Divider />
+      <Space h="md" />
       <Button
         component={Link}
         to={'/campaigns/create'}

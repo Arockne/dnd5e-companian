@@ -23,6 +23,7 @@ export function CharacterOverview({ character }) {
             <Grid.Col>
               <Group position="center">
                 <Image
+                  src={character?.image_url}
                   alt="Character image"
                   withPlaceholder={true}
                   radius="lg"

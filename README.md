@@ -19,7 +19,6 @@ npm install --prefix client
 ## Future Feature Implementations:
 
 - Live Campaign Log
-- Add navigation to dropdown in phone view
 - Campaign Search Page
   - Add owner of campaign to card
     - Add the ability to message owner

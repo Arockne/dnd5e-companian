@@ -13,7 +13,7 @@ function MainHeaderBurgerMenu({ user, toggleOpened }) {
       position="center"
       spacing={0}
       grow
-      style={{ width: 500, margin: '0 auto' }}
+      style={{ maxWidth: 500, margin: '0 auto' }}
     >
       <Group spacing={7}>
         <Avatar src={user.image} alt={user.name} radius="xl" size={20} />

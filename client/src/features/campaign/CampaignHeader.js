@@ -60,7 +60,7 @@ export function CampaignHeader({ campaign, owner }) {
   return (
     <Grid grow style={{ margin: '0 150px' }}>
       <Grid.Col span={1}>
-        <Stack>
+        <Stack spacing={0}>
           <NavLink
             to={`/campaigns/${campaign?.id}`}
             className={({ isActive }) =>

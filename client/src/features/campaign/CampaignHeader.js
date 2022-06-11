@@ -25,9 +25,9 @@ const useStyles = createStyles((theme) => ({
     lineHeight: 1.2,
     fontSize: theme.fontSizes.sm,
     padding: theme.spacing.xs,
-    borderTopLeftRadius: theme.radius.sm,
-    borderBottomLeftRadius: theme.radius.sm,
-    borderRight: `1px solid ${
+    borderTopRightRadius: theme.radius.sm,
+    borderBottomRightRadius: theme.radius.sm,
+    borderLeft: `1px solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
 
@@ -40,7 +40,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   linkActive: {
-    borderRightColor:
+    borderLeftColor:
       theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 6 : 7],
     color:
       theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 2 : 7],
@@ -61,6 +61,10 @@ export function CampaignHeader({ campaign, owner }) {
     <Grid grow style={{ margin: '0 150px' }}>
       <Grid.Col span={1}>
         <Stack spacing={0}>
+          <Group position="left">
+            <Title order={4}>{campaign?.name}</Title>
+          </Group>
+          <Divider />
           <NavLink
             to={`/campaigns/${campaign?.id}`}
             className={({ isActive }) =>

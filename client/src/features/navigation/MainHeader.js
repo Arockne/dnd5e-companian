@@ -8,13 +8,12 @@ import {
   Text,
   Menu,
   Burger,
-  Anchor,
   Header,
   Title,
   Drawer,
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import {
   Logout,
   Settings,
@@ -44,6 +43,7 @@ const useStyles = createStyles((theme) => {
     },
 
     links: {
+      display: 'flex',
       [theme.fn.smallerThan('sm')]: {
         display: 'none',
       },
@@ -138,32 +138,28 @@ function MainHeader() {
           >
             D&D 5e Companion
           </Title>
-          <Group spacing={5} className={classes.links}>
-            <Anchor
-              component={Link}
+          <Container className={classes.links}>
+            <NavLink
               to={'/campaigns/create'}
-              className={cx(classes.link, {
-                [classes.linkActive]: active === '/campaigns/create',
-              })}
-              onClick={() => {
-                setActive('/campaigns/create')
-              }}
+              className={({ isActive }) =>
+                cx(classes.link, {
+                  [classes.linkActive]: isActive,
+                })
+              }
             >
               Create Campaign
-            </Anchor>
-            <Anchor
-              component={Link}
+            </NavLink>
+            <NavLink
               to={'/campaigns/search'}
-              className={cx(classes.link, {
-                [classes.linkActive]: active === '/campaigns/search',
-              })}
-              onClick={() => {
-                setActive('/campaigns/search')
-              }}
+              className={({ isActive }) =>
+                cx(classes.link, {
+                  [classes.linkActive]: isActive,
+                })
+              }
             >
               Search Campaigns
-            </Anchor>
-          </Group>
+            </NavLink>
+          </Container>
 
           <Group>
             <Menu
@@ -197,9 +193,6 @@ function MainHeader() {
               <Menu.Item
                 component={Link}
                 to="/characters"
-                onClick={() => {
-                  setActive('/characters')
-                }}
                 icon={<Book2 size={14} />}
               >
                 Characters
@@ -207,9 +200,6 @@ function MainHeader() {
               <Menu.Item
                 component={Link}
                 to="/campaigns"
-                onClick={() => {
-                  setActive('/campaigns')
-                }}
                 icon={<Swords size={14} />}
               >
                 Campaigns

@@ -117,7 +117,6 @@ const useStyles = createStyles((theme) => {
 function MainHeader() {
   const [opened, toggleOpened] = useBooleanToggle(false)
   const [userMenuOpened, setUserMenuOpened] = useState(false)
-  const [active, setActive] = useState('')
   const { classes, theme, cx } = useStyles()
   const { user } = useSelector(({ user }) => user)
 
@@ -127,15 +126,7 @@ function MainHeader() {
     <>
       <Header height={60} mb={10}>
         <Container className={classes.header}>
-          <Title
-            component={Link}
-            to="/"
-            order={2}
-            className={classes.title}
-            onClick={() => {
-              setActive('/')
-            }}
-          >
+          <Title component={Link} to="/" order={2} className={classes.title}>
             D&D 5e Companion
           </Title>
           <Container className={classes.links}>

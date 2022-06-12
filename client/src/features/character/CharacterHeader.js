@@ -85,7 +85,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
   return (
-    <Grid grow>
+    <Grid grow style={{ margin: '0' }}>
       <Grid.Col span={1}>
         <Navbar height={700} width={{ sm: 300 }} p="md">
           <Navbar.Section grow>

@@ -6,6 +6,7 @@ import CampaignHeader from './CampaignHeader'
 import CampaignOverview from './CampaignOverview'
 import { getCampaign } from './campaignSlice'
 import CampaignSettingsContainer from './settings/CampaignSettingsContainer'
+import CharacterForm from '../character/CharacterForm'
 
 function Campaign() {
   const { campaign_id } = useParams()
@@ -29,6 +30,7 @@ function Campaign() {
         element={<CampaignHeader campaign={campaign} owner={owner} />}
       >
         <Route index element={<CampaignOverview />} />
+        <Route path="/characters/create" element={<CharacterForm />} />
         {owner ? (
           <Route path="settings" element={<CampaignSettingsContainer />} />
         ) : null}

@@ -16,7 +16,7 @@ function CampaignSearchContainer() {
   const [searchByName, setSearchByName] = useState('')
   const [activePage, setActivePage] = useState(1)
   const dispatch = useDispatch()
-  const { campaigns } = useSelector((state) => state.campaignSearch)
+  const { campaigns, status } = useSelector((state) => state.campaignSearch)
 
   useEffect(() => {
     dispatch(getCampaigns())
@@ -66,7 +66,7 @@ function CampaignSearchContainer() {
         />
       </Container>
       <Group style={{ width: '100vw' }} position="center">
-        {campaigns ? (
+        {status !== 'loading' ? (
           campaignsPerPage?.map((campaign) => (
             <CampaignSearchCard key={campaign.id} campaign={campaign} />
           ))

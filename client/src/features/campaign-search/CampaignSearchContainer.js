@@ -8,6 +8,7 @@ import {
   Pagination,
   Grid,
   Group,
+  Loader,
 } from '@mantine/core'
 import CampaignSearchCard from './CampaignSearchCard'
 
@@ -65,9 +66,15 @@ function CampaignSearchContainer() {
         />
       </Container>
       <Group style={{ width: '100vw' }} position="center">
-        {campaignsPerPage?.map((campaign) => (
-          <CampaignSearchCard key={campaign.id} campaign={campaign} />
-        ))}
+        {campaigns ? (
+          campaignsPerPage?.map((campaign) => (
+            <CampaignSearchCard key={campaign.id} campaign={campaign} />
+          ))
+        ) : (
+          <Group position="center">
+            <Loader size="xl" />
+          </Group>
+        )}
       </Group>
       <Container>
         <Pagination

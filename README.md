@@ -33,8 +33,16 @@ npm install --prefix client
     - will create query based on search parameters
   - Server side pagination to load more when user scrolls down
     - Will render from most recent created
-
-
+- Character form
+  - implement stepper
+- Character Navigation & Campaign Navigation
+  - on a specific screen size
+    - render an arrow to the top left of the page
+      - initially this arrow will be pointing right
+      - when clicked 
+        - this will also have the arrow pointing left
+        - this will open a drawer that will have all the navigation related to the current page
+        - when a link is clicked will close the drawer
 ## Bugs that need to be stomped
 
 ## Deployment Instructions

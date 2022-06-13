@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { client } from '../../api/client'
 import FormErrorsContainer from '../error/FormErrorsContainer'
 import { createCampaign, reset, resetErrors } from './campaignSlice'
 
@@ -20,35 +21,34 @@ function CampaignForm() {
     setting: '',
     password: '',
   })
+  const [status, setStatus] = useState('idle')
+  const [errors, setErrors] = useState([])
 
-  const { status, errors, campaign } = useSelector((state) => state.campaign)
-
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    dispatch(reset())
-  }, [])
-
-  useEffect(() => {
-    if (status === 'succeeded') {
-      dispatch(resetErrors())
-      navigate(`/campaigns/${campaign.id}`)
-    }
-  }, [status])
 
   function handleChange(e) {
     if (status === 'failed') {
-      dispatch(resetErrors())
+      setErrors([])
+      setStatus('idle')
     }
     const { name, value } = e.target
     const updatedFormData = { ...formData, [name]: value }
     setFormData(updatedFormData)
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    dispatch(createCampaign(formData))
+    setStatus('loading')
+    const response = await client.post(`/api/campaigns/`, {
+      campaign: formData,
+    })
+    const body = await response.json()
+    if (response.ok) {
+      navigate(`/campaigns/${body.id}`)
+    } else {
+      setStatus('failed')
+      setErrors(body.errors)
+    }
   }
 
   return (

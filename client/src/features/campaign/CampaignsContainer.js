@@ -1,6 +1,7 @@
 import { Container, Group, Loader, Stack, Title } from '@mantine/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../common/Loading'
 import { getCurrentCampaigns } from './campaignSlice'
 import CampaignsTable from './CampaignsTable'
 
@@ -30,9 +31,7 @@ function CampaignsContainer() {
       </Container>
     </Stack>
   ) : (
-    <Group position="center">
-      <Loader size="xl" />
-    </Group>
+    <Loading />
   )
 }
 

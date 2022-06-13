@@ -1,6 +1,7 @@
 import { Group, Loader, Stack, Title } from '@mantine/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../common/Loading'
 import { getCharacters } from './characterSlice'
 import CharactersTable from './CharactersTable'
 
@@ -17,9 +18,7 @@ function CharactersContainer() {
       {status !== 'loading' ? (
         <CharactersTable characters={characters} />
       ) : (
-        <Group position="center">
-          <Loader size="xl" />
-        </Group>
+        <Loading />
       )}
     </Stack>
   )

@@ -1,13 +1,6 @@
-import {
-  Avatar,
-  createStyles,
-  Group,
-  ScrollArea,
-  Table,
-  Text,
-} from '@mantine/core'
+import { createStyles, ScrollArea, Table } from '@mantine/core'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import CharactersTableRow from './CharactersTableRow'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -40,44 +33,6 @@ const useStyles = createStyles((theme) => ({
 function CharactersTable({ characters }) {
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
-  const navigate = useNavigate()
-
-  const rows = characters?.map((character) => (
-    <tr
-      key={character.id}
-      style={{ cursor: 'pointer' }}
-      onClick={() =>
-        navigate(
-          `/campaigns/${character.campaign.id}/characters/${character.id}`
-        )
-      }
-    >
-      <td>
-        <Group spacing="xs">
-          <Avatar size={26} src={character.image_url} radius={26} />
-          <Text size="xs" weight={500}>
-            {character.name}
-          </Text>
-        </Group>
-      </td>
-      <td>
-        <Text size="xs" weight={500}>
-          {character.profession}
-        </Text>
-      </td>
-      <td>{character?.strength}</td>
-      <td>{character?.dexterity}</td>
-      <td>{character?.constitution}</td>
-      <td>{character?.intelligence}</td>
-      <td>{character?.wisdom}</td>
-      <td>{character?.charisma}</td>
-      <td>
-        <Text size="xs" weight={500}>
-          {character.campaign.name}
-        </Text>
-      </td>
-    </tr>
-  ))
 
   return (
     <ScrollArea
@@ -98,7 +53,11 @@ function CharactersTable({ characters }) {
             <th>Campaign</th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody>
+          {characters?.map((character) => (
+            <CharactersTableRow key={character.id} character={character} />
+          ))}
+        </tbody>
       </Table>
     </ScrollArea>
   )

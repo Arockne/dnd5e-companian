@@ -9,11 +9,9 @@ import {
   Text,
   useMantineTheme,
 } from '@mantine/core'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
-import { joinCampaign, reset } from '../campaign-user/campaignUserSlice'
 import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function CampaignSearchCard({ campaign }) {
@@ -22,9 +20,6 @@ function CampaignSearchCard({ campaign }) {
   const [errors, setErrors] = useState([])
   const [status, setStatus] = useState('idle')
   const theme = useMantineTheme()
-  // const { status } = useSelector((state) => state.campaignUser)
-
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const secondaryColor =

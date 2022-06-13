@@ -54,6 +54,15 @@ user_1.campaign_users.create!(campaign: campaign_2)
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
 end
 
+20.times do 
+  Campaign.create(
+    name: Faker::Games::Zelda.location, 
+    setting: Faker::Lorem.paragraphs(number: 20).join(' '), 
+    owner: users[rand(0..2)], 
+    password: 'test123',
+  )
+end
+
 def roll_stat()
   dice = []
   dice_amount = 4
@@ -92,6 +101,8 @@ Campaign.all.each_entry do |campaign|
       )
   end
 end
+
+
 
 
 puts 'finished seeding 🌹'

@@ -1,5 +1,10 @@
 import userEvent from '@testing-library/user-event'
-import { screen, render, waitFor } from '../../../utils/test-utils'
+import {
+  screen,
+  render,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '../../../utils/test-utils'
 import { handlers } from '../../../__mocks__/user'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
@@ -81,6 +86,8 @@ test('when switching from signup to login, errors should not exist from the prev
   )
 
   render(<Login />, { route: '/signup' })
+
+  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
 
   const signupFormUsername = screen.getByRole('textbox', { name: /username/i })
   const signupFormEmail = screen.getByRole('textbox', { name: /email/i })

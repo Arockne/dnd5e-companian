@@ -7,12 +7,10 @@ import {
   Textarea,
   TextInput,
 } from '@mantine/core'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
 import FormErrorsContainer from '../error/FormErrorsContainer'
-import { createCampaign, reset, resetErrors } from './campaignSlice'
 
 function CampaignForm() {
   const [formData, setFormData] = useState({

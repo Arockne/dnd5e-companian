@@ -54,14 +54,14 @@ test('when switching from login to signup, errors should not exist from the prev
   const loginFormPassword = screen.getByLabelText(/password \*/i)
   const loginFormSubmit = screen.getByRole('button', /sign/i)
 
-  userEvent.type(loginFormUsername, userInput.username)
-  userEvent.type(loginFormPassword, userInput.password)
-  userEvent.click(loginFormSubmit)
+  await userEvent.type(loginFormUsername, userInput.username)
+  await userEvent.type(loginFormPassword, userInput.password)
+  await userEvent.click(loginFormSubmit)
 
   await waitFor(() => expect(screen.getByText(/invalid/i)))
   expect(screen.getByText(/invalid/i)).toBeInTheDocument()
 
-  userEvent.click(screen.getByText(/create/i))
+  await userEvent.click(screen.getByText(/create/i))
 
   await waitFor(() => {
     expect(screen.queryByText(/invalid/i)).not.toBeInTheDocument()
@@ -87,8 +87,6 @@ test('when switching from signup to login, errors should not exist from the prev
 
   render(<Login />, { route: '/signup' })
 
-  await waitForElementToBeRemoved(() => screen.getByRole('presentation'))
-
   const signupFormUsername = screen.getByRole('textbox', { name: /username/i })
   const signupFormEmail = screen.getByRole('textbox', { name: /email/i })
   const signupFormPassword = screen.getByLabelText(/password \*/i)
@@ -100,7 +98,7 @@ test('when switching from signup to login, errors should not exist from the prev
 
   expect(signUpFormSubmit).toBeEnabled()
 
-  userEvent.click(signUpFormSubmit)
+  await userEvent.click(signUpFormSubmit)
 
   await waitFor(() => {
     expect(screen.getByText(/username must be/i)).toBeInTheDocument()

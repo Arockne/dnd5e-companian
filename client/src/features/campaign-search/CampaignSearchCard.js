@@ -12,14 +12,16 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { client } from '../../api/client'
 import { joinCampaign, reset } from '../campaign-user/campaignUserSlice'
 import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState([])
   const theme = useMantineTheme()
-  const { status, errors } = useSelector((state) => state.campaignUser)
+  const { status } = useSelector((state) => state.campaignUser)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -30,14 +32,26 @@ function CampaignSearchCard({ campaign }) {
   const { setting, name, image_url, id } = campaign
   const enabled = password.length > 0
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    dispatch(joinCampaign({ id: campaign.id, password }))
+    const response = await client.post(`/api/campaigns/${id}/campaign_users`, {
+      campaign: {
+        id: campaign.id,
+        password,
+      },
+    })
+
+    if (response.ok) {
+      navigate(`/campaigns/${id}`)
+    } else {
+      const body = await response.json()
+      setErrors(body.errors)
+    }
   }
 
   function handleChange(e) {
-    if (status === 'failed') {
-      dispatch(reset())
+    if (errors.length > 0) {
+      setErrors([])
     }
     setPassword(e.target.value)
   }
@@ -48,14 +62,6 @@ function CampaignSearchCard({ campaign }) {
     }
     setOpened(false)
   }
-
-  useEffect(() => {
-    if (status === 'succeeded') {
-      setOpened(false)
-      dispatch(reset())
-      navigate(`/campaigns/${id}`)
-    }
-  }, [status])
 
   return (
     <>

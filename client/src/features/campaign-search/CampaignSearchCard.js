@@ -20,8 +20,9 @@ function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState([])
+  const [status, setStatus] = useState('idle')
   const theme = useMantineTheme()
-  const { status } = useSelector((state) => state.campaignUser)
+  // const { status } = useSelector((state) => state.campaignUser)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ function CampaignSearchCard({ campaign }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    setStatus('loading')
     const response = await client.post(`/api/campaigns/${id}/campaign_users`, {
       campaign: {
         id: campaign.id,
@@ -45,12 +47,14 @@ function CampaignSearchCard({ campaign }) {
       navigate(`/campaigns/${id}`)
     } else {
       const body = await response.json()
+      setStatus('failed')
       setErrors(body.errors)
     }
   }
 
   function handleChange(e) {
-    if (errors.length > 0) {
+    if (status === 'failed') {
+      setStatus('idle')
       setErrors([])
     }
     setPassword(e.target.value)
@@ -58,7 +62,8 @@ function CampaignSearchCard({ campaign }) {
 
   function handleClose() {
     if (status === 'failed') {
-      dispatch(reset())
+      setStatus('idle')
+      setErrors([])
     }
     setOpened(false)
   }

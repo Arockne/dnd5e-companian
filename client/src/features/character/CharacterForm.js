@@ -32,12 +32,27 @@ function CharacterForm() {
   const [intelligence, setIntelligence] = useState(0)
   const [wisdom, setWisdom] = useState(0)
   const [charisma, setCharisma] = useState(0)
+  const [race, setRace] = useState('')
 
   function handleChange(e) {
     const { name, value } = e.target
     const updatedForm = { ...form, [name]: value }
     setForm(updatedForm)
   }
+
+  //Dragonborn Gnome Half-Elf Half-Orc Tiefling
+
+  const races = [
+    { value: 'Dwarf', label: 'Dwarf' },
+    { value: 'Elf', label: 'Elf' },
+    { value: 'Halfling', label: 'Halfling' },
+    { value: 'Human', label: 'Human' },
+    { value: 'Dragonborn', label: 'Dragonborn' },
+    { value: 'Gnome', label: 'Gnome' },
+    { value: 'Half-Elf', label: 'Half-Elf' },
+    { value: 'Half-Orc', label: 'Half-Orc' },
+    { value: 'Tiefling', label: 'Tiefling' },
+  ]
 
   return (
     <form>
@@ -68,8 +83,14 @@ function CharacterForm() {
         value={form.backstory}
         onChange={handleChange}
       />
-      {/* <Select label="Race" name="race" value={form.race} onChange={handleChange} />
-      <Select label="Class" name="profession" value={form.profession} onChange={handleChange} />
+      <Select
+        label="Race"
+        name="race"
+        data={races}
+        value={race}
+        onChange={setRace}
+      />
+      {/* <Select label="Class" name="profession" value={form.profession} onChange={handleChange} />
       <Select label="Background" name="background" value={form.background} onChange={handleChange} />
       <Select label="Alignment" name="alignment" value={form.alignment} onChange={handleChange} />
       <Select label="Gender" name="gender" value={form.gender} onChange={handleChange} /> */}

@@ -35,6 +35,7 @@ function CharacterForm() {
   const [race, setRace] = useState('')
   const [profession, setProfession] = useState('')
   const [background, setBackground] = useState('')
+  const [alignment, setAlignment] = useState('')
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -83,6 +84,18 @@ function CharacterForm() {
     { value: 'Sailor', label: 'Sailor' },
     { value: 'Soldier', label: 'Soldier' },
     { value: 'Urchin', label: 'Urchin' },
+  ]
+
+  const alignments = [
+    { value: 'Lawful Good', label: 'Lawful Good' },
+    { value: 'Neutral Good', label: 'Neutral Good' },
+    { value: 'Chaotic Good', label: 'Chaotic Good' },
+    { value: 'Lawful Neutral', label: 'Lawful Neutral' },
+    { value: 'Neutral', label: 'Neutral' },
+    { value: 'Chaotic Neutral', label: 'Chaotic Neutral' },
+    { value: 'Lawful Evil', label: 'Lawful Evil' },
+    { value: 'Neutral Evil', label: 'Neutral Evil' },
+    { value: 'Chaotic Evil', label: 'Chaotic Evil' },
   ]
 
   return (
@@ -135,8 +148,14 @@ function CharacterForm() {
         value={background}
         onChange={setBackground}
       />
-      {/* <Select label="Alignment" name="alignment" value={form.alignment} onChange={handleChange} />
-      <Select label="Gender" name="gender" value={form.gender} onChange={handleChange} /> */}
+      <Select
+        label="Alignment"
+        name="alignment"
+        data={alignments}
+        value={alignment}
+        onChange={setAlignment}
+      />
+      {/* <Select label="Gender" name="gender" value={form.gender} onChange={handleChange} /> */}
       <NumberInput label="Age" name="age" value={age} onChange={setAge} />
       <NumberInput
         label="Height"

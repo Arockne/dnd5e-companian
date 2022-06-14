@@ -33,14 +33,13 @@ function CharacterForm() {
   const [wisdom, setWisdom] = useState(0)
   const [charisma, setCharisma] = useState(0)
   const [race, setRace] = useState('')
+  const [profession, setProfession] = useState('')
 
   function handleChange(e) {
     const { name, value } = e.target
     const updatedForm = { ...form, [name]: value }
     setForm(updatedForm)
   }
-
-  //Dragonborn Gnome Half-Elf Half-Orc Tiefling
 
   const races = [
     { value: 'Dwarf', label: 'Dwarf' },
@@ -52,6 +51,23 @@ function CharacterForm() {
     { value: 'Half-Elf', label: 'Half-Elf' },
     { value: 'Half-Orc', label: 'Half-Orc' },
     { value: 'Tiefling', label: 'Tiefling' },
+  ]
+
+  // Warlock Wizard
+
+  const professions = [
+    { value: 'Barbarian', label: 'Barbarian' },
+    { value: 'Bard', label: 'Bard' },
+    { value: 'Cleric', label: 'Cleric' },
+    { value: 'Druid', label: 'Druid' },
+    { value: 'Fighter', label: 'Fighter' },
+    { value: 'Monk', label: 'Monk' },
+    { value: 'Paladin', label: 'Paladin' },
+    { value: 'Ranger', label: 'Ranger' },
+    { value: 'Rogue', label: 'Rogue' },
+    { value: 'Sorcerer', label: 'Sorcerer' },
+    { value: 'Warlock', label: 'Warlock' },
+    { value: 'Wizard', label: 'Wizard' },
   ]
 
   return (
@@ -90,8 +106,14 @@ function CharacterForm() {
         value={race}
         onChange={setRace}
       />
-      {/* <Select label="Class" name="profession" value={form.profession} onChange={handleChange} />
-      <Select label="Background" name="background" value={form.background} onChange={handleChange} />
+      <Select
+        label="Class"
+        name="profession"
+        data={professions}
+        value={profession}
+        onChange={setProfession}
+      />
+      {/* <Select label="Background" name="background" value={form.background} onChange={handleChange} />
       <Select label="Alignment" name="alignment" value={form.alignment} onChange={handleChange} />
       <Select label="Gender" name="gender" value={form.gender} onChange={handleChange} /> */}
       <NumberInput label="Age" name="age" value={age} onChange={setAge} />

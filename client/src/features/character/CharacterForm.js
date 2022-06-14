@@ -1,21 +1,17 @@
 import {
-  Alert,
   Button,
   ColorInput,
-  Dialog,
   Group,
   NumberInput,
   Select,
-  Text,
   Textarea,
   TextInput,
 } from '@mantine/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { AlertCircle } from 'tabler-icons-react'
 import { client } from '../../api/client'
-import FormErrorsContainer from '../error/FormErrorsContainer'
+import DialogPopUpErrors from '../error/DialogPopUpErrors'
 
 function CharacterForm() {
   const [form, setForm] = useState({
@@ -275,30 +271,7 @@ function CharacterForm() {
         value={charisma}
         onChange={setCharisma}
       />
-
-      <Dialog
-        opened={errors.length > 0}
-        size="md"
-        style={{ padding: 0, backgroundColor: 'transparent' }}
-      >
-        {errors.map((error, i) => {
-          return (
-            <Alert
-              key={error}
-              icon={<AlertCircle size={16} />}
-              title="Bummer!"
-              color="red"
-              variant="outline"
-              withCloseButton
-              onClose={() =>
-                setErrors([...errors.slice(0, i), ...errors.slice(i + 1)])
-              }
-            >
-              <Text size="xs">{error}</Text>
-            </Alert>
-          )
-        })}
-      </Dialog>
+      <DialogPopUpErrors errors={errors} setErrors={setErrors} />
       <Group position="left" mt="md">
         <Button type="submit">Create Character</Button>
       </Group>

@@ -140,6 +140,8 @@ function CharacterForm() {
         data={races}
         value={race}
         onChange={setRace}
+        searchable
+        nothingFound="Race not found"
       />
       <Select
         label="Class"
@@ -147,6 +149,8 @@ function CharacterForm() {
         data={professions}
         value={profession}
         onChange={setProfession}
+        searchable
+        nothingFound="Class not found"
       />
       <Select
         label="Background"
@@ -154,6 +158,8 @@ function CharacterForm() {
         data={backgrounds}
         value={background}
         onChange={setBackground}
+        searchable
+        nothingFound="Background not found"
       />
       <Select
         label="Alignment"
@@ -161,6 +167,8 @@ function CharacterForm() {
         data={alignments}
         value={alignment}
         onChange={setAlignment}
+        searchable
+        nothingFound="Alignment not found"
       />
       <Select
         label="Gender"
@@ -168,6 +176,8 @@ function CharacterForm() {
         data={genders}
         value={gender}
         onChange={setGender}
+        searchable
+        nothingFound="Gender not found"
       />
       <NumberInput label="Age" name="age" value={age} onChange={setAge} />
       <NumberInput

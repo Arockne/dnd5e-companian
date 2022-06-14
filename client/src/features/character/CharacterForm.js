@@ -36,6 +36,7 @@ function CharacterForm() {
   const [profession, setProfession] = useState('')
   const [background, setBackground] = useState('')
   const [alignment, setAlignment] = useState('')
+  const [gender, setGender] = useState('')
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -98,6 +99,12 @@ function CharacterForm() {
     { value: 'Chaotic Evil', label: 'Chaotic Evil' },
   ]
 
+  const genders = [
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+    { value: 'Non-binary', label: 'Non-binary' },
+  ]
+
   return (
     <form>
       <TextInput
@@ -155,7 +162,13 @@ function CharacterForm() {
         value={alignment}
         onChange={setAlignment}
       />
-      {/* <Select label="Gender" name="gender" value={form.gender} onChange={handleChange} /> */}
+      <Select
+        label="Gender"
+        name="gender"
+        data={genders}
+        value={gender}
+        onChange={setGender}
+      />
       <NumberInput label="Age" name="age" value={age} onChange={setAge} />
       <NumberInput
         label="Height"

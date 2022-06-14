@@ -43,7 +43,6 @@ function CharacterForm() {
   const [alignment, setAlignment] = useState('')
   const [gender, setGender] = useState('')
 
-  const [status, setStatus] = useState('idle')
   const [errors, setErrors] = useState([])
 
   const navigate = useNavigate()
@@ -140,7 +139,6 @@ function CharacterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    setStatus('loading')
     const response = await client.post(
       `/api/campaigns/${campaign?.id}/characters/`,
       characterData
@@ -150,7 +148,6 @@ function CharacterForm() {
     if (response.ok) {
       navigate(`/campaigns/${campaign?.id}/characters/${body.id}`)
     } else {
-      setStatus('failed')
       setErrors(body.errors)
     }
   }

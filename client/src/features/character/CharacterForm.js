@@ -34,6 +34,7 @@ function CharacterForm() {
   const [charisma, setCharisma] = useState(0)
   const [race, setRace] = useState('')
   const [profession, setProfession] = useState('')
+  const [background, setBackground] = useState('')
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -53,8 +54,6 @@ function CharacterForm() {
     { value: 'Tiefling', label: 'Tiefling' },
   ]
 
-  // Warlock Wizard
-
   const professions = [
     { value: 'Barbarian', label: 'Barbarian' },
     { value: 'Bard', label: 'Bard' },
@@ -68,6 +67,22 @@ function CharacterForm() {
     { value: 'Sorcerer', label: 'Sorcerer' },
     { value: 'Warlock', label: 'Warlock' },
     { value: 'Wizard', label: 'Wizard' },
+  ]
+
+  const backgrounds = [
+    { value: 'Acolyte', label: 'Acolyte' },
+    { value: 'Charlatan', label: 'Charlatan' },
+    { value: 'Criminal', label: 'Criminal' },
+    { value: 'Entertainer', label: 'Entertainer' },
+    { value: 'Folk Hero', label: 'Folk Hero' },
+    { value: 'Guild Artisan', label: 'Guild Artisan' },
+    { value: 'Hermit', label: 'Hermit' },
+    { value: 'Noble', label: 'Noble' },
+    { value: 'Outlander', label: 'Outlander' },
+    { value: 'Sage', label: 'Sage' },
+    { value: 'Sailor', label: 'Sailor' },
+    { value: 'Soldier', label: 'Soldier' },
+    { value: 'Urchin', label: 'Urchin' },
   ]
 
   return (
@@ -113,8 +128,14 @@ function CharacterForm() {
         value={profession}
         onChange={setProfession}
       />
-      {/* <Select label="Background" name="background" value={form.background} onChange={handleChange} />
-      <Select label="Alignment" name="alignment" value={form.alignment} onChange={handleChange} />
+      <Select
+        label="Background"
+        name="background"
+        data={backgrounds}
+        value={background}
+        onChange={setBackground}
+      />
+      {/* <Select label="Alignment" name="alignment" value={form.alignment} onChange={handleChange} />
       <Select label="Gender" name="gender" value={form.gender} onChange={handleChange} /> */}
       <NumberInput label="Age" name="age" value={age} onChange={setAge} />
       <NumberInput

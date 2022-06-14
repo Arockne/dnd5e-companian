@@ -1,11 +1,16 @@
 import {
+  Button,
   ColorInput,
+  Group,
   NumberInput,
   Select,
   Textarea,
   TextInput,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { client } from '../../api/client'
 
 function CharacterForm() {
   const [form, setForm] = useState({
@@ -13,11 +18,6 @@ function CharacterForm() {
     image_url: '',
     appearance: '',
     backstory: '',
-    race: '',
-    profession: '',
-    background: '',
-    alignment: '',
-    gender: '',
   })
 
   const [eyes, setEyes] = useState('')
@@ -38,11 +38,30 @@ function CharacterForm() {
   const [alignment, setAlignment] = useState('')
   const [gender, setGender] = useState('')
 
-  function handleChange(e) {
-    const { name, value } = e.target
-    const updatedForm = { ...form, [name]: value }
-    setForm(updatedForm)
+  const navigate = useNavigate()
+
+  const characterData = {
+    ...form,
+    eyes,
+    hair,
+    skin,
+    age,
+    height,
+    weight,
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma,
+    race,
+    profession,
+    background,
+    alignment,
+    gender,
   }
+
+  const campaign = useSelector((state) => state.campaign.campaign)
 
   const races = [
     { value: 'Dwarf', label: 'Dwarf' },
@@ -105,8 +124,28 @@ function CharacterForm() {
     { value: 'Non-binary', label: 'Non-binary' },
   ]
 
+  function handleChange(e) {
+    const { name, value } = e.target
+    const updatedForm = { ...form, [name]: value }
+    setForm(updatedForm)
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    const response = await client.post(
+      `/api/campaigns/${campaign?.id}/characters/`,
+      characterData
+    )
+    const body = await response.json()
+
+    if (response.ok) {
+      navigate(`/campaigns/${campaign?.id}/characters/${body.id}`)
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <TextInput
         label="Name"
         name="name"
@@ -228,6 +267,10 @@ function CharacterForm() {
         value={charisma}
         onChange={setCharisma}
       />
+
+      <Group position="left" mt="md">
+        <Button type="submit">Create Character</Button>
+      </Group>
     </form>
   )
 }

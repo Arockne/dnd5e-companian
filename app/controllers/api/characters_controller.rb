@@ -17,6 +17,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def create
     character = current_user.characters.create!(character_params)
+    byebug
     render json: character, status: :created, serializer: CharacterShowSerializer
   end
 
@@ -40,11 +41,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   private
 
   def character_params
-    params.permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :visible, :campaign_id)
+    params.permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :age, :height, :weight, :eyes, :skin, :hair, :gender, :appearance, :backstory, :visible, :campaign_id)
   end
 
   def creator_update_character_params
-    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :age, :height, :weight, :eyes, :skin, :hair, :gender, :appearance, :backstory, :visible, )
+    params.require(:character).permit(:name, :background, :race, :profession, :alignment, :experience, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :image_url, :age, :height, :weight, :eyes, :skin, :hair, :gender, :appearance, :backstory, :visible)
   end
 
   def campaign_owner_update_character_params

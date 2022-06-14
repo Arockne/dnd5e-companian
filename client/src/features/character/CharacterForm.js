@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
+import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function CharacterForm() {
   const [form, setForm] = useState({
@@ -37,6 +38,9 @@ function CharacterForm() {
   const [background, setBackground] = useState('')
   const [alignment, setAlignment] = useState('')
   const [gender, setGender] = useState('')
+
+  const [status, setStatus] = useState('idle')
+  const [errors, setErrors] = useState([])
 
   const navigate = useNavigate()
 
@@ -132,7 +136,7 @@ function CharacterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+    setStatus('loading')
     const response = await client.post(
       `/api/campaigns/${campaign?.id}/characters/`,
       characterData
@@ -141,6 +145,9 @@ function CharacterForm() {
 
     if (response.ok) {
       navigate(`/campaigns/${campaign?.id}/characters/${body.id}`)
+    } else {
+      setStatus('failed')
+      setErrors(body.errors)
     }
   }
 
@@ -267,7 +274,7 @@ function CharacterForm() {
         value={charisma}
         onChange={setCharisma}
       />
-
+      <FormErrorsContainer errors={errors} />
       <Group position="left" mt="md">
         <Button type="submit">Create Character</Button>
       </Group>

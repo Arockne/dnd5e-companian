@@ -220,12 +220,6 @@ function CharacterForm() {
             value={charisma}
             onChange={setCharisma}
           />
-          <TextInput
-            label="Image"
-            name="image_url"
-            value={form.image_url}
-            onChange={handleChange}
-          />
         </Stepper.Step>
         <Stepper.Step label="Second step" description="Create biography">
           <Select
@@ -254,6 +248,12 @@ function CharacterForm() {
             onChange={setGender}
             searchable
             nothingFound="Gender not found"
+          />
+          <TextInput
+            label="Image"
+            name="image_url"
+            value={form.image_url}
+            onChange={handleChange}
           />
           <NumberInput label="Age" name="age" value={age} onChange={setAge} />
           <NumberInput

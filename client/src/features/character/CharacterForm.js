@@ -43,11 +43,11 @@ function CharacterForm() {
 
   const [errors, setErrors] = useState([])
 
-  const [active, setActive] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
   const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current))
+    setActiveStep((current) => (current < 3 ? current + 1 : current))
   const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current))
+    setActiveStep((current) => (current > 0 ? current - 1 : current))
 
   const navigate = useNavigate()
 
@@ -158,7 +158,7 @@ function CharacterForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+      <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm">
         <Stepper.Step label="First step" description="Roll stats">
           <TextInput
             label="Name"

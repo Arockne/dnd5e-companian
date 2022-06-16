@@ -1,5 +1,13 @@
 import React from 'react'
-import { Divider, Group, ScrollArea, Space, Text, Title } from '@mantine/core'
+import {
+  ColorSwatch,
+  Divider,
+  Group,
+  ScrollArea,
+  Space,
+  Text,
+  Title,
+} from '@mantine/core'
 
 function CharacterBiography({ character }) {
   return (
@@ -8,13 +16,57 @@ function CharacterBiography({ character }) {
       <Divider />
       <ScrollArea style={{ height: 200 }} offsetScrollbars>
         <Group position="left">
-          <Group spacing="sm" position="apart" style={{ width: '200px' }}>
-            <Text size="sm">Age: {character?.age}</Text>
-            <Text size="sm">Eyes: {character?.eyes}</Text>
-            <Text size="sm">Gender: {character?.gender}</Text>
+          <Group spacing="sm">
             <Text size="sm">Race: {character?.race}</Text>
+            <Text size="sm">Age: {character?.age}</Text>
+            <Text size="sm">Gender: {character?.gender}</Text>
             <Text size="sm">Weight: {character?.weight}</Text>
             <Text size="sm">Height: {character?.height}</Text>
+            <Group spacing={5}>
+              <Text size="sm">Eyes:</Text>
+              <ColorSwatch
+                radius="xl"
+                color={character?.eyes}
+                style={{
+                  height: 15,
+                  width: 60,
+                }}
+              >
+                <Text size="xs" style={{ lineHeight: 0 }}>
+                  {character?.eyes}
+                </Text>
+              </ColorSwatch>
+            </Group>
+            <Group spacing={5}>
+              <Text size="sm">Skin:</Text>
+              <ColorSwatch
+                radius="xl"
+                color={character?.skin}
+                style={{
+                  height: 15,
+                  width: 60,
+                }}
+              >
+                <Text size="xs" style={{ lineHeight: 0 }}>
+                  {character?.skin}
+                </Text>
+              </ColorSwatch>
+            </Group>
+            <Group spacing={5}>
+              <Text size="sm">Hair:</Text>
+              <ColorSwatch
+                radius="xl"
+                color={character?.hair}
+                style={{
+                  height: 15,
+                  width: 60,
+                }}
+              >
+                <Text size="xs" style={{ lineHeight: 0 }}>
+                  {character?.hair}
+                </Text>
+              </ColorSwatch>
+            </Group>
           </Group>
         </Group>
         <Divider />

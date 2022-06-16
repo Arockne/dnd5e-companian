@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
 import DialogPopUpErrors from '../error/DialogPopUpErrors'
+import CharacterOverview from './CharacterOverview'
 
 function CharacterForm() {
   const [form, setForm] = useState({
@@ -284,7 +285,7 @@ function CharacterForm() {
           />
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Review character">
-          This would be a page that has all the characters information
+          <CharacterOverview character={characterData} />
         </Stepper.Step>
         <Stepper.Completed>
           <Group position="left" mt="md">

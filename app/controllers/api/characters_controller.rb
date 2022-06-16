@@ -17,7 +17,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def create
     character = current_user.characters.create!(character_params)
-    byebug
     render json: character, status: :created, serializer: CharacterShowSerializer
   end
 

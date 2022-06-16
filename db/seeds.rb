@@ -95,8 +95,10 @@ Campaign.all.each_entry do |campaign|
         age: rand(15..1000), 
         height: "#{rand(160...200)}cm", 
         weight: "#{rand(50...150)}kg", 
-        eyes: Faker::Color.color_name, 
-        gender: Faker::Gender.short_binary_type, 
+        eyes: Faker::Color.hex_color, 
+        hair: Faker::Color.hex_color,
+        skin: Faker::Color.hex_color,
+        gender: Faker::Gender.type, 
         appearance: Faker::Lorem.paragraphs(number: 10).join(' '), backstory: Faker::Lorem.paragraphs(number: 30).join(' ')
       )
   end

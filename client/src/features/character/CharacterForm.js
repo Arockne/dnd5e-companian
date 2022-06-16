@@ -27,12 +27,12 @@ function CharacterForm() {
   const [age, setAge] = useState(0)
   const [height, setHeight] = useState(0)
   const [weight, setWeight] = useState(0)
-  const [strength, setStrength] = useState(0)
-  const [dexterity, setDexterity] = useState(0)
-  const [constitution, setConstitution] = useState(0)
-  const [intelligence, setIntelligence] = useState(0)
-  const [wisdom, setWisdom] = useState(0)
-  const [charisma, setCharisma] = useState(0)
+  const [strength, setStrength] = useState()
+  const [dexterity, setDexterity] = useState()
+  const [constitution, setConstitution] = useState()
+  const [intelligence, setIntelligence] = useState()
+  const [wisdom, setWisdom] = useState()
+  const [charisma, setCharisma] = useState()
   const [race, setRace] = useState('')
   const [profession, setProfession] = useState('')
   const [background, setBackground] = useState('')
@@ -156,6 +156,60 @@ function CharacterForm() {
         value={form.name}
         onChange={handleChange}
       />
+      <Select
+        label="Race"
+        name="race"
+        data={races}
+        value={race}
+        onChange={setRace}
+        searchable
+        nothingFound="Race not found"
+      />
+      <Select
+        label="Class"
+        name="profession"
+        data={professions}
+        value={profession}
+        onChange={setProfession}
+        searchable
+        nothingFound="Class not found"
+      />
+      <NumberInput
+        label="Strength"
+        name="strength"
+        value={strength}
+        onChange={setStrength}
+      />
+      <NumberInput
+        label="Dexterity"
+        name="dexterity"
+        value={dexterity}
+        onChange={setDexterity}
+      />
+      <NumberInput
+        label="Constitution"
+        name="constitution"
+        value={constitution}
+        onChange={setConstitution}
+      />
+      <NumberInput
+        label="Intelligence"
+        name="intelligence"
+        value={intelligence}
+        onChange={setIntelligence}
+      />
+      <NumberInput
+        label="Wisdom"
+        name="wisdom"
+        value={wisdom}
+        onChange={setWisdom}
+      />
+      <NumberInput
+        label="Charisma"
+        name="charisma"
+        value={charisma}
+        onChange={setCharisma}
+      />
       <TextInput
         label="Image"
         name="image_url"
@@ -176,24 +230,6 @@ function CharacterForm() {
         name="backstory"
         value={form.backstory}
         onChange={handleChange}
-      />
-      <Select
-        label="Race"
-        name="race"
-        data={races}
-        value={race}
-        onChange={setRace}
-        searchable
-        nothingFound="Race not found"
-      />
-      <Select
-        label="Class"
-        name="profession"
-        data={professions}
-        value={profession}
-        onChange={setProfession}
-        searchable
-        nothingFound="Class not found"
       />
       <Select
         label="Background"
@@ -234,42 +270,6 @@ function CharacterForm() {
         name="weight"
         value={weight}
         onChange={setWeight}
-      />
-      <NumberInput
-        label="Strength"
-        name="strength"
-        value={strength}
-        onChange={setStrength}
-      />
-      <NumberInput
-        label="Dexterity"
-        name="dexterity"
-        value={dexterity}
-        onChange={setDexterity}
-      />
-      <NumberInput
-        label="Constitution"
-        name="constitution"
-        value={constitution}
-        onChange={setConstitution}
-      />
-      <NumberInput
-        label="Intelligence"
-        name="intelligence"
-        value={intelligence}
-        onChange={setIntelligence}
-      />
-      <NumberInput
-        label="Wisdom"
-        name="wisdom"
-        value={wisdom}
-        onChange={setWisdom}
-      />
-      <NumberInput
-        label="Charisma"
-        name="charisma"
-        value={charisma}
-        onChange={setCharisma}
       />
       <DialogPopUpErrors errors={errors} setErrors={setErrors} />
       <Group position="left" mt="md">

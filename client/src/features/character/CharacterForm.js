@@ -228,21 +228,6 @@ function CharacterForm() {
           />
         </Stepper.Step>
         <Stepper.Step label="Second step" description="Create biography">
-          <ColorInput label="Eyes" value={eyes} onChange={setEyes} />
-          <ColorInput label="Hair" value={hair} onChange={setHair} />
-          <ColorInput label="Skin" value={skin} onChange={setSkin} />
-          <Textarea
-            label="Appearance"
-            name="appearance"
-            value={form.appearance}
-            onChange={handleChange}
-          />
-          <Textarea
-            label="Backstory"
-            name="backstory"
-            value={form.backstory}
-            onChange={handleChange}
-          />
           <Select
             label="Background"
             name="background"
@@ -282,6 +267,21 @@ function CharacterForm() {
             name="weight"
             value={weight}
             onChange={setWeight}
+          />
+          <ColorInput label="Eyes" value={eyes} onChange={setEyes} />
+          <ColorInput label="Hair" value={hair} onChange={setHair} />
+          <ColorInput label="Skin" value={skin} onChange={setSkin} />
+          <Textarea
+            label="Appearance"
+            name="appearance"
+            value={form.appearance}
+            onChange={handleChange}
+          />
+          <Textarea
+            label="Backstory"
+            name="backstory"
+            value={form.backstory}
+            onChange={handleChange}
           />
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Review character">

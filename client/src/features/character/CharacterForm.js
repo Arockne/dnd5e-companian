@@ -4,6 +4,7 @@ import {
   Group,
   NumberInput,
   Select,
+  Stepper,
   Textarea,
   TextInput,
 } from '@mantine/core'
@@ -24,9 +25,9 @@ function CharacterForm() {
   const [eyes, setEyes] = useState('')
   const [hair, setHair] = useState('')
   const [skin, setSkin] = useState('')
-  const [age, setAge] = useState(0)
-  const [height, setHeight] = useState(0)
-  const [weight, setWeight] = useState(0)
+  const [age, setAge] = useState()
+  const [height, setHeight] = useState()
+  const [weight, setWeight] = useState()
   const [strength, setStrength] = useState()
   const [dexterity, setDexterity] = useState()
   const [constitution, setConstitution] = useState()
@@ -40,6 +41,12 @@ function CharacterForm() {
   const [gender, setGender] = useState('')
 
   const [errors, setErrors] = useState([])
+
+  const [active, setActive] = useState(1)
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current))
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current))
 
   const navigate = useNavigate()
 
@@ -150,131 +157,148 @@ function CharacterForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextInput
-        label="Name"
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-      />
-      <Select
-        label="Race"
-        name="race"
-        data={races}
-        value={race}
-        onChange={setRace}
-        searchable
-        nothingFound="Race not found"
-      />
-      <Select
-        label="Class"
-        name="profession"
-        data={professions}
-        value={profession}
-        onChange={setProfession}
-        searchable
-        nothingFound="Class not found"
-      />
-      <NumberInput
-        label="Strength"
-        name="strength"
-        value={strength}
-        onChange={setStrength}
-      />
-      <NumberInput
-        label="Dexterity"
-        name="dexterity"
-        value={dexterity}
-        onChange={setDexterity}
-      />
-      <NumberInput
-        label="Constitution"
-        name="constitution"
-        value={constitution}
-        onChange={setConstitution}
-      />
-      <NumberInput
-        label="Intelligence"
-        name="intelligence"
-        value={intelligence}
-        onChange={setIntelligence}
-      />
-      <NumberInput
-        label="Wisdom"
-        name="wisdom"
-        value={wisdom}
-        onChange={setWisdom}
-      />
-      <NumberInput
-        label="Charisma"
-        name="charisma"
-        value={charisma}
-        onChange={setCharisma}
-      />
-      <TextInput
-        label="Image"
-        name="image_url"
-        value={form.image_url}
-        onChange={handleChange}
-      />
-      <ColorInput label="Eyes" value={eyes} onChange={setEyes} />
-      <ColorInput label="Hair" value={hair} onChange={setHair} />
-      <ColorInput label="Skin" value={skin} onChange={setSkin} />
-      <Textarea
-        label="Appearance"
-        name="appearance"
-        value={form.appearance}
-        onChange={handleChange}
-      />
-      <Textarea
-        label="Backstory"
-        name="backstory"
-        value={form.backstory}
-        onChange={handleChange}
-      />
-      <Select
-        label="Background"
-        name="background"
-        data={backgrounds}
-        value={background}
-        onChange={setBackground}
-        searchable
-        nothingFound="Background not found"
-      />
-      <Select
-        label="Alignment"
-        name="alignment"
-        data={alignments}
-        value={alignment}
-        onChange={setAlignment}
-        searchable
-        nothingFound="Alignment not found"
-      />
-      <Select
-        label="Gender"
-        name="gender"
-        data={genders}
-        value={gender}
-        onChange={setGender}
-        searchable
-        nothingFound="Gender not found"
-      />
-      <NumberInput label="Age" name="age" value={age} onChange={setAge} />
-      <NumberInput
-        label="Height"
-        name="height"
-        value={height}
-        onChange={setHeight}
-      />
-      <NumberInput
-        label="Weight"
-        name="weight"
-        value={weight}
-        onChange={setWeight}
-      />
-      <DialogPopUpErrors errors={errors} setErrors={setErrors} />
-      <Group position="left" mt="md">
-        <Button type="submit">Create Character</Button>
+      <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+        <Stepper.Step label="First step" description="Roll stats">
+          <TextInput
+            label="Name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+          />
+          <Select
+            label="Race"
+            name="race"
+            data={races}
+            value={race}
+            onChange={setRace}
+            searchable
+            nothingFound="Race not found"
+          />
+          <Select
+            label="Class"
+            name="profession"
+            data={professions}
+            value={profession}
+            onChange={setProfession}
+            searchable
+            nothingFound="Class not found"
+          />
+          <NumberInput
+            label="Strength"
+            name="strength"
+            value={strength}
+            onChange={setStrength}
+          />
+          <NumberInput
+            label="Dexterity"
+            name="dexterity"
+            value={dexterity}
+            onChange={setDexterity}
+          />
+          <NumberInput
+            label="Constitution"
+            name="constitution"
+            value={constitution}
+            onChange={setConstitution}
+          />
+          <NumberInput
+            label="Intelligence"
+            name="intelligence"
+            value={intelligence}
+            onChange={setIntelligence}
+          />
+          <NumberInput
+            label="Wisdom"
+            name="wisdom"
+            value={wisdom}
+            onChange={setWisdom}
+          />
+          <NumberInput
+            label="Charisma"
+            name="charisma"
+            value={charisma}
+            onChange={setCharisma}
+          />
+          <TextInput
+            label="Image"
+            name="image_url"
+            value={form.image_url}
+            onChange={handleChange}
+          />
+        </Stepper.Step>
+        <Stepper.Step label="Second step" description="Create biography">
+          <ColorInput label="Eyes" value={eyes} onChange={setEyes} />
+          <ColorInput label="Hair" value={hair} onChange={setHair} />
+          <ColorInput label="Skin" value={skin} onChange={setSkin} />
+          <Textarea
+            label="Appearance"
+            name="appearance"
+            value={form.appearance}
+            onChange={handleChange}
+          />
+          <Textarea
+            label="Backstory"
+            name="backstory"
+            value={form.backstory}
+            onChange={handleChange}
+          />
+          <Select
+            label="Background"
+            name="background"
+            data={backgrounds}
+            value={background}
+            onChange={setBackground}
+            searchable
+            nothingFound="Background not found"
+          />
+          <Select
+            label="Alignment"
+            name="alignment"
+            data={alignments}
+            value={alignment}
+            onChange={setAlignment}
+            searchable
+            nothingFound="Alignment not found"
+          />
+          <Select
+            label="Gender"
+            name="gender"
+            data={genders}
+            value={gender}
+            onChange={setGender}
+            searchable
+            nothingFound="Gender not found"
+          />
+          <NumberInput label="Age" name="age" value={age} onChange={setAge} />
+          <NumberInput
+            label="Height"
+            name="height"
+            value={height}
+            onChange={setHeight}
+          />
+          <NumberInput
+            label="Weight"
+            name="weight"
+            value={weight}
+            onChange={setWeight}
+          />
+        </Stepper.Step>
+        <Stepper.Step label="Final step" description="Review character">
+          This would be a page that has all the characters information
+        </Stepper.Step>
+        <Stepper.Completed>
+          <Group position="left" mt="md">
+            <Button type="submit">Create Character</Button>
+          </Group>
+        </Stepper.Completed>
+      </Stepper>
+      <Group position="center" mt="xl">
+        <Button variant="default" onClick={prevStep}>
+          Back
+        </Button>
+        <Button onClick={nextStep}>Next step</Button>
       </Group>
+      <DialogPopUpErrors errors={errors} setErrors={setErrors} />
     </form>
   )
 }

@@ -1,26 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe Campaign, type: :model do
+  let(:user) do
+    User.create!(
+      username: 'arthur',
+      email: 'arthur@camelot.com',
+      password: 'test123'
+    )
+  end
+  before do
+    Campaign.create(
+      name: 'Knights of the Round Table', 
+      setting: 'Somewhere in Camelot', 
+      owner: user, 
+      password: 'king', 
+    )
+    Campaign.create(
+      name: 'Star Wards', 
+      setting: 'In a hospital far far away...', 
+      owner: user, 
+      password: 'king', 
+    )
+  end
 
-  describe 'valid campaign' do
-    let(:user) do
-      User.create!(
-        username: 'arthur',
-        email: 'arthur@camelot.com',
-        password: 'test123'
-      )
-    end
-    
+  describe 'valid campaign' do   
     it 'with valid attributes' do
       expect(Campaign.new(
-        name: 'Knights of the Round Table', 
-        setting: 'Somewhere in Camelot', 
+        name: 'Star Track', 
+        setting: 'Voyage to many track and fields never seen before...', 
         owner: user, 
         password: 'king', 
         password_confirmation: 'king'
       )).to be_valid
     end
   end
+
 
   describe 'attributes' do
     it { is_expected.to respond_to(:owner) }
@@ -33,6 +47,7 @@ RSpec.describe Campaign, type: :model do
     it { is_expected.to have_secure_password }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_length_of(:name).is_at_most(30) }
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive}
   end
 
   describe 'associations' do

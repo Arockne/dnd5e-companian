@@ -31,8 +31,7 @@ RSpec.describe "Api::Characters", type: :request do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
       owner: user_1, 
-      password: 'king', 
-      password_confirmation: 'king'
+      password: 'king1234'
     )
   end
 
@@ -42,8 +41,7 @@ RSpec.describe "Api::Characters", type: :request do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away', 
       owner: user_2, 
-      password: 'test123', 
-      password_confirmation: 'test123'
+      password: 'test1234'
     )
   end
 
@@ -53,8 +51,7 @@ RSpec.describe "Api::Characters", type: :request do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Code in the future...', 
       owner: user_2, 
-      password: 'test123', 
-      password_confirmation: 'test123'
+      password: 'test1234'
     )
   end
 

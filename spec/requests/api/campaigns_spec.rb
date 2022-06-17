@@ -23,7 +23,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
       owner: user_1, 
-      password: 'king'
+      password: 'king1234'
     )
   end
 
@@ -33,7 +33,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away', 
       owner: user_2, 
-      password: 'test123'
+      password: 'test1234'
     )
   end
 
@@ -171,7 +171,7 @@ RSpec.describe "Api::Campaigns", type: :request do
               name: 'The Throne of the king', 
               image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
               setting: 'A king sits upon a throne...', 
-              password: 'test123'
+              password: 'test1234'
             }
           }
         end

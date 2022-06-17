@@ -14,14 +14,14 @@ RSpec.describe Campaign, type: :model do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
       owner: user, 
-      password: 'king', 
+      password: 'king1234', 
     )
     Campaign.create(
       name: 'Star Wards', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away...', 
       owner: user, 
-      password: 'king', 
+      password: 'king1234', 
     )
   end
 
@@ -32,8 +32,7 @@ RSpec.describe Campaign, type: :model do
         image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
         setting: 'Voyage to many track and fields never seen before...', 
         owner: user, 
-        password: 'king', 
-        password_confirmation: 'king'
+        password: 'king1234'
       )).to be_valid
     end
   end
@@ -52,6 +51,7 @@ RSpec.describe Campaign, type: :model do
     it { is_expected.to validate_length_of(:name).is_at_most(30) }
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive}
     it { is_expected.to validate_presence_of(:image_url) }
+    it { is_expected.to validate_length_of(:password).is_at_least(8) }
   end
 
   describe 'associations' do

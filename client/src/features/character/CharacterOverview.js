@@ -27,7 +27,7 @@ export function CharacterOverview({ character }) {
                   alt="Character image"
                   withPlaceholder={true}
                   radius="lg"
-                  height={200}
+                  height={250}
                 />
               </Group>
             </Grid.Col>

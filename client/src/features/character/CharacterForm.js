@@ -1,12 +1,16 @@
 import {
   Button,
   ColorInput,
+  Divider,
   Group,
+  Image,
   NumberInput,
   Select,
+  Stack,
   Stepper,
   Textarea,
   TextInput,
+  Title,
 } from '@mantine/core'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -288,9 +292,19 @@ function CharacterForm() {
           <CharacterOverview character={characterData} />
         </Stepper.Step>
         <Stepper.Completed>
-          <Group position="left" mt="md">
-            <Button type="submit">Create Character</Button>
-          </Group>
+          <Stack align="center">
+            <Title order={3}>{characterData?.name}</Title>
+            <Image
+              src={characterData?.image_url}
+              alt="Character image"
+              withPlaceholder={true}
+              radius="lg"
+              height={180}
+            />
+            <Group position="left" mt="md">
+              <Button type="submit">{`Create ${characterData?.name}`}</Button>
+            </Group>
+          </Stack>
         </Stepper.Completed>
       </Stepper>
       <Group position="center" mt="xl">

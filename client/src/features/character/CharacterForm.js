@@ -299,7 +299,7 @@ function CharacterForm() {
               alt="Character image"
               withPlaceholder={true}
               radius="lg"
-              height={180}
+              height={400}
             />
             <Group position="left" mt="md">
               <Button type="submit">{`Create ${characterData?.name}`}</Button>

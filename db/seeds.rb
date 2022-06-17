@@ -87,9 +87,21 @@ puts 'Creating characters'
 Campaign.all.each_entry do |campaign|
     filtered_users = users.filter { |user| user.username != campaign.owner.username }
     10.times do
+      name = Faker::Name.unique.name
+      appearance = []
+      backstory = []
+      
+      10.times do
+        appearance.push(Faker::Fantasy::Tolkien.unique.poem)
+        backstory.push(Faker::ChuckNorris.unique.fact.gsub(/Chuck Norris|Chuck/i, name))
+      end
+      
+      Faker::Fantasy::Tolkien.unique.clear
+      Faker::ChuckNorris.unique.clear
+  
       selected_user = filtered_users[rand(0...filtered_users.length)]
       character = Character.create(
-        name: Faker::Name.unique.name,
+        name: name,
         background: Faker::Games::DnD.background,
         race: Faker::Games::DnD.race,
         profession: Faker::Games::DnD.klass,
@@ -108,9 +120,9 @@ Campaign.all.each_entry do |campaign|
         eyes: Faker::Color.hex_color, 
         hair: Faker::Color.hex_color,
         skin: Faker::Color.hex_color,
-        gender: Faker::Gender.type, 
-        appearance: Faker::Lorem.paragraphs(number: 10).join(' '), 
-        backstory: Faker::Lorem.paragraphs(number: 30).join(' ')
+        gender: 'Male', 
+        appearance: appearance.join(' '), 
+        backstory: backstory.join(' ')
       )
   end
 end

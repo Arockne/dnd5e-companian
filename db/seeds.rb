@@ -84,6 +84,24 @@ end
 
 puts 'Creating characters'
 
+character_images = [
+  'https://i.pinimg.com/originals/c7/f7/b2/c7f7b2e00646a1a1e1f625ec504e0530.jpg',
+  'https://i.pinimg.com/474x/15/2f/ae/152fae1f947c5a6cc69213c0e44c4ba6.jpg',
+  'https://i.pinimg.com/474x/dc/c5/29/dcc529ddfe413d62e77be948aa1ccbaa.jpg',
+  'https://i.pinimg.com/originals/c1/7e/0a/c17e0a1467b8ea90f32b681015fe351b.jpg',
+  'https://i.pinimg.com/originals/97/ba/37/97ba379d249f5139628fa9a42e55140b.png',
+  'https://i.pinimg.com/474x/25/db/91/25db9125dd421502375b1db3530109bf.jpg',
+  'https://i.pinimg.com/originals/c5/cb/d4/c5cbd4ac240bf7e7937851a9cb53da4e.jpg',
+  'https://i.pinimg.com/originals/da/34/31/da343123d7e23bcdfdf2f4a207cfe7eb.jpg',
+  'https://i.pinimg.com/736x/6f/46/34/6f46344fa378c5cf1c43d2024fff20bc.jpg',
+  'https://i.pinimg.com/736x/9b/ce/40/9bce400b4660c1918b8e0c0eb725bfce.jpg',
+  'https://i.pinimg.com/564x/5a/d1/a6/5ad1a6a09ba613d248d56a098c8792ad.jpg',
+  'https://i.pinimg.com/736x/48/53/91/485391ab775f002594475afb2755ea73.jpg',
+  'https://i.pinimg.com/736x/25/04/f6/2504f618ac3ee1230f2eadd3f9db2fa5.jpg',
+  'https://i.pinimg.com/564x/95/2e/85/952e858c7b2938ab9a75313ff21c7a0c.jpg',
+  'https://i.pinimg.com/736x/9c/85/a4/9c85a458e0b15010040e537afbaf28f2--character-portraits-character-art.jpg'
+]
+
 Campaign.all.each_entry do |campaign|
     filtered_users = users.filter { |user| user.username != campaign.owner.username }
     10.times do
@@ -114,6 +132,7 @@ Campaign.all.each_entry do |campaign|
         charisma: roll_stat,
         user: selected_user,
         campaign: campaign,
+        image_url: character_images[rand(0...character_images.length)],
         age: rand(15..1000), 
         height: "#{rand(160...200)}cm", 
         weight: "#{rand(50...150)}kg", 

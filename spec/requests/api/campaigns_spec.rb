@@ -20,6 +20,7 @@ RSpec.describe "Api::Campaigns", type: :request do
   let!(:campaign_1) do
     Campaign.create!(
       name: 'Knights of the Round Table', 
+      image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
       owner: user_1, 
       password: 'king'
@@ -29,6 +30,7 @@ RSpec.describe "Api::Campaigns", type: :request do
   let!(:campaign_2) do
     Campaign.create!(
       name: 'Star Wards', 
+      image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away', 
       owner: user_2, 
       password: 'test123'
@@ -167,6 +169,7 @@ RSpec.describe "Api::Campaigns", type: :request do
           { 
             campaign: {
               name: 'The Throne of the king', 
+              image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
               setting: 'A king sits upon a throne...', 
               password: 'test123'
             }
@@ -201,6 +204,7 @@ RSpec.describe "Api::Campaigns", type: :request do
         { 
           campaign: {
             name: 'The Throne of the king', 
+            image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
             setting: 'A king sits upon a throne...', 
             password: 'test123'
           }
@@ -230,6 +234,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       {
         campaign: {
           name: 'Knights of the SQUARE Table', 
+          image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
           setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT', 
           password: 'kingforever'
         }

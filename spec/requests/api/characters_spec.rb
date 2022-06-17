@@ -28,6 +28,7 @@ RSpec.describe "Api::Characters", type: :request do
   let!(:campaign_1) do
     Campaign.create!(
       name: 'Knights of the Round Table', 
+      image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
       owner: user_1, 
       password: 'king', 
@@ -38,6 +39,7 @@ RSpec.describe "Api::Characters", type: :request do
   let!(:campaign_2) do
     Campaign.create!(
       name: 'Star Wards', 
+      image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away', 
       owner: user_2, 
       password: 'test123', 
@@ -48,6 +50,7 @@ RSpec.describe "Api::Characters", type: :request do
   let!(:campaign_3) do
     Campaign.create!(
       name: 'Coderama', 
+      image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Code in the future...', 
       owner: user_2, 
       password: 'test123', 

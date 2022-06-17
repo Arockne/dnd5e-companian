@@ -27,8 +27,30 @@ users = [user_1, user_2, user_3]
 
 puts 'Creating campaigns'
 
+campaign_images = [
+  'https://www.designyourway.net/art/wp-content/uploads/2019/06/berube-jonathan-berube-art-director-matte-192-700x374.jpg',
+  'https://wallpaperaccess.com/full/2037483.jpg',
+  'https://miro.medium.com/max/1400/1*k1x6oDDEtXdQeKTAKQsSbQ.jpeg',
+  'https://www.muddycolors.com/wp-content/uploads/2020/04/ua300hjpvmr41.jpg',
+  'https://pbs.twimg.com/media/E5rB6LbWQAE5b0d.jpg',
+  'https://external-preview.redd.it/5f02pd12CiIAQHr3hj9L6gESI7WeUpsfyhQ4cI7OgnQ.png?width=640&crop=smart&auto=webp&s=ed4d6ed41339c68dd909916da1ba8a6ebb506461',
+  'https://art.ngfiles.com/images/229000/229658_llamareaper_fantasy-landscape.png?f1356652657',
+  'https://assets.3dtotal.com/y.vt1hz1.image.7x7.jpg',
+  'https://cdnb.artstation.com/p/assets/images/images/003/788/949/large/michael-kelly-lakemeadow-landscapes-recovered.jpg?1477501230',
+  'https://cdn.pixabay.com/photo/2020/05/26/03/40/landscape-5221290_960_720.jpg',
+  'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b820606f-568b-47e2-9d16-a9deabcf5dc8/dd0fkat-53aee846-5e36-4458-9232-db73e9d63406.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I4MjA2MDZmLTU2OGItNDdlMi05ZDE2LWE5ZGVhYmNmNWRjOFwvZGQwZmthdC01M2FlZTg0Ni01ZTM2LTQ0NTgtOTIzMi1kYjczZTlkNjM0MDYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ei8j2RDEKqVO75mD5a-OERJyJ5xpJZpzppLwIQ3Af60',
+  'https://w0.peakpx.com/wallpaper/295/546/HD-wallpaper-dark-fantasy-landscape-2-3d-dark-forces-abstract-scary-dark-fantasy.jpg',
+  'https://cdna.artstation.com/p/assets/images/images/001/206/348/4k/david-edwards-kenden-001.jpg?1442195813',
+  'https://i.pinimg.com/originals/b6/5a/ed/b65aed4b877b033bb4292301ad82d9c8.jpg',
+  'https://wallpaperaccess.com/full/143741.jpg',
+  'https://www.teahub.io/photos/full/321-3219809_ice-tower-dark-fantasy-landscape-art.jpg',
+  'https://cdna.artstation.com/p/assets/images/images/050/201/306/large/james-abels-dark-fantasytimetoarchitecture-1-1-upscaled-art-scale-6-00x.jpg?1654280200',
+  'https://wallpaperforu.com/wp-content/uploads/2020/07/space-wallpaper-2007071541573-scaled.jpg'
+]
+
 campaign_1 = Campaign.create!(
   name: 'Knights of the Round Table', 
+  image_url: campaign_images[rand(0...campaign_images.length)],
   setting: 'Somewhere in Camelot', 
   owner: user_1, 
   password: 'test123',
@@ -36,6 +58,7 @@ campaign_1 = Campaign.create!(
 
 campaign_2 = Campaign.create!(
   name: 'Star Wards', 
+  image_url: campaign_images[rand(0...campaign_images.length)],
   setting: 'In a hospital far far away', 
   owner: user_2, 
   password: 'test123',
@@ -48,15 +71,16 @@ user_1.campaign_users.create!(campaign: campaign_2)
   10.times do
     setting.push(Faker::Quotes::Shakespeare.unique.hamlet_quote)
   end
+  Faker::Quotes::Shakespeare.unique.clear
   campaign = Campaign.create(
     name: Faker::Games::ElderScrolls.unique.city, 
+    image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '), 
     owner: users[rand(0..2)], 
     password: 'test123',
   )
   filtered_users = users.filter { |user| user.username != campaign.owner.username }
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
-  Faker::Quotes::Shakespeare.unique.clear
 end
 
 20.times do 
@@ -66,6 +90,7 @@ end
   end
   Campaign.create(
     name: Faker::Games::Zelda.location, 
+    image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '),
     owner: users[rand(0..2)], 
     password: 'test123',

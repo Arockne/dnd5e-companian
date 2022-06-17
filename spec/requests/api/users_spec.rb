@@ -5,14 +5,14 @@ RSpec.describe "Api::Users", type: :request do
     User.create!(
       username: 'bob',
       email: 'bob@gmail.com',
-      password: 'test123'
+      password: 'test1234'
     )
   end
 
   describe "GET /me" do
     context "with user logged in" do
       before do
-        post "/api/login", params: { username: 'bob', password: 'test123' }
+        post "/api/login", params: { username: 'bob', password: 'test1234' }
       end
 
       it "returns the users data" do
@@ -51,7 +51,7 @@ RSpec.describe "Api::Users", type: :request do
         { user: {
             username: 'ron', 
             email:'ron@gmail.com',
-            password:'test123'
+            password:'test1234'
           }
         }
       end

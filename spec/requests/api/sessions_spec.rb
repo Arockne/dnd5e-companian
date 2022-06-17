@@ -5,7 +5,7 @@ RSpec.describe "Api::Sessions", type: :request do
     User.create!(
       username: 'test_user',
       email: 'test@example.com',
-      password: 'test123'
+      password: 'test1234'
     )
   end
 

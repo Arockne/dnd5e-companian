@@ -5,7 +5,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     User.create!(
       username: 'arthur',
       email: 'arthur@camelot.com',
-      password: 'test123'
+      password: 'test1234'
     )
   end
     
@@ -13,7 +13,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     User.create!(
       username: 'bob',
       email: 'bob@gmail.com',
-      password: 'test123'
+      password: 'test1234'
     )
   end
 
@@ -21,7 +21,7 @@ RSpec.describe "Api::CampaignUsers", type: :request do
     User.create!(
       username: 'sam',
       email: 'sam@gmail.com',
-      password: 'test123'
+      password: 'test1234'
     )
   end
 

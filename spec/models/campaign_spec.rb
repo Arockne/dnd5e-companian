@@ -5,7 +5,7 @@ RSpec.describe Campaign, type: :model do
     User.create!(
       username: 'arthur',
       email: 'arthur@camelot.com',
-      password: 'test123'
+      password: 'test1234'
     )
   end
   before do

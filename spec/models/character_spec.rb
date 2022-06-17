@@ -28,6 +28,7 @@ RSpec.describe Character, type: :model do
     it { is_expected.to validate_presence_of(:background) }
     it { is_expected.to validate_presence_of(:race) }
     it { is_expected.to validate_presence_of(:profession) }
+    it { is_expected.to validate_presence_of(:image_url) }
     
     it do 
       is_expected.to validate_inclusion_of(:alignment).

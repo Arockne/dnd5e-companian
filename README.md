@@ -34,7 +34,10 @@ npm install --prefix client
   - Server side pagination to load more when user scrolls down
     - Will render from most recent created
 - Character form
-  - implement stepper
+  - implement rolling stats
+    - this may include a drag and drop feature
+      - where the user rolls stats and the user drops the six rolled stats into an input field
+  - implement point system variant for assigning stats
 - Character Navigation & Campaign Navigation
   - on a specific screen size
     - render an arrow to the top left of the page

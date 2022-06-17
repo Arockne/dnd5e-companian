@@ -12,4 +12,7 @@ class Character < ApplicationRecord
   validates :experience, numericality: { greater_than_or_equal_to: 0 }
   validates :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, numericality: { greater_than_or_equal_to: 0 }, on: :update
   validates :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, numericality: { greater_than_or_equal_to: 3 }, on: :create
+  validates :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, numericality: {
+    less_than_or_equal_to: 30
+  }
 end

@@ -39,6 +39,7 @@ RSpec.describe Character, type: :model do
     [:strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma].each do |ability_score|
       it { is_expected.to validate_numericality_of(ability_score).is_greater_than_or_equal_to(0).on(:update) }
       it { is_expected.to validate_numericality_of(ability_score).is_greater_than_or_equal_to(3).on(:create) }
+      it { is_expected.to validate_numericality_of(ability_score).is_less_than_or_equal_to(30) }
     end
 
   end

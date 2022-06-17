@@ -44,23 +44,33 @@ campaign_2 = Campaign.create!(
 user_1.campaign_users.create!(campaign: campaign_2)
 
 (1..35).each do
+  setting = []
+  10.times do
+    setting.push(Faker::Quotes::Shakespeare.unique.hamlet_quote)
+  end
   campaign = Campaign.create(
     name: Faker::Games::ElderScrolls.unique.city, 
-    setting: Faker::Lorem.paragraphs(number: 20).join(' '), 
+    setting: setting.join(' '), 
     owner: users[rand(0..2)], 
     password: 'test123',
   )
   filtered_users = users.filter { |user| user.username != campaign.owner.username }
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
+  Faker::Quotes::Shakespeare.unique.clear
 end
 
 20.times do 
+  setting = []
+  8.times do
+    setting.push(Faker::Quotes::Shakespeare.unique.king_richard_iii_quote)
+  end
   Campaign.create(
     name: Faker::Games::Zelda.location, 
-    setting: Faker::Lorem.paragraphs(number: 20).join(' '), 
+    setting: setting.join(' '),
     owner: users[rand(0..2)], 
     password: 'test123',
   )
+  Faker::Quotes::Shakespeare.unique.clear
 end
 
 def roll_stat()
@@ -99,7 +109,8 @@ Campaign.all.each_entry do |campaign|
         hair: Faker::Color.hex_color,
         skin: Faker::Color.hex_color,
         gender: Faker::Gender.type, 
-        appearance: Faker::Lorem.paragraphs(number: 10).join(' '), backstory: Faker::Lorem.paragraphs(number: 30).join(' ')
+        appearance: Faker::Lorem.paragraphs(number: 10).join(' '), 
+        backstory: Faker::Lorem.paragraphs(number: 30).join(' ')
       )
   end
 end

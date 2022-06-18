@@ -10,17 +10,17 @@ puts 'seeding file 🌱'
 user_1 = User.create(
   username: 'bob', 
   email: 'bob@gmail.com', 
-  password: 'test123'
+  password: 'test1234'
 )
 user_2 = User.create(
   username: 'karen', 
   email: 'karen@gmail.com',
-  password: 'test123'
+  password: 'test1234'
 )
 user_3 = User.create(
   username: 'sam', 
   email: 'sam@gmail.com',
-  password: 'test123'
+  password: 'test1234'
 )
 
 users = [user_1, user_2, user_3]
@@ -53,7 +53,7 @@ campaign_1 = Campaign.create!(
   image_url: campaign_images[rand(0...campaign_images.length)],
   setting: 'Somewhere in Camelot', 
   owner: user_1, 
-  password: 'test123',
+  password: 'test1234',
 )
 
 campaign_2 = Campaign.create!(
@@ -61,7 +61,7 @@ campaign_2 = Campaign.create!(
   image_url: campaign_images[rand(0...campaign_images.length)],
   setting: 'In a hospital far far away', 
   owner: user_2, 
-  password: 'test123',
+  password: 'test1234',
 )
 
 user_1.campaign_users.create!(campaign: campaign_2)
@@ -72,12 +72,12 @@ user_1.campaign_users.create!(campaign: campaign_2)
     setting.push(Faker::Quotes::Shakespeare.unique.hamlet_quote)
   end
   Faker::Quotes::Shakespeare.unique.clear
-  campaign = Campaign.create(
+  campaign = Campaign.create!(
     name: Faker::Games::ElderScrolls.unique.city, 
     image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '), 
     owner: users[rand(0..2)], 
-    password: 'test123',
+    password: 'test1234',
   )
   filtered_users = users.filter { |user| user.username != campaign.owner.username }
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}

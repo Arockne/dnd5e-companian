@@ -4,19 +4,9 @@ class Campaign < ApplicationRecord
   has_many :users, through: :campaign_users
   has_many :characters, dependent: :destroy
 
-  validates :image_url, presence: true
-  validate :image
-
+  validates :image_url, presence: true, format: { with: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i, message: 'is not valid'}
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: false }
-
   validates :password, length: { minimum: 8 }
   has_secure_password
 
-  def image
-    if image_url.present?
-      unless /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i.match(image_url)
-        errors.add(:image_url, "is not valid")
-      end
-    end
-  end
 end

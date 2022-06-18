@@ -108,31 +108,30 @@ export function CampaignHeader({ campaign, owner }) {
   const { classes, cx } = useStyles()
 
   return (
-    <Grid grow style={{ margin: 0 }}>
-      <Grid.Col span={1}>
-        <Navbar height={700} width={{ sm: 300 }} p="md">
-          <Navbar.Section grow>
-            <Group className={classes.header} position="apart">
-              {campaign?.name}
-            </Group>
-            <NavLink
-              to={`/campaigns/${campaign?.id}`}
-              className={({ isActive }) =>
-                cx(classes.link, { [classes.linkActive]: isActive })
-              }
-              end={`/campaigns/${campaign?.id}`}
-            >
-              Overview
-            </NavLink>
-            <NavLink
-              to={`/campaigns/${campaign?.id}/characters/create`}
-              className={({ isActive }) =>
-                cx(classes.link, { [classes.linkActive]: isActive })
-              }
-            >
-              Create Character
-            </NavLink>
-            {/* <NavLink
+    <Group position="center" align="start" grow>
+      <Navbar height={700} width={{ sm: 300 }} style={{ maxWidth: 300 }} p="md">
+        <Navbar.Section grow>
+          <Group className={classes.header} position="apart">
+            {campaign?.name}
+          </Group>
+          <NavLink
+            to={`/campaigns/${campaign?.id}`}
+            className={({ isActive }) =>
+              cx(classes.link, { [classes.linkActive]: isActive })
+            }
+            end={`/campaigns/${campaign?.id}`}
+          >
+            Overview
+          </NavLink>
+          <NavLink
+            to={`/campaigns/${campaign?.id}/characters/create`}
+            className={({ isActive }) =>
+              cx(classes.link, { [classes.linkActive]: isActive })
+            }
+          >
+            Create Character
+          </NavLink>
+          {/* <NavLink
               to={`/campaigns/${campaign?.id}/players`}
               className={({ isActive }) =>
                 cx(classes.link, { [classes.linkActive]: isActive })
@@ -148,9 +147,9 @@ export function CampaignHeader({ campaign, owner }) {
             >
               Messages
             </NavLink> */}
-            {owner ? (
-              <>
-                {/* <NavLink
+          {owner ? (
+            <>
+              {/* <NavLink
                   to={`/campaigns/${campaign?.id}/logs`}
                   className={({ isActive }) =>
                     cx(classes.link, { [classes.linkActive]: isActive })
@@ -158,26 +157,25 @@ export function CampaignHeader({ campaign, owner }) {
                 >
                   Logs
                 </NavLink> */}
-                <NavLink
-                  to={`/campaigns/${campaign?.id}/settings`}
-                  className={({ isActive }) =>
-                    cx(classes.link, { [classes.linkActive]: isActive })
-                  }
-                >
-                  Settings
-                </NavLink>
-              </>
-            ) : null}
-          </Navbar.Section>
-        </Navbar>
-      </Grid.Col>
-      <Grid.Col span={9}>
+              <NavLink
+                to={`/campaigns/${campaign?.id}/settings`}
+                className={({ isActive }) =>
+                  cx(classes.link, { [classes.linkActive]: isActive })
+                }
+              >
+                Settings
+              </NavLink>
+            </>
+          ) : null}
+        </Navbar.Section>
+      </Navbar>
+      <Group direction="column" style={{ maxWidth: 900, minWidth: 300 }} grow>
         <Group position="center">
           <Title order={2}>{campaign?.name}</Title>
         </Group>
         <Outlet />
-      </Grid.Col>
-    </Grid>
+      </Group>
+    </Group>
   )
 }
 

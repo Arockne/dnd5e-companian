@@ -169,7 +169,7 @@ export function CampaignHeader({ campaign, owner }) {
           ) : null}
         </Navbar.Section>
       </Navbar>
-      <Group direction="column" style={{ maxWidth: 900, minWidth: 300 }} grow>
+      <Group direction="column" grow>
         <Group position="center">
           <Title order={2}>{campaign?.name}</Title>
         </Group>

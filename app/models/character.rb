@@ -5,7 +5,7 @@ class Character < ApplicationRecord
   validates :name, presence: true
   validates :background, presence: true
   validates :race, presence: true
-  validates :profession, presence: true
+  validates :klass, presence: true
   validates :alignment, inclusion: { in: [ 'Lawful Good', 'Neutral Good', 'Chaotic Good', 'Lawful Neutral', 'Neutral', 'Chaotic Neutral', 'Lawful Evil', 'Neutral Evil', 'Chaotic Evil' ]}
 
   validates :image_url, presence: true

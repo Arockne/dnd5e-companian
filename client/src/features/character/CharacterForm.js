@@ -40,7 +40,7 @@ function CharacterForm() {
   const [wisdom, setWisdom] = useState()
   const [charisma, setCharisma] = useState()
   const [race, setRace] = useState('')
-  const [profession, setProfession] = useState('')
+  const [klass, setklass] = useState('')
   const [background, setBackground] = useState('')
   const [alignment, setAlignment] = useState('')
   const [gender, setGender] = useState('')
@@ -70,7 +70,7 @@ function CharacterForm() {
     wisdom,
     charisma,
     race,
-    profession,
+    klass,
     background,
     alignment,
     gender,
@@ -90,7 +90,7 @@ function CharacterForm() {
     { value: 'Tiefling', label: 'Tiefling' },
   ]
 
-  const professions = [
+  const klasss = [
     { value: 'Barbarian', label: 'Barbarian' },
     { value: 'Bard', label: 'Bard' },
     { value: 'Cleric', label: 'Cleric' },
@@ -181,10 +181,10 @@ function CharacterForm() {
           />
           <Select
             label="Class"
-            name="profession"
-            data={professions}
-            value={profession}
-            onChange={setProfession}
+            name="klass"
+            data={klasss}
+            value={klass}
+            onChange={setklass}
             searchable
             nothingFound="Class not found"
           />

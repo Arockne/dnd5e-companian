@@ -24,7 +24,7 @@ function CharactersTableRow({ character }) {
       </td>
       <td>
         <Text size="xs" weight={500}>
-          {character.profession}
+          {character.klass}
         </Text>
       </td>
       <td>{character?.strength}</td>

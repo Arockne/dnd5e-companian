@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_06_233750) do
+ActiveRecord::Schema.define(version: 2022_06_18_162337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_233750) do
     t.string "name", default: ""
     t.string "background", default: ""
     t.string "race", default: ""
-    t.string "profession", default: ""
     t.string "alignment", default: ""
     t.integer "experience", default: 0
     t.integer "strength", default: 3
@@ -72,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_06_06_233750) do
     t.string "appearance", default: ""
     t.string "backstory", default: ""
     t.string "skin", default: ""
+    t.string "klass", default: ""
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
   end

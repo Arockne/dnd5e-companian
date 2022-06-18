@@ -108,7 +108,6 @@ def roll_stat()
 end
 
 puts 'Creating characters'
-
 character_images = [
   'https://i.pinimg.com/originals/c7/f7/b2/c7f7b2e00646a1a1e1f625ec504e0530.jpg',
   'https://i.pinimg.com/474x/15/2f/ae/152fae1f947c5a6cc69213c0e44c4ba6.jpg',
@@ -147,7 +146,7 @@ Campaign.all.each_entry do |campaign|
         name: name,
         background: Faker::Games::DnD.background,
         race: Faker::Games::DnD.race,
-        profession: Faker::Games::DnD.klass,
+        klass: Faker::Games::DnD.klass,
         alignment: Faker::Games::DnD.alignment,
         strength: roll_stat,
         dexterity: roll_stat,

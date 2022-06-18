@@ -21,7 +21,7 @@ class Character < ApplicationRecord
 
   def image
     if image_url.present?
-      unless /(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|gif|png)/i.match(image_url)
+      unless /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i.match(image_url)
         errors.add(:image_url, "is not valid")
       end
     end

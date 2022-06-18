@@ -6,7 +6,7 @@ RSpec.describe Character, type: :model do
     it { is_expected.to respond_to(:name) }
     it { is_expected.to respond_to(:background) }
     it { is_expected.to respond_to(:race) }
-    it { is_expected.to respond_to(:profession) }
+    it { is_expected.to respond_to(:klass) }
     it { is_expected.to respond_to(:alignment) }
     it { is_expected.to respond_to(:experience) }
     it { is_expected.to respond_to(:strength) }
@@ -27,7 +27,7 @@ RSpec.describe Character, type: :model do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:background) }
     it { is_expected.to validate_presence_of(:race) }
-    it { is_expected.to validate_presence_of(:profession) }
+    it { is_expected.to validate_presence_of(:klass) }
     it { is_expected.to validate_presence_of(:image_url) }
     
     it do 

@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, Text, Title } from '@mantine/core'
+import { Box, Button, Divider, Modal, Text, Title } from '@mantine/core'
 import React, { useState } from 'react'
 import CampaignDeleteForm from './CampaignDeleteForm'
 
@@ -6,7 +6,7 @@ function CampaignDeleteContainer({ campaign, status }) {
   const [opened, setOpened] = useState(false)
 
   return (
-    <>
+    <Box>
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
@@ -21,7 +21,7 @@ function CampaignDeleteContainer({ campaign, status }) {
       <Button variant="outline" color="red" onClick={() => setOpened(true)}>
         Delete this campaign
       </Button>
-    </>
+    </Box>
   )
 }
 

@@ -72,7 +72,7 @@ user_1.campaign_users.create!(campaign: campaign_2)
     setting.push(Faker::Quotes::Shakespeare.unique.hamlet_quote)
   end
   Faker::Quotes::Shakespeare.unique.clear
-  campaign = Campaign.create!(
+  campaign = Campaign.create(
     name: Faker::Games::ElderScrolls.unique.city, 
     image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '), 
@@ -93,7 +93,7 @@ end
     image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '),
     owner: users[rand(0..2)], 
-    password: 'test123',
+    password: 'test1234',
   )
   Faker::Quotes::Shakespeare.unique.clear
 end

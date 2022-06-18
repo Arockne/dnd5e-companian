@@ -85,29 +85,27 @@ const useStyles = createStyles((theme, _params, getRef) => {
 function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
   return (
-    <Grid grow style={{ margin: '0' }}>
-      <Grid.Col span={1}>
-        <Navbar height={700} width={{ sm: 300 }} p="md">
-          <Navbar.Section grow>
-            <Group className={classes.header} position="apart">
-              {character?.name}
-            </Group>
-            <NavLink
-              to={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}
-              className={({ isActive }) =>
-                cx(classes.link, { [classes.linkActive]: isActive })
-              }
-              end={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}
-            >
-              Overview
-            </NavLink>
-          </Navbar.Section>
-        </Navbar>
-      </Grid.Col>
-      <Grid.Col span={9}>
+    <Group position="center" align="start" grow>
+      <Navbar height={700} width={{ sm: 300 }} style={{ maxWidth: 300 }} p="md">
+        <Navbar.Section grow>
+          <Group className={classes.header} position="apart">
+            {character?.name}
+          </Group>
+          <NavLink
+            to={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}
+            className={({ isActive }) =>
+              cx(classes.link, { [classes.linkActive]: isActive })
+            }
+            end={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}
+          >
+            Overview
+          </NavLink>
+        </Navbar.Section>
+      </Navbar>
+      <Group direction="column" grow>
         <Outlet />
-      </Grid.Col>
-    </Grid>
+      </Group>
+    </Group>
   )
 }
 

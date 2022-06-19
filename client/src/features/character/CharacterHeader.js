@@ -121,10 +121,13 @@ function CharacterHeader({ character }) {
         <Modal
           opened={opened}
           onClose={() => setOpened(false)}
-          title={`Do you want ${character.name} to be visible?`}
+          title={`Do you want ${character?.name} to be visible?`}
           centered
         >
-          <CharacterVisibilityForm character={character} />
+          <CharacterVisibilityForm
+            character={character}
+            setOpened={setOpened}
+          />
         </Modal>
         <Navbar.Section grow>
           <Group className={classes.header} position="apart">

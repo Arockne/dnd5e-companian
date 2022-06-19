@@ -77,6 +77,18 @@ export const characterSlice = createSlice({
         state.status = 'failed'
         state.errors = action.payload.errors
       })
+      .addCase(updateCharacter.pending, (state) => {
+        state.status = 'loading'
+        state.errors = null
+      })
+      .addCase(updateCharacter.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.character = action.payload
+      })
+      .addCase(updateCharacter.rejected, (state, action) => {
+        state.status = 'failed'
+        state.errors = action.payload.errors
+      })
   },
 })
 

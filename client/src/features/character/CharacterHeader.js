@@ -1,4 +1,5 @@
 import { createStyles, Grid, Group, Navbar, Stack, Title } from '@mantine/core'
+import { Logout, ArrowBarToLeft } from 'tabler-icons-react'
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 
@@ -99,6 +100,15 @@ function CharacterHeader({ character }) {
             end={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}
           >
             Overview
+          </NavLink>
+        </Navbar.Section>
+        <Navbar.Section className={classes.footer}>
+          <NavLink
+            to={`/campaigns/${character?.campaign.id}`}
+            className={classes.link}
+          >
+            <ArrowBarToLeft className={classes.linkIcon} />
+            <span>{character?.campaign.name}</span>
           </NavLink>
         </Navbar.Section>
       </Navbar>

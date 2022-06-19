@@ -2,6 +2,7 @@ import {
   createStyles,
   Grid,
   Group,
+  Modal,
   Navbar,
   Stack,
   Switch,
@@ -12,6 +13,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCharacter } from './characterSlice'
+import CharacterVisibilityForm from './CharacterVisibilityForm'
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon')
@@ -94,22 +96,36 @@ const useStyles = createStyles((theme, _params, getRef) => {
 })
 
 function CharacterHeader({ character }) {
+  const [opened, setOpened] = useState(false)
   const { classes, cx } = useStyles()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
+
   function handleCharacterVisibility(e) {
     const { checked: enablingVisibility } = e.target
-    dispatch(
-      updateCharacter({
-        ...character,
-        visible: enablingVisibility,
-      })
-    )
+    if (enablingVisibility) {
+      setOpened(true)
+    } else {
+      dispatch(
+        updateCharacter({
+          ...character,
+          visible: false,
+        })
+      )
+    }
   }
 
   return (
     <Group position="center" align="start" grow>
       <Navbar height={700} width={{ sm: 300 }} style={{ maxWidth: 300 }} p="md">
+        <Modal
+          opened={opened}
+          onClose={() => setOpened(false)}
+          title={`Do you want ${character.name} to be visible?`}
+          centered
+        >
+          <CharacterVisibilityForm character={character} />
+        </Modal>
         <Navbar.Section grow>
           <Group className={classes.header} position="apart">
             {character?.name}

@@ -10,7 +10,7 @@ import {
 import { ArrowBarToLeft } from 'tabler-icons-react'
 import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateCharacter } from './characterSlice'
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -96,6 +96,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.user)
 
   function handleCharacterVisibility(e) {
     const { checked: enablingVisibility } = e.target
@@ -113,11 +114,13 @@ function CharacterHeader({ character }) {
         <Navbar.Section grow>
           <Group className={classes.header} position="apart">
             {character?.name}
-            <Switch
-              label="Visible"
-              checked={character?.visible || false}
-              onChange={handleCharacterVisibility}
-            />
+            {character?.user.id === user.id ? (
+              <Switch
+                label="Visible"
+                checked={character?.visible || false}
+                onChange={handleCharacterVisibility}
+              />
+            ) : null}
           </Group>
           <NavLink
             to={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}

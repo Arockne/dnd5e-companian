@@ -8,8 +8,10 @@ import {
   Title,
 } from '@mantine/core'
 import { ArrowBarToLeft } from 'tabler-icons-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { updateCharacter } from './characterSlice'
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon')
@@ -93,7 +95,17 @@ const useStyles = createStyles((theme, _params, getRef) => {
 
 function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
-  const [checked, setChecked] = useState(character?.visible)
+  const dispatch = useDispatch()
+
+  function handleCharacterVisibility(e) {
+    const { checked: enablingVisibility } = e.target
+    dispatch(
+      updateCharacter({
+        campaign_id: character.campaign.id,
+        character: { id: character.id, visible: enablingVisibility },
+      })
+    )
+  }
 
   return (
     <Group position="center" align="start" grow>
@@ -101,7 +113,11 @@ function CharacterHeader({ character }) {
         <Navbar.Section grow>
           <Group className={classes.header} position="apart">
             {character?.name}
-            <Switch label="Visible" checked={checked} onChange={setChecked} />
+            <Switch
+              label="Visible"
+              checked={character?.visible || false}
+              onChange={handleCharacterVisibility}
+            />
           </Group>
           <NavLink
             to={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}

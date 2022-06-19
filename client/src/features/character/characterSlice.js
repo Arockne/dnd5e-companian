@@ -31,7 +31,8 @@ export const updateCharacter = createAsyncThunk(
   'character/updateCharacter',
   async ({ campaign_id, character }, { rejectWithValue }) => {
     const response = await client.patch(
-      `/api/campaigns/${campaign_id}/characters/${character.id}`
+      `/api/campaigns/${campaign_id}/characters/${character.id}`,
+      { character }
     )
     const body = await response.json()
     if (response.ok) {

@@ -97,13 +97,12 @@ function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
-
   function handleCharacterVisibility(e) {
     const { checked: enablingVisibility } = e.target
     dispatch(
       updateCharacter({
-        campaign_id: character.campaign.id,
-        character: { id: character.id, visible: enablingVisibility },
+        ...character,
+        visible: enablingVisibility,
       })
     )
   }

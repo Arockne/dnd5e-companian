@@ -1,10 +1,20 @@
 import { Box, Button, Group, Space, Text } from '@mantine/core'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { updateCharacter } from './characterSlice'
 
 function CharacterVisibilityForm({ character, setOpened }) {
+  const dispatch = useDispatch()
+
   function handleSubmit(e) {
     e.preventDefault()
     setOpened(false)
+    dispatch(
+      updateCharacter({
+        ...character,
+        visible: true,
+      })
+    )
   }
   return (
     <>

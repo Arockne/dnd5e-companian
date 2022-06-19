@@ -1,6 +1,14 @@
-import { createStyles, Grid, Group, Navbar, Stack, Title } from '@mantine/core'
-import { Logout, ArrowBarToLeft } from 'tabler-icons-react'
-import React from 'react'
+import {
+  createStyles,
+  Grid,
+  Group,
+  Navbar,
+  Stack,
+  Switch,
+  Title,
+} from '@mantine/core'
+import { ArrowBarToLeft } from 'tabler-icons-react'
+import React, { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -85,12 +93,15 @@ const useStyles = createStyles((theme, _params, getRef) => {
 
 function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
+  const [checked, setChecked] = useState(character?.visible)
+
   return (
     <Group position="center" align="start" grow>
       <Navbar height={700} width={{ sm: 300 }} style={{ maxWidth: 300 }} p="md">
         <Navbar.Section grow>
           <Group className={classes.header} position="apart">
             {character?.name}
+            <Switch label="Visible" checked={checked} onChange={setChecked} />
           </Group>
           <NavLink
             to={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}

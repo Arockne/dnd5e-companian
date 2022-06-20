@@ -202,24 +202,26 @@ export function CampaignHeader({ campaign, owner }) {
             </>
           ) : null}
         </Navbar.Section>
-        <Navbar.Section className={classes.footer}>
-          <Modal
-            centered
-            title={`Leaving ${campaign?.name}?`}
-            opened={openLeaveCampaignForm}
-            onClose={() => setOpenLeaveCampaignForm(false)}
-          >
-            <CampaignLeaveForm currentPlayer={campaign.current_player} />
-          </Modal>
-          <Button
-            variant="subtle"
-            className={classes.leaveButton}
-            onClick={() => setOpenLeaveCampaignForm(true)}
-          >
-            <AlertTriangle className={classes.linkIcon} />
-            <span>Leave Campaign</span>
-          </Button>
-        </Navbar.Section>
+        {!owner ? (
+          <Navbar.Section className={classes.footer}>
+            <Modal
+              centered
+              title={`Leaving ${campaign?.name}?`}
+              opened={openLeaveCampaignForm}
+              onClose={() => setOpenLeaveCampaignForm(false)}
+            >
+              <CampaignLeaveForm currentPlayer={campaign.current_player} />
+            </Modal>
+            <Button
+              variant="subtle"
+              className={classes.leaveButton}
+              onClick={() => setOpenLeaveCampaignForm(true)}
+            >
+              <AlertTriangle className={classes.linkIcon} />
+              <span>Leave Campaign</span>
+            </Button>
+          </Navbar.Section>
+        ) : null}
       </Navbar>
       <Group direction="column" grow>
         <Outlet />

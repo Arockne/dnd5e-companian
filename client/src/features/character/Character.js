@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes, useParams } from 'react-router-dom'
+import NotAuthorized from '../error/NotAuthorized'
+import NotFound from '../error/NotFound'
 import CharacterHeader from './CharacterHeader'
 import CharacterOverview from './CharacterOverview'
 import { getCharacter } from './characterSlice'
 
 function Character() {
-  const { character } = useSelector((state) => state.character)
+  const { character, status, errors } = useSelector((state) => state.character)
   const { campaign_id, character_id } = useParams()
   const dispatch = useDispatch()
 
@@ -16,12 +18,25 @@ function Character() {
     }
   }, [])
 
-  return (
+  function renderErrorPage() {
+    if (status === 'failed') {
+      if (/not authorized/i.test(errors[0])) {
+        return <NotAuthorized />
+      }
+      return <NotFound errors={errors} />
+    } else {
+      return <div></div>
+    }
+  }
+
+  return character ? (
     <Routes>
       <Route path="/" element={<CharacterHeader character={character} />}>
         <Route index element={<CharacterOverview character={character} />} />
       </Route>
     </Routes>
+  ) : (
+    renderErrorPage()
   )
 }
 

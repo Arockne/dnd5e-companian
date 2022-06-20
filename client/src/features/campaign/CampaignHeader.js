@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Anchor,
   Box,
@@ -8,6 +8,7 @@ import {
   Grid,
   Group,
   Loader,
+  Modal,
   Navbar,
   Stack,
   Tabs,
@@ -136,6 +137,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 })
 
 export function CampaignHeader({ campaign, owner }) {
+  const [openLeaveCampaignForm, setOpenLeaveCampaignForm] = useState(false)
   const { classes, cx } = useStyles()
 
   return (
@@ -200,7 +202,16 @@ export function CampaignHeader({ campaign, owner }) {
           ) : null}
         </Navbar.Section>
         <Navbar.Section className={classes.footer}>
-          <Button variant="subtle" className={classes.leaveButton}>
+          <Modal
+            centered
+            opened={openLeaveCampaignForm}
+            onClose={() => setOpenLeaveCampaignForm(false)}
+          ></Modal>
+          <Button
+            variant="subtle"
+            className={classes.leaveButton}
+            onClick={() => setOpenLeaveCampaignForm(true)}
+          >
             <AlertTriangle className={classes.linkIcon} />
             <span>Leave Campaign</span>
           </Button>

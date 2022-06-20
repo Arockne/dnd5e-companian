@@ -13,7 +13,7 @@ function Campaign() {
   const { campaign_id } = useParams()
   const dispatch = useDispatch()
 
-  const { campaign } = useSelector((state) => state.campaign)
+  const { campaign, status } = useSelector((state) => state.campaign)
   const { user } = useSelector((state) => state.user)
 
   const owner = campaign?.owner?.id === user?.id
@@ -23,6 +23,14 @@ function Campaign() {
       dispatch(getCampaign(campaign_id))
     }
   }, [campaign_id])
+
+  function renderErrorPage() {
+    if (status === 'failed') {
+      return <NotAuthorized />
+    } else {
+      return <div></div>
+    }
+  }
 
   return campaign ? (
     <Routes>
@@ -39,7 +47,7 @@ function Campaign() {
       <Route path="/characters/:character_id/*" element={<Character />} />
     </Routes>
   ) : (
-    <NotAuthorized />
+    renderErrorPage()
   )
 }
 

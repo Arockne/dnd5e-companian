@@ -60,7 +60,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
   
   def render_not_found
-    render json: { errors: ['Campaign does not exist'] }, status: :not_found
+    render json: { errors: ['The campaign you are looking for does not exist in this realm.'] }, status: :not_found
   end
 
   def membership

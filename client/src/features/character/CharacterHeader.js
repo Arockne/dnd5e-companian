@@ -1,15 +1,6 @@
-import {
-  createStyles,
-  Grid,
-  Group,
-  Modal,
-  Navbar,
-  Stack,
-  Switch,
-  Title,
-} from '@mantine/core'
-import { ArrowBarToLeft, TransferOut } from 'tabler-icons-react'
-import React, { useEffect, useState } from 'react'
+import { createStyles, Group, Modal, Navbar, Switch } from '@mantine/core'
+import { TransferOut } from 'tabler-icons-react'
+import React, { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCharacter } from './characterSlice'

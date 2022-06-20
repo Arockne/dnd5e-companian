@@ -58,7 +58,7 @@ function CampaignUpdatePasswordForm({ campaign }) {
 
   return (
     <Box>
-      <Title order={3}>Update Password</Title>
+      <Title order={3}>Update Campaign Password</Title>
       <Divider />
       <form onSubmit={handleSubmit}>
         <PasswordInput

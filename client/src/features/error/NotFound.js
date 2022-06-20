@@ -49,7 +49,9 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-export function NotFound({ errors }) {
+export function NotFound({
+  errors = ['Unfortunately, this page you are trying to open does not exist.'],
+}) {
   const { classes } = useStyles()
 
   return (

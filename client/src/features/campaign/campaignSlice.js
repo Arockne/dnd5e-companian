@@ -67,7 +67,7 @@ const initialState = {
   campaign: null,
   campaigns: [],
   status: 'idle',
-  errors: null,
+  errors: [],
 }
 
 const campaignSlice = createSlice({
@@ -77,14 +77,14 @@ const campaignSlice = createSlice({
     reset: () => initialState,
     resetErrors: (state) => {
       state.status = 'idle'
-      state.errors = null
+      state.errors = []
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getCurrentCampaigns.pending, (state) => {
         state.status = 'loading'
-        state.errors = null
+        state.errors = []
       })
       .addCase(getCurrentCampaigns.fulfilled, (state, action) => {
         state.status = 'idle'
@@ -97,12 +97,11 @@ const campaignSlice = createSlice({
       .addCase(getCampaign.pending, (state) => {
         state.status = 'loading'
         state.campaign = null
-        state.errors = null
+        state.errors = []
       })
       .addCase(getCampaign.fulfilled, (state, action) => {
         state.status = 'idle'
         state.campaign = action.payload
-        state.errors = null
       })
       .addCase(getCampaign.rejected, (state, action) => {
         state.status = 'failed'
@@ -110,7 +109,7 @@ const campaignSlice = createSlice({
       })
       .addCase(createCampaign.pending, (state) => {
         state.status = 'loading'
-        state.errors = null
+        state.errors = []
       })
       .addCase(createCampaign.fulfilled, (state, action) => {
         state.status = 'succeeded'
@@ -122,7 +121,7 @@ const campaignSlice = createSlice({
       })
       .addCase(updateCampaign.pending, (state) => {
         state.status = 'loading'
-        state.errors = null
+        state.errors = []
       })
       .addCase(updateCampaign.fulfilled, (state, action) => {
         state.status = 'succeeded'
@@ -134,11 +133,11 @@ const campaignSlice = createSlice({
       })
       .addCase(deleteCampaign.pending, (state) => {
         state.status = 'loading'
-        state.errors = null
+        state.errors = []
       })
       .addCase(deleteCampaign.fulfilled, (state) => {
         state.status = 'succeeded'
-        state.errors = null
+        state.errors = []
         state.campaign.id = 0
       })
       .addCase(deleteCampaign.rejected, (state, action) => {

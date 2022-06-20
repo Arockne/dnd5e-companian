@@ -1,12 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   createStyles,
   Container,
-  Avatar,
-  UnstyledButton,
-  Group,
-  Text,
-  Menu,
   Burger,
   Header,
   Title,
@@ -14,16 +9,9 @@ import {
 } from '@mantine/core'
 import { useBooleanToggle } from '@mantine/hooks'
 import { Link, NavLink, Outlet } from 'react-router-dom'
-import {
-  Logout,
-  Settings,
-  ChevronDown,
-  Swords,
-  Book2,
-} from 'tabler-icons-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../user/state/userSlice'
+import { useSelector } from 'react-redux'
 import MainHeaderBurgerMenu from './MainHeaderBurgerMenu'
+import UserMenu from './UserMenu'
 
 const useStyles = createStyles((theme) => {
   return {
@@ -116,11 +104,8 @@ const useStyles = createStyles((theme) => {
 
 function MainHeader() {
   const [opened, toggleOpened] = useBooleanToggle(false)
-  const [userMenuOpened, setUserMenuOpened] = useState(false)
   const { classes, theme, cx } = useStyles()
   const { user } = useSelector(({ user }) => user)
-
-  const dispatch = useDispatch()
 
   return (
     <>
@@ -151,73 +136,13 @@ function MainHeader() {
               Search Campaigns
             </NavLink>
           </Container>
-
-          <Group>
-            <Menu
-              size={260}
-              placement="end"
-              transition="pop-top-right"
-              className={classes.userMenu}
-              onClose={() => setUserMenuOpened(false)}
-              onOpen={() => setUserMenuOpened(true)}
-              control={
-                <UnstyledButton
-                  className={cx(classes.user, {
-                    [classes.userActive]: userMenuOpened,
-                  })}
-                >
-                  <Group spacing={7}>
-                    <Avatar
-                      src={user.image}
-                      alt={user.name}
-                      radius="xl"
-                      size={20}
-                    />
-                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                      {user.username}
-                    </Text>
-                    <ChevronDown size={12} />
-                  </Group>
-                </UnstyledButton>
-              }
-            >
-              <Menu.Item
-                component={Link}
-                to="/characters"
-                icon={<Book2 size={14} />}
-              >
-                Characters
-              </Menu.Item>
-              <Menu.Item
-                component={Link}
-                to="/campaigns"
-                icon={<Swords size={14} />}
-              >
-                Campaigns
-              </Menu.Item>
-
-              <Menu.Label>Settings</Menu.Label>
-              <Menu.Item icon={<Settings size={14} />}>
-                Account settings
-              </Menu.Item>
-              <Menu.Item
-                icon={<Logout size={14} />}
-                onClick={() => {
-                  dispatch(logoutUser())
-                }}
-              >
-                Logout
-              </Menu.Item>
-            </Menu>
-          </Group>
-
+          <UserMenu user={user} />
           <Burger
             opened={opened}
             onClick={() => toggleOpened()}
             className={classes.burger}
             size="md"
           />
-
           <Drawer
             opened={opened}
             onClose={() => toggleOpened()}

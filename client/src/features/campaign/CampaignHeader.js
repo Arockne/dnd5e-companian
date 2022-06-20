@@ -1,33 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import {
-  Anchor,
-  Box,
-  Button,
-  createStyles,
-  Divider,
-  Grid,
-  Group,
-  Loader,
-  Modal,
-  Navbar,
-  Stack,
-  Tabs,
-  Text,
-  Title,
-} from '@mantine/core'
-import {
-  Logout,
-  MessageCircle,
-  Photo,
-  Settings,
-  SwitchHorizontal,
-  TransferOut,
-  AlertTriangle,
-} from 'tabler-icons-react'
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { getCampaign } from './campaignSlice'
-import CampaignLeaveForm from './CampaignLeaveForm'
+import React from 'react'
+import { createStyles, Group, Navbar } from '@mantine/core'
+import { NavLink, Outlet } from 'react-router-dom'
 import CampaignLeaveContainer from './CampaignLeaveContainer'
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -111,7 +84,6 @@ const useStyles = createStyles((theme, _params, getRef) => {
 })
 
 export function CampaignHeader({ campaign, owner }) {
-  const [openLeaveCampaignForm, setOpenLeaveCampaignForm] = useState(false)
   const { classes, cx } = useStyles()
 
   return (

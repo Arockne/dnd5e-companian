@@ -18,7 +18,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def show
-    render json: campaign, status: :ok
+    render json: campaign, status: :ok, serializer: CampaignShowSerializer
   end
 
   def create

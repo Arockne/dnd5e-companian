@@ -124,7 +124,7 @@ function MainHeader() {
 
   return (
     <>
-      <Header height={60} mb={10}>
+      <Header height={60}>
         <Container className={classes.header}>
           <Title component={Link} to="/" order={2} className={classes.title}>
             D&D 5e Companion

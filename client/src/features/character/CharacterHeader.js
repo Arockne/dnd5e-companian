@@ -8,7 +8,7 @@ import {
   Switch,
   Title,
 } from '@mantine/core'
-import { ArrowBarToLeft } from 'tabler-icons-react'
+import { ArrowBarToLeft, TransferOut } from 'tabler-icons-react'
 import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -155,7 +155,7 @@ function CharacterHeader({ character }) {
             to={`/campaigns/${character?.campaign.id}`}
             className={classes.link}
           >
-            <ArrowBarToLeft className={classes.linkIcon} />
+            <TransferOut className={classes.linkIcon} />
             <span>{character?.campaign.name}</span>
           </NavLink>
         </Navbar.Section>

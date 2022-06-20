@@ -49,6 +49,7 @@ function Campaign() {
         ) : null}
       </Route>
       <Route path="/characters/:character_id/*" element={<Character />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   ) : (
     renderErrorPage()

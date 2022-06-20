@@ -170,9 +170,6 @@ export function CampaignHeader({ campaign, owner }) {
         </Navbar.Section>
       </Navbar>
       <Group direction="column" grow>
-        <Group position="center">
-          <Title order={2}>{campaign?.name}</Title>
-        </Group>
         <Outlet />
       </Group>
     </Group>

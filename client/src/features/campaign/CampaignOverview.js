@@ -1,4 +1,4 @@
-import { Container, Group, Image, ScrollArea, Text } from '@mantine/core'
+import { Container, Group, Image, ScrollArea, Text, Title } from '@mantine/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -7,6 +7,7 @@ function CampaignOverview() {
 
   return (
     <Group direction="column" align="center" spacing="xl">
+      <Title order={2}>{campaign?.name}</Title>
       <Image
         withPlaceholder={true}
         src={campaign?.image_url}

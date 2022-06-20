@@ -46,6 +46,7 @@ npm install --prefix client
         - this will also have the arrow pointing left
         - this will open a drawer that will have all the navigation related to the current page
         - when a link is clicked will close the drawer
+- need to create not found error handling campaign
 ## Bugs that need to be stomped
 
 ## Deployment Instructions

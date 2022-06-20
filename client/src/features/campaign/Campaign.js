@@ -8,12 +8,13 @@ import { getCampaign } from './campaignSlice'
 import CampaignSettingsContainer from './settings/CampaignSettingsContainer'
 import CharacterForm from '../character/CharacterForm'
 import NotAuthorized from '../error/NotAuthorized'
+import NotFound from '../error/NotFound'
 
 function Campaign() {
   const { campaign_id } = useParams()
   const dispatch = useDispatch()
 
-  const { campaign, status } = useSelector((state) => state.campaign)
+  const { campaign, status, errors } = useSelector((state) => state.campaign)
   const { user } = useSelector((state) => state.user)
 
   const owner = campaign?.owner?.id === user?.id
@@ -26,7 +27,10 @@ function Campaign() {
 
   function renderErrorPage() {
     if (status === 'failed') {
-      return <NotAuthorized />
+      if (/not authorized/i.test(errors[0])) {
+        return <NotAuthorized />
+      }
+      return <NotFound errors={errors} />
     } else {
       return <div></div>
     }

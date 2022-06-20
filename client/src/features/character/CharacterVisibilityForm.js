@@ -18,12 +18,14 @@ function CharacterVisibilityForm({ character, setOpened }) {
   }
   return (
     <>
-      <Text size="sm">
+      <Text size="sm" align="center">
         This will allow other players of{' '}
         <strong>{character.campaign.name}</strong> to see this character&#39;s
         profile
       </Text>
-      <Text size="sm">Do you still want this character to be visible?</Text>
+      <Text size="sm" align="center">
+        Do you still want this character to be visible?
+      </Text>
       <br />
       <form onSubmit={handleSubmit}>
         <Group position="center">

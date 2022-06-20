@@ -209,7 +209,7 @@ export function CampaignHeader({ campaign, owner }) {
             opened={openLeaveCampaignForm}
             onClose={() => setOpenLeaveCampaignForm(false)}
           >
-            <CampaignLeaveForm campaign={campaign} />
+            <CampaignLeaveForm currentPlayer={campaign.current_player} />
           </Modal>
           <Button
             variant="subtle"

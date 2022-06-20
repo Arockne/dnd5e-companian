@@ -1,5 +1,6 @@
 class Api::CampaignsController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   
   before_action :authorize_show_action, only: [:show]
   before_action :authorize_password_update, only: [:password_update]
@@ -57,13 +58,17 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   def render_unprocessable_entity(invalid)
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
+  
+  def render_not_found
+    render json: { errors: ['Campaign does not exist'] }, status: :not_found
+  end
 
   def membership
     @membership ||= current_user.campaign_users.find_by(campaign_id: params[:id])
   end
 
   def campaign
-    @campaign ||= Campaign.find_by_id(params[:id] || params[:campaign_id])
+    @campaign ||= Campaign.find(params[:id] || params[:campaign_id])
   end
 
   def campaign_owner?

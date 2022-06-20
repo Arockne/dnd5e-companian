@@ -7,6 +7,7 @@ import CampaignOverview from './CampaignOverview'
 import { getCampaign } from './campaignSlice'
 import CampaignSettingsContainer from './settings/CampaignSettingsContainer'
 import CharacterForm from '../character/CharacterForm'
+import NotAuthorized from '../error/NotAuthorized'
 
 function Campaign() {
   const { campaign_id } = useParams()
@@ -23,7 +24,7 @@ function Campaign() {
     }
   }, [campaign_id])
 
-  return (
+  return campaign ? (
     <Routes>
       <Route
         path="/"
@@ -37,6 +38,8 @@ function Campaign() {
       </Route>
       <Route path="/characters/:character_id/*" element={<Character />} />
     </Routes>
+  ) : (
+    <NotAuthorized />
   )
 }
 

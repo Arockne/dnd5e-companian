@@ -113,7 +113,12 @@ end
 puts 'Creating characters'
 
 Campaign.all.each_entry do |campaign|
-    filtered_users = users.filter { |user| user.username != campaign.owner.username }
+    filtered_users = users.filter { |user| user.username != campaign.owner.username && campaign.campaign_users.find_by(user_id: user.id) }
+    
+    if filtered_users.empty?
+      next
+    end
+
     10.times do
       name = Faker::Name.unique.name
       appearance = []
@@ -173,4 +178,4 @@ puts 'Creating campaigns without players'
   Faker::Quotes::Shakespeare.unique.clear
 end
 
-puts 'finished seeding 🌹'
+puts 'Finished seeding 🌹'

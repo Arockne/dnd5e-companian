@@ -4,6 +4,6 @@ class CampaignShowSerializer < ActiveModel::Serializer
   belongs_to :owner
 
   def current_player
-    object.campaign_users.find_by(user: current_user)
+    object.campaign_users.select(:id, :campaign_id, :user_id).find_by(user: current_user)
   end
 end

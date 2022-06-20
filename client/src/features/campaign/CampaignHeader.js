@@ -27,6 +27,7 @@ import {
 import { Link, NavLink, Outlet, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampaign } from './campaignSlice'
+import CampaignLeaveForm from './CampaignLeaveForm'
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon')
@@ -204,9 +205,12 @@ export function CampaignHeader({ campaign, owner }) {
         <Navbar.Section className={classes.footer}>
           <Modal
             centered
+            title={`Leaving ${campaign?.name}?`}
             opened={openLeaveCampaignForm}
             onClose={() => setOpenLeaveCampaignForm(false)}
-          ></Modal>
+          >
+            <CampaignLeaveForm campaign={campaign} />
+          </Modal>
           <Button
             variant="subtle"
             className={classes.leaveButton}

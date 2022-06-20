@@ -34,6 +34,7 @@ function Character() {
       <Route path="/" element={<CharacterHeader character={character} />}>
         <Route index element={<CharacterOverview character={character} />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   ) : (
     renderErrorPage()

@@ -91,6 +91,7 @@ function CharacterHeader({ character }) {
   const { classes, cx } = useStyles()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
+  const owner = character?.user.id === user?.id
 
   function handleCharacterVisibility(e) {
     const { checked: enablingVisibility } = e.target
@@ -123,7 +124,7 @@ function CharacterHeader({ character }) {
         <Navbar.Section grow>
           <Group className={classes.header} position="apart">
             {character?.name}
-            {character?.user.id === user.id ? (
+            {owner ? (
               <Switch
                 label="Visible"
                 checked={character?.visible || false}

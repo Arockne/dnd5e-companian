@@ -5,6 +5,7 @@ import NotAuthorized from '../error/NotAuthorized'
 import NotFound from '../error/NotFound'
 import CharacterHeader from './CharacterHeader'
 import CharacterOverview from './CharacterOverview'
+import CharacterSettingsContainer from './CharacterSettingsContainer'
 import { getCharacter } from './characterSlice'
 
 function Character() {
@@ -33,6 +34,7 @@ function Character() {
     <Routes>
       <Route path="/" element={<CharacterHeader character={character} />}>
         <Route index element={<CharacterOverview character={character} />} />
+        <Route path="settings" element={<CharacterSettingsContainer />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

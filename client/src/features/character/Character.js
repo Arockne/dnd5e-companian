@@ -11,6 +11,8 @@ import { getCharacter } from './characterSlice'
 function Character() {
   const { character, status, errors } = useSelector((state) => state.character)
   const { campaign_id, character_id } = useParams()
+  const { user } = useSelector((state) => state.user)
+  const owner = character?.user.id === user?.id
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -34,7 +36,9 @@ function Character() {
     <Routes>
       <Route path="/" element={<CharacterHeader character={character} />}>
         <Route index element={<CharacterOverview character={character} />} />
-        <Route path="settings" element={<CharacterSettingsContainer />} />
+        {owner ? (
+          <Route path="settings" element={<CharacterSettingsContainer />} />
+        ) : null}
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

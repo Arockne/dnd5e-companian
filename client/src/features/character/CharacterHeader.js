@@ -140,6 +140,15 @@ function CharacterHeader({ character }) {
           >
             Overview
           </NavLink>
+          <NavLink
+            to={`/campaigns/${character?.campaign.id}/characters/${character?.id}/settings`}
+            className={({ isActive }) =>
+              cx(classes.link, { [classes.linkActive]: isActive })
+            }
+            end={`/campaigns/${character?.campaign.id}/characters/${character?.id}`}
+          >
+            Settings
+          </NavLink>
         </Navbar.Section>
         <Navbar.Section className={classes.footer}>
           <NavLink

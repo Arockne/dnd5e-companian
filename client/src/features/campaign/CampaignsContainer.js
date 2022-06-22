@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../common/Loading'
 import { getCurrentCampaigns } from './campaignSlice'
 import CampaignsOwnedContainer from './CampaignsOwnedContainer'
+import CampaignsPlayedContainer from './CampaignsPlayedContainer'
 import CampaignsTable from './CampaignsTable'
 
 function CampaignsContainer() {
@@ -19,12 +20,7 @@ function CampaignsContainer() {
   return campaigns ? (
     <Stack>
       <CampaignsOwnedContainer />
-      <Container>
-        <Title align="center" order={2}>
-          Campaigns a Member of
-        </Title>
-        <CampaignsTable campaigns={campaigns} />
-      </Container>
+      <CampaignsPlayedContainer />
     </Stack>
   ) : (
     <Loading />

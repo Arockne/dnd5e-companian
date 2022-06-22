@@ -15,7 +15,7 @@ function CampaignsPlayedContainer() {
   return (
     <Container>
       <Title align="center" order={2}>
-        Created Campaigns
+        Campaigns Currently In
       </Title>
       <CampaignsTable campaigns={campaigns} />
     </Container>

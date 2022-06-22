@@ -4,9 +4,9 @@ import { client } from '../../api/client'
 import CampaignsTable from './CampaignsTable'
 
 function CampaignsOwnedContainer() {
-  const [campaigns, setCampaigns] = useState({})
+  const [campaigns, setCampaigns] = useState([])
   useEffect(() => {
-    fetch('/campaigns/currently_owned').then(async (r) => {
+    fetch('/api/campaigns/currently_owned').then(async (r) => {
       const body = await r.json()
       if (r.ok) {
         setCampaigns(body)

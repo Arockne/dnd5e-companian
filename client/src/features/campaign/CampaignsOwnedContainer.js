@@ -1,6 +1,5 @@
 import { Container, Title } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
-import { client } from '../../api/client'
 import CampaignsTable from './CampaignsTable'
 
 function CampaignsOwnedContainer() {

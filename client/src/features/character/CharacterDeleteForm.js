@@ -2,9 +2,12 @@ import { Button, Group, Input, Text } from '@mantine/core'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
+import FormErrorsContainer from '../error/FormErrorsContainer'
 
-function CharacterDeleteForm({ character, status }) {
+function CharacterDeleteForm({ character }) {
   const [inputData, setInputData] = useState('')
+  const [status, setStatus] = useState('idle')
+  const [errors, setErrors] = useState([])
   const navigate = useNavigate()
 
   const textUserNeedsToMatch = `destroy ${character?.name}`
@@ -16,11 +19,16 @@ function CharacterDeleteForm({ character, status }) {
 
   async function handleSumbit(e) {
     e.preventDefault()
+    setStatus('loading')
     const response = await client.delete(
       `/api/campaigns/${character.campaign.id}/characters/${character.id}`
     )
     if (response.ok) {
       navigate('/')
+    } else {
+      const body = await response.json()
+      setStatus('failed')
+      setErrors(body.errors)
     }
   }
 
@@ -44,6 +52,7 @@ function CharacterDeleteForm({ character, status }) {
           Accept this loss
         </Button>
       </Group>
+      <FormErrorsContainer errors={errors} />
     </form>
   )
 }

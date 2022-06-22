@@ -11,10 +11,20 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   end
 
   def current_campaigns
-    owned_campaigns = current_user.owned_campaigns.select(:id, :name, :setting, :image_url)
+    owned_campaigns = current_user.owned_campaigns
     campaigns = current_user.campaigns.select(:id, :name, :setting, :image_url)
     current = { owned_campaigns: owned_campaigns, campaigns: campaigns}
     render json: current, status: :ok
+  end
+
+  def currently_owned
+    campaigns = current_user.owned_campaigns
+    render json: campaigns, status: :ok
+  end
+
+  def currently_playing
+    campaigns = current_user.campaigns
+    render json: campaigns, status: :ok
   end
 
   def show

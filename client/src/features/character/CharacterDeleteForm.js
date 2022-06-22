@@ -1,10 +1,11 @@
 import { Button, Group, Input, Text } from '@mantine/core'
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { client } from '../../api/client'
 
-function CharacterDeleteForm({ character }) {
+function CharacterDeleteForm({ character, status }) {
   const [inputData, setInputData] = useState('')
+  const navigate = useNavigate()
 
   const textUserNeedsToMatch = `destroy ${character?.name}`
   const inputMatchesRequirement = textUserNeedsToMatch === inputData
@@ -13,8 +14,18 @@ function CharacterDeleteForm({ character }) {
     setInputData(e.target.value)
   }
 
+  async function handleSumbit(e) {
+    e.preventDefault()
+    const response = await client.delete(
+      `/api/campaigns/${character.campaign.id}/characters/${character.id}`
+    )
+    if (response.ok) {
+      navigate('/')
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSumbit}>
       <Text size="sm">
         Are you absolutely certain you want this character deleted?
       </Text>
@@ -25,7 +36,11 @@ function CharacterDeleteForm({ character }) {
       </Text>
       <Input required value={inputData} onChange={handleInputChange} />
       <Group position="center" grow>
-        <Button type="submit" disabled={!inputMatchesRequirement}>
+        <Button
+          type="submit"
+          disabled={!inputMatchesRequirement}
+          loading={status === 'loading'}
+        >
           Accept this loss
         </Button>
       </Group>

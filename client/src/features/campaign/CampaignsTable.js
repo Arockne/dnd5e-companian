@@ -44,8 +44,12 @@ function CampaignsTable({ campaigns = [] }) {
   const navigate = useNavigate()
 
   const rows = campaigns?.map((row) => (
-    <tr key={row.id} onClick={() => navigate(`/campaigns/${row.id}`)}>
-      <td style={{ cursor: 'pointer' }}>
+    <tr
+      key={row.id}
+      style={{ cursor: 'pointer' }}
+      onClick={() => navigate(`/campaigns/${row.id}`)}
+    >
+      <td>
         <Group spacing="sm">
           <Avatar size={26} src={row.image_url} radius={26} />
           <Text size="sm" weight={500}>

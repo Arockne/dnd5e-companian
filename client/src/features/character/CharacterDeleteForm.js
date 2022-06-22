@@ -24,7 +24,7 @@ function CharacterDeleteForm({ character }) {
       `/api/campaigns/${character.campaign.id}/characters/${character.id}`
     )
     if (response.ok) {
-      navigate('/')
+      navigate(`/campaigns/${character.campaign.id}`)
     } else {
       const body = await response.json()
       setStatus('failed')

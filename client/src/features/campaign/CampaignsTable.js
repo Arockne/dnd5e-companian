@@ -57,6 +57,9 @@ function CampaignsTable({ campaigns = [] }) {
           </Text>
         </Group>
       </td>
+      <td>
+        <Text size="sm">{row.owner.username}</Text>
+      </td>
     </tr>
   ))
 
@@ -69,6 +72,7 @@ function CampaignsTable({ campaigns = [] }) {
         <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <tr>
             <th>Name</th>
+            <th>Owner</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

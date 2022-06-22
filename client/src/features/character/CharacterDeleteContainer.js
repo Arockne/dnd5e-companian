@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Modal, Text, Title } from '@mantine/core'
 import React, { useState } from 'react'
+import CharacterDeleteForm from './CharacterDeleteForm'
 
 function CharacterDeleteContainer({ character }) {
   const [opened, setOpened] = useState(false)
@@ -11,7 +12,7 @@ function CharacterDeleteContainer({ character }) {
         title={`Delete ${character?.name}?`}
         centered
       >
-        {/* <CharacterDeleteForm /> */}
+        <CharacterDeleteForm character={character} />
       </Modal>
       <Title order={3}>Delete Character</Title>
       <Divider size="xs" />

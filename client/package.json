@@ -24,7 +24,10 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "tabler-icons-react": "^1.47.0"
+    "tabler-icons-react": "^1.47.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-prettier": "^4.0.0"
   },
   "scripts": {
     "start": "PORT=4000 react-scripts start",
@@ -53,9 +56,6 @@
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
     "eslint": "^8.14.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-prettier": "^4.0.0",
     "msw": "^0.39.2",
     "prettier": "^2.6.2"
   }

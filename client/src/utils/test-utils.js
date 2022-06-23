@@ -6,13 +6,14 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 // Import your own reducer
 import userSlice from '../features/user/state/userSlice'
+import characterSlice from '../features/character/characterSlice'
 
 function render(
   ui,
   {
     preloadedState,
     store = configureStore({
-      reducer: { user: userSlice },
+      reducer: { user: userSlice, character: characterSlice },
       preloadedState,
     }),
     route = '/',

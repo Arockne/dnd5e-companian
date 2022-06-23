@@ -18,10 +18,10 @@ function CampaignsContainer() {
   }, [])
 
   return campaigns ? (
-    <Stack>
+    <Group align="center" position="center" spacing="xl" grow>
       <CampaignsOwnedContainer />
       <CampaignsPlayedContainer />
-    </Stack>
+    </Group>
   ) : (
     <Loading />
   )

@@ -1,4 +1,4 @@
-import { Container, Title } from '@mantine/core'
+import { Group, Title } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import CampaignsTable from './CampaignsTable'
 
@@ -13,12 +13,12 @@ function CampaignsPlayedContainer() {
     })
   }, [])
   return (
-    <Container>
+    <Group direction="column" position="center" grow>
       <Title align="center" order={2}>
         Campaigns Currently In
       </Title>
       <CampaignsTable campaigns={campaigns} />
-    </Container>
+    </Group>
   )
 }
 

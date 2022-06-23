@@ -18,7 +18,7 @@ function CampaignsContainer() {
   }, [])
 
   return campaigns ? (
-    <Group align="center" position="center" spacing="xl" grow>
+    <Group align="center" position="center" spacing={100} grow>
       <CampaignsOwnedContainer />
       <CampaignsPlayedContainer />
     </Group>

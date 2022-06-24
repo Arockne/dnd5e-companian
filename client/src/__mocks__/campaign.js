@@ -17,7 +17,7 @@ const postRoute = '/campaigns'
 const deleteRoute = `/campaigns/${campaign1.id}`
 const updateRoute = `/campaigns/${campaign1.id}`
 
-export const handlers = [
+export const campaignHandlers = [
   rest.get(indexRoute, (req, res, ctx) => {
     return res(ctx.json(campaigns), ctx.status(200))
   }),

@@ -30,7 +30,7 @@ const showRoute = `/api/campaigns/${character1.campaign.id}/characters/${charact
 const postRoute = `/api/campaigns/1/characters`
 const deleteRoute = `/api/campaigns/${character1.campaign.id}/characters/${character1.id}`
 
-export const handlers = [
+export const characterHandlers = [
   rest.get(indexRoute, (req, res, ctx) => {
     return res(ctx.json(characters), ctx.status(200))
   }),

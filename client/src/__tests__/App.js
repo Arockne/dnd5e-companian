@@ -7,10 +7,21 @@ import {
 } from '../utils/test-utils'
 import App from '../App'
 import { handlers } from '../__mocks__/user'
+import { characterHandlers } from '../__mocks__/character'
+import { campaignHandlers } from '../__mocks__/campaign'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
 
-const server = setupServer(...handlers)
+class ResizeObserver {
+  observe() {}
+  unobserve() {}
+}
+
+const server = setupServer(
+  ...handlers,
+  ...characterHandlers,
+  ...campaignHandlers
+)
 
 // Enable API mocking before tests.
 beforeAll(() => server.listen())
@@ -79,4 +90,26 @@ test('user is able to logout', async () => {
       screen.getByRole('textbox', { name: /username/i })
     ).toBeInTheDocument()
   })
+})
+
+test('user is able to see their character', async () => {
+  window.ResizeObserver = ResizeObserver
+  render(<App />)
+
+  await waitFor(() => screen.getByText(/test/i))
+
+  await userEvent.click(screen.getByRole('button', { name: /test/i }))
+
+  expect(
+    screen.getByRole('menuitem', { name: /characters/i })
+  ).toBeInTheDocument()
+
+  await userEvent.click(screen.getByRole('menuitem', { name: /characters/i }))
+
+  expect(await screen.getByRole('heading', { name: /characters/i }))
+  await waitFor(() => screen.getByText(/rocko/i))
+  await userEvent.click(screen.getByText(/rocko/i))
+  await waitFor(() =>
+    expect(screen.getByRole('heading', { name: /rocko/i })).toBeInTheDocument()
+  )
 })

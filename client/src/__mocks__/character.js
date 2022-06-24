@@ -21,6 +21,9 @@ const characters = [
       id: 1,
       name: 'Star Wards',
     },
+    user: {
+      id: 1,
+    },
   },
 ]
 

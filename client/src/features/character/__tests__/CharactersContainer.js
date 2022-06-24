@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '../../../utils/test-utils'
-import { handlers } from '../../../__mocks__/character'
+import { characterHandlers } from '../../../__mocks__/character'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
 import CharactersContainer from '../CharactersContainer'
@@ -9,7 +9,7 @@ class ResizeObserver {
   unobserve() {}
 }
 
-const server = setupServer(...handlers)
+const server = setupServer(...characterHandlers)
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen())

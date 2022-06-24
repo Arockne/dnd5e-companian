@@ -92,24 +92,42 @@ test('user is able to logout', async () => {
   })
 })
 
-test('user is able to see their character', async () => {
+test('user is able to see their character and delete their character', async () => {
   window.ResizeObserver = ResizeObserver
   render(<App />)
 
+  //steps to get character
   await waitFor(() => screen.getByText(/test/i))
-
   await userEvent.click(screen.getByRole('button', { name: /test/i }))
-
   expect(
     screen.getByRole('menuitem', { name: /characters/i })
   ).toBeInTheDocument()
-
   await userEvent.click(screen.getByRole('menuitem', { name: /characters/i }))
-
   expect(await screen.getByRole('heading', { name: /characters/i }))
   await waitFor(() => screen.getByText(/rocko/i))
   await userEvent.click(screen.getByText(/rocko/i))
   await waitFor(() =>
     expect(screen.getByRole('heading', { name: /rocko/i })).toBeInTheDocument()
+  )
+
+  //steps to delete character
+  await userEvent.click(screen.getByRole('link', { name: /settings/i }))
+  await waitFor(() =>
+    expect(
+      screen.getByRole('heading', { name: /delete character/i })
+    ).toBeInTheDocument()
+  )
+  await userEvent.click(
+    screen.getByRole('button', { name: /delete this character/i })
+  )
+  await waitFor(() =>
+    expect(screen.getByText(/delete rocko\?/i)).toBeInTheDocument()
+  )
+  await userEvent.type(screen.getByRole('textbox'), 'destroy Rocko')
+  expect(
+    screen.getByRole('button', { name: /accept this loss/i })
+  ).toBeEnabled()
+  await userEvent.click(
+    screen.getByRole('button', { name: /accept this loss/i })
   )
 })

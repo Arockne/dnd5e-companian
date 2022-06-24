@@ -130,4 +130,9 @@ test('user is able to see their character and delete their character', async () 
   await userEvent.click(
     screen.getByRole('button', { name: /accept this loss/i })
   )
-})
+  await waitFor(() => {
+    expect(
+      screen.getByRole('link', { name: /create character/i })
+    ).toBeInTheDocument()
+  })
+}, 10000)

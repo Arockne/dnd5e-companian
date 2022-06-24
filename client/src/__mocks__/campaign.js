@@ -11,17 +11,18 @@ const campaigns = [
 ]
 
 const [campaign1] = campaigns
-const indexRoute = '/campaigns'
-const showRoute = `/campaigns/${campaign1.id}`
-const postRoute = '/campaigns'
-const deleteRoute = `/campaigns/${campaign1.id}`
-const updateRoute = `/campaigns/${campaign1.id}`
+const indexRoute = '/api/campaigns'
+const showRoute = `/api/campaigns/${campaign1.id}`
+const postRoute = '/api/campaigns'
+const deleteRoute = `/api/campaigns/${campaign1.id}`
+const updateRoute = `/api/campaigns/${campaign1.id}`
 
 export const campaignHandlers = [
   rest.get(indexRoute, (req, res, ctx) => {
     return res(ctx.json(campaigns), ctx.status(200))
   }),
   rest.get(showRoute, (req, res, ctx) => {
+    console.log('I was called')
     return res(ctx.json(campaign1), ctx.status(200))
   }),
   rest.post(postRoute, (req, res, ctx) => {

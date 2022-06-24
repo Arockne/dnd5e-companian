@@ -22,7 +22,6 @@ export const campaignHandlers = [
     return res(ctx.json(campaigns), ctx.status(200))
   }),
   rest.get(showRoute, (req, res, ctx) => {
-    console.log('I was called')
     return res(ctx.json(campaign1), ctx.status(200))
   }),
   rest.post(postRoute, (req, res, ctx) => {

@@ -9,6 +9,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     render json: request, status: :ok  
   end
 
+  def destroy
+    campaign_join_request.destroy
+    render json: campaign_join_request, status: :ok
+  end
+
   private
 
   def render_unprocessable_entity(invalid)
@@ -36,7 +41,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     current_user == campaign.owner
   end
 
+  def campaign_join_request
+    @campaign_join_request ||= CampaignJoinRequest.find(params[:id])
+  end
+
   def render_not_found
-    render json: { errors: 'The campaign you are requesting to join is not of this realm'}, status: :not_found
+    render json: { errors: ['The campaign join request does not exist'] }, status: :not_found
   end
 end

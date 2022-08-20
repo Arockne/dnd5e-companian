@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_18_162337) do
+ActiveRecord::Schema.define(version: 2022_08_20_144257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaign_join_requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "campaign_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["campaign_id"], name: "index_campaign_join_requests_on_campaign_id"
+    t.index ["user_id"], name: "index_campaign_join_requests_on_user_id"
+  end
 
   create_table "campaign_logs", force: :cascade do |t|
     t.string "message", default: ""
@@ -85,6 +94,8 @@ ActiveRecord::Schema.define(version: 2022_06_18_162337) do
     t.string "image_url", default: ""
   end
 
+  add_foreign_key "campaign_join_requests", "campaigns"
+  add_foreign_key "campaign_join_requests", "users"
   add_foreign_key "campaign_logs", "campaigns"
   add_foreign_key "campaign_users", "campaigns"
   add_foreign_key "campaign_users", "users"

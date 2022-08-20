@@ -145,7 +145,7 @@ function UserMenu({ user }) {
       </Menu.Item>
 
       <Menu.Label>Settings</Menu.Label>
-      <Menu.Item icon={<Settings size={14} />}>Account settings</Menu.Item>
+      {/* <Menu.Item icon={<Settings size={14} />}>Account settings</Menu.Item> */}
       <Menu.Item
         icon={<Logout size={14} />}
         onClick={() => {

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :characters, only: [:show, :create, :update, :destroy] do
         resources :character_profiles, only: [:update]
       end
+      resources :campaign_join_requests, only: [:create]
     end
     resources :characters, only: [:index]
   end

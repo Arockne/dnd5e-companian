@@ -12,12 +12,20 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   private
 
   def render_unprocessable_entity(invalid)
-    byebug
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 
   def authorize_join_request
     render json: { errors: ['Cannot request to join as the owner'] }, status: :unprocessable_entity if campaign_owner?
+    render json: { errors: ['Cannot request to join as a player'] }, status: :unprocessable_entity if player?
+  end
+
+  def campaign_user
+    @campaign_user ||= campaign.campaign_users.find_by(user: current_user)
+  end
+
+  def player?
+    !campaign_user.nil?
   end
 
   def campaign

@@ -3,7 +3,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   before_action :authorize_join_request, only: [:create]
-  before_action :authorize_campaign_owner_actions, only: [:index, :destroy]
+  before_action :authorize_campaign_owner_actions, only: [:index, :destroy, :accept]
 
   def index
     requests = campaign.campaign_join_requests

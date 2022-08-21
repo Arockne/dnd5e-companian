@@ -47,7 +47,7 @@ function Campaign() {
         <Route path="/characters/create" element={<CharacterForm />} />
         {owner ? (
           <>
-            <Route path="requests" element={<Requests />} />
+            <Route path="requests" element={<Requests campaign={campaign} />} />
             <Route path="settings" element={<CampaignSettingsContainer />} />
           </>
         ) : null}

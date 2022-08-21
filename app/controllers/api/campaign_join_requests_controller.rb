@@ -3,7 +3,12 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   before_action :authorize_join_request, only: [:create]
-  before_action :authorize_campaign_owner_actions, only: [:destroy]
+  before_action :authorize_campaign_owner_actions, only: [:destroy, :index]
+
+  def index
+    requests = campaign.campaign_join_requests
+    render json: requests, status: :ok
+  end
 
   def create
     request = CampaignJoinRequest.create!(user: current_user, campaign_id: params[:campaign_id])
@@ -14,7 +19,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     campaign_join_request.destroy
     render json: campaign_join_request, status: :ok
   end
-
+  
   private
 
   def render_unprocessable_entity(invalid)

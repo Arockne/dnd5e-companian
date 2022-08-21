@@ -11,6 +11,7 @@ import {
 import React, { useState } from 'react'
 import { client } from '../../api/client'
 import FormErrorsContainer from '../error/FormErrorsContainer'
+import FormSuccess from '../common/FormSuccess'
 
 function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)
@@ -31,7 +32,6 @@ function CampaignSearchCard({ campaign }) {
     const body = await response.json()
 
     if (response.ok) {
-      setOpened(false)
       setStatus('succeeded')
     } else {
       setStatus('failed')
@@ -59,6 +59,9 @@ function CampaignSearchCard({ campaign }) {
           >{`Request to join ${name}`}</Button>
         </Group>
         <Group position="center">
+          {status === 'succeeded' && (
+            <FormSuccess message="Request has successfully been sent" />
+          )}
           <FormErrorsContainer errors={errors} />
         </Group>
       </Modal>

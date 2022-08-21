@@ -5,54 +5,37 @@ import {
   Image,
   LoadingOverlay,
   Modal,
-  PasswordInput,
   Text,
   useMantineTheme,
 } from '@mantine/core'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { client } from '../../api/client'
 import FormErrorsContainer from '../error/FormErrorsContainer'
 
 function CampaignSearchCard({ campaign }) {
   const [opened, setOpened] = useState(false)
-  const [password, setPassword] = useState('')
   const [errors, setErrors] = useState([])
   const [status, setStatus] = useState('idle')
   const theme = useMantineTheme()
-  const navigate = useNavigate()
 
   const secondaryColor =
     theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
 
   const { setting, name, image_url, id } = campaign
-  const enabled = password.length > 0
 
-  async function handleSubmit(e) {
-    e.preventDefault()
+  async function handleJoinRequest() {
     setStatus('loading')
-    const response = await client.post(`/api/campaigns/${id}/campaign_users`, {
-      campaign: {
-        id: campaign.id,
-        password,
-      },
-    })
+    const response = await client.post(
+      `/api/campaigns/${id}/campaign_join_requests`
+    )
+    const body = await response.json()
 
     if (response.ok) {
-      navigate(`/campaigns/${id}`)
+      setOpened(false)
     } else {
-      const body = await response.json()
       setStatus('failed')
       setErrors(body.errors)
     }
-  }
-
-  function handleChange(e) {
-    if (status === 'failed') {
-      setStatus('idle')
-      setErrors([])
-    }
-    setPassword(e.target.value)
   }
 
   function handleClose() {
@@ -66,24 +49,17 @@ function CampaignSearchCard({ campaign }) {
   return (
     <>
       <Modal centered opened={opened} onClose={handleClose} title={name}>
-        <form style={{ position: 'relative' }} onSubmit={handleSubmit}>
-          <LoadingOverlay visible={status === 'loading'} />
-          <PasswordInput
-            required
-            autoComplete="off"
-            label="Password"
-            placeholder="Password"
-            name="password"
-            onChange={handleChange}
-            value={password}
-          />
+        <LoadingOverlay visible={status === 'loading'} />
+        <Group position="center" mt="md">
+          <Button
+            uppercase
+            loading={status === 'loading'}
+            onClick={handleJoinRequest}
+          >{`Request to join ${name}`}</Button>
+        </Group>
+        <Group position="center">
           <FormErrorsContainer errors={errors} />
-          <Group position="right" mt="md">
-            <Button disabled={!enabled} type="submit">
-              Join the Adventure!
-            </Button>
-          </Group>
-        </form>
+        </Group>
       </Modal>
       <Card
         shadow="sm"

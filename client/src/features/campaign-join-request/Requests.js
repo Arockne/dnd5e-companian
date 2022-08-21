@@ -1,6 +1,9 @@
 import { Avatar, Table, Group, Text, ScrollArea, Button } from '@mantine/core'
+import { useEffect, useState } from 'react'
+import Request from './request'
 
-export function Requests() {
+export function Requests({ campaign }) {
+  const [requests, setRequests] = useState([])
   const data = [
     {
       avatar:
@@ -43,6 +46,17 @@ export function Requests() {
       rate: 98,
     },
   ]
+
+  useEffect(() => {
+    fetch(`/api/campaigns/${campaign.id}/campaign_join_requests`).then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          setRequests(data)
+        })
+      }
+    })
+  }, [])
+
   const rows = data.map((item) => (
     <tr key={item.name}>
       <td>
@@ -67,7 +81,11 @@ export function Requests() {
   return (
     <ScrollArea>
       <Table verticalSpacing="md" striped>
-        <tbody>{rows}</tbody>
+        <tbody>
+          {requests.map(({ user }) => (
+            <Request key={user.id} user={user} />
+          ))}
+        </tbody>
       </Table>
     </ScrollArea>
   )

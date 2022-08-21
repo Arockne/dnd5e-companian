@@ -3,7 +3,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   before_action :authorize_join_request, only: [:create]
-  before_action :authorize_destroy_request, only: [:destroy]
+  before_action :authorize_join_request_campaign_owner_actions, only: [:destroy]
 
   def create
     request = CampaignJoinRequest.create!(user: current_user, campaign_id: params[:campaign_id])
@@ -26,7 +26,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     render json: { errors: ['Cannot request to join as a player'] }, status: :unprocessable_entity if player?
   end
 
-  def authorize_destroy_request
+  def authorize_join_request_campaign_owner_actions
     render json: { errors: ['Not authorized'] }, status: :unauthorized unless campaign_owner?
   end
 

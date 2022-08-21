@@ -6,7 +6,6 @@ import FormError from './FormError'
 function FormErrorsContainer({ errors }) {
   return (
     <List
-      withPadding
       size="sm"
       mt="sm"
       icon={

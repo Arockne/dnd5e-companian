@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStyles, Group, Navbar } from '@mantine/core'
+import { createStyles, Divider, Group, Navbar } from '@mantine/core'
 import { NavLink, Outlet } from 'react-router-dom'
 import CampaignLeaveContainer from './CampaignLeaveContainer'
 
@@ -128,6 +128,7 @@ export function CampaignHeader({ campaign, owner }) {
             </NavLink> */}
           {owner ? (
             <>
+              <Divider label="DM Actions" labelPosition="center" />
               {/* <NavLink
                   to={`/campaigns/${campaign?.id}/logs`}
                   className={({ isActive }) =>

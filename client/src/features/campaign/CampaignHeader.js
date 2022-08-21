@@ -138,6 +138,14 @@ export function CampaignHeader({ campaign, owner }) {
                   Logs
                 </NavLink> */}
               <NavLink
+                to={`/campaigns/${campaign?.id}/requests`}
+                className={({ isActive }) =>
+                  cx(classes.link, { [classes.linkActive]: isActive })
+                }
+              >
+                Requests
+              </NavLink>
+              <NavLink
                 to={`/campaigns/${campaign?.id}/settings`}
                 className={({ isActive }) =>
                   cx(classes.link, { [classes.linkActive]: isActive })

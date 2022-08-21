@@ -9,6 +9,7 @@ import CampaignSettingsContainer from './settings/CampaignSettingsContainer'
 import CharacterForm from '../character/CharacterForm'
 import NotAuthorized from '../error/NotAuthorized'
 import NotFound from '../error/NotFound'
+import Requests from '../campaign-join-request/Requests'
 
 function Campaign() {
   const { campaign_id } = useParams()
@@ -45,7 +46,10 @@ function Campaign() {
         <Route index element={<CampaignOverview />} />
         <Route path="/characters/create" element={<CharacterForm />} />
         {owner ? (
-          <Route path="settings" element={<CampaignSettingsContainer />} />
+          <>
+            <Route path="requests" element={<Requests />} />
+            <Route path="settings" element={<CampaignSettingsContainer />} />
+          </>
         ) : null}
       </Route>
       <Route path="/characters/:character_id/*" element={<Character />} />

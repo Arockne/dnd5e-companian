@@ -32,6 +32,7 @@ function CampaignSearchCard({ campaign }) {
 
     if (response.ok) {
       setOpened(false)
+      setStatus('succeeded')
     } else {
       setStatus('failed')
       setErrors(body.errors)
@@ -53,7 +54,7 @@ function CampaignSearchCard({ campaign }) {
         <Group position="center" mt="md">
           <Button
             uppercase
-            loading={status === 'loading'}
+            disabled={status !== 'idle'}
             onClick={handleJoinRequest}
           >{`Request to join ${name}`}</Button>
         </Group>

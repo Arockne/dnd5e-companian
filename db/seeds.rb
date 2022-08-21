@@ -62,6 +62,12 @@ user_3 = User.create(
   password: 'test1234'
 )
 
+user_4 = User.create(
+  username: 'test',
+  email: 'test@gmail.com',
+  password: 'test1234'
+)
+
 users = [user_1, user_2, user_3]
 
 puts 'Creating campaigns'
@@ -100,6 +106,9 @@ user_1.campaign_users.create!(campaign: campaign_2)
   filtered_users = users.filter { |user| user.username != campaign.owner.username }
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
 end
+
+puts 'Creating join requests'
+campaign_1.campaign_join_requests.create(user: user_4)
 
 def roll_stat()
   dice = []

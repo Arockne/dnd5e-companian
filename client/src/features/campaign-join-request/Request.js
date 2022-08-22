@@ -16,6 +16,17 @@ function Request({ request, handleRequestDelete }) {
     }
   }
 
+  async function deny() {
+    const response = await client.delete(
+      `/api/campaigns/${campaign_id}/campaign_join_requests/${id}`
+    )
+    const body = await response.json()
+
+    if (response.ok) {
+      handleRequestDelete(body)
+    }
+  }
+
   return (
     <tr>
       <td>
@@ -31,7 +42,7 @@ function Request({ request, handleRequestDelete }) {
       <td>
         <Group position="right">
           <Button onClick={accept}>Accept</Button>
-          <Button>Deny</Button>
+          <Button onClick={deny}>Deny</Button>
         </Group>
       </td>
     </tr>

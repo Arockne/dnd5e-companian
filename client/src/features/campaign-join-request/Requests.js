@@ -15,12 +15,20 @@ export function Requests({ campaign }) {
     })
   }, [])
 
+  function handleRequestDelete(request) {
+    setRequests((requests) => requests.filter(({ id }) => id !== request.id))
+  }
+
   return (
     <ScrollArea>
       <Table verticalSpacing="md" striped>
         <tbody>
           {requests.map(({ user }) => (
-            <Request key={user.id} user={user} />
+            <Request
+              key={user.id}
+              user={user}
+              handleRequestDelete={handleRequestDelete}
+            />
           ))}
         </tbody>
       </Table>

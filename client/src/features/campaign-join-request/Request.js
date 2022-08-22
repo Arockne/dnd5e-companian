@@ -3,7 +3,19 @@ import React from 'react'
 import { client } from '../../api/client'
 
 function Request({ request, handleRequestDelete }) {
-  const { user } = request
+  const { id, campaign_id, user } = request
+
+  async function accept() {
+    const response = await client.post(
+      `/api/campaigns/${campaign_id}/campaign_join_requests/${id}/accept`
+    )
+    const body = await response.json()
+
+    if (response.ok) {
+      handleRequestDelete(body)
+    }
+  }
+
   return (
     <tr>
       <td>
@@ -18,7 +30,7 @@ function Request({ request, handleRequestDelete }) {
       </td>
       <td>
         <Group position="right">
-          <Button>Accept</Button>
+          <Button onClick={accept}>Accept</Button>
           <Button>Deny</Button>
         </Group>
       </td>

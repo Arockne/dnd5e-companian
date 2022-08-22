@@ -1,7 +1,9 @@
 import { Avatar, Button, Group, Text } from '@mantine/core'
 import React from 'react'
+import { client } from '../../api/client'
 
-function Request({ user }) {
+function Request({ request, handleRequestDelete }) {
+  const { user } = request
   return (
     <tr>
       <td>

@@ -23,10 +23,10 @@ export function Requests({ campaign }) {
     <ScrollArea>
       <Table verticalSpacing="md" striped>
         <tbody>
-          {requests.map(({ user }) => (
+          {requests.map((request) => (
             <Request
-              key={user.id}
-              user={user}
+              key={request.id}
+              request={request}
               handleRequestDelete={handleRequestDelete}
             />
           ))}

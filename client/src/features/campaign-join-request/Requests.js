@@ -1,6 +1,6 @@
-import { Avatar, Table, Group, Text, ScrollArea, Button } from '@mantine/core'
+import { Table, ScrollArea } from '@mantine/core'
 import { useEffect, useState } from 'react'
-import Request from './request'
+import Request from './Request'
 
 export function Requests({ campaign }) {
   const [requests, setRequests] = useState([])

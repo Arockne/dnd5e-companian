@@ -76,16 +76,14 @@ campaign_1 = Campaign.create!(
   name: 'Knights of the Round Table', 
   image_url: campaign_images[rand(0...campaign_images.length)],
   setting: 'Somewhere in Camelot', 
-  owner: user_1, 
-  password: 'test1234',
+  owner: user_1,
 )
 
 campaign_2 = Campaign.create!(
   name: 'Star Wards', 
   image_url: campaign_images[rand(0...campaign_images.length)],
   setting: 'In a hospital far far away', 
-  owner: user_2, 
-  password: 'test1234',
+  owner: user_2,
 )
 
 user_1.campaign_users.create!(campaign: campaign_2)
@@ -101,7 +99,6 @@ user_1.campaign_users.create!(campaign: campaign_2)
     image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '), 
     owner: users[rand(0..2)], 
-    password: 'test1234',
   )
   filtered_users = users.filter { |user| user.username != campaign.owner.username }
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
@@ -182,7 +179,6 @@ puts 'Creating campaigns without players'
     image_url: campaign_images[rand(0...campaign_images.length)],
     setting: setting.join(' '),
     owner: users[rand(0..2)], 
-    password: 'test1234',
   )
   Faker::Quotes::Shakespeare.unique.clear
 end

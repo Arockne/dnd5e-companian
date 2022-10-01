@@ -7,7 +7,5 @@ class Campaign < ApplicationRecord
 
   validates :image_url, presence: true, format: { with: /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i, message: 'is not valid'}
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 8 }
-  has_secure_password
 
 end

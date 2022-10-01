@@ -30,8 +30,7 @@ RSpec.describe "Api::Characters", type: :request do
       name: 'Knights of the Round Table', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
-      owner: user_1, 
-      password: 'king1234'
+      owner: user_1
     )
   end
 
@@ -40,8 +39,7 @@ RSpec.describe "Api::Characters", type: :request do
       name: 'Star Wards', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away', 
-      owner: user_2, 
-      password: 'test1234'
+      owner: user_2
     )
   end
 
@@ -50,8 +48,7 @@ RSpec.describe "Api::Characters", type: :request do
       name: 'Coderama', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Code in the future...', 
-      owner: user_2, 
-      password: 'test1234'
+      owner: user_2
     )
   end
 

@@ -8,18 +8,19 @@ RSpec.describe Campaign, type: :model do
       password: 'test1234'
     )
   end
+
   before do
     Campaign.create(
       name: 'Knights of the Round Table', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
-      owner: user, 
+      owner: user
     )
     Campaign.create(
       name: 'Star Wards', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away...', 
-      owner: user, 
+      owner: user
     )
   end
 
@@ -29,7 +30,7 @@ RSpec.describe Campaign, type: :model do
         name: 'Star Track', 
         image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
         setting: 'Voyage to many track and fields never seen before...', 
-        owner: user, 
+        owner: user
       )).to be_valid
     end
   end

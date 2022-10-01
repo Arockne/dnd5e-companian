@@ -3,7 +3,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   
   before_action :authorize_show_action, only: [:show]
-  before_action :authorize_password_update, only: [:password_update]
 
   def index
     campaigns = Campaign.where.not(owner: current_user)
@@ -43,11 +42,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     render json: campaign, status: :ok
   end
 
-  def password_update
-    campaign.update!(password: campaign_password_params[:new_password])
-    head :ok
-  end
-
   def destroy
     campaign = current_user.owned_campaigns.find_by_id(params[:id])
     return render json: { errors: ['Not Authorized'] }, status: :unauthorized if campaign.nil?
@@ -58,11 +52,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   private
 
   def campaign_params
-    params.require(:campaign).permit(:name, :setting, :image_url, :password)
-  end
-
-  def campaign_password_params
-    params.require(:campaign).permit(:old_password, :new_password)
+    params.require(:campaign).permit(:name, :setting, :image_url)
   end
 
   def render_unprocessable_entity(invalid)
@@ -85,21 +75,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     current_user == campaign.owner
   end
 
-  def authenticate_password_update
-    campaign&.authenticate(campaign_password_params[:old_password])
-  end
-
   def authorize_show_action
     render json: { errors: ['Not Authorized'] }, status: :unauthorized unless membership || campaign_owner?
-  end
-
-  def authorize_password_update
-    render json: { 
-      errors: ['Not Authorized'] 
-    }, status: :unauthorized unless campaign_owner?
-    render json: { 
-      errors: ['Old password does not match current password']
-    }, status: :unprocessable_entity unless authenticate_password_update
   end
 
 end

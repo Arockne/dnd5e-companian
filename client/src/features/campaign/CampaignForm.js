@@ -3,7 +3,6 @@ import {
   Button,
   Group,
   LoadingOverlay,
-  PasswordInput,
   Textarea,
   TextInput,
 } from '@mantine/core'
@@ -17,7 +16,6 @@ function CampaignForm() {
     name: '',
     image_url: '',
     setting: '',
-    password: '',
   })
   const [status, setStatus] = useState('idle')
   const [errors, setErrors] = useState([])
@@ -76,15 +74,6 @@ function CampaignForm() {
           name="setting"
           onChange={handleChange}
           value={formData.setting}
-          autoComplete="off"
-        />
-        <PasswordInput
-          required
-          label="Password"
-          placeholder="Password"
-          name="password"
-          onChange={handleChange}
-          value={formData.password}
           autoComplete="off"
         />
         <FormErrorsContainer errors={errors} />

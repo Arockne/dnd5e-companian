@@ -23,7 +23,6 @@ RSpec.describe CampaignUser, type: :model do
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
       owner: campaign_owner, 
-      password: 'king1234'
     )
   end
 

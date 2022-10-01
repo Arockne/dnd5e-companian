@@ -22,8 +22,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       name: 'Knights of the Round Table', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'Somewhere in Camelot', 
-      owner: user_1, 
-      password: 'king1234'
+      owner: user_1
     )
   end
 
@@ -32,8 +31,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       name: 'Star Wards', 
       image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
       setting: 'In a hospital far far away', 
-      owner: user_2, 
-      password: 'test1234'
+      owner: user_2
     )
   end
 
@@ -170,8 +168,7 @@ RSpec.describe "Api::Campaigns", type: :request do
             campaign: {
               name: 'The Throne of the king', 
               image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
-              setting: 'A king sits upon a throne...', 
-              password: 'test1234'
+              setting: 'A king sits upon a throne...'
             }
           }
         end
@@ -205,8 +202,7 @@ RSpec.describe "Api::Campaigns", type: :request do
           campaign: {
             name: 'The Throne of the king', 
             image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
-            setting: 'A king sits upon a throne...', 
-            password: 'test123'
+            setting: 'A king sits upon a throne...'
           }
         }
       end
@@ -235,8 +231,7 @@ RSpec.describe "Api::Campaigns", type: :request do
         campaign: {
           name: 'Knights of the SQUARE Table', 
           image_url: 'https://cdnb.artstation.com/p/assets/images/images/023/999/093/large/gregory-nunkovics-dark-fantasy-landscape.jpg?1580994868',
-          setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT', 
-          password: 'kingforever'
+          setting: 'THE BEST KINGDOM IN THE LAND NAMED CAMELOT'
         }
       }
     end
@@ -245,8 +240,7 @@ RSpec.describe "Api::Campaigns", type: :request do
       {
         campaign: {
           name: '', 
-          setting: '', 
-          password: ''
+          setting: ''
         }
       }
     end

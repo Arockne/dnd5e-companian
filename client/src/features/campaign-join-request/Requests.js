@@ -1,4 +1,4 @@
-import { Table, ScrollArea } from '@mantine/core'
+import { Table, ScrollArea, Header, Title } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import Request from './Request'
 
@@ -21,6 +21,9 @@ export function Requests({ campaign }) {
 
   return (
     <ScrollArea>
+      <Title order={2} align="center">
+        Requests to Join
+      </Title>
       <Table verticalSpacing="md" striped>
         <tbody>
           {requests.map((request) => (

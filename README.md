@@ -38,6 +38,7 @@ npm install --prefix client
     - this may include a drag and drop feature
       - where the user rolls stats and the user drops the six rolled stats into an input field
   - implement point system variant for assigning stats
+  - implement a way for the stepper to not allow the user to not move forward unless all input fields are filled on the current step
 - Character Navigation & Campaign Navigation
   - on a specific screen size
     - render an arrow to the top left of the page

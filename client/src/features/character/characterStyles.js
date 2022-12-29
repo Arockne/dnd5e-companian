@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core'
 
-const characterHeaderStyle = createStyles((theme, _params, getRef) => {
+const useCharacterHeaderStyle = createStyles((theme, _params, getRef) => {
     const icon = getRef('icon')
     return {
       header: {
@@ -80,4 +80,4 @@ const characterHeaderStyle = createStyles((theme, _params, getRef) => {
     }
   })
 
-export { characterHeaderStyle }
+export { useCharacterHeaderStyle }

@@ -5,13 +5,11 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCharacter } from './characterSlice'
 import CharacterVisibilityForm from './CharacterVisibilityForm'
-import { characterHeaderStyle } from './characterStyles'
-
-const useStyles = characterHeaderStyle
+import { useCharacterHeaderStyle } from './characterStyles'
 
 function CharacterHeader({ character }) {
   const [opened, setOpened] = useState(false)
-  const { classes, cx } = useStyles()
+  const { classes, cx } = useCharacterHeaderStyle()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
   const owner = character?.user.id === user?.id

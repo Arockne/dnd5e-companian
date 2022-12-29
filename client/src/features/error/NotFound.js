@@ -7,6 +7,7 @@ import {
   Container,
   Group,
 } from '@mantine/core'
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -53,6 +54,7 @@ export function NotFound({
   errors = ['Unfortunately, this page you are trying to open does not exist.'],
 }) {
   const { classes } = useStyles()
+  const navigate = useNavigate()
 
   return (
     <Container className={classes.root}>
@@ -70,7 +72,7 @@ export function NotFound({
         </Text>
       ))}
       <Group position="center">
-        <Button variant="subtle" size="md">
+        <Button variant="subtle" size="md" onClick={() => navigate('/')}>
           Take me back to home page
         </Button>
       </Group>

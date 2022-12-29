@@ -25,7 +25,7 @@ npm install --prefix client
       - when this gets added, need to change how to select a specific card or possibly add this to the modal that pops up when selecting a campaign
   - Isolate campaigns in search to campaigns that are not affiliated with current user
     - This includes:
-      - Currrent campaigns user has not joined
+      - Current campaigns user has not joined
       - Current campaigns user does not own
 - Implement server search pagination for campaigns
 - User's Characters
@@ -33,6 +33,7 @@ npm install --prefix client
     - will create query based on search parameters
   - Server side pagination to load more when user scrolls down
     - Will render from most recent created
+    - basically an infite scroll
 - Character form
   - implement rolling stats
     - this may include a drag and drop feature
@@ -47,7 +48,7 @@ npm install --prefix client
         - this will also have the arrow pointing left
         - this will open a drawer that will have all the navigation related to the current page
         - when a link is clicked will close the drawer
-- need to create not found error handling campaign
+
 ## Bugs that need to be stomped
 
 ## Deployment Instructions

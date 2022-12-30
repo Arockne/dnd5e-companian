@@ -49,6 +49,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     head :ok
   end
 
+  def players
+    players = campaign.users
+    render json: players, status: :ok
+  end
+
   private
 
   def campaign_params

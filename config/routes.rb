@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/campaigns/currently_owned', to: 'campaigns#currently_owned'
     get '/campaigns/currently_playing', to: 'campaigns#currently_playing'
     resources :campaigns, only: [:index, :show, :create, :update, :destroy] do
+      get '/players', to: 'campaigns#players'
       patch '/password', to: 'campaigns#password_update'
       resources :campaign_users, only: [:create, :destroy]
       resources :characters, only: [:show, :create, :update, :destroy] do

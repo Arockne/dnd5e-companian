@@ -51,7 +51,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def players
     players = campaign.users
-    render json: players, status: :ok
+    render json: players, status: :ok, each_serializer: PlayerSerializer
   end
 
   private

@@ -110,15 +110,15 @@ export function CampaignHeader({ campaign, owner }) {
           >
             Create Character
           </NavLink>
-          {/* <NavLink
-              to={`/campaigns/${campaign?.id}/players`}
-              className={({ isActive }) =>
-                cx(classes.link, { [classes.linkActive]: isActive })
-              }
-            >
-              Players
-            </NavLink>
-            <NavLink
+          <NavLink
+            to={`/campaigns/${campaign?.id}/players`}
+            className={({ isActive }) =>
+              cx(classes.link, { [classes.linkActive]: isActive })
+            }
+          >
+            Players
+          </NavLink>
+          {/*<NavLink
               to={`/campaigns/${campaign?.id}/messages`}
               className={({ isActive }) =>
                 cx(classes.link, { [classes.linkActive]: isActive })

@@ -46,7 +46,10 @@ function Campaign() {
       >
         <Route index element={<CampaignOverview />} />
         <Route path="/characters/create" element={<CharacterForm />} />
-        <Route path="/players" element={<CampaignPlayers />} />
+        <Route
+          path="/players"
+          element={<CampaignPlayers campaign={campaign} />}
+        />
         {owner ? (
           <>
             <Route path="requests" element={<Requests campaign={campaign} />} />

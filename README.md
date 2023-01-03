@@ -23,17 +23,13 @@ npm install --prefix client
   - Add owner of campaign to card
     - Add the ability to message owner
       - when this gets added, need to change how to select a specific card or possibly add this to the modal that pops up when selecting a campaign
-  - Isolate campaigns in search to campaigns that are not affiliated with current user
-    - This includes:
-      - Current campaigns user has not joined
-      - Current campaigns user does not own
 - Implement server search pagination for campaigns
 - User's Characters
   - Search
     - will create query based on search parameters
   - Server side pagination to load more when user scrolls down
     - Will render from most recent created
-    - basically an infite scroll
+    - basically an infinite scroll
 - Character form
   - implement rolling stats
     - this may include a drag and drop feature

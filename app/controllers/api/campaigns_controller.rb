@@ -5,7 +5,13 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   before_action :authorize_show_action, only: [:show]
 
   def index
+    user_campaigns = CampaignUser.pluck(:user_id, :campaign_id) 
+    current_user_campaigns = user_campaigns.filter { |uc| uc.first == current_user.id }
+    current_user_campaign_ids = current_user_campaigns.map { |c| c.second }
     campaigns = Campaign.where.not(owner: current_user)
+    campaigns = campaigns.filter do |c|
+      !current_user_campaign_ids.include?(c.id)
+    end
     render json: campaigns, status: :ok, each_serializer: CampaignIndexSerializer
   end
 

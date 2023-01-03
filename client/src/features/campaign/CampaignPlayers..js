@@ -1,16 +1,16 @@
 import { Group, Title } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
+import { client } from '../../api/client'
 
 function CampaignPlayers({ campaign }) {
   const [players, setPlayers] = useState([])
 
-  useEffect(() => {
-    fetch(`/api/campaigns/${campaign.id}/players`).then(async (r) => {
-      const body = await r.json()
-      if (r.ok) {
-        setPlayers(body)
-      }
-    })
+  useEffect(async () => {
+    const response = await client.get(`/api/campaigns/${campaign.id}/players`)
+    const body = await response.json()
+    if (response.ok) {
+      setPlayers(body)
+    }
   }, [])
 
   return (

@@ -73,11 +73,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def campaigns_not_affiliated_with
     campaigns_currently_playing_ids = CampaignUser.where(user: current_user).pluck(:campaign_id)
-    if campaigns_currently_playing_ids.length > 0
-      campaigns = Campaign.where('campaigns.user_id != ? AND campaigns.id NOT IN (?)', current_user.id, campaigns_currently_playing_ids)
-    else
-      campaigns = Campaign.where.not(owner: current_user)
-    end
+    return Campaign.where.not(owner: current_user) if campaigns_currently_playing_ids.empty?
+    Campaign.where('campaigns.user_id != ? AND campaigns.id NOT IN (?)', current_user.id, campaigns_currently_playing_ids)
   end
 
   def render_unprocessable_entity(invalid)

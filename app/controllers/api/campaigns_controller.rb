@@ -5,13 +5,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   before_action :authorize_show_action, only: [:show]
 
   def index
-    campaigns_currently_playing_ids = CampaignUser.where(user: current_user).pluck(:campaign_id)
-    if campaigns_currently_playing_ids.length > 0
-      campaigns = Campaign.where('campaigns.user_id != ? AND campaigns.id NOT IN (?)', current_user.id, campaigns_currently_playing_ids)
-    else
-      campaigns = Campaign.where.not(owner: current_user)
-    end
-    render json: campaigns, status: :ok, each_serializer: CampaignIndexSerializer
+    render json: campaigns_not_affiliated_with, status: :ok, each_serializer: CampaignIndexSerializer
   end
 
   def current_campaigns
@@ -75,6 +69,15 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   
   def campaign_owner?
     current_user == campaign.owner
+  end
+
+  def campaigns_not_affiliated_with
+    campaigns_currently_playing_ids = CampaignUser.where(user: current_user).pluck(:campaign_id)
+    if campaigns_currently_playing_ids.length > 0
+      campaigns = Campaign.where('campaigns.user_id != ? AND campaigns.id NOT IN (?)', current_user.id, campaigns_currently_playing_ids)
+    else
+      campaigns = Campaign.where.not(owner: current_user)
+    end
   end
 
   def render_unprocessable_entity(invalid)

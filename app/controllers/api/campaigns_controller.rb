@@ -6,7 +6,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def index
     campaigns_currently_playing_ids = CampaignUser.where(user: current_user).pluck(:campaign_id)
-    campaigns = Campaign.where('campaigns.id NOT IN (?) AND campaigns.user_id != ?', campaigns_currently_playing_ids, current_user.id)
+    if campaigns_currently_playing_ids.length > 0
+      campaigns = Campaign.where('campaigns.user_id != ? AND campaigns.id NOT IN (?)', current_user.id, campaigns_currently_playing_ids)
+    else
+      campaigns = Campaign.where.not(owner: current_user)
+    end
     render json: campaigns, status: :ok, each_serializer: CampaignIndexSerializer
   end
 

@@ -104,9 +104,6 @@ user_1.campaign_users.create!(campaign: campaign_2)
   filtered_users.each_entry { |user| user.campaign_users.create!(campaign: campaign)}
 end
 
-puts 'Creating join requests'
-campaign_1.campaign_join_requests.create(user: user_4)
-
 def roll_stat()
   dice = []
   dice_amount = 4

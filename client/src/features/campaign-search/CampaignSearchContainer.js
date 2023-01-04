@@ -17,6 +17,18 @@ function CampaignSearchContainer() {
   const dispatch = useDispatch()
   const { campaigns, status } = useSelector((state) => state.campaignSearch)
 
+  const itemsPerPage = 5
+  const campaignIndex =
+    (activePage * itemsPerPage - itemsPerPage) % campaigns?.length
+  const campaignSearchResults = campaigns?.filter(({ name }) =>
+    name.toLowerCase().includes(searchByName.toLowerCase())
+  )
+  const pages = Math.ceil(campaignSearchResults?.length / itemsPerPage)
+  const campaignsPerPage = campaignSearchResults?.slice(
+    campaignIndex,
+    campaignIndex + itemsPerPage
+  )
+
   useEffect(() => {
     dispatch(getCampaigns())
   }, [])
@@ -24,22 +36,6 @@ function CampaignSearchContainer() {
   function handlePaginationChange(page) {
     setActivePage(page)
   }
-
-  const itemsPerPage = 5
-
-  const campaignIndex =
-    (activePage * itemsPerPage - itemsPerPage) % campaigns?.length
-
-  const campaignSearchResults = campaigns?.filter(({ name }) =>
-    name.toLowerCase().includes(searchByName.toLowerCase())
-  )
-
-  const pages = Math.ceil(campaignSearchResults?.length / itemsPerPage)
-
-  const campaignsPerPage = campaignSearchResults?.slice(
-    campaignIndex,
-    campaignIndex + itemsPerPage
-  )
 
   return (
     <Stack

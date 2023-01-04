@@ -6,7 +6,6 @@ import {
   TextInput,
   Container,
   Pagination,
-  Grid,
   Group,
   Loader,
 } from '@mantine/core'

@@ -1,5 +1,5 @@
 class Api::CampaignsController < ApplicationController
-rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   
   before_action :authorize_show_action, only: [:show]

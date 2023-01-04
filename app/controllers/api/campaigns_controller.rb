@@ -8,13 +8,6 @@ class Api::CampaignsController < ApplicationController
     render json: campaigns_not_affiliated_with, status: :ok, each_serializer: CampaignIndexSerializer
   end
 
-  def current_campaigns
-    owned_campaigns = current_user.owned_campaigns
-    campaigns = current_user.campaigns.select(:id, :name, :setting, :image_url)
-    current = { owned_campaigns: owned_campaigns, campaigns: campaigns}
-    render json: current, status: :ok
-  end
-
   def currently_owned
     campaigns = current_user.owned_campaigns
     render json: campaigns, status: :ok

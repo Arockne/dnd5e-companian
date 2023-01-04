@@ -1,18 +1,19 @@
 import { Table, ScrollArea, Title, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
+import { client } from '../../api/client'
 import Request from './Request'
 
 export function Requests({ campaign }) {
   const [requests, setRequests] = useState([])
 
-  useEffect(() => {
-    fetch(`/api/campaigns/${campaign.id}/campaign_join_requests`).then((r) => {
-      if (r.ok) {
-        r.json().then((data) => {
-          setRequests(data)
-        })
-      }
-    })
+  useEffect(async () => {
+    const response = await client.get(
+      `/api/campaigns/${campaign.id}/campaign_join_requests`
+    )
+    const body = await response.json()
+    if (response.ok) {
+      setRequests(body)
+    }
   }, [])
 
   function handleRequestDelete(request) {
